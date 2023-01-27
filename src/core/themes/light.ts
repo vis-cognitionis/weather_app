@@ -1,34 +1,22 @@
-import Theme from './theme_interface';
+import { Platform, StyleSheet } from "react-native";
 
-const lightTheme: Theme = {
-  colors: {
-    primary: '#fff',
-    secondary: '#000',
-    background: '#f5f5f5',
+export const lightStyles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
   },
-  typography: {
-    fontFamily: 'sans-serif',
-    fontSize: {
-      h1: 24,
-      h2: 20,
-      h3: 18,
-      body: 14,
-    },
+  text: {
+    color: "yellow",
   },
-  platform: {
+  ...Platform.select({
     ios: {
-      specificStyle: {
-        padding: 20,
-        fontSize: 16,
+      iosSpecificStyle: {
+        fontSize: 20,
       },
     },
     android: {
-      specificStyle: {
-        padding: 10,
-        fontSize: 14,
+      androidSpecificStyle: {
+        fontSize: 18,
       },
     },
-  },
-};
-
-export default lightTheme;
+  }),
+});

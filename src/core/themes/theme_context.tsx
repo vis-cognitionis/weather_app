@@ -1,38 +1,42 @@
-import {createContext, useCallback, useContext, useState} from 'react';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { Appearance } from "react-native";
 
-import lightTheme from './light';
-import darkTheme from './dark';
-import Theme from './theme_interface';
+export enum Theme {
+  Light = "light",
+  Dark = "dark",
+}
 
-const ThemeContext = createContext<{
+interface ThemeContext {
   theme: Theme;
-  toggleTheme: () => void;
-}>({theme: lightTheme, toggleTheme: () => {}});
+  setTheme: (theme: Theme) => void;
+}
 
-const ThemeProvider = ({children}: {children: React.ReactNode}) => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+const ThemeContext = createContext<ThemeContext>({
+  theme: Theme.Light,
+  setTheme: () => {},
+});
 
-  //useCallback Hooku, bir fonksiyonun değişmeden kalmasını sağlar.
-  //Bu, performansı artırmak için kullanılabilir çünkü React,
-  //fonksiyonların her çağırıldığında yeniden oluşturulduğunu ve
-  //yeniden render edildiğini varsayar. Böylece, useCallback ile
-  //tanımlanmış bir fonksiyon, belirtilen dependency değişmeden
-  //kalırsa, aynı referansı kullanmaya devam eder ve yeniden
-  //oluşturulmaz.Bu toggleTheme() fonksiyonu için kullanılmıştır
-  //çünkü theme değişirse fonksiyon yeniden oluşturulmamalıdır.
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>(
+    Appearance.getColorScheme() === "dark" ? Theme.Dark : Theme.Light
+  );
 
-  const toggleTheme = useCallback(() => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  }, [theme]);
-
-  const currentTheme = theme === 'light' ? lightTheme : darkTheme;
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(
+      ({ colorScheme }: { colorScheme: any }) => {
+        setTheme(colorScheme === "dark" ? Theme.Dark : Theme.Light);
+      }
+    );
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{theme: currentTheme, toggleTheme}}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 };
-const theme = useContext(ThemeContext);
 
-export {ThemeContext, ThemeProvider, theme};
+export const useTheme = () => useContext(ThemeContext);

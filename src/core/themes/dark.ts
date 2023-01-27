@@ -1,34 +1,22 @@
-import Theme from './theme_interface';
+import { StyleSheet, Platform } from "react-native";
 
-const darkTheme: Theme = {
-  colors: {
-    primary: '#000',
-    secondary: '#fff',
-    background: '#303030',
+export const darkStyles = StyleSheet.create({
+  container: {
+    backgroundColor: "black",
   },
-  typography: {
-    fontFamily: 'sans-serif',
-    fontSize: {
-      h1: 24,
-      h2: 20,
-      h3: 18,
-      body: 14,
-    },
+  text: {
+    color: "green",
   },
-  platform: {
+  ...Platform.select({
     ios: {
-      specificStyle: {
-        padding: 20,
-        fontSize: 16,
+      iosSpecificStyle: {
+        fontSize: 20,
       },
     },
     android: {
-      specificStyle: {
-        padding: 10,
-        fontSize: 14,
+      androidSpecificStyle: {
+        fontSize: 18,
       },
     },
-  },
-};
-
-export default darkTheme;
+  }),
+});

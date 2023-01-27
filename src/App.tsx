@@ -1,6 +1,7 @@
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React from "react";
+import type { PropsWithChildren } from "react";
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -8,7 +9,7 @@ import {
   Text,
   useColorScheme,
   View,
-} from 'react-native';
+} from "react-native";
 
 import {
   Colors,
@@ -16,16 +17,17 @@ import {
   Header,
   LearnMoreLinks,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {ThemeProvider} from './core/themes/theme_context';
-import {theme} from './core/themes/theme_context';
+} from "react-native/Libraries/NewAppScreen";
+import { Theme, ThemeProvider, useTheme } from "./core/themes/theme_context";
+import { darkStyles } from "./core/themes/dark";
+import { lightStyles } from "./core/themes/light";
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function Section({ children, title }: SectionProps): JSX.Element {
+  const isDarkMode = useColorScheme() === "dark";
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -34,7 +36,8 @@ function Section({children, title}: SectionProps): JSX.Element {
           {
             color: isDarkMode ? Colors.white : Colors.black,
           },
-        ]}>
+        ]}
+      >
         {title}
       </Text>
       <Text
@@ -43,60 +46,94 @@ function Section({children, title}: SectionProps): JSX.Element {
           {
             color: isDarkMode ? Colors.light : Colors.dark,
           },
-        ]}>
+        ]}
+      >
         {children}
       </Text>
     </View>
   );
 }
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const ThemeToggleButton = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      title={
+        theme === Theme.Light
+          ? "Switch to Dark Mode" + `${theme}`
+          : "Switch to Light Mode" + `${theme}`
+      }
+      onPress={() => setTheme(theme === Theme.Light ? Theme.Dark : Theme.Light)}
+    />
+  );
+};
+
+const StyledText = () => {
+  const { theme } = useTheme();
+
+  const myStyles = theme === Theme.Light ? lightStyles : darkStyles;
+
+  return <Text style={myStyles.text}>Hello World!</Text>;
+};
+
+function BeforeApp(): JSX.Element {
+  const isDarkMode = useColorScheme() === "dark";
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  console.log('Current Theme', theme);
 
   return (
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}
+      >
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}
+        >
+          <ThemeToggleButton />
+          <Section title="Step One">
+            Edit
+            <StyledText />
+            <Text
+              onPress={() => {
+                console.log("girdi");
+              }}
+              style={styles.highlight}
+            >
+              App.tsx
+            </Text>
+            to change this screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function App() {
+  return (
     <ThemeProvider>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
-          <Header />
-          <View
-            style={{
-              backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            }}>
-            <Section title="Step One">
-              Edit{' '}
-              <Text
-                onPress={() => {
-                  console.log('girdi');
-                }}
-                style={styles.highlight}>
-                App.tsx
-              </Text>{' '}
-              to change this screen and then come back to see your edits.
-            </Section>
-            <Section title="See Your Changes">
-              <ReloadInstructions />
-            </Section>
-            <Section title="Debug">
-              <DebugInstructions />
-            </Section>
-            <Section title="Learn More">
-              Read the docs to discover what to do next:
-            </Section>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <BeforeApp />
     </ThemeProvider>
   );
 }
@@ -108,15 +145,15 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 
