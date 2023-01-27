@@ -1,6 +1,8 @@
+import React from "react";
 import { StyleSheet, Platform } from "react-native";
+import ThemeProps from "../interface/theme_interface";
 
-export const darkStyles = StyleSheet.create({
+const darkTheme: ThemeProps = StyleSheet.create({
   container: {
     backgroundColor: "black",
   },
@@ -20,3 +22,5 @@ export const darkStyles = StyleSheet.create({
     },
   }),
 });
+
+export default darkTheme;

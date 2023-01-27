@@ -1,17 +1,19 @@
-import React, { createContext, useContext, useState } from "react";
-import Localization from "react-native-localization";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { NativeModules } from "react-native";
 
-import en from "./languages/en/en.json";
-import tr from "./languages/tr/tr.json";
+export enum Language {
+  English = "en",
+  Turkish = "tr",
+}
 
-export const localizations = new Localization({
-  en: en,
-  tr: tr,
-});
+interface LanguageContext {
+  language: Language;
+  setLanguage: (language: Language) => void;
+}
 
-const LanguageContext = createContext({
-  language: "en",
-  setLanguage: (language: string) => {},
+const LanguageContext = createContext<LanguageContext>({
+  language: Language.English,
+  setLanguage: () => {},
 });
 
 export const LanguageProvider = ({
@@ -19,7 +21,19 @@ export const LanguageProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [language, setLanguage] = useState<string>("en");
+  const [deviceLanguage, setDeviceLanguage] = useState<Language | null>(null);
+
+  useEffect(() => {
+    const getDeviceLanguage = async () => {
+      const deviceLanguage = await NativeModules.I18nManager.localeIdentifier;
+      setDeviceLanguage(deviceLanguage);
+    };
+    getDeviceLanguage();
+  }, []);
+
+  const [language, setLanguage] = useState<Language>(
+    deviceLanguage as Language
+  );
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

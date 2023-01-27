@@ -1,6 +1,8 @@
+import React from "react";
 import { Platform, StyleSheet } from "react-native";
+import ThemeProps from "../interface/theme_interface";
 
-export const lightStyles = StyleSheet.create({
+const lightTheme: ThemeProps = StyleSheet.create({
   container: {
     backgroundColor: "white",
   },
@@ -20,3 +22,5 @@ export const lightStyles = StyleSheet.create({
     },
   }),
 });
+
+export default lightTheme;
