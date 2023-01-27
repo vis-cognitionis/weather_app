@@ -18,9 +18,19 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
-import { Theme, ThemeProvider, useTheme } from "./core/themes/theme_context";
-import { darkStyles } from "./core/themes/dark";
-import { lightStyles } from "./core/themes/light";
+
+import {
+  LanguageProvider,
+  useLanguage,
+} from "./core/init/lang/language_context";
+import { t } from "./core/init/lang/custom-hook/use_translate";
+import { darkStyles } from "./core/init/themes/dark";
+import { lightStyles } from "./core/init/themes/light";
+import {
+  Theme,
+  ThemeProvider,
+  useTheme,
+} from "./core/init/themes/theme_context";
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -77,6 +87,18 @@ const StyledText = () => {
   return <Text style={myStyles.text}>Hello World!</Text>;
 };
 
+const HomeScreen = () => {
+  const { setLanguage } = useLanguage();
+
+  return (
+    <View>
+      <Text>{t("home.welcome")}</Text>
+      <Button title="Tr" onPress={() => setLanguage("tr")} />
+      <Button title="Eng" onPress={() => setLanguage("en")} />
+    </View>
+  );
+};
+
 function BeforeApp(): JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
 
@@ -104,6 +126,7 @@ function BeforeApp(): JSX.Element {
           <Section title="Step One">
             Edit
             <StyledText />
+            <HomeScreen></HomeScreen>
             <Text
               onPress={() => {
                 console.log("girdi");
@@ -132,9 +155,11 @@ function BeforeApp(): JSX.Element {
 
 function App() {
   return (
-    <ThemeProvider>
-      <BeforeApp />
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <BeforeApp />
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 
