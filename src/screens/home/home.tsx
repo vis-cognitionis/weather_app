@@ -1,61 +1,66 @@
-import React from "react";
-import { View, Text, Button, Switch, StyleSheet } from "react-native";
+import React, { useCallback, useState } from "react";
+import {
+  View,
+  Button,
+  StyleSheet,
+  SafeAreaView,
+  RefreshControl,
+  ScrollView,
+} from "react-native";
 import { useTheme } from "../../core/init/themes/theme_context";
 
 import {
   ScreenNavigationProps,
   StackScreenNames,
 } from "../../navigation/interfaces/interfaces";
-import lightStyles from "../../core/init/themes/styles/light";
-import darkStyles from "../../core/init/themes/styles/dark";
 import { Language, useLanguage } from "../../core/init/lang/language_context";
 import { t } from "../../core/init/lang/custom-hook/useTranslate";
 import ThemeProps from "../../core/init/themes/interface/interfaces";
-
-const ThemeSwitch = () => {
-  const { theme, setTheme } = useTheme();
-  const value: boolean = theme === lightStyles;
-
-  return (
-    <View>
-      <Text style={theme.typography.h1}>Change Theme</Text>
-      <Switch
-        // trackColor={{ true: "blue" }}
-        value={!value}
-        onValueChange={() => setTheme(value ? darkStyles : lightStyles)}
-      />
-      <Text>{value ? "light" : "dark"}</Text>
-    </View>
-  );
-};
+import AppBar from "./components/app-bar/app_bar";
 
 const Home = ({ navigation }: ScreenNavigationProps) => {
   const { theme } = useTheme();
-  const { setLanguage } = useLanguage();
   const styles = Styles({ theme });
+  const { setLanguage } = useLanguage();
+
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <ThemeSwitch />
-
-      <View style={{ flexDirection: "row" }}>
-        <Button
-          title="Tr"
-          color={theme.palette.primary.main}
-          onPress={() => setLanguage(Language.Turkish)}
-        />
-        <Button title="Eng" onPress={() => setLanguage(Language.English)} />
-      </View>
-      <Button
-        title={t("navbar.nav")}
-        onPress={() =>
-          navigation.navigate(StackScreenNames.Splash, {
-            name: StackScreenNames.Splash,
-            path: StackScreenNames.Splash.toLowerCase(),
-          })
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-      />
-    </View>
+      >
+        <AppBar />
+
+        <View style={{ flexDirection: "row" }}>
+          <Button
+            title="Tr"
+            color={theme.palette.primary.main}
+            onPress={() => setLanguage(Language.Turkish)}
+          />
+          <Button title="Eng" onPress={() => setLanguage(Language.English)} />
+        </View>
+        <Button
+          title={t("navbar.nav")}
+          onPress={() =>
+            navigation.navigate(StackScreenNames.Splash, {
+              name: StackScreenNames.Splash,
+              path: StackScreenNames.Splash.toLowerCase(),
+            })
+          }
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -64,8 +69,11 @@ export default Home;
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
     container: {
-      height: "10%",
+      flex: 1,
       backgroundColor: theme.palette.background.default,
+    },
+    scrollView: {
+      // flex: 1,
     },
   });
 };

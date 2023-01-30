@@ -5,6 +5,7 @@ const lightTheme: ThemeProps = {
   palette: {
     common: { black: "#424242", white: "#F7F7F7" },
     primary: {
+      main: "#40516F",
       dark: "#424242",
       light: "#F7F7F7",
     },
