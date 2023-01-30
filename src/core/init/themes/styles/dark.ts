@@ -1,26 +1,47 @@
 import React from "react";
-import { StyleSheet, Platform } from "react-native";
-import ThemeProps from "../interface/theme_interface";
+import ThemeProps from "../interface/interfaces";
 
-const darkTheme: ThemeProps = StyleSheet.create({
-  container: {
-    backgroundColor: "#333333",
-  },
-  text: {
-    color: "green",
-  },
-  ...Platform.select({
-    ios: {
-      iosSpecificStyle: {
-        fontSize: 20,
-      },
+const darkTheme: ThemeProps = {
+  palette: {
+    common: { black: "#424242", white: "#F7F7F7" },
+    primary: {
+      dark: "#999999",
+      light: "#F7F7F7",
     },
-    android: {
-      androidSpecificStyle: {
-        fontSize: 18,
-      },
+
+    secondary: {
+      light: "#A0B3C6",
+      dark: "#788897",
     },
-  }),
-});
+
+    background: {
+      default: "#666666",
+      paper: "#424242",
+    },
+
+    error: {
+      main: "#F9D4D1",
+    },
+
+    warning: {
+      main: "#FBC89F",
+    },
+
+    info: {
+      main: "#89ADCF",
+    },
+
+    text: {
+      primary: "#252525",
+      secondary: "#F7F7F7",
+      disabled: "#A9A9A9",
+    },
+
+    success: {
+      main: "#6BB27B",
+    },
+  },
+  typography: { h1: { color: "green" }, h2: { color: "green" } },
+};
 
 export default darkTheme;

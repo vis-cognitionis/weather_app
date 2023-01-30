@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, Switch } from "react-native";
+import { View, Text, Button, Switch, StyleSheet } from "react-native";
 import { useTheme } from "../../core/init/themes/theme_context";
 
 import {
@@ -10,6 +10,7 @@ import lightStyles from "../../core/init/themes/styles/light";
 import darkStyles from "../../core/init/themes/styles/dark";
 import { Language, useLanguage } from "../../core/init/lang/language_context";
 import { t } from "../../core/init/lang/custom-hook/useTranslate";
+import ThemeProps from "../../core/init/themes/interface/interfaces";
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
@@ -17,7 +18,7 @@ const ThemeSwitch = () => {
 
   return (
     <View>
-      <Text>Change Theme</Text>
+      <Text style={theme.typography.h1}>Change Theme</Text>
       <Switch
         // trackColor={{ true: "blue" }}
         value={!value}
@@ -31,18 +32,18 @@ const ThemeSwitch = () => {
 const Home = ({ navigation }: ScreenNavigationProps) => {
   const { theme } = useTheme();
   const { setLanguage } = useLanguage();
+  const styles = Styles({ theme });
 
   return (
-    <View
-      style={{
-        height: "100%",
-        backgroundColor: theme.container.backgroundColor,
-      }}
-    >
+    <View style={styles.container}>
       <ThemeSwitch />
 
       <View style={{ flexDirection: "row" }}>
-        <Button title="Tr" onPress={() => setLanguage(Language.Turkish)} />
+        <Button
+          title="Tr"
+          color={theme.palette.primary.main}
+          onPress={() => setLanguage(Language.Turkish)}
+        />
         <Button title="Eng" onPress={() => setLanguage(Language.English)} />
       </View>
       <Button
@@ -59,3 +60,12 @@ const Home = ({ navigation }: ScreenNavigationProps) => {
 };
 
 export default Home;
+
+const Styles = ({ theme }: { theme: ThemeProps }) => {
+  return StyleSheet.create({
+    container: {
+      height: "10%",
+      backgroundColor: theme.palette.background.default,
+    },
+  });
+};

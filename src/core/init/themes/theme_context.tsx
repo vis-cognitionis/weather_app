@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { Appearance } from "react-native";
-import ThemeProps from "./interface/theme_interface";
+import ThemeProps from "./interface/interfaces";
 import darkTheme from "./styles/dark";
 import lightTheme from "./styles/light";
 
