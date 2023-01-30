@@ -4,7 +4,7 @@ import ThemeProps from "../interface/theme_interface";
 
 const darkTheme: ThemeProps = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: "#333333",
   },
   text: {
     color: "green",

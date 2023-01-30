@@ -19,17 +19,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     Appearance.getColorScheme() === "dark" ? darkTheme : lightTheme
   );
 
-  useEffect(() => {
-    const subscription = Appearance.addChangeListener(
-      ({ colorScheme }: { colorScheme: any }) => {
-        setTheme(colorScheme === "dark" ? darkTheme : lightTheme);
-      }
-    );
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}

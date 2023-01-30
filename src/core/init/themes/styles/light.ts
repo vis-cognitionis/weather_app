@@ -4,7 +4,7 @@ import ThemeProps from "../interface/theme_interface";
 
 const lightTheme: ThemeProps = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#CDCDCD",
   },
   text: {
     color: "yellow",

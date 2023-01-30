@@ -1,5 +1,5 @@
 export default interface ThemeProps {
-  container: object;
+  container: Record<string, any>;
   text: object;
   iosSpecificStyle?: object;
   androidSpecificStyle?: object;
