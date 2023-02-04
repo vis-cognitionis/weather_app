@@ -1,13 +1,22 @@
-import React from "react";
-import ThemeProps from "../interface/interfaces";
+import ThemeProps, { Palette } from "../interface/interfaces";
+
+const PaletteColors: Palette = {
+  primary: {
+    main: "#40516F",
+    dark: "#999999",
+    light: "#F7F7F7",
+  },
+  background: { default: "red", paper: "green" },
+  text: { disabled: "purple", primary: "blue", secondary: "black" },
+};
 
 const darkTheme: ThemeProps = {
   palette: {
     common: { black: "#424242", white: "#F7F7F7" },
     primary: {
-      main: "#40516F",
-      dark: "#999999",
-      light: "#F7F7F7",
+      main: PaletteColors.primary.main,
+      dark: PaletteColors.primary.dark,
+      light: PaletteColors.primary.light,
     },
 
     secondary: {

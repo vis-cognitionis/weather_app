@@ -7,9 +7,10 @@ import {
   RouteConfig,
   StackScreenNames,
 } from "./interfaces/interfaces";
-import SplashScreen from "../screens/splash/splash";
-import Home from "../screens/home/home";
 import { useTheme } from "../core/init/themes/theme_context";
+import Home from "../screens/home/home";
+import Landing from "../screens/landing/landing";
+import SplashScreen from "../screens/splash/splash";
 
 const NavigationStacks = () => {
   const Stack = createNativeStackNavigator<ParamList>();
@@ -36,6 +37,15 @@ const NavigationStacks = () => {
           backgroundColor: theme.palette.primary.main,
         },
         headerTintColor: "#fff",
+        headerShown: false,
+      },
+    },
+    {
+      name: StackScreenNames.Landing,
+      component: Landing,
+      params: { name: "landing" },
+      options: {
+        title: "",
         headerShown: false,
       },
     },

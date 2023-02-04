@@ -5,12 +5,15 @@ import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 export enum StackScreenNames {
   Home = "Home",
   Splash = "Splash",
+  Landing = "Landing",
   //Details = "Details",
 }
 
 export type ParamList = {
-  Splash: { name: string; path: string };
-  Home: undefined;
+  Splash: any;
+  Home: any;
+  Landing: any;
+
   // Details: { itemId: number };
 };
 

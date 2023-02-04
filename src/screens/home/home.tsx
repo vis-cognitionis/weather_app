@@ -51,11 +51,11 @@ const Home = ({ navigation }: ScreenNavigationProps) => {
           <Button title="Eng" onPress={() => setLanguage(Language.English)} />
         </View>
         <Button
-          title={t("navbar.nav")}
+          title={"GO TO LANDING"}
           onPress={() =>
-            navigation.navigate(StackScreenNames.Splash, {
-              name: StackScreenNames.Splash,
-              path: StackScreenNames.Splash.toLowerCase(),
+            navigation.navigate(StackScreenNames.Landing, {
+              name: StackScreenNames.Landing,
+              path: StackScreenNames.Landing.toLowerCase(),
             })
           }
         />

@@ -1,4 +1,4 @@
-import { TextStyle, Platform } from "react-native";
+import { TextStyle } from "react-native";
 
 interface CommonColors {
   black: string;
@@ -11,7 +11,7 @@ interface PaletteColor {
   dark?: string;
 }
 
-interface TypeText {
+interface TextColor {
   primary: string;
   secondary: string;
   disabled: string;
@@ -22,15 +22,15 @@ interface TypeBackground {
   paper: string;
 }
 
-interface Palette {
-  common: CommonColors;
+export interface Palette {
+  common?: CommonColors;
   primary: PaletteColor;
-  secondary: PaletteColor;
-  error: PaletteColor;
-  warning: PaletteColor;
-  info: PaletteColor;
-  success: PaletteColor;
-  text: TypeText;
+  secondary?: PaletteColor;
+  error?: PaletteColor;
+  warning?: PaletteColor;
+  info?: PaletteColor;
+  success?: PaletteColor;
+  text: TextColor;
   background: TypeBackground;
 }
 
@@ -50,7 +50,7 @@ interface Palette {
 //   | "overline";
 
 type Variant = "h1" | "h2";
-// or appbar, appsection etc.
+// or instead of "h1", "h2" => appbar, appsection etc.
 
 interface Typography extends Record<Variant, TextStyle> {}
 

@@ -9,7 +9,7 @@ import {
 const SplashScreen = ({ navigation, route }: ScreenNavigationProps) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate(StackScreenNames.Home);
+      navigation.navigate(StackScreenNames.Landing);
     }, 3000);
   }, []);
 
