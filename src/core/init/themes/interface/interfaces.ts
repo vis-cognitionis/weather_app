@@ -1,8 +1,8 @@
 import { TextStyle } from "react-native";
 
 interface CommonColors {
-  black: string;
-  white: string;
+  black?: string;
+  white?: string;
 }
 
 interface PaletteColor {
@@ -12,14 +12,14 @@ interface PaletteColor {
 }
 
 interface TextColor {
-  primary: string;
-  secondary: string;
-  disabled: string;
+  primary?: string;
+  secondary?: string;
+  disabled?: string;
 }
 
 interface TypeBackground {
-  default: string;
-  paper: string;
+  default?: string;
+  paper?: string;
 }
 
 export interface Palette {

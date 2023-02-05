@@ -10,21 +10,29 @@ const ThemeSwitch = () => {
   const value: boolean = theme === lightStyles;
 
   return (
-    <View>
-      <Text style={theme.typography.h1}>Change Theme</Text>
-      <Switch
-        // trackColor={{ true: "blue" }}
-        value={!value}
-        onValueChange={() => setTheme(value ? darkStyles : lightStyles)}
-      />
-      <Text>{value ? "light" : "dark"}</Text>
-    </View>
+    <Switch
+      // trackColor={{ true: "blue" }}
+      value={!value}
+      onValueChange={() => setTheme(value ? darkStyles : lightStyles)}
+    />
   );
 };
 
 const AppBar = () => {
   return (
-    <View>
+    <View
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: 38,
+        paddingHorizontal: 20,
+        marginTop: 30,
+      }}
+    >
+      <Text> konum gelecek </Text>
+
       <ThemeSwitch />
     </View>
   );

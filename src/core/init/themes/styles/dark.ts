@@ -23,7 +23,7 @@ const darkTheme: ThemeProps = {
     },
 
     background: {
-      default: "#666666",
+      default: PaletteColors.primary.main,
       paper: "#424242",
     },
 
