@@ -3,8 +3,6 @@ import ThemeProps, { Palette } from "../interface/interfaces";
 const PaletteColors: Palette = {
   primary: {
     main: "#40516F",
-    dark: "#999999",
-    light: "#F7F7F7",
   },
   background: { default: "red", paper: "green" },
   text: { disabled: "purple", primary: "blue", secondary: "black" },
@@ -51,7 +49,19 @@ const darkTheme: ThemeProps = {
       main: "#6BB27B",
     },
   },
-  typography: { h1: { color: "green" }, h2: { color: "green" } },
+  typography: {
+    h1: {
+      color: PaletteColors.primary.main,
+      // fontFamily: "Poppins-Regular",r
+      fontStyle: "normal",
+      fontWeight: "700",
+      fontSize: 36,
+      lineHeight: 40,
+      textAlign: "center",
+    },
+    h2: { color: "green" },
+    button: { color: PaletteColors.primary.main, fontSize: 20 },
+  },
 };
 
 export default darkTheme;

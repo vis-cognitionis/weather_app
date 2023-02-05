@@ -3,7 +3,7 @@
     "welcome": "Hoşgeldiniz",
     "title": "Anasayfa"
   },
-  "landing":{"content":"Havaya Bir Göz Atalım"},
+  "landing":{"content":"Havaya Bir Göz Atalım","button" :"Haydi Bakalım"},
 
   "about": {
     "title": "Hakkında"

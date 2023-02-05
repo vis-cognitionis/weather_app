@@ -3,7 +3,7 @@
     "welcome": "Welcome",
     "title": "Home"
   },
-  "landing":{"content":"Let’s See The Weather Around you"},
+  "landing":{"content":"Let’s See The Weather Around You" ,"button": "Let's Check"},
 
   "about": {
     "title": "About"
