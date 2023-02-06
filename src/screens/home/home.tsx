@@ -10,6 +10,7 @@ import { useTheme } from "../../core/init/themes/theme_context";
 import { ScreenNavigationProps } from "../../navigation/interfaces/interfaces";
 import ThemeProps from "../../core/init/themes/interface/interfaces";
 import AppBar from "./components/app-bar/app_bar";
+import ActionBar from "./components/action-bar/action_bar";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -56,6 +57,7 @@ const Home = ({ navigation }: ScreenNavigationProps) => {
           }
         /> */}
       </ScrollView>
+      <ActionBar navigation={navigation} />
     </SafeAreaView>
   );
 };

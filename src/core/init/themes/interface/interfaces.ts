@@ -30,7 +30,7 @@ export interface Palette {
   warning?: PaletteColor;
   info?: PaletteColor;
   success?: PaletteColor;
-  text: TextColor;
+  text?: TextColor;
   background: TypeBackground;
 }
 

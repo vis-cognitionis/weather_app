@@ -3,9 +3,10 @@ import ThemeProps, { Palette } from "../interface/interfaces";
 const PaletteColors: Palette = {
   primary: {
     main: "#40516F",
+    dark: "#FCFCFC",
   },
   background: { default: "red", paper: "green" },
-  text: { disabled: "purple", primary: "blue", secondary: "black" },
+  text: { disabled: "purple", primary: "#40516F", secondary: "#FCFCFC" },
 };
 
 const darkTheme: ThemeProps = {
@@ -39,19 +40,13 @@ const darkTheme: ThemeProps = {
       main: "#89ADCF",
     },
 
-    text: {
-      primary: "#252525",
-      secondary: "#F7F7F7",
-      disabled: "#A9A9A9",
-    },
-
     success: {
       main: "#6BB27B",
     },
   },
   typography: {
     h1: {
-      color: PaletteColors.primary.main,
+      color: PaletteColors.text?.secondary,
       // fontFamily: "Poppins-Regular",r
       fontStyle: "normal",
       fontWeight: "700",
@@ -60,7 +55,7 @@ const darkTheme: ThemeProps = {
       textAlign: "center",
     },
     h2: { color: "green" },
-    button: { color: PaletteColors.primary.main, fontSize: 20 },
+    button: { color: PaletteColors.text?.primary, fontSize: 20 },
   },
 };
 

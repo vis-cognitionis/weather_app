@@ -2,9 +2,9 @@ import { Platform } from "react-native";
 import ThemeProps, { Palette } from "../interface/interfaces";
 
 const PaletteColors: Palette = {
-  primary: { main: "#40516F", dark: "#424242", light: "#F7F7F7" },
+  primary: { main: "#40516F", dark: "#40516F", light: "#F7F7F7" },
   background: { default: "red", paper: "green" },
-  text: { disabled: "purple", primary: "#FFFFFF", secondary: "black" },
+  text: { disabled: "purple", primary: "#FFFFFF", secondary: "#40516F" },
 };
 
 const lightTheme: ThemeProps = {
@@ -38,12 +38,6 @@ const lightTheme: ThemeProps = {
       main: "#89ADCF",
     },
 
-    text: {
-      primary: PaletteColors.text.primary,
-      secondary: PaletteColors.text.secondary,
-      disabled: PaletteColors.text.disabled,
-    },
-
     success: {
       main: "#6BB27B",
     },
@@ -51,7 +45,7 @@ const lightTheme: ThemeProps = {
 
   typography: {
     h1: {
-      color: PaletteColors.primary.main,
+      color: PaletteColors.text?.secondary,
       // fontFamily: "Poppins-Regular",r
       fontStyle: "normal",
       fontWeight: "700",
@@ -61,7 +55,7 @@ const lightTheme: ThemeProps = {
     },
     h2: { color: "green" },
     button: {
-      color: PaletteColors.text.primary,
+      color: PaletteColors.text?.primary,
       fontSize: Platform.OS === "android" ? 16 : 20,
     },
   },

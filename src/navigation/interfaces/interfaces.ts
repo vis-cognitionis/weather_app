@@ -19,7 +19,7 @@ export type ParamList = {
 
 export interface ScreenNavigationProps {
   navigation: StackNavigationProp<ParamList>;
-  route: RouteProp<ParamList>;
+  route?: RouteProp<ParamList>;
 }
 
 export interface RouteConfig {
