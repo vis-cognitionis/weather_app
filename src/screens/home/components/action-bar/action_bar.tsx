@@ -5,8 +5,7 @@ import ActionButton from "../../../../core/components/buttons/button";
 import ThemeProps from "../../../../core/init/themes/interface/interfaces";
 import { ScreenNavigationProps } from "../../../../navigation/interfaces/interfaces";
 import { useTheme } from "../../../../core/init/themes/theme_context";
-import { Icon } from "react-native-vector-icons/Icon";
-// import { IconHomeWeather } from "../../../../core/components/icons/custom_icons";
+import { IconHomeWeather } from "../../../../core/components/icons/custom_icons";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -29,7 +28,11 @@ const ActionBar = ({ navigation }: ScreenNavigationProps) => {
 
   const ActionButtons = [
     {
-      icon: <View>{/* <IconHomeWeather /> */}</View>,
+      icon: (
+        <View>
+          <IconHomeWeather />
+        </View>
+      ),
       onPress: () => {},
     },
     { icon: <View></View>, onPress: () => {} },

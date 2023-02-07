@@ -28,7 +28,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
     shadow: {
       ...Platform.select({
         ios: {
-          shadowColor: theme === lightTheme ? "#424242" : "#FCFCFC",
+          shadowColor: "#424242",
           shadowOpacity: theme === lightTheme ? 0.6 : 0.25,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 6 },

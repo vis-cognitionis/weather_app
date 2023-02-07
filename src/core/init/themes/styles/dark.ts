@@ -4,6 +4,7 @@ const PaletteColors: Palette = {
   primary: {
     main: "#40516F",
     dark: "#FCFCFC",
+    light: "#40516F",
   },
   background: { default: "red", paper: "green" },
   text: { disabled: "purple", primary: "#40516F", secondary: "#FCFCFC" },

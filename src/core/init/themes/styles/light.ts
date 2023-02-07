@@ -2,7 +2,7 @@ import { Platform } from "react-native";
 import ThemeProps, { Palette } from "../interface/interfaces";
 
 const PaletteColors: Palette = {
-  primary: { main: "#40516F", dark: "#40516F", light: "#F7F7F7" },
+  primary: { main: "#40516F", dark: "#40516F", light: "#FCFCFC" },
   background: { default: "red", paper: "green" },
   text: { disabled: "purple", primary: "#FFFFFF", secondary: "#40516F" },
 };
@@ -13,7 +13,7 @@ const lightTheme: ThemeProps = {
     primary: {
       main: PaletteColors.primary.main,
       dark: PaletteColors.primary.dark,
-      light: PaletteColors.primary.dark,
+      light: PaletteColors.primary.light,
     },
 
     secondary: {
