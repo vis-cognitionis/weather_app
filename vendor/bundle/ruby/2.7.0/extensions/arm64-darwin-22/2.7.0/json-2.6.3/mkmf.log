@@ -90,7 +90,7 @@ checked program was:
 "gcc -o conftest -I/Users/omeralemdar/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/arm64-darwin22 -I/Users/omeralemdar/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/omeralemdar/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I.  -I/opt/homebrew/opt/libyaml/include -I/opt/homebrew/opt/libksba/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/zlib/include -I/opt/homebrew/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe conftest.c  -L. -L/Users/omeralemdar/.rvm/rubies/ruby-2.7.6/lib -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib -L. -fstack-protector-strong -L/usr/local/lib -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib  -m64   -lruby.2.7   "
 Undefined symbols for architecture arm64:
   "_rb_enc_interned_str", referenced from:
-      _t in conftest-25c2e9.o
+      _t in conftest-0c5f69.o
 ld: symbol(s) not found for architecture arm64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 checked program was:

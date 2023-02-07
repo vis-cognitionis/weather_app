@@ -9,6 +9,24 @@ import {
 } from "../../navigation/interfaces/interfaces";
 import ActionButton from "../../core/components/buttons/button";
 import { t } from "../../core/init/lang/custom-hook/useTranslate";
+import Svg, { Circle, Rect } from "react-native-svg";
+
+const MySVG = () => {
+  return (
+    <Svg style={styles3.container} height="100" width="100">
+      <Circle cx="50" cy="50" r="45" fill="blue" />
+      <Rect x="15" y="15" width="70" height="70" fill="red" />
+    </Svg>
+  );
+};
+
+const styles3 = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -43,6 +61,7 @@ const Landing = ({ navigation }: ScreenNavigationProps) => {
           alignItems: "center",
         }}
       >
+        <MySVG />
         <Image
           style={styles.image}
           source={require("../../assets/landing_page.png")}
@@ -50,7 +69,6 @@ const Landing = ({ navigation }: ScreenNavigationProps) => {
         <View style={{ width: 254, height: 120 }}>
           <Text style={theme.typography.h1}> {t("landing.content")} </Text>
         </View>
-
         <ActionButton
           onPress={() =>
             navigation.navigate(StackScreenNames.Home, {
