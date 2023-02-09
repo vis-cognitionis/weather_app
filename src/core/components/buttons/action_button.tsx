@@ -36,6 +36,9 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
         android: {
           elevation: 10,
           shadowColor: "#000000",
+          shadowOpacity: theme === lightTheme ? 0.6 : 0.25,
+          shadowRadius: 8,
+          shadowOffset: { width: 0, height: 6 },
         },
       }),
     },
@@ -46,15 +49,21 @@ interface ButtonProps {
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;
   children?: React.ReactNode;
   customStyles?: FlexStyle | ViewStyle;
+  isFocused?: boolean;
 }
 
-const ActionButton = ({ onPress, children, customStyles }: ButtonProps) => {
+const ActionButton = ({
+  onPress,
+  children,
+  customStyles,
+  isFocused = true,
+}: ButtonProps) => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
 
   return (
     <Pressable
-      style={[styles.button, styles.shadow, customStyles]}
+      style={[styles.button, isFocused && styles.shadow, customStyles]}
       onPress={onPress}
     >
       {children}

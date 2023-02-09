@@ -1,5 +1,5 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView } from "react-native";
 
 import { useTheme } from "../../../../core/init/themes/theme_context";
 import {
@@ -18,20 +18,13 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
         flexDirection: "row",
         gap: 15,
         justifyContent: "center",
+        height: "10%",
       }}
     >
       {state.routes.map((route, index) => {
-        // const { options } = descriptors[route.key];
-        // const label =
-        //   options.tabBarLabel !== undefined
-        //     ? options.tabBarLabel
-        //     : options.title !== undefined
-        //     ? options.title
-        //     : route.name;
+        const isFocused: boolean = state.index === index;
 
-        const isFocused = state.index === index;
-
-        const stroke = isFocused
+        const stroke: string = isFocused
           ? theme.palette.primary.light!
           : theme.palette.primary.dark!;
 
@@ -59,6 +52,7 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
 
         return (
           <ActionButton
+            isFocused={isFocused}
             key={index}
             children={<TabIcon />}
             customStyles={{

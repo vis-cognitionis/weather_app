@@ -16,7 +16,6 @@ import {
 } from "../../navigation/interfaces/interfaces";
 import ActionButton from "../../core/components/buttons/action_button";
 import { t } from "../../core/init/lang/custom-hook/useTranslate";
-import ActionBar from "../home/components/tab-bar/tab_bar";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

@@ -1,21 +1,33 @@
 import React from "react";
-import { View, Button } from "react-native";
+import { SafeAreaView, Button } from "react-native";
+
 import { Language, useLanguage } from "../../core/init/lang/language_context";
 import { useTheme } from "../../core/init/themes/theme_context";
 
 const Settings = () => {
-  const { setLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const { theme } = useTheme();
 
+  const isEng: boolean = language === Language.English;
   return (
-    <View style={{ flexDirection: "row" }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        backgroundColor: theme.palette.background.default,
+      }}
+    >
       <Button
+        color={isEng ? "black" : "red"}
         title="Tr"
-        color={theme.palette.primary.main}
         onPress={() => setLanguage(Language.Turkish)}
       />
-      <Button title="Eng" onPress={() => setLanguage(Language.English)} />
-    </View>
+      <Button
+        color={isEng ? "red" : "black"}
+        title="Eng"
+        onPress={() => setLanguage(Language.English)}
+      />
+    </SafeAreaView>
   );
 };
 export default Settings;
