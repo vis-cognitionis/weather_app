@@ -5,22 +5,7 @@ import {
   ScreenNavigationProps,
   StackScreenNames,
 } from "../../navigation/interfaces/interfaces";
-
-const SplashScreen = ({ navigation, route }: ScreenNavigationProps) => {
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate(StackScreenNames.Landing);
-    }, 3000);
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Image source={require("./splash.png")} style={styles.image} />
-    </View>
-  );
-};
-
-export default SplashScreen;
+import ActionBar from "../home/components/tab-bar/tab_bar";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,3 +16,20 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
+
+const SplashScreen = ({ navigation, route }: ScreenNavigationProps) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate(StackScreenNames.Landing, "Landing");
+    }, 3000);
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      {/* <ActionBar route={route} navigation={navigation} /> */}
+      <Image source={require("./splash.png")} style={styles.image} />
+    </View>
+  );
+};
+
+export default SplashScreen;

@@ -14,26 +14,9 @@ import {
   ScreenNavigationProps,
   StackScreenNames,
 } from "../../navigation/interfaces/interfaces";
-import ActionButton from "../../core/components/buttons/button";
+import ActionButton from "../../core/components/buttons/action_button";
 import { t } from "../../core/init/lang/custom-hook/useTranslate";
-import Svg, { Circle, Rect } from "react-native-svg";
-
-const MySVG = () => {
-  return (
-    <Svg style={styles3.container} height="100" width="100">
-      <Circle cx="50" cy="50" r="45" fill="blue" />
-      <Rect x="15" y="15" width="70" height="70" fill="red" />
-    </Svg>
-  );
-};
-
-const styles3 = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+import ActionBar from "../home/components/tab-bar/tab_bar";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -51,7 +34,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const Landing = ({ navigation }: ScreenNavigationProps) => {
+const Landing = ({ navigation, route }: ScreenNavigationProps) => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
 
@@ -66,22 +49,23 @@ const Landing = ({ navigation }: ScreenNavigationProps) => {
       </View>
       <ActionButton
         onPress={() =>
-          navigation.navigate(StackScreenNames.Home, {
-            name: StackScreenNames.Home,
-            path: StackScreenNames.Home.toLowerCase(),
+          navigation.navigate(StackScreenNames.Outlet, {
+            name: StackScreenNames.Outlet,
+            path: StackScreenNames.Outlet,
           })
         }
         children={
           <Text style={theme.typography.button}>{t("landing.button")} </Text>
         }
         customStyles={{
-          paddingHorizontal: 90,
+          paddingHorizontal: 70,
           paddingVertical: 10,
           gap: 10,
           width: 291,
           height: 62,
         }}
       />
+      {/* <ActionBar route={route} navigation={navigation} /> */}
     </SafeAreaView>
   );
 };

@@ -10,7 +10,7 @@ import { useTheme } from "../../core/init/themes/theme_context";
 import { ScreenNavigationProps } from "../../navigation/interfaces/interfaces";
 import ThemeProps from "../../core/init/themes/interface/interfaces";
 import AppBar from "./components/app-bar/app_bar";
-import ActionBar from "./components/action-bar/action_bar";
+import ActionBar from "./components/tab-bar/tab_bar";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -24,7 +24,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const Home = ({ navigation }: ScreenNavigationProps) => {
+const Home = ({ navigation, route }: ScreenNavigationProps) => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
 
@@ -45,7 +45,7 @@ const Home = ({ navigation }: ScreenNavigationProps) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <AppBar />
+        {/* <AppBar /> */}
 
         {/* <Button
           title={"GO TO LANDING"}
@@ -57,7 +57,7 @@ const Home = ({ navigation }: ScreenNavigationProps) => {
           }
         /> */}
       </ScrollView>
-      <ActionBar navigation={navigation} />
+      {/* <ActionBar route={route} navigation={navigation} /> */}
     </SafeAreaView>
   );
 };

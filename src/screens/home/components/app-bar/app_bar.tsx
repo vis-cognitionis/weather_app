@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import lightStyles from "../../../../core/init/themes/styles/light";
 import darkStyles from "../../../../core/init/themes/styles/dark";
@@ -19,22 +20,22 @@ const ThemeSwitch = () => {
 };
 
 const AppBar = () => {
+  const { theme } = useTheme();
   return (
-    <View
+    <SafeAreaView
       style={{
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        height: 38,
         paddingHorizontal: 20,
-        marginTop: 30,
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Text> konum gelecek </Text>
 
       <ThemeSwitch />
-    </View>
+    </SafeAreaView>
   );
 };
 export default AppBar;
