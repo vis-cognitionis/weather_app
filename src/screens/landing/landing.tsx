@@ -20,13 +20,14 @@ import { t } from "../../core/init/lang/custom-hook/useTranslate";
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
     container: {
-      display: "flex",
+      flex: 1,
       flexDirection: "column",
       gap: Platform.OS === "android" ? 15 : 66,
       alignItems: "center",
-      marginTop: 100,
+      backgroundColor: theme.palette.background.default,
     },
     image: {
+      marginTop: 30,
       width: 313,
       height: 341,
     },
@@ -64,7 +65,6 @@ const Landing = ({ navigation, route }: ScreenNavigationProps) => {
           height: 62,
         }}
       />
-      {/* <ActionBar route={route} navigation={navigation} /> */}
     </SafeAreaView>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -25,21 +25,21 @@ const OutletTabs = () => {
       name: StackScreenNames.Home,
       component: Home,
       options: {
-        header: () => <AppBar />,
+        headerShown: false,
       },
     },
     {
       name: StackScreenNames.Map,
       component: Map,
       options: {
-        header: () => <AppBar />,
+        headerShown: false,
       },
     },
     {
       name: StackScreenNames.Settings,
       component: Settings,
       options: {
-        header: () => <AppBar />,
+        headerShown: false,
       },
     },
   ];
@@ -66,16 +66,6 @@ const NavigationStacks = () => {
 
   const routes: RouteConfig[] = [
     {
-      name: StackScreenNames.Splash,
-      component: SplashScreen,
-      params: { name: "Splash" },
-      options: {
-        title: "",
-        headerShown: false,
-      },
-    },
-
-    {
       name: StackScreenNames.Landing,
       component: Landing,
       params: { name: "Landing" },
@@ -89,26 +79,46 @@ const NavigationStacks = () => {
       component: OutletTabs,
       params: { name: "Outlet" },
       options: {
-        headerShown: false,
+        header: () => <AppBar />,
       },
     },
   ];
 
+  const [showSplashScreen, setShowSplashScreen] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplashScreen(false);
+    }, 3000);
+  }, []);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={StackScreenNames.Splash}
-        children={routes.map((route) => {
-          return (
-            <Stack.Screen
-              key={route.name}
-              name={route.name}
-              component={route.component}
-              options={route.options}
-            />
-          );
-        })}
-      />
+      {
+        <Stack.Navigator
+          initialRouteName={StackScreenNames.Landing}
+          children={
+            showSplashScreen ? (
+              <Stack.Screen
+                name={StackScreenNames.Splash}
+                component={SplashScreen}
+                options={{ headerShown: false }}
+              />
+            ) : (
+              routes.map((route) => {
+                return (
+                  <Stack.Screen
+                    key={route.name}
+                    name={route.name}
+                    component={route.component}
+                    options={route.options}
+                  />
+                );
+              })
+            )
+          }
+        />
+      }
     </NavigationContainer>
   );
 };

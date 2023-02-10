@@ -12,7 +12,8 @@ const PaletteColors: Palette = {
 
 const darkTheme: ThemeProps = {
   palette: {
-    common: { black: "#424242", white: "#F7F7F7" },
+    common: { black: "#40516F", white: "#FFFFFF" },
+
     primary: {
       main: PaletteColors.primary.main,
       dark: PaletteColors.primary.dark,

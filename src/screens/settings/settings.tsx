@@ -9,6 +9,7 @@ const Settings = () => {
   const { theme } = useTheme();
 
   const isEng: boolean = language === Language.English;
+
   return (
     <SafeAreaView
       style={{

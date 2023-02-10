@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -7,10 +7,12 @@ import {
 } from "react-native";
 import { useTheme } from "../../core/init/themes/theme_context";
 
-import { ScreenNavigationProps } from "../../navigation/interfaces/interfaces";
+import {
+  ScreenNavigationProps,
+  StackScreenNames,
+} from "../../navigation/interfaces/interfaces";
 import ThemeProps from "../../core/init/themes/interface/interfaces";
-import AppBar from "./components/app-bar/app_bar";
-import ActionBar from "./components/tab-bar/tab_bar";
+import { useActiveTab } from "../../navigation/custom-hook/tab_context";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -24,7 +26,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const Home = ({ navigation, route }: ScreenNavigationProps) => {
+const Home = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
 
@@ -45,8 +47,6 @@ const Home = ({ navigation, route }: ScreenNavigationProps) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* <AppBar /> */}
-
         {/* <Button
           title={"GO TO LANDING"}
           onPress={() =>

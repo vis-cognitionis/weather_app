@@ -3,16 +3,18 @@ import {
   StyleSheet,
   Platform,
   Pressable,
-  GestureResponderEvent,
   FlexStyle,
   ViewStyle,
+  GestureResponderEvent,
 } from "react-native";
 
 import ThemeProps from "../../init/themes/interface/interfaces";
-import lightTheme from "../../init/themes/styles/light";
+import lightStyles from "../../init/themes/styles/light";
 import { useTheme } from "../../init/themes/theme_context";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
+  const value: boolean = theme === lightStyles;
+
   return StyleSheet.create({
     button: {
       display: "flex",
@@ -29,14 +31,14 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
       ...Platform.select({
         ios: {
           shadowColor: "#424242",
-          shadowOpacity: theme === lightTheme ? 0.6 : 0.25,
+          shadowOpacity: value ? 0.5 : 1,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 6 },
         },
         android: {
           elevation: 10,
           shadowColor: "#000000",
-          shadowOpacity: theme === lightTheme ? 0.6 : 0.25,
+          shadowOpacity: value ? 0.5 : 1,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 6 },
         },
@@ -64,10 +66,9 @@ const ActionButton = ({
   return (
     <Pressable
       style={[styles.button, isFocused && styles.shadow, customStyles]}
+      children={children}
       onPress={onPress}
-    >
-      {children}
-    </Pressable>
+    />
   );
 };
 

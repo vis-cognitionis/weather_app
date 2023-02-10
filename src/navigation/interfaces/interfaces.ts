@@ -33,6 +33,7 @@ export interface RouteConfig {
   params: Record<string, any>;
   options: NativeStackNavigationOptions;
 }
+
 export interface TabConfig {
   name: StackScreenNames;
   component: ({ navigation, route }: ScreenNavigationProps) => JSX.Element;

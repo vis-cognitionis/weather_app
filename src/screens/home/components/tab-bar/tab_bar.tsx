@@ -8,9 +8,12 @@ import {
   IconSettings,
 } from "../../../../core/components/icons/custom_icons";
 import ActionButton from "../../../../core/components/buttons/action_button";
+import { useActiveTab } from "../../../../navigation/custom-hook/tab_context";
 
 const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
+  const { setActiveTabName } = useActiveTab();
+
   return (
     <SafeAreaView
       style={{
@@ -48,6 +51,8 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
           }
+
+          setActiveTabName(route.name);
         };
 
         return (
