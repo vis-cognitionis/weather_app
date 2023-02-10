@@ -18,10 +18,38 @@ export const ActiveTabProvider = ({
   const [activeTabName, setActiveTabName] = useState<string>("");
 
   return (
-    <ActiveTabContext.Provider value={{ activeTabName, setActiveTabName }}>
-      {children}
-    </ActiveTabContext.Provider>
+    <ActiveTabContext.Provider
+      children={children}
+      value={{ activeTabName, setActiveTabName }}
+    />
   );
 };
 
 export const useActiveTab = () => useContext(ActiveTabContext);
+
+interface TabPreviousContext {
+  previousTabName: string;
+  setPreviousTabName: (activeTabName: string) => void;
+}
+
+const PreviousTabContext = createContext<TabPreviousContext>({
+  previousTabName: "",
+  setPreviousTabName: () => {},
+});
+
+export const PreviousTabProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [previousTabName, setPreviousTabName] = useState<string>("Home");
+
+  return (
+    <PreviousTabContext.Provider
+      children={children}
+      value={{ previousTabName, setPreviousTabName }}
+    />
+  );
+};
+
+export const usePreviousTab = () => useContext(PreviousTabContext);

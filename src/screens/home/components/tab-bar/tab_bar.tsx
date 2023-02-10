@@ -8,11 +8,16 @@ import {
   IconSettings,
 } from "../../../../core/components/icons/custom_icons";
 import ActionButton from "../../../../core/components/buttons/action_button";
-import { useActiveTab } from "../../../../navigation/custom-hook/tab_context";
+import {
+  useActiveTab,
+  usePreviousTab,
+} from "../../../../navigation/custom-hook/tab_context";
+import { StackScreenNames } from "../../../../navigation/interfaces/interfaces";
 
 const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
   const { setActiveTabName } = useActiveTab();
+  const { setPreviousTabName } = usePreviousTab();
 
   return (
     <SafeAreaView
@@ -50,6 +55,13 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
 
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
+          }
+
+          if (route.name === StackScreenNames.Home) {
+            setPreviousTabName(StackScreenNames.Home);
+          }
+          if (route.name === StackScreenNames.Map) {
+            setPreviousTabName(StackScreenNames.Map);
           }
 
           setActiveTabName(route.name);

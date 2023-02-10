@@ -1,5 +1,6 @@
 import React from "react";
 import { Platform, Pressable, StyleSheet, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import lightStyles from "../../../../core/init/themes/styles/light";
@@ -7,10 +8,15 @@ import darkStyles from "../../../../core/init/themes/styles/dark";
 import ThemeProps from "../../../../core/init/themes/interface/interfaces";
 import { useTheme } from "../../../../core/init/themes/theme_context";
 import {
+  IconBack,
   IconDarkTheme,
   IconLightTheme,
 } from "../../../../core/components/icons/custom_icons";
-import { useActiveTab } from "../../../../navigation/custom-hook/tab_context";
+import {
+  useActiveTab,
+  usePreviousTab,
+} from "../../../../navigation/custom-hook/tab_context";
+import { StackScreenNames } from "../../../../navigation/interfaces/interfaces";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightStyles;
@@ -73,14 +79,37 @@ const ThemeSwitch = () => {
   );
 };
 
+const style = StyleSheet.create({
+  backButton: {
+    width: 32,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
 const AppBar = () => {
+  const { activeTabName, setActiveTabName } = useActiveTab();
+  const { previousTabName } = usePreviousTab();
+  const navigation = useNavigation();
+
   const { theme } = useTheme();
-  const { activeTabName } = useActiveTab();
   const styles = AppBarStyles({ theme });
 
   return (
     <SafeAreaView style={styles.container}>
-      {activeTabName !== "Settings" && <Text> konum gelecek </Text>}
+      {activeTabName !== StackScreenNames.Settings.toString() ? (
+        <Text> konum gelecek </Text>
+      ) : (
+        <Pressable
+          style={style.backButton}
+          children={<IconBack />}
+          onPress={() => {
+            navigation.navigate(previousTabName as never);
+            setActiveTabName(previousTabName);
+          }}
+        />
+      )}
 
       <ThemeSwitch />
     </SafeAreaView>

@@ -13,12 +13,12 @@ export enum StackScreenNames {
 }
 
 export type ParamList = {
-  Splash: any;
-  Home: any;
-  Landing: any;
-  Map: any;
-  Settings: any;
-  Outlet: any;
+  Splash: Record<string, any>;
+  Home: Record<string, any>;
+  Landing: Record<string, any>;
+  Map: Record<string, any>;
+  Settings: Record<string, any>;
+  Outlet: Record<string, any>;
   // Details: { itemId: number };
 };
 

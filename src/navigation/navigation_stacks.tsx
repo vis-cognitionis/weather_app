@@ -9,6 +9,10 @@ import {
   TabConfig,
   StackScreenNames,
 } from "./interfaces/interfaces";
+import {
+  ActiveTabProvider,
+  PreviousTabProvider,
+} from "./custom-hook/tab_context";
 import SplashScreen from "../screens/splash/splash";
 import Landing from "../screens/landing/landing";
 import AppBar from "../screens/home/components/app-bar/app_bar";
@@ -93,33 +97,37 @@ const NavigationStacks = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      {
-        <Stack.Navigator
-          initialRouteName={StackScreenNames.Landing}
-          children={
-            showSplashScreen ? (
-              <Stack.Screen
-                name={StackScreenNames.Splash}
-                component={SplashScreen}
-                options={{ headerShown: false }}
-              />
-            ) : (
-              routes.map((route) => {
-                return (
+    <PreviousTabProvider>
+      <ActiveTabProvider>
+        <NavigationContainer>
+          {
+            <Stack.Navigator
+              initialRouteName={StackScreenNames.Landing}
+              children={
+                showSplashScreen ? (
                   <Stack.Screen
-                    key={route.name}
-                    name={route.name}
-                    component={route.component}
-                    options={route.options}
+                    name={StackScreenNames.Splash}
+                    component={SplashScreen}
+                    options={{ headerShown: false }}
                   />
-                );
-              })
-            )
+                ) : (
+                  routes.map((route) => {
+                    return (
+                      <Stack.Screen
+                        key={route.name}
+                        name={route.name}
+                        component={route.component}
+                        options={route.options}
+                      />
+                    );
+                  })
+                )
+              }
+            />
           }
-        />
-      }
-    </NavigationContainer>
+        </NavigationContainer>
+      </ActiveTabProvider>
+    </PreviousTabProvider>
   );
 };
 

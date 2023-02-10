@@ -81,3 +81,19 @@ export const IconDarkTheme = () => {
     </Svg>
   );
 };
+
+export const IconBack = () => {
+  const { theme } = useTheme();
+
+  return (
+    <Svg width="9" height="15" viewBox="0 0 9 15" fill="none">
+      <Path
+        d="M7.66675 1L1.00008 7.66667L7.66675 14.3333"
+        stroke={theme.palette.primary.dark}
+        stroke-width="1.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </Svg>
+  );
+};

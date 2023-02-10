@@ -1,18 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
   RefreshControl,
   ScrollView,
 } from "react-native";
-import { useTheme } from "../../core/init/themes/theme_context";
 
-import {
-  ScreenNavigationProps,
-  StackScreenNames,
-} from "../../navigation/interfaces/interfaces";
+import { useTheme } from "../../core/init/themes/theme_context";
 import ThemeProps from "../../core/init/themes/interface/interfaces";
-import { useActiveTab } from "../../navigation/custom-hook/tab_context";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -46,18 +41,7 @@ const Home = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-      >
-        {/* <Button
-          title={"GO TO LANDING"}
-          onPress={() =>
-            navigation.navigate(StackScreenNames.Landing, {
-              name: StackScreenNames.Landing,
-              path: StackScreenNames.Landing.toLowerCase(),
-            })
-          }
-        /> */}
-      </ScrollView>
-      {/* <ActionBar route={route} navigation={navigation} /> */}
+      ></ScrollView>
     </SafeAreaView>
   );
 };
