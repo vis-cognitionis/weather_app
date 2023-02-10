@@ -10,5 +10,18 @@
   },
     "navbar": {
     "nav": "Go to splash"
+  },
+    "settings": {
+    "general": {
+      "title": "General Settings",
+      "location":"Location",
+      "notifications": "Notifications",
+      "language":"Language"
+    },
+    "temperature": {
+      "title": "Temperature",
+      "fahrenheit":"Fahrenheit",
+      "celsius":"Celsius"
+    }
   }
 }

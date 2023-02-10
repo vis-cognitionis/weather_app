@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 const SplashScreen = () => {
   return (
     <View style={styles.container}>
-      <Image source={require("./splash.png")} style={styles.image} />
+      <Image source={require("../../assets/splash.png")} style={styles.image} />
     </View>
   );
 };

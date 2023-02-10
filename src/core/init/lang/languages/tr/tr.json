@@ -3,12 +3,28 @@
     "welcome": "Hoşgeldiniz",
     "title": "Anasayfa"
   },
-  "landing":{"content":"Havaya Bir Göz Atalım","button" :"Haydi Bakalım"},
-
+  "landing": {
+    "content": "Havaya Bir Göz Atalım",
+    "button": "Haydi Bakalım"
+  },
   "about": {
     "title": "Hakkında"
   },
   "navbar": {
     "nav": "splash e git"
+  },
+  "settings": {
+    "general": {
+      "title": "Genel Ayarlar",
+      "location":"Konum",
+      "notifications": "Bildirimler",
+      "language":"Dil"
+
+    },
+    "temperature": {
+      "title": "Sıcaklık Birimi",
+      "fahrenheit":"Fahrenheit",
+      "celsius":"Celsius"
+    }
   }
 }
