@@ -12,7 +12,8 @@
       "title": "General Settings",
       "location": "Location",
       "notifications": "Notifications",
-      "language": "Language"
+      "language": "Language",
+      "statusBar": "Status Bar"
     },
     "temperature": {
       "title": "Temperature",

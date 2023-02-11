@@ -12,7 +12,8 @@
       "title": "Genel Ayarlar",
       "location": "Konum",
       "notifications": "Bildirimler",
-      "language": "Dil"
+      "language": "Dil",
+      "statusBar": "Durum Çubuğu"
     },
     "temperature": {
       "title": "Sıcaklık Birimi",

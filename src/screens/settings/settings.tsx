@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { StatusBar } from "react-native";
 import { Pressable, Text, View } from "react-native";
 import { SafeAreaView, SectionList } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -29,56 +30,44 @@ const SectionTitle = ({ title }: { title: string }) => {
 };
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
+  const { language, setLanguage } = useLanguage();
+  const [openNotification, setopenNotification] = useState<boolean>(true);
 
   const NotificationAction = () => {
-    const [openNotification, setopenNotification] = useState<boolean>(true);
-
-    return openNotification ? (
+    return (
       <Pressable
         onPress={() => {
-          setopenNotification(false);
+          setopenNotification(!openNotification);
         }}
-      >
-        <IconNotifications />
-      </Pressable>
-    ) : (
-      <Pressable
-        onPress={() => {
-          setopenNotification(true);
-        }}
-      >
-        <IconNotificationsOff />
-      </Pressable>
+        children={
+          openNotification ? <IconNotifications /> : <IconNotificationsOff />
+        }
+      />
     );
   };
 
   const LanguageAction = () => {
-    const { language, setLanguage } = useLanguage();
-
     const isTr: boolean = language === Language.Turkish;
 
-    return isTr ? (
+    return (
       <Pressable
         onPress={() => {
-          setLanguage(Language.English);
+          isTr ? setLanguage(Language.English) : setLanguage(Language.Turkish);
         }}
-      >
-        <Text
-          style={{ color: theme.palette.secondary?.main }}
-          children={Language.English.toLocaleUpperCase()}
-        />
-      </Pressable>
-    ) : (
-      <Pressable
-        onPress={() => {
-          setLanguage(Language.Turkish);
-        }}
-      >
-        <Text
-          style={{ color: theme.palette.secondary?.main }}
-          children={Language.Turkish.toLocaleUpperCase()}
-        />
-      </Pressable>
+        children={
+          isTr ? (
+            <Text
+              style={{ color: theme.palette.secondary?.main }}
+              children={Language.English.toLocaleUpperCase()}
+            />
+          ) : (
+            <Text
+              style={{ color: theme.palette.secondary?.main }}
+              children={Language.Turkish.toLocaleUpperCase()}
+            />
+          )
+        }
+      />
     );
   };
 
@@ -98,6 +87,7 @@ const SectionContent = ({ content }: { content: string }) => {
         return null;
     }
   };
+  const [hidden, setHidden] = useState<boolean>(false);
 
   return (
     <View
@@ -113,6 +103,19 @@ const SectionContent = ({ content }: { content: string }) => {
       <Text style={theme.typography.content}>{content}</Text>
 
       <GeneralAction />
+      {content === t("settings.general.statusBar") && (
+        <View>
+          <StatusBar animated={true} hidden={hidden} />
+          <BouncyCheckbox
+            isChecked={!hidden}
+            fillColor={theme.palette.success?.main}
+            style={{ width: 20 }}
+            onPress={() => {
+              setHidden(!hidden);
+            }}
+          ></BouncyCheckbox>
+        </View>
+      )}
       {content === t("settings.temperature.celsius") ? (
         <BouncyCheckbox
           style={{ width: 20 }}
@@ -140,6 +143,7 @@ const Settings = () => {
         { name: t("settings.general.location") },
         { name: t("settings.general.notifications") },
         { name: t("settings.general.language") },
+        { name: t("settings.general.statusBar") },
       ],
     },
     {
@@ -174,6 +178,7 @@ const Settings = () => {
           <SectionTitle title={section.title} />
         )}
       />
+      {/* <StatusBarSettings /> */}
     </SafeAreaView>
   );
 };

@@ -110,7 +110,6 @@ const AppBar = () => {
           }}
         />
       )}
-
       <ThemeSwitch />
     </SafeAreaView>
   );
