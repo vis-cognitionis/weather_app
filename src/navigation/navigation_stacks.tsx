@@ -13,13 +13,13 @@ import {
   ActiveTabProvider,
   PreviousTabProvider,
 } from "./custom-hook/tab_context";
-import SplashScreen from "../screens/splash/splash";
-import Landing from "../screens/landing/landing";
-import AppBar from "../screens/home/components/app-bar/app_bar";
-import Home from "../screens/home/home";
-import Map from "../screens/map/map";
-import TabBar from "../screens/home/components/tab-bar/tab_bar";
-import Settings from "../screens/settings/settings";
+import SplashScreen from "../screens/view/splash/splash";
+import Landing from "../screens//view/landing/landing";
+import AppBar from "../screens/view/home/components/app-bar/app_bar";
+import Home from "../screens/view/home/home";
+import Map from "../screens/view/map/map";
+import TabBar from "../screens/view/home/components/tab-bar/tab_bar";
+import Settings from "../screens/view/settings/settings";
 
 const OutletTabs = () => {
   const Tab = createBottomTabNavigator<ParamList>();
@@ -97,37 +97,37 @@ const NavigationStacks = () => {
   }, []);
 
   return (
-    <PreviousTabProvider>
-      <ActiveTabProvider>
-        <NavigationContainer>
-          {
-            <Stack.Navigator
-              initialRouteName={StackScreenNames.Landing}
-              children={
-                showSplashScreen ? (
+    // <PreviousTabProvider>
+    //   <ActiveTabProvider>
+    <NavigationContainer>
+      {
+        <Stack.Navigator
+          initialRouteName={StackScreenNames.Landing}
+          children={
+            showSplashScreen ? (
+              <Stack.Screen
+                name={StackScreenNames.Splash}
+                component={SplashScreen}
+                options={{ headerShown: false }}
+              />
+            ) : (
+              routes.map((route) => {
+                return (
                   <Stack.Screen
-                    name={StackScreenNames.Splash}
-                    component={SplashScreen}
-                    options={{ headerShown: false }}
+                    key={route.name}
+                    name={route.name}
+                    component={route.component}
+                    options={route.options}
                   />
-                ) : (
-                  routes.map((route) => {
-                    return (
-                      <Stack.Screen
-                        key={route.name}
-                        name={route.name}
-                        component={route.component}
-                        options={route.options}
-                      />
-                    );
-                  })
-                )
-              }
-            />
+                );
+              })
+            )
           }
-        </NavigationContainer>
-      </ActiveTabProvider>
-    </PreviousTabProvider>
+        />
+      }
+    </NavigationContainer>
+    // </ActiveTabProvider>
+    //</PreviousTabProvider>
   );
 };
 

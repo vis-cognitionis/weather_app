@@ -6,8 +6,8 @@ import {
   ScrollView,
 } from "react-native";
 
-import { useTheme } from "../../core/init/themes/theme_context";
-import ThemeProps from "../../core/init/themes/interface/interfaces";
+import { useTheme } from "../../../core/init/themes/theme_context";
+import ThemeProps from "../../../core/init/themes/interface/interfaces";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

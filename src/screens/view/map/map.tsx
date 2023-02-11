@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, Text } from "react-native";
 
-import { useTheme } from "../../core/init/themes/theme_context";
+import { useTheme } from "../../../core/init/themes/theme_context";
 
 const Map = () => {
   const { theme } = useTheme();

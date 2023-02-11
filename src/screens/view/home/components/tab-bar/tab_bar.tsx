@@ -1,23 +1,26 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native";
 
-import { useTheme } from "../../../../core/init/themes/theme_context";
+import { useTheme } from "../../../../../core/init/themes/theme_context";
 import {
   IconMap,
   IconHomeWeather,
   IconSettings,
-} from "../../../../core/components/icons/custom_icons";
-import ActionButton from "../../../../core/components/buttons/action_button";
+} from "../../../../../core/components/icons/custom_icons";
+import ActionButton from "../../../../../core/components/buttons/action_button";
 import {
   useActiveTab,
   usePreviousTab,
-} from "../../../../navigation/custom-hook/tab_context";
-import { StackScreenNames } from "../../../../navigation/interfaces/interfaces";
+} from "../../../../../navigation/custom-hook/tab_context";
+import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
+
+import { observer } from "mobx-react";
+import { mainStore } from "../../../../view-model/main_store";
 
 const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
-  const { setActiveTabName } = useActiveTab();
-  const { setPreviousTabName } = usePreviousTab();
+  // const { setActiveTabName } = useActiveTab();
+  // const { setPreviousTabName } = usePreviousTab();
 
   return (
     <SafeAreaView
@@ -58,13 +61,15 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
           }
 
           if (route.name === StackScreenNames.Home) {
-            setPreviousTabName(StackScreenNames.Home);
+            mainStore.setPreviousTab(StackScreenNames.Home);
+            // setPreviousTabName(StackScreenNames.Home);
           }
           if (route.name === StackScreenNames.Map) {
-            setPreviousTabName(StackScreenNames.Map);
+            mainStore.setPreviousTab(StackScreenNames.Map);
+            // setPreviousTabName(StackScreenNames.Map);
           }
 
-          setActiveTabName(route.name);
+          mainStore.setCurrentTab(route.name);
         };
 
         return (
@@ -88,4 +93,4 @@ const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   );
 };
 
-export default TabBar;
+export default observer(TabBar);

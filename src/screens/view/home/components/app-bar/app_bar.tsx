@@ -3,20 +3,22 @@ import { Platform, Pressable, StyleSheet, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import lightStyles from "../../../../core/init/themes/styles/light";
-import darkStyles from "../../../../core/init/themes/styles/dark";
-import ThemeProps from "../../../../core/init/themes/interface/interfaces";
-import { useTheme } from "../../../../core/init/themes/theme_context";
+import lightStyles from "../../../../../core/init/themes/styles/light";
+import darkStyles from "../../../../../core/init/themes/styles/dark";
+import ThemeProps from "../../../../../core/init/themes/interface/interfaces";
+import { useTheme } from "../../../../../core/init/themes/theme_context";
 import {
   IconBack,
   IconDarkTheme,
   IconLightTheme,
-} from "../../../../core/components/icons/custom_icons";
+} from "../../../../../core/components/icons/custom_icons";
 import {
   useActiveTab,
   usePreviousTab,
-} from "../../../../navigation/custom-hook/tab_context";
-import { StackScreenNames } from "../../../../navigation/interfaces/interfaces";
+} from "../../../../../navigation/custom-hook/tab_context";
+import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
+import { mainStore } from "../../../../view-model/main_store";
+import { observer } from "mobx-react";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightStyles;
@@ -89,8 +91,8 @@ const style = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { activeTabName, setActiveTabName } = useActiveTab();
-  const { previousTabName } = usePreviousTab();
+  // const { activeTabName, setActiveTabName } = useActiveTab();
+  // const { previousTabName } = usePreviousTab();
   const navigation = useNavigation();
 
   const { theme } = useTheme();
@@ -98,15 +100,15 @@ const AppBar = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {activeTabName !== StackScreenNames.Settings.toString() ? (
+      {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
         <Text> konum gelecek </Text>
       ) : (
         <Pressable
           style={style.backButton}
           children={<IconBack />}
           onPress={() => {
-            navigation.navigate(previousTabName as never);
-            setActiveTabName(previousTabName);
+            navigation.navigate(mainStore.previousTab as never);
+            mainStore.setCurrentTab(mainStore.previousTab);
           }}
         />
       )}
@@ -114,4 +116,4 @@ const AppBar = () => {
     </SafeAreaView>
   );
 };
-export default AppBar;
+export default observer(AppBar);

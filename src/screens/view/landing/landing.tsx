@@ -8,14 +8,14 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import ThemeProps from "../../core/init/themes/interface/interfaces";
-import { useTheme } from "../../core/init/themes/theme_context";
+import ThemeProps from "../../../core/init/themes/interface/interfaces";
+import { useTheme } from "../../../core/init/themes/theme_context";
 import {
   ScreenNavigationProps,
   StackScreenNames,
-} from "../../navigation/interfaces/interfaces";
-import ActionButton from "../../core/components/buttons/action_button";
-import { t } from "../../core/init/lang/custom-hook/useTranslate";
+} from "../../../navigation/interfaces/interfaces";
+import ActionButton from "../../../core/components/buttons/action_button";
+import { t } from "../../../core/init/lang/custom-hook/useTranslate";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -42,7 +42,7 @@ const Landing = ({ navigation, route }: ScreenNavigationProps) => {
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/landing_page.png")}
+        source={require("../../../assets/landing_page.png")}
       />
       <View style={{ width: 254, height: 120 }}>
         <Text style={theme.typography.h1}> {t("landing.content")} </Text>
