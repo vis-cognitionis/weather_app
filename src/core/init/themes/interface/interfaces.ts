@@ -49,7 +49,7 @@ export interface Palette {
 //   | "button"
 //   | "overline";
 
-type Variant = "h1" | "h2" | "button";
+type Variant = "h1" | "h2" | "button" | "title" | "content";
 // or instead of "h1", "h2" => appbar, appsection etc.
 
 interface Typography extends Record<Variant, TextStyle> {}

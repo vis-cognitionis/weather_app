@@ -21,6 +21,7 @@ const darkTheme: ThemeProps = {
     },
 
     secondary: {
+      main: "#F1AAAA",
       light: "#A0B3C6",
       dark: "#788897",
     },
@@ -31,7 +32,7 @@ const darkTheme: ThemeProps = {
     },
 
     error: {
-      main: "#F9D4D1",
+      main: "#FF9455",
     },
 
     warning: {
@@ -58,6 +59,18 @@ const darkTheme: ThemeProps = {
     },
     h2: { color: "green" },
     button: { color: PaletteColors.text?.primary, fontSize: 20 },
+    title: {
+      fontStyle: "normal",
+      fontWeight: "500",
+      fontSize: 18,
+      color: PaletteColors.primary.dark,
+    },
+    content: {
+      fontStyle: "normal",
+      fontWeight: "400",
+      fontSize: 16,
+      color: PaletteColors.primary.dark,
+    },
   },
 };
 

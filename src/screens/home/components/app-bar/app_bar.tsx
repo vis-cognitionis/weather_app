@@ -74,7 +74,7 @@ const ThemeSwitch = () => {
       style={[styles.button, styles.shadow]}
       onPress={() => setTheme(value ? darkStyles : lightStyles)}
     >
-      {value ? <IconLightTheme /> : <IconDarkTheme />}
+      {value ? <IconDarkTheme /> : <IconLightTheme />}
     </Pressable>
   );
 };

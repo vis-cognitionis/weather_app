@@ -3,25 +3,23 @@
     "welcome": "Welcome",
     "title": "Home"
   },
-  "landing":{"content":"Let’s See The Weather Around You" ,"button": "Let's Check"},
-
-  "about": {
-    "title": "About"
+  "landing": {
+    "content": "Let’s See The Weather Around You",
+    "button": "Let's Check"
   },
-    "navbar": {
-    "nav": "Go to splash"
-  },
-    "settings": {
+  "settings": {
     "general": {
       "title": "General Settings",
-      "location":"Location",
+      "location": "Location",
       "notifications": "Notifications",
-      "language":"Language"
+      "language": "Language"
     },
     "temperature": {
       "title": "Temperature",
-      "fahrenheit":"Fahrenheit",
-      "celsius":"Celsius"
-    }
+      "fahrenheit": "Fahrenheit",
+      "celsius": "Celsius"
+    },
+    "terms": "terms and services",
+    "about": "About"
   }
 }

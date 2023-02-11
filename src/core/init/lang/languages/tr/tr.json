@@ -7,24 +7,19 @@
     "content": "Havaya Bir Göz Atalım",
     "button": "Haydi Bakalım"
   },
-  "about": {
-    "title": "Hakkında"
-  },
-  "navbar": {
-    "nav": "splash e git"
-  },
   "settings": {
     "general": {
       "title": "Genel Ayarlar",
-      "location":"Konum",
+      "location": "Konum",
       "notifications": "Bildirimler",
-      "language":"Dil"
-
+      "language": "Dil"
     },
     "temperature": {
       "title": "Sıcaklık Birimi",
-      "fahrenheit":"Fahrenheit",
-      "celsius":"Celsius"
-    }
+      "fahrenheit": "Fahrenheit",
+      "celsius": "Celsius"
+    },
+    "terms": "şartlar ve hizmetler",
+    "about": "Hakkında"
   }
 }

@@ -17,6 +17,7 @@ const lightTheme: ThemeProps = {
     },
 
     secondary: {
+      main: "#BF6767",
       light: "#A0B3C6",
       dark: "#788897",
     },
@@ -27,7 +28,7 @@ const lightTheme: ThemeProps = {
     },
 
     error: {
-      main: "#F9D4D1",
+      main: "#CB4B00",
     },
 
     warning: {
@@ -39,7 +40,7 @@ const lightTheme: ThemeProps = {
     },
 
     success: {
-      main: "#6BB27B",
+      main: "#579464",
     },
   },
 
@@ -57,6 +58,18 @@ const lightTheme: ThemeProps = {
     button: {
       color: PaletteColors.text?.primary,
       fontSize: Platform.OS === "android" ? 16 : 20,
+    },
+    title: {
+      fontStyle: "normal",
+      fontWeight: "500",
+      fontSize: 18,
+      color: PaletteColors.primary.dark,
+    },
+    content: {
+      fontStyle: "normal",
+      fontWeight: "400",
+      fontSize: 16,
+      color: PaletteColors.primary.dark,
     },
   },
 };
