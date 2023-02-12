@@ -39,7 +39,7 @@ const Landing = () => {
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../../assets/landing_page.png")}
+        source={require("../../../images/landing_page.png")}
       />
       <Text style={[theme.typography.h1, { width: "70%" }]}>
         {t("landing.content")}

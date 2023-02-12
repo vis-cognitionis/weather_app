@@ -12,7 +12,7 @@ import ThemeProps from "../../../core/init/themes/interface/interfaces";
 import { IconInfoSunny } from "../../../core/components/icons/weather_info_icons";
 import { IconSunny } from "../../../core/components/icons/weather_colored_icons";
 import { useTheme } from "../../../core/init/themes/theme_context";
-import { SunnySvg } from "../../../assets/weather-svg/weather_svg";
+import { SunnySvg } from "../../../images/weather-svg/weather_svg";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
