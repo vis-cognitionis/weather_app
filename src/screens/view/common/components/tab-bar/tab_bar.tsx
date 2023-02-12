@@ -22,7 +22,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
         flexDirection: "row",
         gap: 15,
         justifyContent: "center",
-        height: "10%",
+        height: "12%",
       }}
     >
       {state.routes.map((route, index) => {
