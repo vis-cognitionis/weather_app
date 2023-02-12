@@ -6,7 +6,7 @@ import {
   IconNotifications,
   IconNotificationsOff,
 } from "../../../../core/components/icons/custom_icons";
-import { mainStore } from "../../../view-model/main_store";
+import mainStore from "../../../view-model/main_store";
 
 const NotificationAction = () => {
   return (

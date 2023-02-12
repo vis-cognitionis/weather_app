@@ -13,7 +13,7 @@ import {
   IconLightTheme,
 } from "../../../../../core/components/icons/custom_icons";
 import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
-import { mainStore } from "../../../../view-model/main_store";
+import mainStore from "../../../../view-model/main_store";
 import { observer } from "mobx-react";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {

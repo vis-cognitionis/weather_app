@@ -10,7 +10,7 @@ import {
 } from "../../../../../core/components/icons/custom_icons";
 import ActionButton from "../../../../../core/components/buttons/action_button";
 import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
-import { mainStore } from "../../../../view-model/main_store";
+import mainStore from "../../../../view-model/main_store";
 
 const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();

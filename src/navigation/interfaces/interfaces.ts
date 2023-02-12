@@ -27,13 +27,6 @@ export interface ScreenNavigationProps {
   route?: RouteProp<ParamList>;
 }
 
-export interface RouteConfig {
-  name: StackScreenNames;
-  component: ({ navigation, route }: ScreenNavigationProps) => JSX.Element;
-  params: Record<string, any>;
-  options: NativeStackNavigationOptions;
-}
-
 export interface TabConfig {
   name: StackScreenNames;
   component: ({ navigation, route }: ScreenNavigationProps) => JSX.Element;

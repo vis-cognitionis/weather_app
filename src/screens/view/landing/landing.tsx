@@ -8,13 +8,10 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import ThemeProps from "../../../core/init/themes/interface/interfaces";
-import { useTheme } from "../../../core/init/themes/theme_context";
-import {
-  ScreenNavigationProps,
-  StackScreenNames,
-} from "../../../navigation/interfaces/interfaces";
 import ActionButton from "../../../core/components/buttons/action_button";
+import ThemeProps from "../../../core/init/themes/interface/interfaces";
+import mainStore from "../../view-model/main_store";
+import { useTheme } from "../../../core/init/themes/theme_context";
 import { t } from "../../../core/init/lang/custom-hook/useTranslate";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
@@ -34,7 +31,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const Landing = ({ navigation, route }: ScreenNavigationProps) => {
+const Landing = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
 
@@ -48,12 +45,9 @@ const Landing = ({ navigation, route }: ScreenNavigationProps) => {
         <Text style={theme.typography.h1}> {t("landing.content")} </Text>
       </View>
       <ActionButton
-        onPress={() =>
-          navigation.navigate(StackScreenNames.Outlet, {
-            name: StackScreenNames.Outlet,
-            path: StackScreenNames.Outlet,
-          })
-        }
+        onPress={() => {
+          mainStore.setNavigateLanding(false);
+        }}
         children={
           <Text style={theme.typography.button}>{t("landing.button")} </Text>
         }
