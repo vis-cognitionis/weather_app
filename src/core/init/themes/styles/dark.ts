@@ -53,7 +53,7 @@ const darkTheme: ThemeProps = {
   typography: {
     h1: {
       color: PaletteColors.text?.secondary,
-      fontFamily: "Poppins-Bold",
+      fontFamily: "Poppins-SemiBold",
       fontSize: Platform.OS === "android" ? 26 : 36,
       lineHeight: 40,
     },
