@@ -40,6 +40,7 @@ const OutletTabs = () => {
 
   return (
     <Tab.Navigator
+      initialRouteName={StackScreenNames.Home}
       tabBar={(props) => <TabBar {...props} />}
       children={tabRoutes.map((tab) => {
         return (

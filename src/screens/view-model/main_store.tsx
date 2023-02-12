@@ -7,6 +7,7 @@ class MainStore {
   openNotification: boolean = true;
   showSplashScreen: boolean = true;
   navigateLanding: boolean = false;
+  hideStatusBar: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -30,6 +31,10 @@ class MainStore {
 
   setNavigateLanding = (navigate: boolean) => {
     this.navigateLanding = navigate;
+  };
+
+  setHideStatusBar = (hide: boolean) => {
+    this.hideStatusBar = hide;
   };
 }
 

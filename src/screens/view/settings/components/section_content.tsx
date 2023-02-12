@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { View, Text, StatusBar } from "react-native";
+import React from "react";
+import { View, Text } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-import { useTheme } from "../../../../core/init/themes/theme_context";
-import { t } from "../../../../core/init/lang/custom-hook/useTranslate";
 import {
   IconLocation,
   IconTerms,
@@ -11,10 +9,12 @@ import {
 } from "../../../../core/components/icons/custom_icons";
 import LanguageAction from "./language_actions";
 import NotificationAction from "./notification_action";
+import StatusbarSettings from "./statusbar_settings";
+import { useTheme } from "../../../../core/init/themes/theme_context";
+import { t } from "../../../../core/init/lang/custom-hook/useTranslate";
 
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
-  const [hidden, setHidden] = useState<boolean>(false);
 
   const GeneralAction = () => {
     switch (content) {
@@ -45,21 +45,8 @@ const SectionContent = ({ content }: { content: string }) => {
       }}
     >
       <Text style={theme.typography.content}>{content}</Text>
-
       <GeneralAction />
-      {content === t("settings.general.statusBar") && (
-        <View>
-          <StatusBar animated={true} hidden={hidden} />
-          <BouncyCheckbox
-            isChecked={!hidden}
-            fillColor={theme.palette.success?.main}
-            style={{ width: 20 }}
-            onPress={() => {
-              setHidden(!hidden);
-            }}
-          ></BouncyCheckbox>
-        </View>
-      )}
+      <StatusbarSettings content={content} />
       {content === t("settings.temperature.celsius") ? (
         <BouncyCheckbox
           style={{ width: 20 }}

@@ -2,19 +2,19 @@ import React from "react";
 import { Platform, Pressable, StyleSheet, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { observer } from "mobx-react";
 
 import lightStyles from "../../../../../core/init/themes/styles/light";
 import darkStyles from "../../../../../core/init/themes/styles/dark";
 import ThemeProps from "../../../../../core/init/themes/interface/interfaces";
-import { useTheme } from "../../../../../core/init/themes/theme_context";
+import mainStore from "../../../../view-model/main_store";
 import {
   IconBack,
   IconDarkTheme,
   IconLightTheme,
 } from "../../../../../core/components/icons/custom_icons";
 import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
-import mainStore from "../../../../view-model/main_store";
-import { observer } from "mobx-react";
+import { useTheme } from "../../../../../core/init/themes/theme_context";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightStyles;
@@ -87,10 +87,7 @@ const style = StyleSheet.create({
 });
 
 const AppBar = () => {
-  // const { activeTabName, setActiveTabName } = useActiveTab();
-  // const { previousTabName } = usePreviousTab();
   const navigation = useNavigation();
-
   const { theme } = useTheme();
   const styles = AppBarStyles({ theme });
 

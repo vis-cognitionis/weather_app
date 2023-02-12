@@ -9,13 +9,10 @@ import {
 } from "react-native";
 
 import ThemeProps from "../../../core/init/themes/interface/interfaces";
-import { useTheme } from "../../../core/init/themes/theme_context";
 import { IconInfoSunny } from "../../../core/components/icons/weather_info_icons";
+import { IconSunny } from "../../../core/components/icons/weather_colored_icons";
+import { useTheme } from "../../../core/init/themes/theme_context";
 import { SunnySvg } from "../../../assets/weather-svg/weather_svg";
-import {
-  IconSunny,
-  IconWindy,
-} from "../../../core/components/icons/weather_colored_icons";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
