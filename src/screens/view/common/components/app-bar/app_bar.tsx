@@ -12,10 +12,6 @@ import {
   IconDarkTheme,
   IconLightTheme,
 } from "../../../../../core/components/icons/custom_icons";
-import {
-  useActiveTab,
-  usePreviousTab,
-} from "../../../../../navigation/custom-hook/tab_context";
 import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
 import { mainStore } from "../../../../view-model/main_store";
 import { observer } from "mobx-react";
@@ -101,7 +97,7 @@ const AppBar = () => {
   return (
     <SafeAreaView style={styles.container}>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
-        <Text> konum gelecek </Text>
+        <Text> New York - USA </Text>
       ) : (
         <Pressable
           style={style.backButton}

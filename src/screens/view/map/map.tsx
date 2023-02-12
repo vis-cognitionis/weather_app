@@ -9,9 +9,7 @@ const Map = () => {
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.palette.background.default }}
-    >
-      <Text>MAP</Text>
-    </SafeAreaView>
+    ></SafeAreaView>
   );
 };
 export default Map;

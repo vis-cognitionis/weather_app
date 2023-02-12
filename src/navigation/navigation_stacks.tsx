@@ -9,17 +9,13 @@ import {
   TabConfig,
   StackScreenNames,
 } from "./interfaces/interfaces";
-import {
-  ActiveTabProvider,
-  PreviousTabProvider,
-} from "./custom-hook/tab_context";
 import SplashScreen from "../screens/view/splash/splash";
+import Settings from "../screens/view/settings/settings";
 import Landing from "../screens//view/landing/landing";
-import AppBar from "../screens/view/home/components/app-bar/app_bar";
+import AppBar from "../screens/view/common/components/app-bar/app_bar";
+import TabBar from "../screens/view/common/components/tab-bar/tab_bar";
 import Home from "../screens/view/home/home";
 import Map from "../screens/view/map/map";
-import TabBar from "../screens/view/home/components/tab-bar/tab_bar";
-import Settings from "../screens/view/settings/settings";
 
 const OutletTabs = () => {
   const Tab = createBottomTabNavigator<ParamList>();

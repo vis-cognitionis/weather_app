@@ -1,5 +1,6 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native";
+import { observer } from "mobx-react";
 
 import { useTheme } from "../../../../../core/init/themes/theme_context";
 import {
@@ -8,13 +9,7 @@ import {
   IconSettings,
 } from "../../../../../core/components/icons/custom_icons";
 import ActionButton from "../../../../../core/components/buttons/action_button";
-import {
-  useActiveTab,
-  usePreviousTab,
-} from "../../../../../navigation/custom-hook/tab_context";
 import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
-
-import { observer } from "mobx-react";
 import { mainStore } from "../../../../view-model/main_store";
 
 const TabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {

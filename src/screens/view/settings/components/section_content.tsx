@@ -10,7 +10,7 @@ import {
   IconAbout,
 } from "../../../../core/components/icons/custom_icons";
 import LanguageAction from "./language_actions";
-import NotificationAction from "./notifications";
+import NotificationAction from "./notification_action";
 
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();

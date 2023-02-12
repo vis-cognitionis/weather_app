@@ -42,7 +42,6 @@ const Settings = () => {
       <SectionList
         style={{
           paddingLeft: 60,
-          paddingTop: 20,
         }}
         sections={settings}
         keyExtractor={(item) => item.name}
