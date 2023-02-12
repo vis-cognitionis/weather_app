@@ -61,6 +61,7 @@ const Home = () => {
             <Text style={[theme.typography.h2, { width: 211 }]}>
               Feels like a good time to go out
             </Text>
+
             <IconInfoSunny />
           </View>
 

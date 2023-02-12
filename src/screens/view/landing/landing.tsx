@@ -41,9 +41,9 @@ const Landing = () => {
         style={styles.image}
         source={require("../../../assets/landing_page.png")}
       />
-      <View style={{ width: 254, height: 120 }}>
-        <Text style={theme.typography.h1}> {t("landing.content")} </Text>
-      </View>
+      <Text style={[theme.typography.h1, { width: "70%" }]}>
+        {t("landing.content")}
+      </Text>
       <ActionButton
         onPress={() => {
           mainStore.setNavigateLanding(false);

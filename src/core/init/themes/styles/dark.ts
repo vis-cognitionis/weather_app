@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import ThemeProps, { Palette } from "../interface/interfaces";
 
 const PaletteColors: Palette = {
@@ -9,6 +10,8 @@ const PaletteColors: Palette = {
   background: { default: "red", paper: "green" },
   text: { disabled: "purple", primary: "#40516F", secondary: "#FCFCFC" },
 };
+
+const generalFontFamily: string = "Poppins-Regular";
 
 const darkTheme: ThemeProps = {
   palette: {
@@ -50,45 +53,52 @@ const darkTheme: ThemeProps = {
   typography: {
     h1: {
       color: PaletteColors.text?.secondary,
-      // fontFamily: "Poppins-Regular",r
-      fontStyle: "normal",
-      fontWeight: "700",
-      fontSize: 36,
+      fontFamily: "Poppins-Bold",
+      fontSize: Platform.OS === "android" ? 26 : 36,
       lineHeight: 40,
-      textAlign: "center",
     },
     h2: {
+      fontFamily: generalFontFamily,
       color: PaletteColors.text?.secondary,
       fontStyle: "normal",
       fontWeight: "500",
       fontSize: 24,
     },
-    button: { color: PaletteColors.text?.primary, fontSize: 20 },
+    button: {
+      fontFamily: generalFontFamily,
+      color: PaletteColors.text?.primary,
+      fontSize: 20,
+    },
     title: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "500",
       fontSize: 18,
       color: PaletteColors.primary.dark,
     },
     content: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "400",
       fontSize: 16,
       color: PaletteColors.primary.dark,
     },
     temperature: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "700",
       fontSize: 52,
       color: PaletteColors.primary.dark,
     },
     location: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "700",
       fontSize: 24,
       color: PaletteColors.primary.dark,
     },
     weather: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "600",
       fontSize: 12,

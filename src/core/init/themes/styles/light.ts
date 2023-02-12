@@ -7,6 +7,8 @@ const PaletteColors: Palette = {
   text: { disabled: "purple", primary: "#FFFFFF", secondary: "#40516F" },
 };
 
+const generalFontFamily: string = "Poppins-Regular";
+
 const lightTheme: ThemeProps = {
   palette: {
     common: { black: "#40516F", white: "#FFFFFF" },
@@ -47,48 +49,52 @@ const lightTheme: ThemeProps = {
   typography: {
     h1: {
       color: PaletteColors.text?.secondary,
-      // fontFamily: "Poppins-Regular",r
-      fontStyle: "normal",
-      fontWeight: "700",
+      fontFamily: "Poppins-Bold",
       fontSize: Platform.OS === "android" ? 26 : 36,
       lineHeight: 40,
-      textAlign: "center",
     },
     h2: {
+      fontFamily: generalFontFamily,
       color: PaletteColors.text?.secondary,
       fontStyle: "normal",
       fontWeight: "500",
       fontSize: 24,
     },
     button: {
+      fontFamily: generalFontFamily,
       color: PaletteColors.text?.primary,
       fontSize: Platform.OS === "android" ? 16 : 20,
     },
     title: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "500",
       fontSize: 18,
       color: PaletteColors.primary.dark,
     },
     content: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "400",
       fontSize: 16,
       color: PaletteColors.primary.dark,
     },
     temperature: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "700",
       fontSize: 52,
       color: PaletteColors.primary.dark,
     },
     location: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "700",
       fontSize: 24,
       color: PaletteColors.primary.dark,
     },
     weather: {
+      fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "600",
       fontSize: 12,
