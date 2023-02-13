@@ -8,6 +8,7 @@ class MainStore {
   showSplashScreen: boolean = true;
   navigateLanding: boolean = false;
   hideStatusBar: boolean = false;
+  weatherUnit: string = "metric";
 
   constructor() {
     makeAutoObservable(this);
@@ -35,6 +36,9 @@ class MainStore {
 
   setHideStatusBar = (hide: boolean) => {
     this.hideStatusBar = hide;
+  };
+  setWeatherUnit = (unit: string) => {
+    this.weatherUnit = unit;
   };
 }
 

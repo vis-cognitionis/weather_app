@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { View, Text } from "react-native";
+import { observer } from "mobx-react";
 
 import {
   IconLocation,
@@ -12,9 +13,12 @@ import NotificationAction from "./notification_action";
 import StatusbarSettings from "./statusbar_settings";
 import { useTheme } from "../../../../core/init/themes/theme_context";
 import { t } from "../../../../core/init/lang/custom-hook/useTranslate";
+import mainStore from "../../../view-model/main_store";
 
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
+
+  console.log(mainStore.weatherUnit);
 
   const GeneralAction = () => {
     switch (content) {
@@ -33,6 +37,24 @@ const SectionContent = ({ content }: { content: string }) => {
     }
   };
 
+  const CustomCheckbox = ({
+    isChecked,
+    onPress,
+  }: {
+    isChecked: boolean;
+    onPress: () => void;
+  }) => {
+    return (
+      <BouncyCheckbox
+        role="radio"
+        style={{ width: 20 }}
+        fillColor={theme.palette.success?.main}
+        isChecked={isChecked}
+        onPress={onPress}
+      />
+    );
+  };
+
   return (
     <View
       style={{
@@ -48,19 +70,21 @@ const SectionContent = ({ content }: { content: string }) => {
       <GeneralAction />
       <StatusbarSettings content={content} />
       {content === t("settings.temperature.celsius") ? (
-        <BouncyCheckbox
-          style={{ width: 20 }}
-          fillColor={theme.palette.success?.main}
-          isChecked={true}
+        <CustomCheckbox
+          isChecked={mainStore.weatherUnit === "metric"}
+          onPress={() => {
+            mainStore.setWeatherUnit("metric");
+          }}
         />
       ) : content === t("settings.temperature.fahrenheit") ? (
-        <BouncyCheckbox
-          style={{ width: 20 }}
-          fillColor={theme.palette.success?.main}
-          isChecked={false}
+        <CustomCheckbox
+          isChecked={mainStore.weatherUnit === "imperial"}
+          onPress={() => {
+            mainStore.setWeatherUnit("imperial");
+          }}
         />
       ) : null}
     </View>
   );
 };
-export default SectionContent;
+export default observer(SectionContent);

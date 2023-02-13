@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -6,13 +6,19 @@ import {
   ScrollView,
   Text,
   View,
+  Button,
 } from "react-native";
+import axios from "axios";
 
 import ThemeProps from "../../../core/init/themes/interface/interfaces";
 import { IconInfoSunny } from "../../../core/components/icons/weather_info_icons";
+import { WeatherData } from "./interfaces/interface_home";
 import { IconSunny } from "../../../core/components/icons/weather_colored_icons";
 import { useTheme } from "../../../core/init/themes/theme_context";
 import { SunnySvg } from "../../../images/weather-svg/weather_svg";
+import Weather from "./components/weather";
+import { observer } from "mobx-react";
+import mainStore from "../../view-model/main_store";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -39,6 +45,31 @@ const Home = () => {
     }, 2000);
   }, []);
 
+  const [weatherData, setWeatherData] = useState<WeatherData>(
+    {} as WeatherData
+  );
+
+  let city: string = "London";
+  let unit_imperial = "imperial"; // F
+  let unit_metric: string = "metric"; // C
+  const API_KEY = "4ece27e8959cae958f124f7316c6e352";
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/forecast?q=" +
+          city +
+          `&units=${mainStore.weatherUnit}&appid=` +
+          API_KEY
+      )
+      .then((res) => {
+        setWeatherData(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [mainStore.weatherUnit]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -64,7 +95,7 @@ const Home = () => {
 
             <IconInfoSunny />
           </View>
-
+          {/*
           <View
             style={{
               flexDirection: "row",
@@ -78,6 +109,9 @@ const Home = () => {
               <Text style={theme.typography.weather}>Sunny</Text>
             </View>
             <IconSunny />
+          </View> */}
+          <View>
+            <Weather weatherData={weatherData} />
           </View>
         </View>
       </ScrollView>
@@ -85,4 +119,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default observer(Home);
