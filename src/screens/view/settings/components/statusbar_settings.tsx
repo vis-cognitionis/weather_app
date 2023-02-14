@@ -16,7 +16,7 @@ const StatusBarSettings = ({ content }: { content: string }) => {
       <BouncyCheckbox
         isChecked={!mainStore.hideStatusBar}
         fillColor={theme.palette.success?.main}
-        style={{ width: 20 }}
+        style={{ width: 25 }}
         onPress={() => {
           mainStore.setHideStatusBar(!mainStore.hideStatusBar);
         }}

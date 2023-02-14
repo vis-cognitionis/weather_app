@@ -18,8 +18,6 @@ import mainStore from "../../../view-model/main_store";
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
 
-  console.log(mainStore.weatherUnit);
-
   const GeneralAction = () => {
     switch (content) {
       case t("settings.general.location"):
@@ -47,7 +45,7 @@ const SectionContent = ({ content }: { content: string }) => {
     return (
       <BouncyCheckbox
         role="radio"
-        style={{ width: 20 }}
+        style={{ width: 25 }}
         fillColor={theme.palette.success?.main}
         isChecked={isChecked}
         onPress={onPress}

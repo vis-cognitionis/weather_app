@@ -15,6 +15,9 @@ const LanguageAction = () => {
 
   return (
     <Pressable
+      style={{
+        padding: 5,
+      }}
       onPress={() => {
         isTr ? setLanguage(Language.English) : setLanguage(Language.Turkish);
       }}

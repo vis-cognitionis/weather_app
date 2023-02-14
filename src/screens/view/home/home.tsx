@@ -37,6 +37,9 @@ const Home = () => {
   const styles = Styles({ theme });
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [weatherData, setWeatherData] = useState<WeatherData>(
+    {} as WeatherData
+  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -45,13 +48,7 @@ const Home = () => {
     }, 2000);
   }, []);
 
-  const [weatherData, setWeatherData] = useState<WeatherData>(
-    {} as WeatherData
-  );
-
-  let city: string = "London";
-  let unit_imperial = "imperial"; // F
-  let unit_metric: string = "metric"; // C
+  let city: string = "Istanbul";
   const API_KEY = "4ece27e8959cae958f124f7316c6e352";
 
   useEffect(() => {
@@ -95,7 +92,7 @@ const Home = () => {
 
             <IconInfoSunny />
           </View>
-          {/*
+
           <View
             style={{
               flexDirection: "row",
@@ -109,7 +106,7 @@ const Home = () => {
               <Text style={theme.typography.weather}>Sunny</Text>
             </View>
             <IconSunny />
-          </View> */}
+          </View>
           <View>
             <Weather weatherData={weatherData} />
           </View>

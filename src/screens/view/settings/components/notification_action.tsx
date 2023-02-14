@@ -11,6 +11,9 @@ import mainStore from "../../../view-model/main_store";
 const NotificationAction = () => {
   return (
     <Pressable
+      style={{
+        padding: 5,
+      }}
       onPress={() => {
         mainStore.setOpenNotification(!mainStore.openNotification);
       }}
