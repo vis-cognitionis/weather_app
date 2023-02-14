@@ -22,5 +22,8 @@
     },
     "terms": "terms and services",
     "about": "About"
+  },
+  "weatherSuggestion": {
+    "sunny": "Feels like a good time to go out"
   }
 }

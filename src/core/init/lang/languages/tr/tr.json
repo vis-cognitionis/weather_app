@@ -22,5 +22,8 @@
     },
     "terms": "şartlar ve hizmetler",
     "about": "Hakkında"
+  },
+  "weatherSuggestion": {
+    "sunny": "Dışarı çıkmak için iyi bir zaman"
   }
 }

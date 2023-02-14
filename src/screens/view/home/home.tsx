@@ -6,19 +6,19 @@ import {
   ScrollView,
   Text,
   View,
-  Button,
 } from "react-native";
 import axios from "axios";
+import { observer } from "mobx-react";
 
+import Weather from "./components/weather";
+import mainStore from "../../view-model/main_store";
 import ThemeProps from "../../../core/init/themes/interface/interfaces";
 import { IconInfoSunny } from "../../../core/components/icons/weather_info_icons";
 import { WeatherData } from "./interfaces/interface_home";
 import { IconSunny } from "../../../core/components/icons/weather_colored_icons";
 import { useTheme } from "../../../core/init/themes/theme_context";
 import { SunnySvg } from "../../../images/weather-svg/weather_svg";
-import Weather from "./components/weather";
-import { observer } from "mobx-react";
-import mainStore from "../../view-model/main_store";
+import { t } from "../../../core/init/lang/custom-hook/useTranslate";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -87,7 +87,7 @@ const Home = () => {
             }}
           >
             <Text style={[theme.typography.h2, { width: 211 }]}>
-              Feels like a good time to go out
+              {t("weatherSuggestion.sunny")}
             </Text>
 
             <IconInfoSunny />

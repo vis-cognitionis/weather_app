@@ -58,6 +58,7 @@ const AppBarStyles = ({ theme }: { theme: ThemeProps }) => {
       justifyContent: "space-between",
       backgroundColor: theme.palette.background.default,
       paddingHorizontal: 20,
+      paddingTop: 15,
     },
   });
 };
@@ -94,7 +95,7 @@ const AppBar = () => {
   return (
     <SafeAreaView style={styles.container}>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
-        <Text> New York - USA </Text>
+        <Text> İstanbul </Text>
       ) : (
         <Pressable
           style={style.backButton}
