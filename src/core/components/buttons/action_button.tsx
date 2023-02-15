@@ -8,12 +8,12 @@ import {
   GestureResponderEvent,
 } from "react-native";
 
-import ThemeProps from "../../init/themes/interface/interfaces";
-import lightStyles from "../../init/themes/styles/light";
-import { useTheme } from "../../init/themes/theme_context";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
+import lightTheme from "src/core/init/themes/styles/light";
+import { useTheme } from "src/core/init/themes/theme_context";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
-  const value: boolean = theme === lightStyles;
+  const value: boolean = theme === lightTheme;
 
   return StyleSheet.create({
     button: {

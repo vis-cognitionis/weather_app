@@ -7,8 +7,8 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { LinearGradientText } from "react-native-linear-gradient-text";
 
-import ThemeProps from "../../../../core/init/themes/interface/interfaces";
-import { useTheme } from "../../../../core/init/themes/theme_context";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
+import { useTheme } from "src/core/init/themes/theme_context";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

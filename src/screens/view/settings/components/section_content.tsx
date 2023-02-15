@@ -3,17 +3,17 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { View, Text } from "react-native";
 import { observer } from "mobx-react";
 
+import mainStore from "src/screens/view-model/main_store";
+import LanguageAction from "./language_actions";
+import StatusbarSettings from "./statusbar_settings";
+import NotificationAction from "./notification_action";
 import {
   IconLocation,
   IconTerms,
   IconAbout,
-} from "../../../../core/components/icons/custom_icons";
-import LanguageAction from "./language_actions";
-import NotificationAction from "./notification_action";
-import StatusbarSettings from "./statusbar_settings";
-import { useTheme } from "../../../../core/init/themes/theme_context";
-import { t } from "../../../../core/init/lang/custom-hook/useTranslate";
-import mainStore from "../../../view-model/main_store";
+} from "src/core/components/icons/custom_icons";
+import { useTheme } from "src/core/init/themes/theme_context";
+import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();

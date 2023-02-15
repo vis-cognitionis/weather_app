@@ -6,10 +6,10 @@ import {
   TabConfig,
   StackScreenNames,
 } from "../interfaces/interfaces";
-import Settings from "../../screens/view/settings/settings";
-import TabBar from "../../screens/view/common/components/tab-bar/tab_bar";
-import Home from "../../screens/view/home/home";
-import Map from "../../screens/view/map/map";
+import Home from "src/screens/view/home/home";
+import Map from "src/screens/view/map/map";
+import Settings from "src/screens/view/settings/settings";
+import TabBar from "src/screens/view/common/components/tab-bar/tab_bar";
 
 const OutletTabs = () => {
   const Tab = createBottomTabNavigator<ParamList>();

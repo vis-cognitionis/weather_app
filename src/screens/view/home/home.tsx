@@ -10,15 +10,15 @@ import {
 import axios from "axios";
 import { observer } from "mobx-react";
 
-import Weather from "./components/weather";
-import mainStore from "../../view-model/main_store";
-import ThemeProps from "../../../core/init/themes/interface/interfaces";
-import { IconInfoSunny } from "../../../core/components/icons/weather_info_icons";
+import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
 import { WeatherData } from "./interfaces/interface_home";
-import { IconSunny } from "../../../core/components/icons/weather_colored_icons";
-import { useTheme } from "../../../core/init/themes/theme_context";
-import { SunnySvg } from "../../../images/weather-svg/weather_svg";
-import { t } from "../../../core/init/lang/custom-hook/useTranslate";
+import { IconSunny } from "src/core/components/icons/weather_colored_icons";
+import { SunnySvg } from "src/images/weather-svg/weather_svg";
+import { useTheme } from "src/core/init/themes/theme_context";
+import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import Weather from "./components/weather";
+import mainStore from "src/screens/view-model/main_store";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

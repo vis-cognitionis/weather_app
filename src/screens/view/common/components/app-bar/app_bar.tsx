@@ -4,20 +4,20 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react";
 
-import lightStyles from "../../../../../core/init/themes/styles/light";
-import darkStyles from "../../../../../core/init/themes/styles/dark";
-import ThemeProps from "../../../../../core/init/themes/interface/interfaces";
-import mainStore from "../../../../view-model/main_store";
+import lightTheme from "src/core/init/themes/styles/light";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
+import { useTheme } from "src/core/init/themes/theme_context";
+import { StackScreenNames } from "src/navigation/interfaces/interfaces";
 import {
   IconBack,
   IconDarkTheme,
   IconLightTheme,
-} from "../../../../../core/components/icons/custom_icons";
-import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
-import { useTheme } from "../../../../../core/init/themes/theme_context";
+} from "src/core/components/icons/custom_icons";
+import darkTheme from "src/core/init/themes/styles/dark";
+import mainStore from "src/screens/view-model/main_store";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
-  const value: boolean = theme === lightStyles;
+  const value: boolean = theme === lightTheme;
 
   return StyleSheet.create({
     button: {
@@ -65,13 +65,13 @@ const AppBarStyles = ({ theme }: { theme: ThemeProps }) => {
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
-  const value: boolean = theme === lightStyles;
+  const value: boolean = theme === lightTheme;
   const styles = SwitchStyles({ theme });
 
   return (
     <Pressable
       style={[styles.button, styles.shadow]}
-      onPress={() => setTheme(value ? darkStyles : lightStyles)}
+      onPress={() => setTheme(value ? darkTheme : lightTheme)}
     >
       {value ? <IconDarkTheme /> : <IconLightTheme />}
     </Pressable>

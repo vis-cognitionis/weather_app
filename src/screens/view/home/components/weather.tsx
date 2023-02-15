@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
+import mainStore from "src/screens/view-model/main_store";
 import { WeatherData } from "../interfaces/interface_home";
-import mainStore from "../../../view-model/main_store";
 
 const Weather = ({ weatherData }: { weatherData: WeatherData }) => {
   return (

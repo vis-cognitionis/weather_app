@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, Image, Platform, SafeAreaView } from "react-native";
 
-import ActionButton from "../../../core/components/buttons/action_button";
-import ThemeProps from "../../../core/init/themes/interface/interfaces";
-import mainStore from "../../view-model/main_store";
-import { useTheme } from "../../../core/init/themes/theme_context";
-import { t } from "../../../core/init/lang/custom-hook/useTranslate";
+import ActionButton from "src/core/components/buttons/action_button";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
+import mainStore from "src/screens/view-model/main_store";
+import { useTheme } from "src/core/init/themes/theme_context";
+import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

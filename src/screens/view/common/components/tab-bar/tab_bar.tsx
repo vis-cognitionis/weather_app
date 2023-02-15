@@ -2,15 +2,15 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native";
 import { observer } from "mobx-react";
 
-import { useTheme } from "../../../../../core/init/themes/theme_context";
+import mainStore from "src/screens/view-model/main_store";
+import ActionButton from "src/core/components/buttons/action_button";
 import {
   IconMap,
   IconHomeWeather,
   IconSettings,
-} from "../../../../../core/components/icons/custom_icons";
-import ActionButton from "../../../../../core/components/buttons/action_button";
-import { StackScreenNames } from "../../../../../navigation/interfaces/interfaces";
-import mainStore from "../../../../view-model/main_store";
+} from "src/core/components/icons/custom_icons";
+import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { useTheme } from "src/core/init/themes/theme_context";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();

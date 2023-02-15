@@ -3,12 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 
-import { ParamList, StackScreenNames } from "./interfaces/interfaces";
-import mainStore from "../screens/view-model/main_store";
-import SplashScreen from "../screens/view/splash/splash";
+import AppBar from "src/screens/view/common/components/app-bar/app_bar";
+import Landing from "src/screens/view/landing/landing";
+import mainStore from "src/screens/view-model/main_store";
 import OutletTabs from "./components/outlet_tabs";
-import Landing from "../screens//view/landing/landing";
-import AppBar from "../screens/view/common/components/app-bar/app_bar";
+import SplashScreen from "src/screens/view/splash/splash";
+import { ParamList, StackScreenNames } from "./interfaces/interfaces";
 
 const NavigationStacks = () => {
   const Stack = createNativeStackNavigator<ParamList>();

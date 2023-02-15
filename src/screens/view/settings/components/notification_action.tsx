@@ -2,11 +2,11 @@ import React from "react";
 import { Pressable } from "react-native";
 import { observer } from "mobx-react";
 
+import mainStore from "src/screens/view-model/main_store";
 import {
   IconNotifications,
   IconNotificationsOff,
-} from "../../../../core/components/icons/custom_icons";
-import mainStore from "../../../view-model/main_store";
+} from "src/core/components/icons/custom_icons";
 
 const NotificationAction = () => {
   return (

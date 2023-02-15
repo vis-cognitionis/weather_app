@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { StackScreenNames } from "../../navigation/interfaces/interfaces";
+import { StackScreenNames } from "src/navigation/interfaces/interfaces";
 
 class MainStore {
   currentTab: string = "";

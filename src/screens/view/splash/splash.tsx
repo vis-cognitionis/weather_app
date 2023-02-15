@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { View, Image, StyleSheet } from "react-native";
 
-import { ScreenNavigationProps } from "../../../navigation/interfaces/interfaces";
-import mainStore from "../../view-model/main_store";
+import { ScreenNavigationProps } from "src/navigation/interfaces/interfaces";
+import mainStore from "src/screens/view-model/main_store";
 
 const styles = StyleSheet.create({
   container: {
