@@ -1,5 +1,5 @@
 current directory: /Users/omeralemdar/Documents/GitHub/weather_app/weather/vendor/bundle/ruby/2.7.0/gems/ffi-1.15.5/ext/ffi_c
-/Users/omeralemdar/.rvm/rubies/ruby-2.7.6/bin/ruby -I /Users/omeralemdar/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0 -r ./siteconf20230207-21427-ti6oi.rb extconf.rb
+/Users/omeralemdar/.rvm/rubies/ruby-2.7.6/bin/ruby -I /Users/omeralemdar/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0 -r ./siteconf20230216-25853-9qazkl.rb extconf.rb
 checking for ffi_prep_closure_loc() in -lffi... yes
 checking for ffi_prep_cif_var()... yes
 checking for ffi_raw_call()... yes
@@ -40,4 +40,4 @@ linking shared-object ffi_c.bundle
 
 current directory: /Users/omeralemdar/Documents/GitHub/weather_app/weather/vendor/bundle/ruby/2.7.0/gems/ffi-1.15.5/ext/ffi_c
 make "DESTDIR=" install
-/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 ffi_c.bundle ./.gem.20230207-21427-dtczzl
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 ffi_c.bundle ./.gem.20230216-25853-1virsyl
