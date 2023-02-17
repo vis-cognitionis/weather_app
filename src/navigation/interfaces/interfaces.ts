@@ -6,7 +6,7 @@ export enum StackScreenNames {
   Home = "Home",
   Splash = "Splash",
   Landing = "Landing",
-  Map = "Map",
+  Detail = "Detail",
   Settings = "Settings",
   Outlet = "Outlet",
 }
@@ -15,10 +15,9 @@ export type ParamList = {
   Splash: Record<string, any>;
   Home: Record<string, any>;
   Landing: Record<string, any>;
-  Map: Record<string, any>;
+  Detail: Record<string, any>;
   Settings: Record<string, any>;
   Outlet: Record<string, any>;
-  // Details: { itemId: number };
 };
 
 export interface ScreenNavigationProps {

@@ -33,7 +33,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           : theme.palette.primary.dark!;
 
         const TabIcon = () => {
-          return route.name === "Map" ? (
+          return route.name === "Detail" ? (
             <IconMap stroke={stroke} />
           ) : route.name === "Home" ? (
             <IconHomeWeather stroke={stroke} />
@@ -56,8 +56,8 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           if (route.name === StackScreenNames.Home) {
             mainStore.setPreviousTab(StackScreenNames.Home);
           }
-          if (route.name === StackScreenNames.Map) {
-            mainStore.setPreviousTab(StackScreenNames.Map);
+          if (route.name === StackScreenNames.Detail) {
+            mainStore.setPreviousTab(StackScreenNames.Detail);
           }
 
           mainStore.setCurrentTab(route.name);

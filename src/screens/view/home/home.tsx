@@ -50,7 +50,7 @@ const Home = () => {
 
   let city: string = "Istanbul";
   const API_KEY = "4ece27e8959cae958f124f7316c6e352";
-
+  //http://api.openweathermap.org/data/2.5/air_pollution?lat=41.0351&lon=28.9833&appid=4ece27e8959cae958f124f7316c6e352
   useEffect(() => {
     axios
       .get(

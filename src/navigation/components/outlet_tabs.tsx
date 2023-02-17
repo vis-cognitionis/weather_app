@@ -7,7 +7,7 @@ import {
   StackScreenNames,
 } from "../interfaces/interfaces";
 import Home from "src/screens/view/home/home";
-import Map from "src/screens/view/map/map";
+import Detail from "src/screens/view/detail/detail";
 import Settings from "src/screens/view/settings/settings";
 import TabBar from "src/screens/view/common/components/tab-bar/tab_bar";
 
@@ -23,8 +23,8 @@ const OutletTabs = () => {
       },
     },
     {
-      name: StackScreenNames.Map,
-      component: Map,
+      name: StackScreenNames.Detail,
+      component: Detail,
       options: {
         headerShown: false,
       },
