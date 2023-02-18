@@ -12,7 +12,7 @@ interface City {
   sunset: number;
 }
 
-interface Weather {
+export interface Weather {
   dt: number;
   main: {
     temp: number;

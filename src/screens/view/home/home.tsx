@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -7,18 +7,14 @@ import {
   Text,
   View,
 } from "react-native";
-import axios from "axios";
-import { observer } from "mobx-react";
 
+import WeatherHourly from "./components/weather_hourly";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
 import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
-import { WeatherData } from "./interfaces/interface_home";
 import { IconSunny } from "src/core/components/icons/weather_colored_icons";
 import { SunnySvg } from "src/images/weather-svg/weather_svg";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
-import Weather from "./components/weather";
-import mainStore from "src/screens/view-model/main_store";
-import ThemeProps from "src/core/init/themes/interface/interfaces";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -37,9 +33,6 @@ const Home = () => {
   const styles = Styles({ theme });
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [weatherData, setWeatherData] = useState<WeatherData>(
-    {} as WeatherData
-  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -47,25 +40,6 @@ const Home = () => {
       setRefreshing(false);
     }, 2000);
   }, []);
-
-  let city: string = "Istanbul";
-  const API_KEY = "4ece27e8959cae958f124f7316c6e352";
-  //http://api.openweathermap.org/data/2.5/air_pollution?lat=41.0351&lon=28.9833&appid=4ece27e8959cae958f124f7316c6e352
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.openweathermap.org/data/2.5/forecast?q=" +
-          city +
-          `&units=${mainStore.weatherUnit}&appid=` +
-          API_KEY
-      )
-      .then((res) => {
-        setWeatherData(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [mainStore.weatherUnit]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -108,7 +82,7 @@ const Home = () => {
             <IconSunny />
           </View>
           <View>
-            <Weather weatherData={weatherData} />
+            <WeatherHourly />
           </View>
         </View>
       </ScrollView>
@@ -116,4 +90,4 @@ const Home = () => {
   );
 };
 
-export default observer(Home);
+export default Home;

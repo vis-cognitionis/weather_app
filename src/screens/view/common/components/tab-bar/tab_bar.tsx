@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import mainStore from "src/screens/view-model/main_store";
 import ActionButton from "src/core/components/buttons/action_button";
 import {
-  IconMap,
+  IconDetail,
   IconHomeWeather,
   IconSettings,
 } from "src/core/components/icons/custom_icons";
@@ -34,7 +34,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
 
         const TabIcon = () => {
           return route.name === "Detail" ? (
-            <IconMap stroke={stroke} />
+            <IconDetail stroke={stroke} />
           ) : route.name === "Home" ? (
             <IconHomeWeather stroke={stroke} />
           ) : route.name === "Settings" ? (
