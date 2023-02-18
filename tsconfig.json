@@ -6,6 +6,10 @@
       "*": [
         "./*"
       ]
-    }
+    },
+    "types": [
+      "react-native",
+      "dotenv"
+    ]
   }
 }

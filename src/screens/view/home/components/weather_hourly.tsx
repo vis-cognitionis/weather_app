@@ -3,20 +3,21 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { observer } from "mobx-react";
 import axios from "axios";
 
-import { WeatherData, Weather } from "../interfaces/interface_home";
 import mainStore from "src/screens/view-model/main_store";
+import { WeatherData, Weather } from "../interfaces/interface_home";
 
 const WeatherHourly = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
-  const defaultCity: string = "Istanbul";
-  const API_KEY = "4ece27e8959cae958f124f7316c6e352";
+  const defaultCity = "Istanbul";
+  const [city, setCity] = useState<string>(defaultCity);
+  const API_KEY = process.env.API_KEY!;
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
         "https://api.openweathermap.org/data/2.5/forecast?q=" +
-          defaultCity +
+          city +
           `&units=${mainStore.weatherUnit}&appid=` +
           API_KEY
       );
