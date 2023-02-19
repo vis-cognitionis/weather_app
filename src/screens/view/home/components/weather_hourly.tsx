@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import axios from "axios";
 
 import mainStore from "src/screens/view-model/main_store";
-import { WeatherData, Weather } from "../interfaces/interface_home";
+import { WeatherDatas, Weather } from "../interfaces/interface_home";
 import { IconSunny } from "src/core/components/icons/weather_colored_icons";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -39,8 +39,7 @@ const styles = StyleSheet.create({
 
 const WeatherHourly = () => {
   const { theme } = useTheme();
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-
+  const [weatherDatas, setWeatherDatas] = useState<WeatherDatas | null>(null);
   const [currentTemp, setCurrentTemp] = useState<Weather | null>(null);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const WeatherHourly = () => {
           "4ece27e8959cae958f124f7316c6e352"
       );
 
-      setWeatherData(response.data);
+      setWeatherDatas(response.data);
     };
 
     fetchData();
@@ -148,11 +147,11 @@ const WeatherHourly = () => {
     );
   };
 
-  if (!weatherData) {
+  if (!weatherDatas) {
     return <Text>Loading...</Text>;
   }
 
-  const groupedWeatherData = groupWeatherDataByDate(weatherData.list);
+  const groupedWeatherData = groupWeatherDataByDate(weatherDatas.list);
 
   return (
     <>
