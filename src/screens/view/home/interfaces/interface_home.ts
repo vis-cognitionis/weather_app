@@ -49,7 +49,7 @@ export interface Weather {
   dt_txt: string;
 }
 
-export interface WeatherData {
+export interface WeatherDatas {
   cod: string;
   message: number;
   cnt: number;
