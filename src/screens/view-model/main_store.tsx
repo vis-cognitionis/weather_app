@@ -9,6 +9,7 @@ class MainStore {
   navigateLanding: boolean = false;
   hideStatusBar: boolean = false;
   weatherUnit: string = "metric";
+  city = "Istanbul";
 
   constructor() {
     makeAutoObservable(this);
@@ -37,8 +38,13 @@ class MainStore {
   setHideStatusBar = (hide: boolean) => {
     this.hideStatusBar = hide;
   };
+
   setWeatherUnit = (unit: string) => {
     this.weatherUnit = unit;
+  };
+
+  setCity = (city: string) => {
+    this.city = city;
   };
 }
 

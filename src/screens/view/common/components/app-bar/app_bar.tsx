@@ -1,5 +1,13 @@
-import React from "react";
-import { Platform, Pressable, StyleSheet, Text } from "react-native";
+import React, { useState } from "react";
+import {
+  Button,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react";
@@ -59,6 +67,7 @@ const AppBarStyles = ({ theme }: { theme: ThemeProps }) => {
       backgroundColor: theme.palette.background.default,
       paddingHorizontal: 20,
       paddingTop: 15,
+      flex: 1,
     },
   });
 };
@@ -79,6 +88,12 @@ const ThemeSwitch = () => {
 };
 
 const style = StyleSheet.create({
+  location: {
+    flexDirection: "row",
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   backButton: {
     width: 32,
     height: 32,
@@ -91,11 +106,16 @@ const AppBar = () => {
   const navigation = useNavigation();
   const { theme } = useTheme();
   const styles = AppBarStyles({ theme });
+  console.log(mainStore.city);
+  const [inputValue, setInputValue] = useState<string>(mainStore.city);
 
   return (
     <SafeAreaView style={styles.container}>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
-        <Text> İstanbul </Text>
+        <View style={style.location}>
+          <TextInput value={inputValue} onChangeText={setInputValue} />
+          <Button title="O" onPress={() => mainStore.setCity(inputValue)} />
+        </View>
       ) : (
         <Pressable
           style={style.backButton}

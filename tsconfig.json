@@ -7,9 +7,5 @@
         "./*"
       ]
     },
-    "types": [
-      "react-native",
-      "dotenv"
-    ]
   }
 }

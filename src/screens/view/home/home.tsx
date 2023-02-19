@@ -52,7 +52,7 @@ const Home = () => {
         <View style={{ position: "absolute", left: "11%", top: "10%" }}>
           <SunnySvg />
         </View>
-        <View style={{ flexDirection: "column", gap: 245 }}>
+        <View style={{ flexDirection: "column", gap: 155 }}>
           <View
             style={{
               flexDirection: "row",
@@ -67,23 +67,7 @@ const Home = () => {
             <IconInfoSunny />
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "90%",
-            }}
-          >
-            <View style={{ flexDirection: "column" }}>
-              <Text style={theme.typography.temperature}>27 °C</Text>
-              <Text style={theme.typography.location}>New York</Text>
-              <Text style={theme.typography.weather}>Sunny</Text>
-            </View>
-            <IconSunny />
-          </View>
-          <View>
-            <WeatherHourly />
-          </View>
+          <WeatherHourly />
         </View>
       </ScrollView>
     </SafeAreaView>
