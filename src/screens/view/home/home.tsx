@@ -11,7 +11,6 @@ import {
 import WeatherHourly from "./components/weather_hourly";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
 import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
-import { IconSunny } from "src/core/components/icons/weather_colored_icons";
 import { SunnySvg } from "src/images/weather-svg/weather_svg";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";

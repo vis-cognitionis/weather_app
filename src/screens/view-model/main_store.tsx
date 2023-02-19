@@ -10,6 +10,7 @@ class MainStore {
   hideStatusBar: boolean = false;
   weatherUnit: string = "metric";
   city = "Istanbul";
+  isError: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -45,6 +46,10 @@ class MainStore {
 
   setCity = (city: string) => {
     this.city = city;
+  };
+
+  setIsError = (error: boolean) => {
+    this.isError = error;
   };
 }
 

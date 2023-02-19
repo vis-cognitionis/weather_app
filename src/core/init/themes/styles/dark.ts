@@ -105,6 +105,14 @@ const darkTheme: ThemeProps = {
       lineHeight: 18,
       color: PaletteColors.primary.dark,
     },
+    appbar: {
+      fontFamily: generalFontFamily,
+      fontStyle: "normal",
+      fontWeight: "400",
+      fontSize: 14,
+      lineHeight: 18,
+      color: PaletteColors.primary.dark,
+    },
   },
 };
 

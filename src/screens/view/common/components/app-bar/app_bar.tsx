@@ -1,25 +1,19 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react";
 
 import lightTheme from "src/core/init/themes/styles/light";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
-import { useTheme } from "src/core/init/themes/theme_context";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { useTheme } from "src/core/init/themes/theme_context";
 import {
   IconBack,
   IconDarkTheme,
+  IconEdit,
   IconLightTheme,
+  IconSearch,
 } from "src/core/components/icons/custom_icons";
 import darkTheme from "src/core/init/themes/styles/dark";
 import mainStore from "src/screens/view-model/main_store";
@@ -65,8 +59,9 @@ const AppBarStyles = ({ theme }: { theme: ThemeProps }) => {
       alignItems: "center",
       justifyContent: "space-between",
       backgroundColor: theme.palette.background.default,
-      paddingHorizontal: 20,
-      paddingTop: 15,
+      paddingLeft: 30,
+      paddingRight: 20,
+      paddingTop: 25,
       flex: 1,
     },
   });
@@ -93,6 +88,7 @@ const style = StyleSheet.create({
     height: 32,
     alignItems: "center",
     justifyContent: "center",
+    gap: 16,
   },
   backButton: {
     width: 32,
@@ -106,15 +102,60 @@ const AppBar = () => {
   const navigation = useNavigation();
   const { theme } = useTheme();
   const styles = AppBarStyles({ theme });
-  console.log(mainStore.city);
+
   const [inputValue, setInputValue] = useState<string>(mainStore.city);
+  const [editable, setEditable] = useState<boolean>(false);
+
+  const handleSearch = () => {
+    mainStore.setCity(inputValue);
+    setEditable(false);
+  };
+
+  useEffect(() => {
+    mainStore.isError === true && setInputValue("Istanbul");
+    mainStore.isError === true && mainStore.setCity("Istanbul");
+  }, [mainStore.isError]);
+
+  //Ekranda uygun olan bir şehir isteme uyarısı çıkarılabilir!
 
   return (
     <SafeAreaView style={styles.container}>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={style.location}>
-          <TextInput value={inputValue} onChangeText={setInputValue} />
-          <Button title="O" onPress={() => mainStore.setCity(inputValue)} />
+          <TextInput
+            defaultValue={mainStore.city}
+            editable={editable}
+            value={inputValue}
+            onChangeText={setInputValue}
+            style={[
+              {
+                alignSelf: "flex-end",
+                paddingBottom: 1,
+                width: "auto",
+                textDecorationLine: editable ? "underline" : "none",
+                textTransform: "capitalize",
+              },
+              theme.typography.appbar,
+            ]}
+          />
+          {editable ? (
+            <Pressable
+              onPress={() => {
+                inputValue.length !== 0 && handleSearch();
+              }}
+            >
+              <IconSearch />
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={() => {
+                setEditable(true);
+                mainStore.isError === true && mainStore.setIsError(false);
+              }}
+            >
+              <IconEdit />
+            </Pressable>
+          )}
         </View>
       ) : (
         <Pressable

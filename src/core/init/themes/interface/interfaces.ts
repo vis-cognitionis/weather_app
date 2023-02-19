@@ -57,8 +57,8 @@ type Variant =
   | "content"
   | "temperature"
   | "location"
-  | "weather";
-// or instead of "h1", "h2" => appbar, appsection etc.
+  | "weather"
+  | "appbar";
 
 interface Typography extends Record<Variant, TextStyle> {}
 

@@ -56,3 +56,19 @@ export interface WeatherDatas {
   list: Weather[];
   city: City;
 }
+
+export enum WeatherCondition {
+  Clear = "Clear",
+  Clouds = "Clouds",
+  Drizzle = "Drizzle",
+  Dust = "Dust",
+  Fog = "Fog",
+  Haze = "Haze",
+  Mist = "Mist",
+  Rain = "Rain",
+  Sand = "Sand",
+  Snow = "Snow",
+  Squall = "Squall",
+  Thunderstorm = "Thunderstorm",
+  Tornado = "Tornado",
+}
