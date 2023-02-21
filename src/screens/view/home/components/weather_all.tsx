@@ -2,25 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { observer } from "mobx-react";
 
-import { Weather, WeatherCondition } from "../interfaces/interface_home";
-import {
-  IconClear,
-  IconClouds,
-  IconDrizzle,
-  IconDustSand,
-  IconFogHazeMist,
-  IconRain,
-  IconSnow,
-  IconSquall,
-  IconThunderstorm,
-  IconTornado,
-} from "src/core/components/icons/weather_field_icons";
 import mainStore from "src/screens/view-model/main_store";
-import WeatherBackground from "./weather_background";
 import WeatherCurrent from "./weather_current";
+import WeatherBackground from "./weather_background";
+import WeatherHourlyIcons from "./weather_hourly_icons";
 import { useWeatherDatas } from "../query/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
+import { Weather } from "../interfaces/interface_home";
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -69,39 +58,6 @@ const WeatherAll = () => {
       .toISOString()
       .slice(0, 10);
 
-    const HourlyWeatherIcons = ({ weather }: { weather: Weather }) => {
-      switch (weather.weather[0].main) {
-        case WeatherCondition.Clear:
-          return <IconClear />;
-        case WeatherCondition.Clouds:
-          return <IconClouds />;
-        case WeatherCondition.Drizzle:
-          return <IconDrizzle />;
-        case WeatherCondition.Dust:
-          return <IconDustSand />;
-        case WeatherCondition.Fog:
-          return <IconFogHazeMist />;
-        case WeatherCondition.Haze:
-          return <IconFogHazeMist />;
-        case WeatherCondition.Mist:
-          return <IconFogHazeMist />;
-        case WeatherCondition.Rain:
-          return <IconRain />;
-        case WeatherCondition.Sand:
-          return <IconDustSand />;
-        case WeatherCondition.Snow:
-          return <IconSnow />;
-        case WeatherCondition.Squall:
-          return <IconSquall />;
-        case WeatherCondition.Thunderstorm:
-          return <IconThunderstorm />;
-        case WeatherCondition.Tornado:
-          return <IconTornado />;
-        default:
-          return <IconClouds />;
-      }
-    };
-
     return (
       <View style={styles.rowContainer}>
         <ScrollView horizontal={true}>
@@ -113,7 +69,7 @@ const WeatherAll = () => {
                   {Math.ceil(weather.main.temp)} {tempUnit}
                 </Text>
                 <View style={{ flex: 1, paddingVertical: 10 }}>
-                  <HourlyWeatherIcons weather={weather} />
+                  <WeatherHourlyIcons weather={weather} />
                 </View>
                 <Text
                   style={theme.typography.caption}
@@ -129,7 +85,7 @@ const WeatherAll = () => {
                   {Math.ceil(weather.main.temp)} {tempUnit}
                 </Text>
                 <View style={{ flex: 1 }}>
-                  <HourlyWeatherIcons weather={weather} />
+                  <WeatherHourlyIcons weather={weather} />
                 </View>
                 <Text
                   style={theme.typography.caption}

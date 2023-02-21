@@ -3,19 +3,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { observer } from "mobx-react";
 
-import {
-  IconClear,
-  IconClouds,
-  IconDrizzle,
-  IconDustSand,
-  IconFogHazeMist,
-  IconRain,
-  IconSnow,
-  IconSquall,
-  IconThunderstorm,
-  IconTornado,
-} from "src/core/components/icons/weather_colored_icons";
 import mainStore from "src/screens/view-model/main_store";
+import WeatherCurrentIcons from "./weather_current_icons";
 import { Weather, WeatherCondition } from "../interfaces/interface_home";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
@@ -42,39 +31,6 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
 
     fetchData();
   }, [mainStore.city, mainStore.weatherUnit]);
-
-  const WeatherIcons = () => {
-    switch (currentTemp?.weather[0].main) {
-      case WeatherCondition.Clear:
-        return <IconClear />;
-      case WeatherCondition.Clouds:
-        return <IconClouds />;
-      case WeatherCondition.Drizzle:
-        return <IconDrizzle />;
-      case WeatherCondition.Dust:
-        return <IconDustSand />;
-      case WeatherCondition.Fog:
-        return <IconFogHazeMist />;
-      case WeatherCondition.Haze:
-        return <IconFogHazeMist />;
-      case WeatherCondition.Mist:
-        return <IconFogHazeMist />;
-      case WeatherCondition.Rain:
-        return <IconRain />;
-      case WeatherCondition.Sand:
-        return <IconDustSand />;
-      case WeatherCondition.Snow:
-        return <IconSnow />;
-      case WeatherCondition.Squall:
-        return <IconSquall />;
-      case WeatherCondition.Thunderstorm:
-        return <IconThunderstorm />;
-      case WeatherCondition.Tornado:
-        return <IconTornado />;
-      default:
-        return <IconClouds />;
-    }
-  };
 
   const weatherDesc = () => {
     switch (currentTemp?.weather[0].main) {
@@ -128,7 +84,7 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
           {`${t("home.minTemp")}:${Math.floor(currentTemp?.main.temp_min!)}°`}
         </Text>
       </View>
-      <WeatherIcons />
+      <WeatherCurrentIcons currentTemp={currentTemp} />
     </View>
   );
 };
