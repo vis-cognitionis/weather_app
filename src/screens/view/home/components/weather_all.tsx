@@ -17,12 +17,12 @@ import {
   IconRain,
   IconSnow,
   IconSquall,
+  IconThunderstorm,
   IconTornado,
 } from "src/core/components/icons/weather_field_icons";
 import mainStore from "src/screens/view-model/main_store";
 import WeatherBackground from "./weather_background";
 import WeatherCurrent from "./weather_current";
-import { IconThunderstorm } from "src/core/components/icons/weather_colored_icons";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 
