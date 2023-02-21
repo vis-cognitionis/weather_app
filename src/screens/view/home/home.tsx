@@ -4,16 +4,11 @@ import {
   SafeAreaView,
   RefreshControl,
   ScrollView,
-  Text,
-  View,
 } from "react-native";
 
-import WeatherHourly from "./components/weather_hourly";
+import WeatherAll from "./components/weather_all";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
-import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
-import { SunnySvg } from "src/images/weather-svg/weather_svg";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -48,7 +43,7 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <WeatherHourly />
+        <WeatherAll />
       </ScrollView>
     </SafeAreaView>
   );

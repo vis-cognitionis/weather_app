@@ -29,37 +29,23 @@ import { useTheme } from "src/core/init/themes/theme_context";
 const styles = StyleSheet.create({
   weathersContainer: {
     flexDirection: "column",
-    gap: 20,
+    gap: 32,
   },
   rowContainer: {
     flexDirection: "row",
     overflow: "scroll",
   },
-  dateContainer: {
-    marginRight: 10,
-    alignItems: "center",
-  },
-  dateText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
   weatherContainer: {
     flex: 1,
-    padding: 8,
+    padding: 10,
     alignItems: "center",
     justifyContent: "center",
-  },
-  timeText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  tempText: {
-    fontSize: 16,
-    marginTop: 8,
+    minWidth: 90,
+    width: 90,
   },
 });
 
-const WeatherHourly = () => {
+const WeatherAll = () => {
   const [weatherDatas, setWeatherDatas] = useState<WeatherDatas | null>(null);
   const { theme } = useTheme();
 
@@ -148,7 +134,7 @@ const WeatherHourly = () => {
                 <Text style={[theme.typography.caption, { flex: 0.5 }]}>
                   {Math.ceil(weather.main.temp)} {tempUnit}
                 </Text>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, paddingVertical: 10 }}>
                   <HourlyWeatherIcons weather={weather} />
                 </View>
                 <Text
@@ -196,4 +182,4 @@ const WeatherHourly = () => {
   );
 };
 
-export default observer(WeatherHourly);
+export default observer(WeatherAll);
