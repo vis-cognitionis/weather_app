@@ -17,6 +17,7 @@ import {
 } from "src/core/components/icons/custom_icons";
 import darkTheme from "src/core/init/themes/styles/dark";
 import mainStore from "src/screens/view-model/main_store";
+import { useWeatherDatas } from "src/screens/view/home/query/useWeatherDatas";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;
@@ -105,10 +106,12 @@ const AppBar = () => {
 
   const [inputValue, setInputValue] = useState<string>(mainStore.city);
   const [editable, setEditable] = useState<boolean>(false);
+  const { refetch } = useWeatherDatas();
 
   const handleSearch = () => {
     mainStore.setCity(inputValue);
     setEditable(false);
+    refetch();
   };
 
   useEffect(() => {

@@ -42,7 +42,7 @@ type Variant =
   | "content"
   | "temperature"
   | "location"
-  | "weather"
+  | "title2"
   | "caption";
 
 interface Typography extends Record<Variant, TextStyle> {}

@@ -1,113 +1,90 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
+import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 import { useTheme } from "src/core/init/themes/theme_context";
+import { useWeatherDatas } from "../home/query/useWeatherDatas";
+import TemperatureChart from "./components/temp_chart";
 
-import { View, StyleSheet } from "react-native";
-import { Svg, Path, Text, G, Line, Circle } from "react-native-svg";
-import { scaleLinear } from "d3-scale";
-
-const data = [20, 22, 23, 25, 24, 22, 21];
-const width = 300;
-const height = 200;
-const padding = 32;
-
-const xScale = scaleLinear()
-  .domain([0, data.length - 1])
-  .range([padding, width - padding]);
-
-const yScale = scaleLinear()
-  .domain([20, 25])
-  .range([height - padding, padding]);
-
-const TemperatureChart = () => {
-  const line = `M${xScale(0)},${yScale(data[0])}${data
-    .map((d, i) => `L${xScale(i)},${yScale(d)}`)
-    .join("")}`;
-
+const Container = ({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) => {
+  const { theme } = useTheme();
   return (
-    <View style={styles.container}>
-      <Svg width={width} height={height}>
-        {/* <Line
-          x1={padding}
-          x2={width - padding}
-          y1={yScale(20)}
-          y2={yScale(20)}
-          stroke="#000"
-        />
-        <Line
-          x1={padding}
-          x2={width - padding}
-          y1={yScale(22.5)}
-          y2={yScale(22.5)}
-          stroke="#000"
-        />
-        <Line
-          x1={padding}
-          x2={width - padding}
-          y1={yScale(25)}
-          y2={yScale(25)}
-          stroke="#000"
-        /> */}
-        <G>
-          <Path d={line} fill="none" stroke="red" strokeWidth="2" />
-          {data.map((d, i) => (
-            <Circle key={i} cx={xScale(i)} cy={yScale(d)} r="5" fill="red" />
-          ))}
-        </G>
-        <Text x={0} y={0} fill="#000" fontSize="12" fontWeight="bold">
-          Day
-        </Text>
-        <Text
-          x={padding - 16}
-          y={yScale(20) + 6}
-          fill="#000"
-          fontSize="12"
-          fontWeight="bold"
-        >
-          Too cold
-        </Text>
-        <Text
-          x={padding - 16}
-          y={yScale(22.5) + 6}
-          fill="#000"
-          fontSize="12"
-          fontWeight="bold"
-        >
-          Just right
-        </Text>
-        <Text
-          x={padding - 16}
-          y={yScale(25) + 6}
-          fill="#000"
-          fontSize="12"
-          fontWeight="bold"
-        >
-          Too hot
-        </Text>
-      </Svg>
+    <View
+      style={{
+        backgroundColor: "#EEF0F2",
+        borderRadius: 16,
+        width: "auto",
+        height: "auto",
+        minWidth: 162,
+        minHeight: 93,
+        paddingTop: 22,
+        padding: 12,
+        gap: 10,
+      }}
+    >
+      <Text style={theme.typography.title2}> {title} </Text>
+      {children}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 8,
-    borderRadius: 16,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
 const Detail = () => {
   const { theme } = useTheme();
+  const { weatherDatas } = useWeatherDatas();
+
+  const DetailCurrentInfos = [
+    { title: t("detail.wind") },
+    { title: t("detail.humidity") },
+    { title: t("detail.pressure") },
+    { title: t("detail.visibility") },
+  ];
 
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.palette.background.default }}
     >
-      <TemperatureChart />
+      <View
+        style={{
+          justifyContent: "center",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          rowGap: 8,
+          columnGap: 10,
+        }}
+      >
+        {DetailCurrentInfos.map((info, index) => {
+          return (
+            <Container
+              key={index}
+              children={
+                <Text style={[theme.typography.caption, , { paddingLeft: 4 }]}>
+                  {info.title === t("detail.wind")
+                    ? weatherDatas?.list[0].wind.speed +
+                      " " +
+                      t("detail.windUnit")
+                    : info.title === t("detail.humidity")
+                    ? "%" + weatherDatas?.list[0].main.humidity
+                    : info.title === t("detail.pressure")
+                    ? weatherDatas?.list[0].main.pressure + " " + "hPa"
+                    : info.title === t("detail.visibility")
+                    ? Number(weatherDatas?.list[0].visibility) / 1000 +
+                      " " +
+                      "km"
+                    : "loading"}
+                </Text>
+              }
+              title={info.title}
+            />
+          );
+        })}
+      </View>
+      {/* <TemperatureChart /> */}
     </SafeAreaView>
   );
 };

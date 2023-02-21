@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { observer } from "mobx-react";
-import axios from "axios";
 
-import {
-  WeatherDatas,
-  Weather,
-  WeatherCondition,
-} from "../interfaces/interface_home";
+import { Weather, WeatherCondition } from "../interfaces/interface_home";
 import {
   IconClear,
   IconClouds,
@@ -23,6 +18,7 @@ import {
 import mainStore from "src/screens/view-model/main_store";
 import WeatherBackground from "./weather_background";
 import WeatherCurrent from "./weather_current";
+import { useWeatherDatas } from "../query/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -46,42 +42,23 @@ const styles = StyleSheet.create({
 });
 
 const WeatherAll = () => {
-  const [weatherDatas, setWeatherDatas] = useState<WeatherDatas | null>(null);
   const { theme } = useTheme();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.openweathermap.org/data/2.5/forecast?q=" +
-            mainStore.city +
-            `&units=${mainStore.weatherUnit}&appid=` +
-            "4ece27e8959cae958f124f7316c6e352"
-        );
-        mainStore.isError !== true && setWeatherDatas(response.data);
-      } catch (error) {
-        console.error("Error fetching weather data: ", error);
-        mainStore.setIsError(true);
-      }
-    };
-    fetchData();
-  }, [mainStore.city, mainStore.weatherUnit, mainStore.isError]);
+  const { weatherDatas, isLoading } = useWeatherDatas();
 
   const tempUnit = mainStore.weatherUnit === "metric" ? "°C" : "°F";
 
-  const groupWeatherDataByDate = (
-    weatherData: Weather[]
-  ): { [key: string]: Weather[] } => {
+  const groupWeatherDataByDate = (): { [key: string]: Weather[] } => {
     const groupedData: { [key: string]: Weather[] } = {};
 
-    weatherData.forEach((weather: Weather) => {
-      const date = weather.dt_txt.split(" ")[0];
-      if (groupedData[date]) {
-        groupedData[date].push(weather);
-      } else {
-        groupedData[date] = [weather];
-      }
-    });
+    weatherDatas &&
+      weatherDatas.list.forEach((weather: Weather) => {
+        const date = weather.dt_txt.split(" ")[0];
+        if (groupedData[date]) {
+          groupedData[date].push(weather);
+        } else {
+          groupedData[date] = [weather];
+        }
+      });
 
     return groupedData;
   };
@@ -128,7 +105,8 @@ const WeatherAll = () => {
     return (
       <View style={styles.rowContainer}>
         <ScrollView horizontal={true}>
-          {groupedWeatherData[today] &&
+          {weatherDatas &&
+            groupedWeatherData[today] &&
             groupedWeatherData[today].map((weather: Weather) => (
               <View key={weather.dt} style={styles.weatherContainer}>
                 <Text style={[theme.typography.caption, { flex: 0.5 }]}>
@@ -144,31 +122,31 @@ const WeatherAll = () => {
               </View>
             ))}
 
-          {groupedWeatherData[tomorrow].map((weather: Weather) => (
-            <View key={weather.dt} style={styles.weatherContainer}>
-              <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                {Math.ceil(weather.main.temp)} {tempUnit}
-              </Text>
-              <View style={{ flex: 1 }}>
-                <HourlyWeatherIcons weather={weather} />
+          {weatherDatas &&
+            groupedWeatherData[tomorrow].map((weather: Weather) => (
+              <View key={weather.dt} style={styles.weatherContainer}>
+                <Text style={[theme.typography.caption, { flex: 0.5 }]}>
+                  {Math.ceil(weather.main.temp)} {tempUnit}
+                </Text>
+                <View style={{ flex: 1 }}>
+                  <HourlyWeatherIcons weather={weather} />
+                </View>
+                <Text
+                  style={theme.typography.caption}
+                  children={weather.dt_txt.split(" ")[1].slice(0, 5)}
+                />
               </View>
-              <Text
-                style={theme.typography.caption}
-                children={weather.dt_txt.split(" ")[1].slice(0, 5)}
-              />
-            </View>
-          ))}
+            ))}
         </ScrollView>
       </View>
     );
   };
 
-  if (!weatherDatas) {
+  if (isLoading) {
     return <Text>Loading...</Text>;
   }
 
-  const groupedWeatherData = groupWeatherDataByDate(weatherDatas.list);
-
+  const groupedWeatherData = groupWeatherDataByDate();
   const gapValue: number = windowHeight * 0.2725;
 
   return (

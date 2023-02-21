@@ -24,6 +24,13 @@
     "content": "Havaya Bir Göz Atalım",
     "button": "Haydi Bakalım"
   },
+  "detail": {
+    "wind": "Rüzgar",
+    "humidity": "Nem",
+    "pressure": "Basınç",
+    "visibility": "Görüş mesafesi",
+    "windUnit": "km/sa"
+  },
   "settings": {
     "general": {
       "title": "Genel Ayarlar",

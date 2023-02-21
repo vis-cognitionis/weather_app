@@ -97,7 +97,7 @@ const darkTheme: ThemeProps = {
       fontSize: 24,
       color: PaletteColors.primary.dark,
     },
-    weather: {
+    title2: {
       fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "600",

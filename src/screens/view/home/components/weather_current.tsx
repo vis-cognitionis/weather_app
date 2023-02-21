@@ -122,8 +122,8 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
           {Math.ceil(currentTemp?.main.temp!)} {tempUnit}
         </Text>
         <Text children={mainStore.city} style={theme.typography.location} />
-        <Text children={weatherDesc()} style={theme.typography.weather} />
-        <Text style={theme.typography.weather}>
+        <Text children={weatherDesc()} style={theme.typography.title2} />
+        <Text style={theme.typography.title2}>
           {`${t("home.maxTemp")}:${Math.ceil(currentTemp?.main.temp_max!)}°`}{" "}
           {`${t("home.minTemp")}:${Math.floor(currentTemp?.main.temp_min!)}°`}
         </Text>
