@@ -101,11 +101,11 @@ const darkTheme: ThemeProps = {
       fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "600",
-      fontSize: 12,
+      fontSize: 16,
       lineHeight: 18,
       color: PaletteColors.primary.dark,
     },
-    appbar: {
+    caption: {
       fontFamily: generalFontFamily,
       fontStyle: "normal",
       fontWeight: "400",

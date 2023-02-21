@@ -1,7 +1,24 @@
 {
   "home": {
     "welcome": "Welcome",
-    "title": "Home"
+    "title": "Home",
+    "minTemp": "M",
+    "maxTemp": "H",
+    "weatherDesc": {
+      "clear": "Clear",
+      "clouds": "Clouds",
+      "drizzle": "Drizzle",
+      "dust": "Dust",
+      "fog": "Fog",
+      "haze": "Haze",
+      "mist": "Mist",
+      "rain": "Rain",
+      "sand": "Sand",
+      "snow": "Snow",
+      "squall": "Squall",
+      "thunderstorm": "Thunderstorm",
+      "tornado": "Tornado"
+    }
   },
   "landing": {
     "content": "Let’s See The Weather Around You",

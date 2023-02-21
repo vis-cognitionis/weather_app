@@ -34,21 +34,6 @@ export interface Palette {
   background: TypeBackground;
 }
 
-//  type Variant =
-//   | "h1"
-//   | "h2"
-//   | "h3"
-//   | "h4"
-//   | "h5"
-//   | "h6"
-//   | "subtitle1"
-//   | "subtitle2"
-//   | "body1"
-//   | "body2"
-//   | "caption"
-//   | "button"
-//   | "overline";
-
 type Variant =
   | "h1"
   | "h2"
@@ -58,7 +43,7 @@ type Variant =
   | "temperature"
   | "location"
   | "weather"
-  | "appbar";
+  | "caption";
 
 interface Typography extends Record<Variant, TextStyle> {}
 

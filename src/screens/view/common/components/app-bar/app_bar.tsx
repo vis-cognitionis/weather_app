@@ -135,7 +135,7 @@ const AppBar = () => {
                 textDecorationLine: editable ? "underline" : "none",
                 textTransform: "capitalize",
               },
-              theme.typography.appbar,
+              theme.typography.caption,
             ]}
           />
           {editable ? (

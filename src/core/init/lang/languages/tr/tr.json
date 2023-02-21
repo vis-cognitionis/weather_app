@@ -1,7 +1,24 @@
 {
   "home": {
     "welcome": "Hoşgeldiniz",
-    "title": "Anasayfa"
+    "title": "Anasayfa",
+    "minTemp": "D",
+    "maxTemp": "Y",
+    "weatherDesc": {
+      "clear": "Açık",
+      "clouds": "Bulutlu",
+      "drizzle": "Çise",
+      "dust": "Toz",
+      "fog": "Sis",
+      "haze": "Pus",
+      "mist": "Sis",
+      "rain": "Yağmur",
+      "sand": "Toz",
+      "snow": "Kar",
+      "squall": "Rüzgar",
+      "thunderstorm": "Şimşekler",
+      "tornado": "Fırtına"
+    }
   },
   "landing": {
     "content": "Havaya Bir Göz Atalım",

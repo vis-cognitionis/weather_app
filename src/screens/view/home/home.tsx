@@ -22,7 +22,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
       backgroundColor: theme.palette.background.default,
     },
     scrollView: {
-      paddingLeft: 30,
+      paddingHorizontal: 30,
     },
   });
 };
@@ -48,26 +48,7 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={{ position: "absolute", left: "11%", top: "10%" }}>
-          <SunnySvg />
-        </View>
-        <View style={{ flexDirection: "column", gap: 155 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              width: "70%",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={[theme.typography.h2, { width: 211 }]}>
-              {t("weatherSuggestion.sunny")}
-            </Text>
-
-            <IconInfoSunny />
-          </View>
-
-          <WeatherHourly />
-        </View>
+        <WeatherHourly />
       </ScrollView>
     </SafeAreaView>
   );
