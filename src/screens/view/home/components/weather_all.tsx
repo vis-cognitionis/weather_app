@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
-import WeatherCurrent from "./weather_current";
+import WeatherCurrent from "./weather-current/weather_current";
 import WeatherBackground from "./weather_background";
 import WeatherHourlyIcons from "./weather_hourly_icons";
-import { useWeatherDatas } from "../query/useWeatherDatas";
+import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { Weather } from "../interfaces/interface_home";

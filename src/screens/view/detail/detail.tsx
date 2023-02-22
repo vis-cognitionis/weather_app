@@ -1,42 +1,26 @@
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 import { useTheme } from "src/core/init/themes/theme_context";
-import { useWeatherDatas } from "../home/query/useWeatherDatas";
+import { useWeatherCurrent } from "../home/queries/useWeatherCurrent";
 import TemperatureChart from "./components/temp_chart";
+import Container from "./components/container";
 
-const Container = ({
-  children,
-  title,
-}: {
-  children: React.ReactNode;
-  title: string;
-}) => {
-  const { theme } = useTheme();
-  return (
-    <View
-      style={{
-        backgroundColor: "#EEF0F2",
-        borderRadius: 16,
-        width: "auto",
-        height: "auto",
-        minWidth: 162,
-        minHeight: 93,
-        paddingTop: 22,
-        padding: 12,
-        gap: 10,
-      }}
-    >
-      <Text style={theme.typography.title2}> {title} </Text>
-      {children}
-    </View>
-  );
-};
+const styles = StyleSheet.create({
+  grid: {
+    justifyContent: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    rowGap: 8,
+    columnGap: 10,
+  },
+});
 
 const Detail = () => {
   const { theme } = useTheme();
-  const { weatherDatas } = useWeatherDatas();
+  const { currentTemp } = useWeatherCurrent();
+  console.log(currentTemp);
 
   const DetailCurrentInfos = [
     { title: t("detail.wind") },
@@ -49,15 +33,7 @@ const Detail = () => {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.palette.background.default }}
     >
-      <View
-        style={{
-          justifyContent: "center",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          rowGap: 8,
-          columnGap: 10,
-        }}
-      >
+      <View style={styles.grid}>
         {DetailCurrentInfos.map((info, index) => {
           return (
             <Container
@@ -65,17 +41,13 @@ const Detail = () => {
               children={
                 <Text style={[theme.typography.caption, , { paddingLeft: 4 }]}>
                   {info.title === t("detail.wind")
-                    ? weatherDatas?.list[0].wind.speed +
-                      " " +
-                      t("detail.windUnit")
+                    ? currentTemp?.wind.speed + " " + t("detail.windUnit")
                     : info.title === t("detail.humidity")
-                    ? "%" + weatherDatas?.list[0].main.humidity
+                    ? "%" + currentTemp?.main.humidity
                     : info.title === t("detail.pressure")
-                    ? weatherDatas?.list[0].main.pressure + " " + "hPa"
+                    ? currentTemp?.main.pressure + " " + "hPa"
                     : info.title === t("detail.visibility")
-                    ? Number(weatherDatas?.list[0].visibility) / 1000 +
-                      " " +
-                      "km"
+                    ? Number(currentTemp?.visibility) / 1000 + " " + "km"
                     : "loading"}
                 </Text>
               }

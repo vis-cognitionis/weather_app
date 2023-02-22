@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import lightTheme from "src/core/init/themes/styles/light";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { useWeatherDatas } from "src/screens/view/home/queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 import {
   IconBack,
@@ -17,7 +18,6 @@ import {
 } from "src/core/components/icons/custom_icons";
 import darkTheme from "src/core/init/themes/styles/dark";
 import mainStore from "src/screens/view-model/main_store";
-import { useWeatherDatas } from "src/screens/view/home/query/useWeatherDatas";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;

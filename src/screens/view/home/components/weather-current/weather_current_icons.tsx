@@ -11,13 +11,9 @@ import {
   IconThunderstorm,
   IconTornado,
 } from "src/core/components/icons/weather_colored_icons";
-import { Weather, WeatherCondition } from "../interfaces/interface_home";
+import { Weather, WeatherCondition } from "../../interfaces/interface_home";
 
-const WeatherCurrentIcons = ({
-  currentTemp,
-}: {
-  currentTemp: Weather | null;
-}) => {
+const WeatherCurrentIcons = ({ currentTemp }: { currentTemp: Weather }) => {
   switch (currentTemp?.weather[0].main) {
     case WeatherCondition.Clear:
       return <IconClear />;
