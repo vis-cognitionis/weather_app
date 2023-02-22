@@ -61,32 +61,34 @@ const Detail = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={styles.grid}>
-          {DetailCurrentInfos.map((info, index) => {
-            return (
-              <Container
-                key={index}
-                children={
-                  <Text
-                    style={[theme.typography.caption, , { paddingLeft: 4 }]}
-                  >
-                    {info.title === t("detail.wind")
-                      ? currentTemp?.wind.speed + " " + t("detail.windUnit")
-                      : info.title === t("detail.humidity")
-                      ? "%" + currentTemp?.main.humidity
-                      : info.title === t("detail.pressure")
-                      ? currentTemp?.main.pressure + " " + "hPa"
-                      : info.title === t("detail.visibility")
-                      ? Number(currentTemp?.visibility) / 1000 + " " + "km"
-                      : "loading"}
-                  </Text>
-                }
-                title={info.title}
-              />
-            );
-          })}
+        <View style={{ rowGap: 12 }}>
+          <View style={styles.grid}>
+            {DetailCurrentInfos.map((info, index) => {
+              return (
+                <Container
+                  key={index}
+                  children={
+                    <Text
+                      style={[theme.typography.caption, , { paddingLeft: 4 }]}
+                    >
+                      {info.title === t("detail.wind")
+                        ? currentTemp?.wind.speed + " " + t("detail.windUnit")
+                        : info.title === t("detail.humidity")
+                        ? "%" + currentTemp?.main.humidity
+                        : info.title === t("detail.pressure")
+                        ? currentTemp?.main.pressure + " " + "hPa"
+                        : info.title === t("detail.visibility")
+                        ? Number(currentTemp?.visibility) / 1000 + " " + "km"
+                        : "loading"}
+                    </Text>
+                  }
+                  title={info.title}
+                />
+              );
+            })}
+          </View>
+          {weatherDatas && <TemperatureChart weatherDatas={weatherDatas} />}
         </View>
-        {weatherDatas && <TemperatureChart weatherDatas={weatherDatas} />}
       </ScrollView>
     </SafeAreaView>
   );
