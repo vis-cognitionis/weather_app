@@ -3,6 +3,12 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Svg, Path, Text, G, Line, Circle } from "react-native-svg";
 import { scaleLinear } from "d3-scale";
+import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
+import {
+  groupWeatherDataByDate,
+  today,
+  tomorrow,
+} from "../../home/components/weather_all";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,20 +19,36 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-const data = [20, 22, 23, 25, 24, 22, 21];
-const width = 300;
-const height = 200;
-const padding = 32;
-
-const xScale = scaleLinear()
-  .domain([0, data.length - 1])
-  .range([padding, width - padding]);
-
-const yScale = scaleLinear()
-  .domain([20, 25])
-  .range([height - padding, padding]);
 
 const TemperatureChart = () => {
+  const { weatherDatas } = useWeatherDatas();
+  const todaysHourArr = groupWeatherDataByDate(weatherDatas)[today]?.map(
+    (weather) => {
+      return Number(weather.dt_txt.split(" ")[1].slice(0, 2));
+    }
+  );
+
+  const tomorrowsHourArr = groupWeatherDataByDate(weatherDatas)[tomorrow]?.map(
+    (weather) => {
+      return Number(weather.dt_txt.split(" ")[1].slice(0, 2));
+    }
+  );
+
+  const combinedHourArr = [...todaysHourArr, ...tomorrowsHourArr];
+
+  const data = [20, 22, 23, 25, 24, 22, 21];
+  const width = 300;
+  const height = 200;
+  const padding = 32;
+
+  const xScale = scaleLinear()
+    .domain([0, data.length - 1])
+    .range([padding, width - padding]);
+
+  const yScale = scaleLinear()
+    .domain([20, 25])
+    .range([height - padding, padding]);
+
   const line = `M${xScale(0)},${yScale(data[0])}${data
     .map((d, i) => `L${xScale(i)},${yScale(d)}`)
     .join("")}`;

@@ -86,7 +86,7 @@ const Detail = () => {
             );
           })}
         </View>
-        {/* <TemperatureChart /> */}
+        <TemperatureChart />
       </ScrollView>
     </SafeAreaView>
   );

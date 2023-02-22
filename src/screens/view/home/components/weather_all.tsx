@@ -9,7 +9,7 @@ import WeatherHourlyIcons from "./weather_hourly_icons";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { Weather } from "../interfaces/interface_home";
+import { Weather, WeatherDatas } from "../interfaces/interface_home";
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -30,6 +30,29 @@ const styles = StyleSheet.create({
   },
 });
 
+export const today = new Date().toISOString().slice(0, 10);
+export const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1))
+  .toISOString()
+  .slice(0, 10);
+
+export const groupWeatherDataByDate = (
+  weatherDatas: WeatherDatas | undefined
+): { [key: string]: Weather[] } => {
+  const groupedData: { [key: string]: Weather[] } = {};
+
+  weatherDatas &&
+    weatherDatas.list.forEach((weather) => {
+      const date = weather.dt_txt.split(" ")[0];
+      if (groupedData[date]) {
+        groupedData[date].push(weather);
+      } else {
+        groupedData[date] = [weather];
+      }
+    });
+
+  return groupedData;
+};
+
 const WeatherAll = () => {
   const { theme } = useTheme();
   const { weatherDatas, isLoading, refetch } = useWeatherDatas();
@@ -41,34 +64,18 @@ const WeatherAll = () => {
 
   const tempUnit = mainStore.weatherUnit === "metric" ? "°C" : "°F";
 
-  const groupWeatherDataByDate = (): { [key: string]: Weather[] } => {
-    const groupedData: { [key: string]: Weather[] } = {};
-
-    weatherDatas &&
-      weatherDatas.list.forEach((weather: Weather) => {
-        const date = weather.dt_txt.split(" ")[0];
-        if (groupedData[date]) {
-          groupedData[date].push(weather);
-        } else {
-          groupedData[date] = [weather];
-        }
-      });
-
-    return groupedData;
-  };
-
   const hourlyWeather = (groupedWeatherData: { [key: string]: Weather[] }) => {
-    const today = new Date().toISOString().slice(0, 10);
-    const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1))
-      .toISOString()
-      .slice(0, 10);
+    // const today = new Date().toISOString().slice(0, 10);
+    // const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1))
+    //   .toISOString()
+    //   .slice(0, 10);
 
     return (
       <View style={styles.rowContainer}>
         <ScrollView horizontal={true}>
           {weatherDatas &&
             groupedWeatherData[today] &&
-            groupedWeatherData[today].map((weather: Weather) => (
+            groupedWeatherData[today].map((weather) => (
               <View key={weather.dt} style={styles.weatherContainer}>
                 <Text style={[theme.typography.caption, { flex: 0.5 }]}>
                   {Math.ceil(weather.main.temp)} {tempUnit}
@@ -84,7 +91,7 @@ const WeatherAll = () => {
             ))}
 
           {weatherDatas &&
-            groupedWeatherData[tomorrow].map((weather: Weather) => (
+            groupedWeatherData[tomorrow].map((weather) => (
               <View key={weather.dt} style={styles.weatherContainer}>
                 <Text style={[theme.typography.caption, { flex: 0.5 }]}>
                   {Math.ceil(weather.main.temp)} {tempUnit}
@@ -107,7 +114,7 @@ const WeatherAll = () => {
     return <Text>Loading...</Text>;
   }
 
-  const groupedWeatherData = groupWeatherDataByDate();
+  const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
   const gapValue: number = windowHeight * 0.2725;
 
   return (
