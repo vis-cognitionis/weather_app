@@ -27,8 +27,13 @@ const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
     return weather.main.temp;
   });
 
-  const combinedHourArr = [...todaysHourArr, ...tomorrowsHourArr];
-  const combinedTempArr = [...todaysTempArr, ...tomorrowsTempArr];
+  const combinedHourArr = todaysWeather
+    ? [...todaysHourArr, ...tomorrowsHourArr]
+    : tomorrowsHourArr;
+
+  const combinedTempArr = todaysWeather
+    ? [...todaysTempArr, ...tomorrowsTempArr]
+    : tomorrowsTempArr;
 
   const chartConfig = {
     backgroundGradientFrom: "#ffffff",
