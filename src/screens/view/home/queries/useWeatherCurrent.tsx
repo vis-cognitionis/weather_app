@@ -10,7 +10,7 @@ export const useWeatherCurrent = () => {
     data: currentTemp,
     isLoading,
     isError,
-    refetch,
+    refetch: refetchCurrent,
   } = useQuery<Weather>(
     ["currentTemp", mainStore.city, mainStore.weatherUnit],
     async () => {
@@ -30,5 +30,5 @@ export const useWeatherCurrent = () => {
     mainStore.setIsError(true);
   }
 
-  return { currentTemp, isLoading, refetch };
+  return { currentTemp, isLoading, refetchCurrent };
 };

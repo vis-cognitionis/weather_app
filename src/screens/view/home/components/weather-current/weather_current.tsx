@@ -5,13 +5,14 @@ import { observer } from "mobx-react";
 import mainStore from "src/screens/view-model/main_store";
 import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
-import { useWeatherCurrent } from "../../queries/useWeatherCurrent";
+import { useWeatherDatas } from "../../queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
   const { theme } = useTheme();
-  const { currentTemp } = useWeatherCurrent();
+  const { weatherDatas } = useWeatherDatas();
+  const currentTemp = weatherDatas && weatherDatas.list[0];
 
   return (
     <View

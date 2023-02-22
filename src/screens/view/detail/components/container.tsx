@@ -5,7 +5,6 @@ import { useTheme } from "src/core/init/themes/theme_context";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#EEF0F2",
     borderRadius: 16,
     width: "auto",
     height: "auto",
@@ -26,7 +25,14 @@ const Container = ({
 }) => {
   const { theme } = useTheme();
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.palette.secondary?.light,
+        },
+      ]}
+    >
       <Text style={theme.typography.title2}> {title} </Text>
       {children}
     </View>

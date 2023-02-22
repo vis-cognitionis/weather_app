@@ -106,12 +106,10 @@ const AppBar = () => {
 
   const [inputValue, setInputValue] = useState<string>(mainStore.city);
   const [editable, setEditable] = useState<boolean>(false);
-  const { refetch } = useWeatherDatas();
 
   const handleSearch = () => {
     mainStore.setCity(inputValue);
     setEditable(false);
-    refetch();
   };
 
   useEffect(() => {

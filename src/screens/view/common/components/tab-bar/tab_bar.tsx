@@ -56,6 +56,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           if (route.name === StackScreenNames.Home) {
             mainStore.setPreviousTab(StackScreenNames.Home);
           }
+
           if (route.name === StackScreenNames.Detail) {
             mainStore.setPreviousTab(StackScreenNames.Detail);
           }

@@ -7,6 +7,8 @@ const PaletteColors: Palette = {
     dark: "#FCFCFC",
     light: "#40516F",
   },
+  secondary: { main: "#F1AAAA", dark: "#EEF0F2", light: "#4E6388" },
+
   background: { default: "red", paper: "green" },
   text: { disabled: "purple", primary: "#40516F", secondary: "#FCFCFC" },
 };
@@ -24,9 +26,9 @@ const darkTheme: ThemeProps = {
     },
 
     secondary: {
-      main: "#F1AAAA",
-      light: "#A0B3C6",
-      dark: "#788897",
+      main: PaletteColors.secondary?.main,
+      light: PaletteColors.secondary?.light,
+      dark: PaletteColors.secondary?.dark,
     },
 
     background: {

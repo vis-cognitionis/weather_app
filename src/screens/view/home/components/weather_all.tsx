@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { observer } from "mobx-react";
 
@@ -32,7 +32,12 @@ const styles = StyleSheet.create({
 
 const WeatherAll = () => {
   const { theme } = useTheme();
-  const { weatherDatas, isLoading } = useWeatherDatas();
+  const { weatherDatas, isLoading, refetch } = useWeatherDatas();
+
+  useEffect(() => {
+    refetch();
+    console.log("girdi");
+  }, [mainStore.city]);
 
   const tempUnit = mainStore.weatherUnit === "metric" ? "°C" : "°F";
 

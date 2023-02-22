@@ -3,6 +3,7 @@ import ThemeProps, { Palette } from "../interface/interfaces";
 
 const PaletteColors: Palette = {
   primary: { main: "#FCFCFC", dark: "#40516F", light: "#FCFCFC" },
+  secondary: { main: "#BF6767", dark: "#4E6388", light: "#EEF0F2" },
   background: { default: "red", paper: "green" },
   text: { disabled: "purple", primary: "#FFFFFF", secondary: "#40516F" },
 };
@@ -19,9 +20,9 @@ const lightTheme: ThemeProps = {
     },
 
     secondary: {
-      main: "#BF6767",
-      light: "#A0B3C6",
-      dark: "#788897",
+      main: PaletteColors.secondary?.main,
+      light: PaletteColors.secondary?.light,
+      dark: PaletteColors.secondary?.dark,
     },
 
     background: {

@@ -25,7 +25,6 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
 const Home = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
-
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const onRefresh = useCallback(() => {
