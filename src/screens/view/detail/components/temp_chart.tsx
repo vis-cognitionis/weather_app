@@ -41,62 +41,60 @@ const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
     : tomorrowsTempArr;
 
   const chartConfig: AbstractChartConfig = {
-    backgroundGradientFrom: theme.palette?.background.default!,
-    backgroundGradientTo: theme.palette?.background.default!,
+    backgroundGradientFrom: theme.palette.secondary?.light,
+    backgroundGradientTo: theme.palette.secondary?.light,
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     decimalPlaces: 0,
-    // fillShadowGradient: "rgba(255, 0, 0, 1)",
-    // fillShadowGradientOpacity: 0.5,
     propsForDots: {
       r: "3",
     },
     propsForHorizontalLabels: {
       fontSize: 10,
       fontWeight: "bold",
-      fill: "orange",
+      fill: theme.palette.primary.dark,
     },
 
     propsForVerticalLabels: {
       fontSize: 10,
       fontWeight: "bold",
-      fill: "orange",
+      fill: theme.palette.primary.dark,
     },
     formatYLabel: (yLabel) => `${yLabel}°`,
-    propsForBackgroundLines: {
-      color: "red",
-    },
+    // propsForBackgroundLines: {
+    //   fill: "red",
+    // },
   };
 
   return (
-    <View>
-      <LineChart
-        // withDots={false}
-        // withOuterLines={false} //
-        withShadow={false}
-        withInnerLines={false}
-        data={{
-          labels: combinedHourArr,
-          datasets: [
-            {
-              data: combinedTempArr,
-              color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
-              strokeWidth: 3,
-            },
-          ],
-        }}
-        width={windowWidth}
-        height={200}
-        chartConfig={{
-          ...chartConfig,
-          style: {
-            borderStyle: "solid",
-            borderWidth: 1,
-            borderColor: "#ff0000",
+    <LineChart
+      // withDots={false}
+      // withOuterLines={false}
+      withShadow={false}
+      // withInnerLines={false}
+      withVerticalLines={false}
+      data={{
+        labels: combinedHourArr,
+        datasets: [
+          {
+            data: combinedTempArr,
+            color: () => `${theme.palette.primary.dark}`,
+            strokeWidth: 2,
           },
-        }}
-        yAxisSuffix="°"
-      />
-    </View>
+        ],
+      }}
+      width={windowWidth - 60}
+      height={200}
+      style={{ marginLeft: 30, borderRadius: 16 }}
+      chartConfig={{
+        ...chartConfig,
+        style: {
+          borderStyle: "solid",
+          borderWidth: 1,
+          borderColor: "#ff0000",
+        },
+      }}
+      yAxisSuffix="°"
+    />
   );
 };
 
