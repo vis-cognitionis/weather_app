@@ -49,9 +49,9 @@ const Detail = () => {
   ];
   useEffect(() => {
     refetch();
-    // refetchCurrent();
     console.log("girdi-detay");
   }, [mainStore.city]);
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.palette.background.default }}
@@ -86,7 +86,7 @@ const Detail = () => {
             );
           })}
         </View>
-        <TemperatureChart />
+        {weatherDatas && <TemperatureChart weatherDatas={weatherDatas} />}
       </ScrollView>
     </SafeAreaView>
   );

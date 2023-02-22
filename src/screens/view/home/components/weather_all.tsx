@@ -35,6 +35,8 @@ export const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1))
   .toISOString()
   .slice(0, 10);
 
+export const tempUnit = mainStore.weatherUnit === "metric" ? "°C" : "°F";
+
 export const groupWeatherDataByDate = (
   weatherDatas: WeatherDatas | undefined
 ): { [key: string]: Weather[] } => {
@@ -61,8 +63,6 @@ const WeatherAll = () => {
     refetch();
     console.log("girdi");
   }, [mainStore.city]);
-
-  const tempUnit = mainStore.weatherUnit === "metric" ? "°C" : "°F";
 
   const hourlyWeather = (groupedWeatherData: { [key: string]: Weather[] }) => {
     // const today = new Date().toISOString().slice(0, 10);
