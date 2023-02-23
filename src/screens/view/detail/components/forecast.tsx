@@ -25,6 +25,7 @@ import Container from "./container";
 
 const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   const { theme } = useTheme();
+  const currentDate = new Date();
 
   interface DailyData {
     [date: string]: {
@@ -36,11 +37,10 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   }
 
   const dailyData: DailyData = {};
-
-  // Günlük verileri topla
   for (let i = 0; i < weatherDatas?.list.length; i++) {
     const data = weatherDatas.list[i];
-    const dateStr = data.dt_txt.split(" ")[0];
+    const date = new Date(data.dt_txt);
+    const dateStr = date.toISOString().substring(0, 10);
     const info = data.weather[0]?.main;
 
     if (!dailyData[dateStr]) {
@@ -59,19 +59,16 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
     }
   }
 
-  // "Today" ve sonraki beş gün için verileri ayarla
   const dailyDataForNextFiveDays: DailyData = {};
 
-  for (let i = 0; i < 5; i++) {
-    const date = new Date();
+  for (let i = 1; i < 6; i++) {
+    const date = new Date(currentDate);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().substring(0, 10);
     const dayOfWeek = getDayOfWeek(dateStr);
 
-    // console.log(dateStr);
-
     dailyDataForNextFiveDays[dateStr] = {
-      dayOfWeek: i === 0 ? t("daysShort.today") : dayOfWeek,
+      dayOfWeek: dayOfWeek,
       maxTemp: dailyData[dateStr]?.maxTemp,
       minTemp: dailyData[dateStr]?.minTemp,
       info: dailyData[dateStr]?.info,
@@ -89,7 +86,11 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
       t("daysShort.saturday"),
     ];
     const dayOfWeekIndex = new Date(date).getDay();
-    return days[dayOfWeekIndex];
+    if (dayOfWeekIndex === new Date().getDay()) {
+      return t("daysShort.today");
+    } else {
+      return days[dayOfWeekIndex];
+    }
   }
 
   const smallIcons = (dateStr: string) => {
@@ -135,19 +136,36 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
             flexDirection: "row",
             alignItems: "center",
             paddingHorizontal: 5,
+            justifyContent: "space-between",
+            height: 50,
+            maxHeight: 50,
           }}
           key={i}
         >
-          <Text>{dailyDataForNextFiveDays[dateStr].dayOfWeek}</Text>
-          <Text>
-            {`${t("home.maxTemp")}:`}{" "}
-            {dailyDataForNextFiveDays[dateStr].maxTemp} {tempUnit}
+          <Text style={[theme.typography.caption, { width: 50 }]}>
+            {dailyDataForNextFiveDays[dateStr].dayOfWeek}
           </Text>
-          <Text>
-            {`${t("home.minTemp")}:`}{" "}
-            {dailyDataForNextFiveDays[dateStr].minTemp} {tempUnit}
-          </Text>
-          {smallIcons(dateStr)}
+          <View style={{ transform: [{ scale: 0.3 }], width: 70 }}>
+            {smallIcons(dateStr)}
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: 130,
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={[theme.typography.caption, { width: "auto" }]}>
+              {`${t("home.maxTemp")}:`}{" "}
+              {dailyDataForNextFiveDays[dateStr].maxTemp} {tempUnit}
+            </Text>
+            <Text style={[theme.typography.caption, { width: "auto" }]}>
+              {`${t("home.minTemp")}:`}{" "}
+              {dailyDataForNextFiveDays[dateStr].minTemp} {tempUnit}
+            </Text>
+          </View>
         </View>
       ))}
     />
