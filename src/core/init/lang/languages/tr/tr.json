@@ -30,7 +30,8 @@
     "pressure": "Basınç",
     "visibility": "Görüş mesafesi",
     "windUnit": "km/sa",
-    "graphicTitle": "saatlik sıcaklık değişimi"
+    "graphicTitle": "saatlik sıcaklık değişimi",
+    "forecastTitle": "5 günlük tahmin"
   },
   "settings": {
     "general": {

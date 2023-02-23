@@ -30,7 +30,8 @@
     "pressure": "Pressure",
     "visibility": "Visibility",
     "windUnit": "km/h",
-    "graphicTitle": "hourly temperature change"
+    "graphicTitle": "hourly temperature change",
+    "forecastTitle": "5-day forecast"
   },
   "settings": {
     "general": {

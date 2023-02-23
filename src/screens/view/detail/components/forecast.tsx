@@ -1,10 +1,27 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
+import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { tempUnit } from "../../home/components/weather_all";
-import { WeatherDatas } from "../../home/interfaces/interface_home";
+import { windowWidth } from "../../common/constants/constants";
+import {
+  WeatherCondition,
+  WeatherDatas,
+} from "../../home/interfaces/interface_home";
+import {
+  IconClear,
+  IconClouds,
+  IconDrizzle,
+  IconDustSand,
+  IconFogHazeMist,
+  IconRain,
+  IconSnow,
+  IconSquall,
+  IconThunderstorm,
+  IconTornado,
+} from "src/core/components/icons/weather_colored_icons";
+import Container from "./container";
 
 const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   const { theme } = useTheme();
@@ -51,6 +68,8 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
     const dateStr = date.toISOString().substring(0, 10);
     const dayOfWeek = getDayOfWeek(dateStr);
 
+    // console.log(dateStr);
+
     dailyDataForNextFiveDays[dateStr] = {
       dayOfWeek: i === 0 ? t("daysShort.today") : dayOfWeek,
       maxTemp: dailyData[dateStr]?.maxTemp,
@@ -73,10 +92,52 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
     return days[dayOfWeekIndex];
   }
 
+  const smallIcons = (dateStr: string) => {
+    switch (dailyDataForNextFiveDays[dateStr].info) {
+      case WeatherCondition.Clear:
+        return <IconClear />;
+      case WeatherCondition.Clouds:
+        return <IconClouds />;
+      case WeatherCondition.Drizzle:
+        return <IconDrizzle />;
+      case WeatherCondition.Dust:
+        return <IconDustSand />;
+      case WeatherCondition.Fog:
+        return <IconFogHazeMist />;
+      case WeatherCondition.Haze:
+        return <IconFogHazeMist />;
+      case WeatherCondition.Mist:
+        return <IconFogHazeMist />;
+      case WeatherCondition.Rain:
+        return <IconRain />;
+      case WeatherCondition.Sand:
+        return <IconDustSand />;
+      case WeatherCondition.Snow:
+        return <IconSnow />;
+      case WeatherCondition.Squall:
+        return <IconSquall />;
+      case WeatherCondition.Thunderstorm:
+        return <IconThunderstorm />;
+      case WeatherCondition.Tornado:
+        return <IconTornado />;
+      default:
+        return <IconClouds />;
+    }
+  };
+
   return (
-    <View>
-      {Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => (
-        <View key={i}>
+    <Container
+      width={windowWidth - 60}
+      title={t("detail.forecastTitle")}
+      children={Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => (
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 5,
+          }}
+          key={i}
+        >
           <Text>{dailyDataForNextFiveDays[dateStr].dayOfWeek}</Text>
           <Text>
             {`${t("home.maxTemp")}:`}{" "}
@@ -86,10 +147,10 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
             {`${t("home.minTemp")}:`}{" "}
             {dailyDataForNextFiveDays[dateStr].minTemp} {tempUnit}
           </Text>
-          <Text>Info: {dailyDataForNextFiveDays[dateStr].info}</Text>
+          {smallIcons(dateStr)}
         </View>
       ))}
-    </View>
+    />
   );
 };
 
