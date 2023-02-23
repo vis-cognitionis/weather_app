@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { AbstractChartConfig } from "react-native-chart-kit/dist/AbstractChart";
 
@@ -88,8 +87,8 @@ const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   //     : tomorrowsTempArr;
 
   const chartConfig: AbstractChartConfig = {
-    backgroundGradientFrom: theme.palette.secondary?.light,
-    backgroundGradientTo: theme.palette.secondary?.light,
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     decimalPlaces: 0,
     propsForDots: {
@@ -126,7 +125,7 @@ const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
         ],
       }}
       width={windowWidth - 60}
-      height={200}
+      height={190}
       style={{
         borderRadius: 16,
         alignSelf: "center",

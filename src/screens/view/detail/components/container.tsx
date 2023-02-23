@@ -13,15 +13,18 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     padding: 12,
     gap: 10,
+    alignSelf: "center",
   },
 });
 
 const Container = ({
   children,
   title,
+  width,
 }: {
   children: React.ReactNode;
   title: string;
+  width?: number;
 }) => {
   const { theme } = useTheme();
   return (
@@ -30,6 +33,7 @@ const Container = ({
         styles.container,
         {
           backgroundColor: theme.palette.secondary?.light,
+          width: width,
         },
       ]}
     >

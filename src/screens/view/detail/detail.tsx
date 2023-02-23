@@ -15,6 +15,7 @@ import mainStore from "src/screens/view-model/main_store";
 import { useWeatherDatas } from "../home/queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { observer } from "mobx-react";
+import { windowWidth } from "../common/constants/constants";
 
 const styles = StyleSheet.create({
   grid: {
@@ -87,7 +88,13 @@ const Detail = () => {
               );
             })}
           </View>
-          {weatherDatas && <TemperatureChart weatherDatas={weatherDatas} />}
+          {weatherDatas && (
+            <Container
+              width={windowWidth - 60}
+              title={t("detail.graphicTitle")}
+              children={<TemperatureChart weatherDatas={weatherDatas} />}
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

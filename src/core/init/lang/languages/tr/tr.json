@@ -29,7 +29,8 @@
     "humidity": "Nem",
     "pressure": "Basınç",
     "visibility": "Görüş mesafesi",
-    "windUnit": "km/sa"
+    "windUnit": "km/sa",
+    "graphicTitle": "saatlik sıcaklık değişimi"
   },
   "settings": {
     "general": {

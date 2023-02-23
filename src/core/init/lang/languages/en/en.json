@@ -29,7 +29,8 @@
     "humidity": "Humidity",
     "pressure": "Pressure",
     "visibility": "Visibility",
-    "windUnit": "km/h"
+    "windUnit": "km/h",
+    "graphicTitle": "hourly temperature change"
   },
   "settings": {
     "general": {
