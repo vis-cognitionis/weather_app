@@ -50,5 +50,25 @@
   },
   "weatherSuggestion": {
     "sunny": "Dışarı çıkmak için iyi bir zaman"
+  },
+  "daysLong": {
+    "today": "Bugün",
+    "monday": "Pazartesi",
+    "tuesday": "Salı",
+    "wednesday": "Çarşamba",
+    "thursday": "Perşembe",
+    "friday": "Cuma",
+    "saturday": "Cumartesi",
+    "sunday": "Pazar"
+  },
+  "daysShort": {
+    "today": "Bugün",
+    "monday": "Pzt",
+    "tuesday": "Sal",
+    "wednesday": "Çrş",
+    "thursday": "Prş",
+    "friday": "Cum",
+    "saturday": "Cmt",
+    "sunday": "Pzr"
   }
 }
