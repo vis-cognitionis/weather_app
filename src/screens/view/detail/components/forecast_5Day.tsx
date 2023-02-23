@@ -23,7 +23,7 @@ import {
 } from "src/core/components/icons/weather_colored_icons";
 import Container from "./container";
 
-const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
+const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   const { theme } = useTheme();
   const currentDate = new Date();
 
@@ -133,43 +133,70 @@ const Forecast = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
       children={Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => (
         <View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: "column",
             paddingHorizontal: 5,
-            justifyContent: "space-between",
-            height: 50,
-            maxHeight: 50,
           }}
           key={i}
         >
-          <Text style={[theme.typography.caption, { width: 50 }]}>
-            {dailyDataForNextFiveDays[dateStr].dayOfWeek}
-          </Text>
-          <View style={{ transform: [{ scale: 0.3 }], width: 70 }}>
-            {smallIcons(dateStr)}
-          </View>
-
           <View
             style={{
               flexDirection: "row",
-              width: 130,
-              justifyContent: "space-between",
               alignItems: "center",
+              justifyContent: "space-between",
+              height: 50,
+              maxHeight: 50,
             }}
           >
-            <Text style={[theme.typography.caption, { width: "auto" }]}>
-              {`${t("home.maxTemp")}:`}{" "}
-              {dailyDataForNextFiveDays[dateStr].maxTemp} {tempUnit}
+            <Text style={[theme.typography.caption, { width: 50 }]}>
+              {dailyDataForNextFiveDays[dateStr].dayOfWeek}
             </Text>
-            <Text style={[theme.typography.caption, { width: "auto" }]}>
-              {`${t("home.minTemp")}:`}{" "}
-              {dailyDataForNextFiveDays[dateStr].minTemp} {tempUnit}
-            </Text>
+            <View style={{ transform: [{ scale: 0.3 }] }}>
+              {smallIcons(dateStr)}
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                width: 130,
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={[
+                  theme.typography.caption,
+                  { width: "auto", minWidth: 80 },
+                ]}
+              >
+                {`${t("home.maxTemp")}:`}{" "}
+                {dailyDataForNextFiveDays[dateStr].maxTemp} {tempUnit}
+              </Text>
+              <Text
+                style={[
+                  theme.typography.caption,
+                  { width: "auto", minWidth: 80 },
+                ]}
+              >
+                {`${t("home.minTemp")}:`}{" "}
+                {dailyDataForNextFiveDays[dateStr].minTemp} {tempUnit}
+              </Text>
+            </View>
           </View>
+
+          {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
+            <View
+              style={{
+                alignSelf: "center",
+                width: windowWidth - 60,
+                borderBottomWidth: 1,
+                borderBottomColor: theme.palette.background.default,
+              }}
+            />
+          )}
         </View>
       ))}
     />
   );
 };
 
-export default Forecast;
+export default Forecast5Day;

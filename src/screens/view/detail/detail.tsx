@@ -7,16 +7,16 @@ import {
   RefreshControl,
   ScrollView,
 } from "react-native";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { observer } from "mobx-react";
 
-import TemperatureChart from "./components/temp_chart";
+import Forecast5Day from "./components/forecast_5Day";
 import Container from "./components/container";
 import mainStore from "src/screens/view-model/main_store";
+import TemperatureChart from "./components/temp_chart";
 import { useWeatherDatas } from "../home/queries/useWeatherDatas";
-import { useTheme } from "src/core/init/themes/theme_context";
-import { observer } from "mobx-react";
 import { windowWidth } from "../common/constants/constants";
-import Forecast from "./components/forecast";
+import { useTheme } from "src/core/init/themes/theme_context";
+import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 const styles = StyleSheet.create({
   grid: {
@@ -63,7 +63,7 @@ const Detail = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={{ rowGap: 12 }}>
+        <View style={{ rowGap: 12, paddingBottom: 40 }}>
           <View style={styles.grid}>
             {DetailCurrentInfos.map((info, index) => {
               return (
@@ -97,7 +97,7 @@ const Detail = () => {
             />
           )}
 
-          {weatherDatas && <Forecast weatherDatas={weatherDatas} />}
+          {weatherDatas && <Forecast5Day weatherDatas={weatherDatas} />}
         </View>
       </ScrollView>
     </SafeAreaView>
