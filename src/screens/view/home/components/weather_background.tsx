@@ -7,7 +7,6 @@ import { windowHeight } from "../../common/constants/constants";
 import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { WeatherCondition } from "../interfaces/interface_home";
-
 import {
   RainySvg,
   ClearSvg,
@@ -19,6 +18,15 @@ import {
   TornadoSvg,
   FogHazeMistSvg,
 } from "src/images/weather-svg/weather_svg";
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  infoContainer: {
+    flexDirection: "row",
+    width: "70%",
+    justifyContent: "space-between",
+  },
+});
 
 const WeatherBackground = () => {
   const { theme } = useTheme();
@@ -66,13 +74,7 @@ const WeatherBackground = () => {
       >
         <BackgroundSvg />
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          width: "70%",
-          justifyContent: "space-between",
-        }}
-      >
+      <View style={styles.infoContainer}>
         <Text style={[theme.typography.h2, { width: 211 }]}>
           {t("weatherSuggestion.sunny")}
         </Text>
