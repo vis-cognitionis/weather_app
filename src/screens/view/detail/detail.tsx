@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { observer } from "mobx-react";
 
-import Forecast5Day from "./components/forecast_5Day";
+import ForecastFiveDay from "./components/forecast_five_day";
 import Container from "./components/container";
 import mainStore from "src/screens/view-model/main_store";
 import TemperatureChart from "./components/temp_chart";
@@ -89,15 +89,13 @@ const Detail = () => {
               );
             })}
           </View>
-          {weatherDatas && (
-            <Container
-              width={windowWidth - 60}
-              title={t("detail.graphicTitle")}
-              children={<TemperatureChart weatherDatas={weatherDatas} />}
-            />
-          )}
+          <Container
+            width={windowWidth - 60}
+            title={t("detail.graphicTitle")}
+            children={<TemperatureChart />}
+          />
 
-          {weatherDatas && <Forecast5Day weatherDatas={weatherDatas} />}
+          <ForecastFiveDay />
         </View>
       </ScrollView>
     </SafeAreaView>

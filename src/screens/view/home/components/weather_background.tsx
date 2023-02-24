@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
@@ -18,7 +18,6 @@ import {
   TornadoSvg,
   FogHazeMistSvg,
 } from "src/images/weather-svg/weather_svg";
-import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   infoContainer: {
@@ -88,7 +87,7 @@ const WeatherBackground = () => {
       case WeatherCondition.Sand:
         return t("weatherSuggestion.clear");
       case WeatherCondition.Snow:
-        return t("weatherSuggestion.clear");
+        return t("weatherSuggestion.snow");
       case WeatherCondition.Squall:
         return t("weatherSuggestion.clear");
       case WeatherCondition.Thunderstorm:
@@ -141,8 +140,8 @@ const WeatherBackground = () => {
         <BackgroundSvg />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={[theme.typography.h2, { width: 211 }]}>
-          {t("weatherSuggestion.clear")}
+        <Text style={[theme.typography.h2, { width: 240 }]}>
+          {weatherSuggestions()}
         </Text>
 
         <IconInfoSunny />

@@ -5,10 +5,8 @@ import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { tempUnit } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
-import {
-  WeatherCondition,
-  WeatherDatas,
-} from "../../home/interfaces/interface_home";
+import { WeatherCondition } from "../../home/interfaces/interface_home";
+import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
 import {
   IconClear,
   IconClouds,
@@ -51,9 +49,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
+const ForecastFiveDay = () => {
   const { theme } = useTheme();
   const currentDate = new Date();
+  const { weatherDatas } = useWeatherDatas();
 
   interface DailyData {
     [date: string]: {
@@ -65,45 +64,31 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   }
 
   const dailyData: DailyData = {};
-  for (let i = 0; i < weatherDatas?.list.length; i++) {
-    const data = weatherDatas.list[i];
-    const date = new Date(data.dt_txt);
-    const dateStr = date.toISOString().substring(0, 10);
-    const info = data.weather[0]?.main;
+  if (weatherDatas && weatherDatas.list) {
+    for (let i = 0; i < weatherDatas.list.length; i++) {
+      const data = weatherDatas.list[i];
+      const date = new Date(data.dt_txt);
+      const dateStr = date.toISOString().substring(0, 10);
+      const info = data.weather[0]?.main;
 
-    if (!dailyData[dateStr]) {
-      dailyData[dateStr] = {
-        maxTemp: Math.ceil(data.main.temp_max),
-        minTemp: Math.floor(data.main.temp_min),
-        info: info,
-      };
-    } else {
-      if (data.main.temp_max > dailyData[dateStr].maxTemp) {
-        dailyData[dateStr].maxTemp = Math.ceil(data.main.temp_max);
-      }
-      if (data.main.temp_min < dailyData[dateStr].minTemp) {
-        dailyData[dateStr].minTemp = Math.floor(data.main.temp_min);
+      if (!dailyData[dateStr]) {
+        dailyData[dateStr] = {
+          maxTemp: Math.ceil(data.main.temp_max),
+          minTemp: Math.floor(data.main.temp_min),
+          info: info,
+        };
+      } else {
+        if (data.main.temp_max > dailyData[dateStr].maxTemp) {
+          dailyData[dateStr].maxTemp = Math.ceil(data.main.temp_max);
+        }
+        if (data.main.temp_min < dailyData[dateStr].minTemp) {
+          dailyData[dateStr].minTemp = Math.floor(data.main.temp_min);
+        }
       }
     }
   }
 
-  const dailyDataForNextFiveDays: DailyData = {};
-
-  for (let i = 0; i < 5; i++) {
-    const date = new Date(currentDate);
-    date.setDate(date.getDate() + i);
-    const dateStr = date.toISOString().substring(0, 10);
-    const dayOfWeek = getDayOfWeek(dateStr);
-
-    dailyDataForNextFiveDays[dateStr] = {
-      dayOfWeek: dayOfWeek,
-      maxTemp: dailyData[dateStr]?.maxTemp,
-      minTemp: dailyData[dateStr]?.minTemp,
-      info: dailyData[dateStr]?.info,
-    };
-  }
-
-  function getDayOfWeek(date: string) {
+  const getDayOfWeek = (date: string) => {
     const days = [
       t("daysShort.sunday"),
       t("daysShort.monday"),
@@ -118,6 +103,24 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
       return t("daysShort.today");
     } else {
       return days[dayOfWeekIndex];
+    }
+  };
+
+  const dailyDataForNextFiveDays: DailyData = {};
+
+  for (let i = 1; i < 6; i++) {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() + i);
+    const dateStr = date.toISOString().substring(0, 10);
+    const dayOfWeek = getDayOfWeek(dateStr);
+
+    if (!dailyDataForNextFiveDays[dateStr]) {
+      dailyDataForNextFiveDays[dateStr] = {
+        dayOfWeek: dayOfWeek,
+        maxTemp: dailyData[dateStr]?.maxTemp ?? undefined,
+        minTemp: dailyData[dateStr]?.minTemp ?? undefined,
+        info: dailyData[dateStr]?.info ?? undefined,
+      };
     }
   }
 
@@ -204,4 +207,4 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   );
 };
 
-export default Forecast5Day;
+export default ForecastFiveDay;

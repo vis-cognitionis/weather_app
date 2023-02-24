@@ -4,15 +4,16 @@ import { AbstractChartConfig } from "react-native-chart-kit/dist/AbstractChart";
 
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
-import { WeatherDatas } from "../../home/interfaces/interface_home";
 import {
   groupWeatherDataByDate,
   today,
   tomorrow,
 } from "../../home/components/constants/constants";
+import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
 
-const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
+const TemperatureChart = () => {
   const { theme } = useTheme();
+  const { weatherDatas } = useWeatherDatas();
 
   const todaysWeather = groupWeatherDataByDate(weatherDatas)[today];
   const tomorrowsWeather = groupWeatherDataByDate(weatherDatas)[tomorrow];
