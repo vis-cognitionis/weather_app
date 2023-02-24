@@ -50,7 +50,19 @@
     "about": "About"
   },
   "weatherSuggestion": {
-    "clear": "Feels like a good time to go out"
+    "clear": "Feels like a good time to go out",
+    "clouds": "Don't be deceived by the sun",
+    "squall": "Good idea to button up your jacket",
+    "drizzle": "Better have an umbrella in your bag",
+    "dust": "Dust",
+    "fog": "Take air instead of wear mourning ",
+    "haze": "Take air instead of wear mourning ",
+    "mist": "Take air instead of wear mourning ",
+    "rain": "A sturdy umbrella would be fine",
+    "sand": "Sand",
+    "snow": "An ideal day to build a snowman",
+    "thunderstorm": "Thunderstorm",
+    "tornado": "Tornado"
   },
   "daysLong": {
     "today": "Today",

@@ -50,7 +50,19 @@
     "about": "Hakkında"
   },
   "weatherSuggestion": {
-    "clear": "Dışarı çıkmak için iyi bir zaman"
+    "clear": "Dışarı çıkmak için iyi bir zaman",
+    "clouds": "Bulutlu",
+    "drizzle": "Çise",
+    "dust": "Toz",
+    "fog": "Sis",
+    "haze": "Pus",
+    "mist": "Sis",
+    "rain": "Yağmur",
+    "sand": "Toz",
+    "snow": "Kar",
+    "squall": "Rüzgar",
+    "thunderstorm": "Şimşekler",
+    "tornado": "Fırtına"
   },
   "daysLong": {
     "today": "Bugün",
