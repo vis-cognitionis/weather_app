@@ -31,9 +31,14 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
           children={weatherDesc({ currentTemp: currentTemp })}
           style={theme.typography.title2}
         />
-        <Text style={theme.typography.title2}>
-          {`${t("home.maxTemp")}:${Math.ceil(currentTemp?.main.temp_max!)}°`}{" "}
-          {`${t("home.minTemp")}:${Math.floor(currentTemp?.main.temp_min!)}°`}
+        <Text style={theme.typography.caption}>
+          3-hour |{" "}
+          {`${t("home.maxTemp")}:${Math.ceil(
+            weatherDatas?.list[3].main.temp_max!
+          )}°`}{" "}
+          {`${t("home.minTemp")}:${Math.floor(
+            weatherDatas?.list[3].main.temp_min!
+          )}°`}
         </Text>
       </View>
       {currentTemp && <WeatherCurrentIcons currentTemp={currentTemp} />}

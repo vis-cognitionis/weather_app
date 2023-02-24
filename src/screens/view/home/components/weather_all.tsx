@@ -14,7 +14,7 @@ import { Weather, WeatherDatas } from "../interfaces/interface_home";
 const styles = StyleSheet.create({
   weathersContainer: {
     flexDirection: "column",
-    gap: 32,
+    gap: 40,
   },
   rowContainer: {
     flexDirection: "row",
@@ -65,11 +65,6 @@ const WeatherAll = () => {
   }, [mainStore.city]);
 
   const hourlyWeather = (groupedWeatherData: { [key: string]: Weather[] }) => {
-    // const today = new Date().toISOString().slice(0, 10);
-    // const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1))
-    //   .toISOString()
-    //   .slice(0, 10);
-
     return (
       <View style={styles.rowContainer}>
         <ScrollView horizontal={true}>
@@ -115,7 +110,7 @@ const WeatherAll = () => {
   }
 
   const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
-  const gapValue: number = windowHeight * 0.2725;
+  const gapValue: number = windowHeight * 0.28;
 
   return (
     <View style={{ gap: gapValue }}>
