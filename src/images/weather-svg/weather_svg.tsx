@@ -1,7 +1,7 @@
 import React from "react";
 import Svg, { Path } from "react-native-svg";
 
-export const SunnySvg = () => {
+export const ClearSvg = () => {
   return (
     <Svg width="327" height="288" viewBox="0 0 327 288" fill="none">
       <Path

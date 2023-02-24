@@ -9,7 +9,7 @@ import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { WeatherCondition } from "../interfaces/interface_home";
 import {
   RainySvg,
-  SunnySvg,
+  ClearSvg,
   SnowySvg,
 } from "src/images/weather-svg/weather_svg";
 
@@ -22,14 +22,14 @@ const WeatherBackground = () => {
   const BackgroundSvg = () => {
     switch (currentTemp?.weather[0].main) {
       case WeatherCondition.Clear:
-        return <SunnySvg />;
+        return <ClearSvg />;
       case WeatherCondition.Rain:
         return <RainySvg />;
       case WeatherCondition.Snow:
         return <SnowySvg />;
 
       default:
-        return <SunnySvg />;
+        return <ClearSvg />;
     }
   };
 
