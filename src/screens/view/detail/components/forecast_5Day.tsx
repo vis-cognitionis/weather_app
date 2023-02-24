@@ -1,9 +1,9 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { tempUnit } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { tempUnit } from "../../home/components/weather_all";
 import { windowWidth } from "../../common/constants/constants";
 import {
   WeatherCondition,
@@ -22,6 +22,34 @@ import {
   IconTornado,
 } from "src/core/components/icons/weather_colored_icons";
 import Container from "./container";
+
+const styles = StyleSheet.create({
+  dayContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 50,
+    maxHeight: 50,
+  },
+
+  container: {
+    flexDirection: "column",
+    paddingHorizontal: 5,
+  },
+
+  line: {
+    alignSelf: "center",
+    width: windowWidth - 60,
+    borderBottomWidth: 1,
+  },
+
+  tempContainer: {
+    flexDirection: "row",
+    width: 130,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+});
 
 const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   const { theme } = useTheme();
@@ -131,22 +159,8 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
       width={windowWidth - 60}
       title={t("detail.forecastTitle")}
       children={Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => (
-        <View
-          style={{
-            flexDirection: "column",
-            paddingHorizontal: 5,
-          }}
-          key={i}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              height: 50,
-              maxHeight: 50,
-            }}
-          >
+        <View style={styles.container} key={i}>
+          <View style={styles.dayContainer}>
             <Text style={[theme.typography.caption, { width: 50 }]}>
               {dailyDataForNextFiveDays[dateStr].dayOfWeek}
             </Text>
@@ -154,14 +168,7 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
               {smallIcons(dateStr)}
             </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                width: 130,
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.tempContainer}>
               <Text
                 style={[
                   theme.typography.caption,
@@ -185,12 +192,10 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
 
           {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
             <View
-              style={{
-                alignSelf: "center",
-                width: windowWidth - 60,
-                borderBottomWidth: 1,
-                borderBottomColor: theme.palette.background.default,
-              }}
+              style={[
+                styles.line,
+                { borderBottomColor: theme.palette.background.default },
+              ]}
             />
           )}
         </View>

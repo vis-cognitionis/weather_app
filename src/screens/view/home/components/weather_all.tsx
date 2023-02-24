@@ -9,7 +9,13 @@ import WeatherHourlyIcons from "./weather_hourly_icons";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { Weather, WeatherDatas } from "../interfaces/interface_home";
+import { Weather } from "../interfaces/interface_home";
+import {
+  today,
+  tempUnit,
+  tomorrow,
+  groupWeatherDataByDate,
+} from "./constants/constants";
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -29,31 +35,6 @@ const styles = StyleSheet.create({
     width: 90,
   },
 });
-
-export const today = new Date().toISOString().slice(0, 10);
-export const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1))
-  .toISOString()
-  .slice(0, 10);
-
-export const tempUnit = mainStore.weatherUnit === "metric" ? "°C" : "°F";
-
-export const groupWeatherDataByDate = (
-  weatherDatas: WeatherDatas | undefined
-): { [key: string]: Weather[] } => {
-  const groupedData: { [key: string]: Weather[] } = {};
-
-  weatherDatas &&
-    weatherDatas.list.forEach((weather) => {
-      const date = weather.dt_txt.split(" ")[0];
-      if (groupedData[date]) {
-        groupedData[date].push(weather);
-      } else {
-        groupedData[date] = [weather];
-      }
-    });
-
-  return groupedData;
-};
 
 const WeatherAll = () => {
   const { theme } = useTheme();

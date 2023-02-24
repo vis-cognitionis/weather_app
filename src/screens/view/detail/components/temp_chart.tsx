@@ -9,7 +9,7 @@ import {
   groupWeatherDataByDate,
   today,
   tomorrow,
-} from "../../home/components/weather_all";
+} from "../../home/components/constants/constants";
 
 const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
   const { theme } = useTheme();
