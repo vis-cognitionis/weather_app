@@ -67,6 +67,72 @@ const WeatherBackground = () => {
     }
   };
 
+  const weatherSuggestions = () => {
+    switch (currentTemp?.weather[0].main) {
+      case WeatherCondition.Clear:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Clouds:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Drizzle:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Dust:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Fog:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Haze:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Mist:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Rain:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Sand:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Snow:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Squall:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Thunderstorm:
+        return t("weatherSuggestion.clear");
+      case WeatherCondition.Tornado:
+        return t("weatherSuggestion.clear");
+      default:
+        return t("weatherSuggestion.clear");
+    }
+  };
+
+  const SuggestionIcons = () => {
+    switch (currentTemp?.weather[0].main) {
+      case WeatherCondition.Clear:
+        return <ClearSvg />;
+      case WeatherCondition.Clouds:
+        return <CloudsSvg />;
+      case WeatherCondition.Drizzle:
+        return <RainySvg />;
+      case WeatherCondition.Dust:
+        return <DustSandSvg />;
+      case WeatherCondition.Fog:
+        return <FogHazeMistSvg />;
+      case WeatherCondition.Haze:
+        return <FogHazeMistSvg />;
+      case WeatherCondition.Mist:
+        return <FogHazeMistSvg />;
+      case WeatherCondition.Rain:
+        return <RainySvg />;
+      case WeatherCondition.Sand:
+        return <DustSandSvg />;
+      case WeatherCondition.Snow:
+        return <SnowySvg />;
+      case WeatherCondition.Squall:
+        return <SquallSvg />;
+      case WeatherCondition.Thunderstorm:
+        return <ThunderstormSvg />;
+      case WeatherCondition.Tornado:
+        return <TornadoSvg />;
+      default:
+        return <ClearSvg />;
+    }
+  };
+
   return (
     <>
       <View
@@ -76,7 +142,7 @@ const WeatherBackground = () => {
       </View>
       <View style={styles.infoContainer}>
         <Text style={[theme.typography.h2, { width: 211 }]}>
-          {t("weatherSuggestion.sunny")}
+          {t("weatherSuggestion.clear")}
         </Text>
 
         <IconInfoSunny />

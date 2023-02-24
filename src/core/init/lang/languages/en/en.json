@@ -50,7 +50,7 @@
     "about": "About"
   },
   "weatherSuggestion": {
-    "sunny": "Feels like a good time to go out"
+    "clear": "Feels like a good time to go out"
   },
   "daysLong": {
     "today": "Today",
