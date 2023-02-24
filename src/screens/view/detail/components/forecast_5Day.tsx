@@ -61,7 +61,7 @@ const Forecast5Day = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
 
   const dailyDataForNextFiveDays: DailyData = {};
 
-  for (let i = 1; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     const date = new Date(currentDate);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().substring(0, 10);
