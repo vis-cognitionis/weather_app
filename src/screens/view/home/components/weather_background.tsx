@@ -7,10 +7,17 @@ import { windowHeight } from "../../common/constants/constants";
 import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { WeatherCondition } from "../interfaces/interface_home";
+
 import {
   RainySvg,
   ClearSvg,
   SnowySvg,
+  DustSandSvg,
+  ThunderstormSvg,
+  CloudsSvg,
+  SquallSvg,
+  TornadoSvg,
+  FogHazeMistSvg,
 } from "src/images/weather-svg/weather_svg";
 
 const WeatherBackground = () => {
@@ -23,11 +30,30 @@ const WeatherBackground = () => {
     switch (currentTemp?.weather[0].main) {
       case WeatherCondition.Clear:
         return <ClearSvg />;
+      case WeatherCondition.Clouds:
+        return <CloudsSvg />;
+      case WeatherCondition.Drizzle:
+        return <RainySvg />;
+      case WeatherCondition.Dust:
+        return <DustSandSvg />;
+      case WeatherCondition.Fog:
+        return <FogHazeMistSvg />;
+      case WeatherCondition.Haze:
+        return <FogHazeMistSvg />;
+      case WeatherCondition.Mist:
+        return <FogHazeMistSvg />;
       case WeatherCondition.Rain:
         return <RainySvg />;
+      case WeatherCondition.Sand:
+        return <DustSandSvg />;
       case WeatherCondition.Snow:
         return <SnowySvg />;
-
+      case WeatherCondition.Squall:
+        return <SquallSvg />;
+      case WeatherCondition.Thunderstorm:
+        return <ThunderstormSvg />;
+      case WeatherCondition.Tornado:
+        return <TornadoSvg />;
       default:
         return <ClearSvg />;
     }
