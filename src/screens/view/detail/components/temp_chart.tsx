@@ -39,7 +39,7 @@ const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
     ? [...todaysTempArr, ...tomorrowsTempArr]
     : tomorrowsTempArr;
 
-  // 24 saatlik tam döngü için
+  // --- 24 saatlik tam döngü için ----
 
   // const todaysWeather = groupWeatherDataByDate(weatherDatas)[today];
   // const tomorrowsWeather = groupWeatherDataByDate(weatherDatas)[tomorrow];
@@ -132,7 +132,7 @@ const TemperatureChart = ({ weatherDatas }: { weatherDatas: WeatherDatas }) => {
       }}
       chartConfig={chartConfig}
       yAxisSuffix="°"
-      yLabelsOffset={26}
+      yLabelsOffset={25}
       segments={5}
     />
   );
