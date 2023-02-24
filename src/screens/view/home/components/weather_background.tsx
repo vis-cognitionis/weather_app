@@ -3,18 +3,42 @@ import { Text, View } from "react-native";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { SunnySvg } from "src/images/weather-svg/weather_svg";
 import { windowHeight } from "../../common/constants/constants";
 import { IconInfoSunny } from "src/core/components/icons/weather_info_icons";
+import { useWeatherDatas } from "../queries/useWeatherDatas";
+import { WeatherCondition } from "../interfaces/interface_home";
+import {
+  RainySvg,
+  SunnySvg,
+  SnowySvg,
+} from "src/images/weather-svg/weather_svg";
 
 const WeatherBackground = () => {
   const { theme } = useTheme();
   const topValue: number = windowHeight * 0.0475;
+  const { weatherDatas } = useWeatherDatas();
+  const currentTemp = weatherDatas && weatherDatas.list[0];
+
+  const BackgroundSvg = () => {
+    switch (currentTemp?.weather[0].main) {
+      case WeatherCondition.Clear:
+        return <SunnySvg />;
+      case WeatherCondition.Rain:
+        return <RainySvg />;
+      case WeatherCondition.Snow:
+        return <SnowySvg />;
+
+      default:
+        return <SunnySvg />;
+    }
+  };
 
   return (
     <>
-      <View style={{ position: "absolute", top: topValue }}>
-        <SunnySvg />
+      <View
+        style={{ position: "absolute", top: topValue, alignSelf: "center" }}
+      >
+        <BackgroundSvg />
       </View>
       <View
         style={{
