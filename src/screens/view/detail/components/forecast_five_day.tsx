@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 
 const ForecastFiveDay = () => {
   const { theme } = useTheme();
-  const currentDate = new Date();
+  const currentDate = new Date().toISOString().substring(0, 10);
   const { weatherDatas } = useWeatherDatas();
 
   interface DailyData {
@@ -108,13 +108,20 @@ const ForecastFiveDay = () => {
 
   const dailyDataForNextFiveDays: DailyData = {};
 
-  for (let i = 1; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     const date = new Date(currentDate);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().substring(0, 10);
     const dayOfWeek = getDayOfWeek(dateStr);
 
-    if (!dailyDataForNextFiveDays[dateStr]) {
+    if (dateStr === currentDate) {
+      dailyDataForNextFiveDays[dateStr] = {
+        dayOfWeek: t("daysShort.today"),
+        maxTemp: dailyData[dateStr]?.maxTemp ?? undefined,
+        minTemp: dailyData[dateStr]?.minTemp ?? undefined,
+        info: dailyData[dateStr]?.info ?? undefined,
+      };
+    } else if (!dailyDataForNextFiveDays[dateStr]) {
       dailyDataForNextFiveDays[dateStr] = {
         dayOfWeek: dayOfWeek,
         maxTemp: dailyData[dateStr]?.maxTemp ?? undefined,
