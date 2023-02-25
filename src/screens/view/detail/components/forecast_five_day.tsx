@@ -2,22 +2,22 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
-import { tempUnit } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
-import { WeatherCondition } from "../../home/interfaces/interface_home";
+import { tempUnit, today } from "../../home/components/constants/constants";
 import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
+import { WeatherCondition } from "../../home/interfaces/interface_home";
 import {
+  IconRain,
+  IconSnow,
   IconClear,
   IconClouds,
+  IconSquall,
+  IconTornado,
   IconDrizzle,
   IconDustSand,
   IconFogHazeMist,
-  IconRain,
-  IconSnow,
-  IconSquall,
   IconThunderstorm,
-  IconTornado,
 } from "src/core/components/icons/weather_colored_icons";
 import Container from "./container";
 
@@ -106,7 +106,6 @@ const ForecastFiveDay = () => {
   };
 
   const dailyDataForNextFiveDays: DailyData = {};
-  const today = new Date().toISOString().substring(0, 10);
 
   for (let i = 0; i < 5; i++) {
     const date = new Date(today);
