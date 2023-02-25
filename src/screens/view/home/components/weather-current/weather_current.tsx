@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { observer } from "mobx-react";
 
@@ -8,10 +8,17 @@ import WeatherCurrentIcons from "./weather_current_icons";
 import { useWeatherDatas } from "../../queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { WeatherDatas } from "../../interfaces/interface_home";
 
-const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
+const WeatherCurrent = ({
+  tempUnit,
+  weatherDatas,
+}: {
+  tempUnit: string;
+  weatherDatas: WeatherDatas;
+}) => {
   const { theme } = useTheme();
-  const { weatherDatas } = useWeatherDatas();
+  // const { weatherDatas } = useWeatherDatas();
   const currentTemp = weatherDatas && weatherDatas.list[0];
 
   return (

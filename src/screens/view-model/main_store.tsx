@@ -11,6 +11,7 @@ class MainStore {
   weatherUnit: string = "metric";
   city = "Istanbul";
   isError: boolean = false;
+  timeOfDay: string = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -51,6 +52,10 @@ class MainStore {
   setIsError = (error: boolean) => {
     this.isError = error;
   };
+
+  setTimeOfDay(timeOfDay: string) {
+    this.timeOfDay = timeOfDay;
+  }
 }
 
 const mainStore = new MainStore();

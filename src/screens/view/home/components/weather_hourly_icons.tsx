@@ -1,4 +1,6 @@
 import React from "react";
+import { observer } from "mobx-react";
+
 import {
   IconClear,
   IconClouds,
@@ -10,10 +12,28 @@ import {
   IconSquall,
   IconThunderstorm,
   IconTornado,
+  IconClearNight,
 } from "src/core/components/icons/weather_field_icons";
 import { Weather, WeatherCondition } from "../interfaces/interface_home";
+import mainStore from "src/screens/view-model/main_store";
 
-const WeatherHourlyIcons = ({ weather }: { weather: Weather }) => {
+const WeatherHourlyIcons = ({
+  weather,
+  sunrise,
+  sunset,
+}: {
+  weather: Weather;
+  sunrise: Date;
+  sunset: Date;
+}) => {
+  const hourControl =
+    Number(weather.dt_txt.split(" ")[1].slice(0, 2)) >= sunrise.getUTCHours() &&
+    Number(weather.dt_txt.split(" ")[1].slice(0, 2)) < sunset.getUTCHours();
+
+  //  Number(weather.dt_txt.split(" ")[1].slice(0, 2)) >= sunrise.getUTCHours() &&
+  //  Number(weather.dt_txt.split(" ")[1].slice(0, 2)) < sunset.getUTCHours()
+  //    ? "day"
+  //    : "night";
   switch (weather.weather[0].main) {
     case WeatherCondition.Clear:
       return <IconClear />;
@@ -46,4 +66,4 @@ const WeatherHourlyIcons = ({ weather }: { weather: Weather }) => {
   }
 };
 
-export default WeatherHourlyIcons;
+export default observer(WeatherHourlyIcons);
