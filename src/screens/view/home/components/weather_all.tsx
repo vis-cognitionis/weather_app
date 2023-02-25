@@ -54,7 +54,6 @@ const WeatherAll = () => {
 
     if (currentDate >= sunrise && currentDate < sunset && mainStore.city) {
       mainStore.setTimeOfDay("day");
-      console.log(currentDate, weatherDatas?.city.name, sunset);
     } else {
       mainStore.setTimeOfDay("night");
     }
@@ -65,45 +64,52 @@ const WeatherAll = () => {
       <View style={styles.rowContainer}>
         <ScrollView horizontal={true}>
           {weatherDatas &&
+            groupedWeatherData &&
             groupedWeatherData[today] &&
-            groupedWeatherData[today].map((weather) => (
-              <View key={weather.dt} style={styles.weatherContainer}>
-                <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                  {Math.ceil(weather.main.temp)} {tempUnit}
-                </Text>
-                <View style={{ flex: 1, paddingVertical: 10 }}>
-                  <WeatherHourlyIcons
-                    sunrise={sunrise}
-                    sunset={sunset}
-                    weather={weather}
+            groupedWeatherData[today]
+              .filter((weather) => new Date(weather.dt * 1000) >= currentDate)
+              .map((weather) => (
+                <View key={weather.dt} style={styles.weatherContainer}>
+                  <Text style={[theme.typography.caption, { flex: 0.5 }]}>
+                    {Math.ceil(weather.main.temp)} {tempUnit}
+                  </Text>
+                  <View style={{ flex: 1, paddingVertical: 10 }}>
+                    <WeatherHourlyIcons
+                      sunrise={sunrise}
+                      sunset={sunset}
+                      weather={weather}
+                    />
+                  </View>
+                  <Text
+                    style={theme.typography.caption}
+                    children={weather.dt_txt.split(" ")[1].slice(0, 5)}
                   />
                 </View>
-                <Text
-                  style={theme.typography.caption}
-                  children={weather.dt_txt.split(" ")[1].slice(0, 5)}
-                />
-              </View>
-            ))}
+              ))}
 
           {weatherDatas &&
-            groupedWeatherData[tomorrow].map((weather) => (
-              <View key={weather.dt} style={styles.weatherContainer}>
-                <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                  {Math.ceil(weather.main.temp)} {tempUnit}
-                </Text>
-                <View style={{ flex: 1 }}>
-                  <WeatherHourlyIcons
-                    sunrise={sunrise}
-                    sunset={sunset}
-                    weather={weather}
+            groupedWeatherData &&
+            groupedWeatherData[tomorrow] &&
+            groupedWeatherData[tomorrow]
+              .filter((weather) => new Date(weather.dt * 1000) >= currentDate)
+              .map((weather) => (
+                <View key={weather.dt} style={styles.weatherContainer}>
+                  <Text style={[theme.typography.caption, { flex: 0.5 }]}>
+                    {Math.ceil(weather.main.temp)} {tempUnit}
+                  </Text>
+                  <View style={{ flex: 1 }}>
+                    <WeatherHourlyIcons
+                      sunrise={sunrise}
+                      sunset={sunset}
+                      weather={weather}
+                    />
+                  </View>
+                  <Text
+                    style={theme.typography.caption}
+                    children={weather.dt_txt.split(" ")[1].slice(0, 5)}
                   />
                 </View>
-                <Text
-                  style={theme.typography.caption}
-                  children={weather.dt_txt.split(" ")[1].slice(0, 5)}
-                />
-              </View>
-            ))}
+              ))}
         </ScrollView>
       </View>
     );
