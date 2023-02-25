@@ -51,18 +51,18 @@
   },
   "weatherSuggestion": {
     "clear": "Feels like a good time to go out",
-    "clouds": "Don't be deceived by the sun",
+    "clouds": "Take air instead of wear mourning",
     "squall": "Good idea to button up your jacket",
     "drizzle": "Better have an umbrella in your bag",
-    "dust": "Dust",
-    "fog": "Take air instead of wear mourning ",
-    "haze": "Take air instead of wear mourning ",
-    "mist": "Take air instead of wear mourning ",
+    "dust": "Wear a mask to protect your lungs",
+    "fog": "Stay safe and enjoy the moody atmosphere!",
+    "haze": "Stay safe and enjoy the moody atmosphere!",
+    "mist": "Stay safe and enjoy the moody atmosphere!",
     "rain": "A sturdy umbrella would be fine",
-    "sand": "Sand",
+    "sand": "Wear a mask to protect your lungs",
     "snow": "An ideal day to build a snowman",
-    "thunderstorm": "Thunderstorm",
-    "tornado": "Tornado"
+    "thunderstorm": "Stay safe and hang on tight!",
+    "tornado": "Stay indoors and take shelter in a safe room"
   },
   "daysLong": {
     "today": "Today",
