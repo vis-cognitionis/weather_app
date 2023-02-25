@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
 import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
-import { useWeatherDatas } from "../../queries/useWeatherDatas";
+import { WeatherDatas } from "../../interfaces/interface_home";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
-import { WeatherDatas } from "../../interfaces/interface_home";
 
 const WeatherCurrent = ({
   tempUnit,
@@ -18,7 +17,6 @@ const WeatherCurrent = ({
   weatherDatas: WeatherDatas;
 }) => {
   const { theme } = useTheme();
-  // const { weatherDatas } = useWeatherDatas();
   const currentTemp = weatherDatas && weatherDatas.list[0];
 
   return (

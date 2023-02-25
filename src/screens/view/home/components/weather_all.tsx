@@ -83,8 +83,7 @@ const WeatherAll = () => {
                 </View>
                 <Text
                   style={theme.typography.caption}
-                  // children={weather.dt_txt.split(" ")[1].slice(0, 5)}
-                  children={weather.dt_txt}
+                  children={weather.dt_txt.split(" ")[1].slice(0, 5)}
                 />
               </View>
             ))}
