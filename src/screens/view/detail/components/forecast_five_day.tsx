@@ -113,7 +113,7 @@ const ForecastFiveDay = () => {
     const dateStr = date.toISOString().substring(0, 10);
     const dayOfWeek = getDayOfWeek(dateStr);
 
-    if (dateStr === today && i !== 0) {
+    if (dateStr === today) {
       dailyDataForNextFiveDays[dateStr] = {
         dayOfWeek: dayOfWeek,
         maxTemp: dailyData[dateStr]?.maxTemp ?? undefined,
@@ -130,19 +130,19 @@ const ForecastFiveDay = () => {
     }
 
     //son günün verileri için?
-    if (i === 4) {
-      const lastDay = new Date(date);
-      lastDay.setDate(lastDay.getDate() + 1);
-      const lastDayStr = lastDay.toISOString().substring(0, 10);
-      const lastDayOfWeek = getDayOfWeek(lastDayStr);
+    // if (i === 4) {
+    //   const lastDay = new Date(date);
+    //   lastDay.setDate(lastDay.getDate() + 1);
+    //   const lastDayStr = lastDay.toISOString().substring(0, 10);
+    //   const lastDayOfWeek = getDayOfWeek(lastDayStr);
 
-      dailyDataForNextFiveDays[lastDayStr] = {
-        dayOfWeek: lastDayOfWeek,
-        maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
-        minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
-        info: dailyData[lastDayStr]?.info ?? undefined,
-      };
-    }
+    //   dailyDataForNextFiveDays[lastDayStr] = {
+    //     dayOfWeek: lastDayOfWeek,
+    //     maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
+    //     minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
+    //     info: dailyData[lastDayStr]?.info ?? undefined,
+    //   };
+    // }
   }
 
   const smallIcons = (dateStr: string) => {

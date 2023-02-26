@@ -67,7 +67,10 @@ const WeatherAll = () => {
             groupedWeatherData &&
             groupedWeatherData[today] &&
             groupedWeatherData[today]
-              .filter((weather) => new Date(weather.dt * 1000) >= currentDate)
+              .filter((weather) => {
+                const weatherDate = new Date(weather.dt * 1000);
+                return weatherDate >= currentDate;
+              })
               .map((weather) => (
                 <View key={weather.dt} style={styles.weatherContainer}>
                   <Text style={[theme.typography.caption, { flex: 0.5 }]}>
@@ -91,7 +94,12 @@ const WeatherAll = () => {
             groupedWeatherData &&
             groupedWeatherData[tomorrow] &&
             groupedWeatherData[tomorrow]
-              .filter((weather) => new Date(weather.dt * 1000) >= currentDate)
+              .filter((weather) => {
+                const weatherDate = new Date(weather.dt * 1000);
+                return (
+                  weatherDate >= currentDate && weatherDate.getHours() < 21
+                );
+              })
               .map((weather) => (
                 <View key={weather.dt} style={styles.weatherContainer}>
                   <Text style={[theme.typography.caption, { flex: 0.5 }]}>
