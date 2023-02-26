@@ -1,9 +1,12 @@
 import React from "react";
 
-import { Weather, WeatherCondition } from "../../interfaces/interface_home";
+import {
+  WeatherCurrentData,
+  WeatherCondition,
+} from "../../interfaces/interface_home";
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
-const weatherDesc = ({ currentTemp }: { currentTemp: Weather | undefined }) => {
+const weatherDesc = ({ currentTemp }: { currentTemp: WeatherCurrentData }) => {
   switch (currentTemp?.weather[0].main) {
     case WeatherCondition.Clear:
       return t("home.weatherDesc.clear");

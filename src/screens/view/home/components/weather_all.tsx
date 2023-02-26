@@ -16,6 +16,7 @@ import {
   tomorrow,
   groupWeatherDataByDate,
 } from "./constants/constants";
+import { useWeatherCurrent } from "../queries/useWeatherCurrent";
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
 const WeatherAll = () => {
   const { theme } = useTheme();
   const { weatherDatas, isLoading, refetch } = useWeatherDatas();
+  const { refetchCurrent } = useWeatherCurrent();
 
   const cityTimeZone = weatherDatas?.city.timezone!;
   const sunrise = new Date((weatherDatas?.city.sunrise! + cityTimeZone) * 1000);
@@ -48,9 +50,11 @@ const WeatherAll = () => {
   const selectedCityTimezoneOffset = selectedCityTimeZone * 60 * 60 * 1000;
 
   const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
+  console.log(currentDate);
 
   useEffect(() => {
     refetch();
+    refetchCurrent();
 
     if (currentDate >= sunrise && currentDate < sunset && mainStore.city) {
       mainStore.setTimeOfDay("day");
@@ -132,9 +136,7 @@ const WeatherAll = () => {
     <View style={{ gap: gapValue }}>
       <WeatherBackground />
       <View style={styles.weathersContainer}>
-        {weatherDatas && (
-          <WeatherCurrent weatherDatas={weatherDatas} tempUnit={tempUnit} />
-        )}
+        <WeatherCurrent tempUnit={tempUnit} />
         <View>{hourlyWeather(groupedWeatherData)}</View>
       </View>
     </View>

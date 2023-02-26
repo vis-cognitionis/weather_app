@@ -12,7 +12,6 @@ import {
   IconInfoSquall,
   IconInfoWarning,
 } from "src/core/components/icons/weather_info_icons";
-import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { WeatherCondition } from "../interfaces/interface_home";
 import {
   RainySvg,
@@ -25,6 +24,7 @@ import {
   TornadoSvg,
   FogHazeMistSvg,
 } from "src/images/weather-svg/weather_svg";
+import { useWeatherCurrent } from "../queries/useWeatherCurrent";
 
 const styles = StyleSheet.create({
   infoContainer: {
@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
 const WeatherBackground = () => {
   const { theme } = useTheme();
   const topValue: number = windowHeight * 0.0475;
-  const { weatherDatas } = useWeatherDatas();
-  const currentTemp = weatherDatas && weatherDatas.list[0];
+  const { currentTemp } = useWeatherCurrent();
 
   const condition = currentTemp?.weather[0].main;
 
@@ -149,7 +148,7 @@ const WeatherBackground = () => {
         <BackgroundSvg />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={[theme.typography.h2, { width: 240 }]}>
+        <Text style={[theme.typography.h2, { width: 260 }]}>
           {weatherSuggestions()}
         </Text>
         <View style={{ paddingTop: 5 }}>

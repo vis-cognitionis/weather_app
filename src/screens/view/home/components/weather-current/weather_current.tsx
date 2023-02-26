@@ -5,18 +5,29 @@ import { observer } from "mobx-react";
 import mainStore from "src/screens/view-model/main_store";
 import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
-import { WeatherDatas } from "../../interfaces/interface_home";
+import { useWeatherCurrent } from "../../queries/useWeatherCurrent";
+import { WeatherCurrentData } from "../../interfaces/interface_home";
 import { useTheme } from "src/core/init/themes/theme_context";
 
-const WeatherCurrent = ({
-  tempUnit,
-  weatherDatas,
-}: {
-  tempUnit: string;
-  weatherDatas: WeatherDatas;
-}) => {
+const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
   const { theme } = useTheme();
-  const currentTemp = weatherDatas && weatherDatas.list[1];
+  const { currentTemp } = useWeatherCurrent();
+
+  const unixTime = currentTemp?.dt!;
+  const cityTimezoneOffset = currentTemp?.timezone! / 3600;
+  const dateObj = new Date(
+    unixTime * 1000 + cityTimezoneOffset * 60 * 60 * 1000
+  );
+  const hourStr =
+    dateObj.getUTCHours().toString().padStart(2, "0") +
+    ":" +
+    dateObj.getUTCMinutes().toString().padStart(2, "0");
+  const dateStr =
+    dateObj.getUTCDate().toString().padStart(2, "0") +
+    "." +
+    (dateObj.getUTCMonth() + 1).toString().padStart(2, "0") +
+    "." +
+    dateObj.getUTCFullYear().toString();
 
   return (
     <View
@@ -32,12 +43,14 @@ const WeatherCurrent = ({
         </Text>
         <Text children={mainStore.city} style={theme.typography.location} />
         <Text
-          children={weatherDesc({ currentTemp: currentTemp })}
+          children={weatherDesc({ currentTemp: currentTemp! })}
           style={theme.typography.title2}
         />
-        <Text style={theme.typography.caption}>{currentTemp.dt_txt}</Text>
+        <Text style={theme.typography.caption}>
+          {dateStr + " | " + hourStr}
+        </Text>
       </View>
-      {currentTemp && <WeatherCurrentIcons currentTemp={currentTemp} />}
+      <WeatherCurrentIcons currentTemp={currentTemp!} />
     </View>
   );
 };

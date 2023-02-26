@@ -14,11 +14,18 @@ import {
   IconThunderstorm,
   IconTornado,
 } from "src/core/components/icons/weather_colored_icons";
-import { Weather, WeatherCondition } from "../../interfaces/interface_home";
+import {
+  WeatherCondition,
+  WeatherCurrentData,
+} from "../../interfaces/interface_home";
 import mainStore from "src/screens/view-model/main_store";
 
-const WeatherCurrentIcons = ({ currentTemp }: { currentTemp: Weather }) => {
-  switch (currentTemp?.weather[0].main) {
+const WeatherCurrentIcons = ({
+  currentTemp,
+}: {
+  currentTemp: WeatherCurrentData;
+}) => {
+  switch (currentTemp?.weather[0].main!) {
     case WeatherCondition.Clear:
       return mainStore.timeOfDay === "night" ? (
         <IconClearNight />

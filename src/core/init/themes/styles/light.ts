@@ -59,7 +59,7 @@ const lightTheme: ThemeProps = {
       color: PaletteColors.text?.secondary,
       fontStyle: "normal",
       fontWeight: "500",
-      fontSize: 24,
+      fontSize: 22,
     },
     button: {
       fontFamily: generalFontFamily,
