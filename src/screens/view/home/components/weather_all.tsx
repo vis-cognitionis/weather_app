@@ -96,9 +96,7 @@ const WeatherAll = () => {
             groupedWeatherData[tomorrow]
               .filter((weather) => {
                 const weatherDate = new Date(weather.dt * 1000);
-                return (
-                  weatherDate >= currentDate && weatherDate.getHours() < 21
-                );
+                return weatherDate >= currentDate;
               })
               .map((weather) => (
                 <View key={weather.dt} style={styles.weatherContainer}>

@@ -6,21 +6,21 @@ import { useTheme } from "src/core/init/themes/theme_context";
 
 const styles = StyleSheet.create({
   shadow: {
-    ...Platform.select({
-      ios: {
-        shadowColor: "#000000",
-        shadowOpacity: 1,
-        shadowRadius: 1,
-        shadowOffset: { width: 0, height: 0 },
-      },
-      android: {
-        elevation: 2,
-        shadowColor: "#000000",
-        shadowOpacity: 1,
-        shadowRadius: 1,
-        shadowOffset: { width: 0, height: 0 },
-      },
-    }),
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: "#000000",
+    //     shadowOpacity: 1,
+    //     shadowRadius: 1,
+    //     shadowOffset: { width: 0, height: 0 },
+    //   },
+    //   android: {
+    //     elevation: 2,
+    //     shadowColor: "#000000",
+    //     shadowOpacity: 1,
+    //     shadowRadius: 1,
+    //     shadowOffset: { width: 0, height: 0 },
+    //   },
+    // }),
   },
 });
 

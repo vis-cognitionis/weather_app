@@ -7,7 +7,6 @@ import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
 import { WeatherDatas } from "../../interfaces/interface_home";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
 
 const WeatherCurrent = ({
   tempUnit,
@@ -17,7 +16,7 @@ const WeatherCurrent = ({
   weatherDatas: WeatherDatas;
 }) => {
   const { theme } = useTheme();
-  const currentTemp = weatherDatas && weatherDatas.list[0];
+  const currentTemp = weatherDatas && weatherDatas.list[1];
 
   return (
     <View
@@ -36,15 +35,7 @@ const WeatherCurrent = ({
           children={weatherDesc({ currentTemp: currentTemp })}
           style={theme.typography.title2}
         />
-        <Text style={theme.typography.caption}>
-          3-hour |{" "}
-          {`${t("home.maxTemp")}:${Math.ceil(
-            weatherDatas?.list[3].main.temp_max!
-          )}°`}{" "}
-          {`${t("home.minTemp")}:${Math.floor(
-            weatherDatas?.list[3].main.temp_min!
-          )}°`}
-        </Text>
+        <Text style={theme.typography.caption}>{currentTemp.dt_txt}</Text>
       </View>
       {currentTemp && <WeatherCurrentIcons currentTemp={currentTemp} />}
     </View>
