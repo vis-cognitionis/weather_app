@@ -12,6 +12,7 @@ class MainStore {
   city = "Istanbul";
   isError: boolean = false;
   timeOfDay: string = "";
+  currentDate: Date = new Date();
 
   constructor() {
     makeAutoObservable(this);
@@ -55,6 +56,10 @@ class MainStore {
 
   setTimeOfDay(timeOfDay: string) {
     this.timeOfDay = timeOfDay;
+  }
+
+  setCurrentDate(date: Date) {
+    this.currentDate = date;
   }
 }
 

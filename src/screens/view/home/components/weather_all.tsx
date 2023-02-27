@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
 
 const WeatherAll = () => {
   const { theme } = useTheme();
-  const { weatherDatas, isLoading, refetch } = useWeatherDatas();
-  const { refetchCurrent } = useWeatherCurrent();
+  const { weatherDatas, isLoading } = useWeatherDatas();
 
   const cityTimeZone = weatherDatas?.city.timezone!;
   const sunrise = new Date((weatherDatas?.city.sunrise! + cityTimeZone) * 1000);
@@ -48,14 +47,12 @@ const WeatherAll = () => {
   const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
 
   useEffect(() => {
-    refetch();
-    refetchCurrent();
-
     if (currentDate >= sunrise && currentDate < sunset && mainStore.city) {
       mainStore.setTimeOfDay("day");
     } else {
       mainStore.setTimeOfDay("night");
     }
+    mainStore.setCurrentDate(currentDate);
   }, [mainStore.city, weatherDatas]);
 
   const filterWeatherData = (timeKey: string) => {

@@ -9,6 +9,7 @@ import {
 import WeatherAll from "./components/weather_all";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
 import { useTheme } from "src/core/init/themes/theme_context";
+import { useWeatherCurrent } from "./queries/useWeatherCurrent";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -25,12 +26,14 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
 const Home = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
+  const { refetchCurrent } = useWeatherCurrent();
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
+      refetchCurrent();
     }, 2000);
   }, []);
 

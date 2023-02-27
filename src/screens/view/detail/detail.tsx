@@ -49,10 +49,6 @@ const Detail = () => {
     { title: t("detail.pressure") },
     { title: t("detail.visibility") },
   ];
-  useEffect(() => {
-    refetch();
-    console.log("girdi-detay");
-  }, [mainStore.city]);
 
   return (
     <SafeAreaView

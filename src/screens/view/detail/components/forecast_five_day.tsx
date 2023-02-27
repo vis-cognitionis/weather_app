@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { observer } from "mobx-react";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
@@ -20,6 +21,7 @@ import {
   IconThunderstorm,
 } from "src/core/components/icons/weather_colored_icons";
 import Container from "./container";
+import mainStore from "src/screens/view-model/main_store";
 
 const styles = StyleSheet.create({
   dayContainer: {
@@ -107,7 +109,13 @@ const ForecastFiveDay = () => {
 
   const dailyDataForNextFiveDays: DailyData = {};
 
-  for (let i = 0; i < 5; i++) {
+  const currentDayNum = Number(
+    mainStore.currentDate.toISOString().substring(8, 10)
+  );
+  const todayNum = Number(today.slice(8, 10));
+  const compareDays = Boolean(todayNum < currentDayNum);
+
+  for (let i = compareDays ? 1 : 0; i < (compareDays ? 6 : 5); i++) {
     const date = new Date(today);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().substring(0, 10);
@@ -128,21 +136,6 @@ const ForecastFiveDay = () => {
         info: dailyData[dateStr]?.info ?? undefined,
       };
     }
-
-    //son günün verileri için?
-    // if (i === 4) {
-    //   const lastDay = new Date(date);
-    //   lastDay.setDate(lastDay.getDate() + 1);
-    //   const lastDayStr = lastDay.toISOString().substring(0, 10);
-    //   const lastDayOfWeek = getDayOfWeek(lastDayStr);
-
-    //   dailyDataForNextFiveDays[lastDayStr] = {
-    //     dayOfWeek: lastDayOfWeek,
-    //     maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
-    //     minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
-    //     info: dailyData[lastDayStr]?.info ?? undefined,
-    //   };
-    // }
   }
 
   const smallIcons = (dateStr: string) => {
@@ -228,4 +221,4 @@ const ForecastFiveDay = () => {
   );
 };
 
-export default ForecastFiveDay;
+export default observer(ForecastFiveDay);
