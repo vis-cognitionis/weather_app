@@ -45,11 +45,9 @@ const WeatherAll = () => {
   const cityTimeZone = weatherDatas?.city.timezone!;
   const sunrise = new Date((weatherDatas?.city.sunrise! + cityTimeZone) * 1000);
   const sunset = new Date((weatherDatas?.city.sunset! + cityTimeZone) * 1000);
-
-  const selectedCityTimeZone = weatherDatas?.city.timezone! / 3600;
-  const selectedCityTimezoneOffset = selectedCityTimeZone * 60 * 60 * 1000;
-
+  const selectedCityTimezoneOffset = weatherDatas?.city.timezone! * 1000;
   const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
+
   console.log(currentDate);
 
   useEffect(() => {
