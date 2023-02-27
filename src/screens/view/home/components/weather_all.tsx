@@ -48,8 +48,6 @@ const WeatherAll = () => {
   const selectedCityTimezoneOffset = weatherDatas?.city.timezone! * 1000;
   const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
 
-  console.log(currentDate);
-
   useEffect(() => {
     refetch();
     refetchCurrent();
@@ -60,6 +58,8 @@ const WeatherAll = () => {
       mainStore.setTimeOfDay("night");
     }
   }, [mainStore.city, weatherDatas]);
+
+  const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
 
   const hourlyWeather = (groupedWeatherData: { [key: string]: Weather[] }) => {
     return (
@@ -127,7 +127,6 @@ const WeatherAll = () => {
     return <Text>Loading...</Text>;
   }
 
-  const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
   const gapValue: number = windowHeight * 0.28;
 
   return (

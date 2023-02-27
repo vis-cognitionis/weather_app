@@ -6,7 +6,6 @@ import mainStore from "src/screens/view-model/main_store";
 import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
 import { useWeatherCurrent } from "../../queries/useWeatherCurrent";
-import { WeatherCurrentData } from "../../interfaces/interface_home";
 import { useTheme } from "src/core/init/themes/theme_context";
 
 const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
@@ -18,10 +17,10 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
   const dateObj = new Date(
     unixTime * 1000 + cityTimezoneOffset * 60 * 60 * 1000
   );
-  const hourStr =
-    dateObj.getUTCHours().toString().padStart(2, "0") +
-    ":" +
-    dateObj.getUTCMinutes().toString().padStart(2, "0");
+  // const hourStr =
+  //  dateObj.getUTCHours().toString().padStart(2, "0") +
+  //  ":" +
+  // dateObj.getUTCMinutes().toString().padStart(2, "0");
   const dateStr =
     dateObj.getUTCDate().toString().padStart(2, "0") +
     "." +
@@ -47,7 +46,7 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
           style={theme.typography.title2}
         />
         <Text style={theme.typography.caption}>
-          {dateStr + " | " + hourStr}
+          {dateStr + " | current weather"}
         </Text>
       </View>
       <WeatherCurrentIcons currentTemp={currentTemp!} />
