@@ -12,6 +12,7 @@ import {
   IconThunderstorm,
   IconTornado,
   IconClearNight,
+  IconCloudsNight,
 } from "src/core/components/icons/weather_field_icons";
 import { Weather, WeatherCondition } from "../interfaces/interface_home";
 
@@ -32,7 +33,7 @@ const WeatherHourlyIcons = ({
     case WeatherCondition.Clear:
       return hourControl ? <IconClear /> : <IconClearNight />;
     case WeatherCondition.Clouds:
-      return hourControl ? <IconClouds /> : <IconClearNight />;
+      return hourControl ? <IconClouds /> : <IconCloudsNight />;
     case WeatherCondition.Drizzle:
       return <IconDrizzle />;
     case WeatherCondition.Dust:

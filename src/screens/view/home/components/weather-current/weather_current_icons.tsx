@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import {
   IconClear,
   IconClearNight,
+  IconCloudsNight,
   IconClouds,
   IconDrizzle,
   IconDustSand,
@@ -34,7 +35,7 @@ const WeatherCurrentIcons = ({
       );
     case WeatherCondition.Clouds:
       return mainStore.timeOfDay === "night" ? (
-        <IconClearNight />
+        <IconCloudsNight />
       ) : (
         <IconClouds />
       );
