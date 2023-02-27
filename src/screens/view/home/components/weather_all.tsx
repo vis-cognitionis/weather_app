@@ -58,53 +58,31 @@ const WeatherAll = () => {
     }
   }, [mainStore.city, weatherDatas]);
 
-  const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
+  const filterWeatherData = (timeKey: string) => {
+    const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
 
-  const todayData =
-    weatherDatas && groupedWeatherData && groupedWeatherData[today]
-      ? groupedWeatherData[today].filter((weather) => {
+    return timeKey && groupedWeatherData && groupedWeatherData[timeKey]
+      ? groupedWeatherData[timeKey].filter((weather) => {
           const weatherDate = new Date(weather.dt * 1000);
           return weatherDate >= currentDate;
         })
       : [];
+  };
 
-  const tomorrowData =
-    weatherDatas && groupedWeatherData && groupedWeatherData[tomorrow]
-      ? groupedWeatherData[tomorrow].filter((weather) => {
-          const weatherDate = new Date(weather.dt * 1000);
-          return weatherDate >= currentDate;
-        })
-      : [];
+  const todayData = filterWeatherData(today);
+  const tomorrowData = filterWeatherData(tomorrow);
+  const hourlyData = [...todayData, ...tomorrowData];
 
-  const hourlyWeather = () => {
+  const HourlyWeather = () => {
     return (
       <View style={styles.rowContainer}>
         <ScrollView horizontal={true}>
-          {todayData.map((weather) => (
+          {hourlyData.map((weather) => (
             <View key={weather.dt} style={styles.weatherContainer}>
               <Text style={[theme.typography.caption, { flex: 0.5 }]}>
                 {Math.ceil(weather.main.temp)} {tempUnit}
               </Text>
               <View style={{ flex: 1, paddingVertical: 10 }}>
-                <WeatherHourlyIcons
-                  sunrise={sunrise}
-                  sunset={sunset}
-                  weather={weather}
-                />
-              </View>
-              <Text
-                style={theme.typography.caption}
-                children={weather.dt_txt.split(" ")[1].slice(0, 5)}
-              />
-            </View>
-          ))}
-
-          {tomorrowData.map((weather) => (
-            <View key={weather.dt} style={styles.weatherContainer}>
-              <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                {Math.ceil(weather.main.temp)} {tempUnit}
-              </Text>
-              <View style={{ flex: 1 }}>
                 <WeatherHourlyIcons
                   sunrise={sunrise}
                   sunset={sunset}
@@ -133,7 +111,7 @@ const WeatherAll = () => {
       <WeatherBackground />
       <View style={styles.weathersContainer}>
         <WeatherCurrent tempUnit={tempUnit} />
-        <View>{hourlyWeather()}</View>
+        <HourlyWeather />
       </View>
     </View>
   );
