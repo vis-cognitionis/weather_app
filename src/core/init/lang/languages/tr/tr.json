@@ -51,7 +51,9 @@
   },
   "weatherSuggestion": {
     "clear": "Dışarı çıkmak için iyi bir zaman",
+    "clearNight": "Yıldızlar tarafından boyanmış bir tuval gibi",
     "clouds": "Yas tutmak yerine hava alın",
+    "cloudsNight": "Bulutlu geceler havadaki sürpriz partiler gibi",
     "squall": "Ceketinizi iliklemek iyi bir fikir",
     "drizzle": "Çantanızda bir şemsiye olsa iyi olur",
     "dust": "Ciğerlerinizi korumak için maske takın",

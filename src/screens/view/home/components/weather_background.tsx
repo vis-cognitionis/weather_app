@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { observer } from "mobx-react";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
@@ -12,7 +13,6 @@ import {
   IconInfoSquall,
   IconInfoWarning,
 } from "src/core/components/icons/weather_info_icons";
-import { WeatherCondition } from "../interfaces/interface_home";
 import {
   RainySvg,
   ClearSvg,
@@ -23,8 +23,12 @@ import {
   SquallSvg,
   TornadoSvg,
   FogHazeMistSvg,
+  CloudsNightSvg,
+  ClearNightSvg,
 } from "src/images/weather-svg/weather_svg";
 import { useWeatherCurrent } from "../queries/useWeatherCurrent";
+import { WeatherCondition } from "../interfaces/interface_home";
+import mainStore from "src/screens/view-model/main_store";
 
 const styles = StyleSheet.create({
   infoContainer: {
@@ -44,9 +48,17 @@ const WeatherBackground = () => {
   const BackgroundSvg = () => {
     switch (condition) {
       case WeatherCondition.Clear:
-        return <ClearSvg />;
+        return mainStore.timeOfDay === "night" ? (
+          <ClearNightSvg />
+        ) : (
+          <ClearSvg />
+        );
       case WeatherCondition.Clouds:
-        return <CloudsSvg />;
+        return mainStore.timeOfDay === "night" ? (
+          <CloudsNightSvg />
+        ) : (
+          <CloudsSvg />
+        );
       case WeatherCondition.Drizzle:
         return <RainySvg />;
       case WeatherCondition.Dust:
@@ -77,9 +89,13 @@ const WeatherBackground = () => {
   const weatherSuggestions = () => {
     switch (condition) {
       case WeatherCondition.Clear:
-        return t("weatherSuggestion.clear");
+        return mainStore.timeOfDay === "night"
+          ? t("weatherSuggestion.clearNight")
+          : t("weatherSuggestion.clear");
       case WeatherCondition.Clouds:
-        return t("weatherSuggestion.clouds");
+        return mainStore.timeOfDay === "night"
+          ? t("weatherSuggestion.cloudsNight")
+          : t("weatherSuggestion.clouds");
       case WeatherCondition.Drizzle:
         return t("weatherSuggestion.drizzle");
       case WeatherCondition.Dust:
@@ -159,4 +175,4 @@ const WeatherBackground = () => {
   );
 };
 
-export default WeatherBackground;
+export default observer(WeatherBackground);

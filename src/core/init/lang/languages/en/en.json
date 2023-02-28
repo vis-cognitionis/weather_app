@@ -51,7 +51,9 @@
   },
   "weatherSuggestion": {
     "clear": "Feels like a good time to go out",
+    "clearNight": "Like a canvas painted by the stars",
     "clouds": "Take air instead of wear mourning",
+    "cloudsNight": "Cloudy nights are like surprise parties in the sky",
     "squall": "Good idea to button up your jacket",
     "drizzle": "Better have an umbrella in your bag",
     "dust": "Wear a mask to protect your lungs",
