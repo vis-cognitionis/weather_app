@@ -115,7 +115,7 @@ const ForecastFiveDay = () => {
   const todayNum = Number(today.slice(8, 10));
   const compareDays = Boolean(todayNum < currentDayNum);
 
-  for (let i = compareDays ? 1 : 0; i < (compareDays ? 6 : 5); i++) {
+  for (let i = compareDays ? 0 : 1; i < (compareDays ? 5 : 6); i++) {
     const date = new Date(today);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().substring(0, 10);
@@ -136,6 +136,20 @@ const ForecastFiveDay = () => {
         info: dailyData[dateStr]?.info ?? undefined,
       };
     }
+
+    // if (i === 4) {
+    //   const lastDay = new Date(date);
+    //   lastDay.setDate(lastDay.getDate() + 1);
+    //   const lastDayStr = lastDay.toISOString().substring(0, 10);
+    //   const lastDayOfWeek = getDayOfWeek(lastDayStr);
+
+    //   dailyDataForNextFiveDays[lastDayStr] = {
+    //     dayOfWeek: lastDayOfWeek,
+    //     maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
+    //     minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
+    //     info: dailyData[lastDayStr]?.info ?? undefined,
+    //   };
+    // }
   }
 
   const smallIcons = (dateStr: string) => {
