@@ -107,7 +107,6 @@ const TemperatureChart = () => {
       fill: theme.palette.primary.dark,
     },
   };
-
   return (
     <LineChart
       // withDots={false}
@@ -134,7 +133,9 @@ const TemperatureChart = () => {
       chartConfig={chartConfig}
       yAxisSuffix="°"
       yLabelsOffset={25}
-      segments={5}
+      segments={Math.ceil(
+        Math.max(...combinedTempArr) - Math.min(...combinedTempArr)
+      )}
     />
   );
 };
