@@ -8,7 +8,7 @@ import WeatherCurrentIcons from "./weather_current_icons";
 import { useWeatherCurrent } from "../../queries/useWeatherCurrent";
 import { useTheme } from "src/core/init/themes/theme_context";
 
-const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
+const WeatherCurrent = () => {
   const { theme } = useTheme();
   const { currentTemp } = useWeatherCurrent();
 
@@ -38,7 +38,8 @@ const WeatherCurrent = ({ tempUnit }: { tempUnit: string }) => {
     >
       <View style={{ flexDirection: "column", gap: 4 }}>
         <Text style={theme.typography.temperature}>
-          {Math.ceil(currentTemp?.main.temp!)} {tempUnit}
+          {Math.ceil(currentTemp?.main.temp!)}{" "}
+          {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
         </Text>
         <Text children={mainStore.city} style={theme.typography.location} />
         <Text

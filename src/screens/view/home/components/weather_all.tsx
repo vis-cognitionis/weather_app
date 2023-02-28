@@ -6,16 +6,10 @@ import mainStore from "src/screens/view-model/main_store";
 import WeatherCurrent from "./weather-current/weather_current";
 import WeatherBackground from "./weather_background";
 import WeatherHourlyIcons from "./weather_hourly_icons";
-import { useWeatherCurrent } from "../queries/useWeatherCurrent";
+import { today, tomorrow, groupWeatherDataByDate } from "./constants/constants";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
-import {
-  today,
-  tempUnit,
-  tomorrow,
-  groupWeatherDataByDate,
-} from "./constants/constants";
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -77,7 +71,8 @@ const WeatherAll = () => {
           {hourlyData.map((weather) => (
             <View key={weather.dt} style={styles.weatherContainer}>
               <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                {Math.ceil(weather.main.temp)} {tempUnit}
+                {Math.ceil(weather.main.temp)}{" "}
+                {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
               </Text>
               <View style={{ flex: 1, paddingVertical: 10 }}>
                 <WeatherHourlyIcons
@@ -107,7 +102,7 @@ const WeatherAll = () => {
     <View style={{ gap: gapValue }}>
       <WeatherBackground />
       <View style={styles.weathersContainer}>
-        <WeatherCurrent tempUnit={tempUnit} />
+        <WeatherCurrent />
         <HourlyWeather />
       </View>
     </View>

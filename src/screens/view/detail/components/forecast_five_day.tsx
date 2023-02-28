@@ -3,9 +3,9 @@ import { Text, View, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
 import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { today } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
-import { tempUnit, today } from "../../home/components/constants/constants";
 import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
 import { WeatherCondition } from "../../home/interfaces/interface_home";
 import {
@@ -193,7 +193,8 @@ const ForecastFiveDay = () => {
                 ]}
               >
                 {`${t("home.maxTemp")}:`}{" "}
-                {dailyDataForNextFiveDays[dateStr].maxTemp} {tempUnit}
+                {dailyDataForNextFiveDays[dateStr].maxTemp}{" "}
+                {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
               </Text>
               <Text
                 style={[
@@ -202,7 +203,8 @@ const ForecastFiveDay = () => {
                 ]}
               >
                 {`${t("home.minTemp")}:`}{" "}
-                {dailyDataForNextFiveDays[dateStr].minTemp} {tempUnit}
+                {dailyDataForNextFiveDays[dateStr].minTemp}{" "}
+                {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
               </Text>
             </View>
           </View>
