@@ -1,4 +1,3 @@
-import React from "react";
 import Localization from "react-native-localization";
 
 import { useLanguage } from "../language_context";
@@ -10,11 +9,11 @@ const localizations = new Localization({
   tr: tr,
 });
 
-export const useTranslate = (key: string) => {
+export const useTranslate = () => {
   const { language } = useLanguage();
-  const translation = localizations.getString(key, language);
-  return translation;
+  const t = (key: string) => {
+    const translation = localizations.getString(key, language);
+    return translation;
+  };
+  return { t };
 };
-
-import { useTranslate as t } from "./useTranslate";
-export { t };

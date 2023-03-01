@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowHeight } from "../../common/constants/constants";
 import {
@@ -87,6 +87,8 @@ const WeatherBackground = () => {
   };
 
   const weatherSuggestions = () => {
+    const { t } = useTranslate();
+
     switch (condition) {
       case WeatherCondition.Clear:
         return mainStore.timeOfDay === "night"

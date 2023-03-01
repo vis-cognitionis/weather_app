@@ -63,11 +63,11 @@ const TemperatureChart = () => {
 
   const refinedTempArr = combinedTempArr
     ? combinedTempArr.map((item) => Math.floor(item))
-    : [5];
+    : [0];
 
   const segments = refinedTempArr
     ? Math.floor(Math.max(...refinedTempArr) - Math.min(...refinedTempArr))
-    : 5;
+    : 1;
 
   return (
     <LineChart

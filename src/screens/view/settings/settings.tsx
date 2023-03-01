@@ -4,10 +4,11 @@ import { SafeAreaView, SectionList } from "react-native";
 import SectionTitle from "./components/section_title";
 import SectionContent from "./components/section_content";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const Settings = () => {
   const { theme } = useTheme();
+  const { t } = useTranslate();
 
   const settings = [
     {

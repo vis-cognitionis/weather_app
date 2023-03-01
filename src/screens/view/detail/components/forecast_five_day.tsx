@@ -2,7 +2,6 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
 import { today } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
@@ -22,6 +21,7 @@ import {
 } from "src/core/components/icons/weather_colored_icons";
 import Container from "./container";
 import mainStore from "src/screens/view-model/main_store";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const styles = StyleSheet.create({
   dayContainer: {
@@ -51,18 +51,19 @@ const styles = StyleSheet.create({
   },
 });
 
+interface DailyData {
+  [date: string]: {
+    dayOfWeek?: string;
+    maxTemp: number;
+    minTemp: number;
+    info: string;
+  };
+}
+
 const ForecastFiveDay = () => {
   const { theme } = useTheme();
-  const { weatherDatas } = useWeatherDatas();
-
-  interface DailyData {
-    [date: string]: {
-      dayOfWeek?: string;
-      maxTemp: number;
-      minTemp: number;
-      info: string;
-    };
-  }
+  const { weatherDatas, isLoading } = useWeatherDatas();
+  const { t } = useTranslate();
 
   const dailyData: DailyData = {};
   if (weatherDatas && weatherDatas.list) {
@@ -88,23 +89,21 @@ const ForecastFiveDay = () => {
       }
     }
   }
-
+  const days = [
+    t("daysShort.sunday"),
+    t("daysShort.monday"),
+    t("daysShort.tuesday"),
+    t("daysShort.wednesday"),
+    t("daysShort.thursday"),
+    t("daysShort.friday"),
+    t("daysShort.saturday"),
+  ];
   const getDayOfWeek = (date: string) => {
-    const days = [
-      t("daysShort.sunday"),
-      t("daysShort.monday"),
-      t("daysShort.tuesday"),
-      t("daysShort.wednesday"),
-      t("daysShort.thursday"),
-      t("daysShort.friday"),
-      t("daysShort.saturday"),
-    ];
     const dayOfWeekIndex = new Date(date).getDay();
-    if (dayOfWeekIndex === new Date().getDay()) {
-      return t("daysShort.today");
-    } else {
-      return days[dayOfWeekIndex];
-    }
+
+    return dayOfWeekIndex === new Date().getDay()
+      ? t("daysShort.today")
+      : days[dayOfWeekIndex];
   };
 
   const dailyDataForNextFiveDays: DailyData = {};
@@ -186,53 +185,59 @@ const ForecastFiveDay = () => {
   return (
     <Container
       width={windowWidth - 60}
-      title={"detail.forecastTitle"}
-      children={Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => {
-        return (
-          <View style={styles.container} key={i}>
-            <View style={styles.dayContainer}>
-              <Text style={[theme.typography.caption, { width: 50 }]}>
-                {dailyDataForNextFiveDays[dateStr].dayOfWeek}
-              </Text>
-              <View style={{ transform: [{ scale: 0.3 }] }}>
-                {smallIcons(dateStr)}
-              </View>
+      title={t("detail.forecastTitle")}
+      children={
+        isLoading ? (
+          <Text>Loading...</Text>
+        ) : (
+          Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => {
+            return (
+              <View style={styles.container} key={i}>
+                <View style={styles.dayContainer}>
+                  <Text style={[theme.typography.caption, { width: 50 }]}>
+                    {dailyDataForNextFiveDays[dateStr].dayOfWeek}
+                  </Text>
+                  <View style={{ transform: [{ scale: 0.3 }] }}>
+                    {smallIcons(dateStr)}
+                  </View>
 
-              <View style={styles.tempContainer}>
-                <Text
-                  style={[
-                    theme.typography.caption,
-                    { width: "auto", minWidth: 80 },
-                  ]}
-                >
-                  {`${t("home.maxTemp")}:`}{" "}
-                  {dailyDataForNextFiveDays[dateStr].maxTemp}{" "}
-                  {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
-                </Text>
-                <Text
-                  style={[
-                    theme.typography.caption,
-                    { width: "auto", minWidth: 80 },
-                  ]}
-                >
-                  {`${t("home.minTemp")}:`}{" "}
-                  {dailyDataForNextFiveDays[dateStr].minTemp}{" "}
-                  {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
-                </Text>
-              </View>
-            </View>
+                  <View style={styles.tempContainer}>
+                    <Text
+                      style={[
+                        theme.typography.caption,
+                        { width: "auto", minWidth: 80 },
+                      ]}
+                    >
+                      {`${t("home.maxTemp")}:`}{" "}
+                      {dailyDataForNextFiveDays[dateStr].maxTemp}{" "}
+                      {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                    </Text>
+                    <Text
+                      style={[
+                        theme.typography.caption,
+                        { width: "auto", minWidth: 80 },
+                      ]}
+                    >
+                      {`${t("home.minTemp")}:`}{" "}
+                      {dailyDataForNextFiveDays[dateStr].minTemp}{" "}
+                      {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                    </Text>
+                  </View>
+                </View>
 
-            {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
-              <View
-                style={[
-                  styles.line,
-                  { borderBottomColor: theme.palette.background.default },
-                ]}
-              />
-            )}
-          </View>
-        );
-      })}
+                {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
+                  <View
+                    style={[
+                      styles.line,
+                      { borderBottomColor: theme.palette.background.default },
+                    ]}
+                  />
+                )}
+              </View>
+            );
+          })
+        )
+      }
     />
   );
 };

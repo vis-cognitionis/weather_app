@@ -16,7 +16,7 @@ import { useWeatherCurrent } from "../home/queries/useWeatherCurrent";
 import { useWeatherDatas } from "../home/queries/useWeatherDatas";
 import { windowWidth } from "../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const styles = StyleSheet.create({
   grid: {
@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
 
 const Detail = () => {
   const { theme } = useTheme();
-  const { refetch } = useWeatherDatas();
+  const { t } = useTranslate();
+
+  const { refetch, isLoading } = useWeatherDatas();
   const { currentTemp, refetchCurrent } = useWeatherCurrent();
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -93,7 +95,9 @@ const Detail = () => {
           <Container
             width={windowWidth - 60}
             title={t("detail.graphicTitle")}
-            children={<TemperatureChart />}
+            children={
+              isLoading ? <Text> loading...</Text> : <TemperatureChart />
+            }
           />
 
           <ForecastFiveDay />

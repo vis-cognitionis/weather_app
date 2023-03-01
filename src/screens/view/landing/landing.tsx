@@ -5,7 +5,7 @@ import ActionButton from "src/core/components/buttons/action_button";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
 import mainStore from "src/screens/view-model/main_store";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -27,6 +27,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
 const Landing = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
+  const { t } = useTranslate();
 
   return (
     <SafeAreaView style={styles.container}>

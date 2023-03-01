@@ -13,10 +13,11 @@ import {
   IconAbout,
 } from "src/core/components/icons/custom_icons";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { t } from "src/core/init/lang/custom-hook/useTranslate";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
+  const { t } = useTranslate();
 
   const GeneralAction = () => {
     switch (content) {
