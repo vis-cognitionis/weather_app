@@ -7,7 +7,6 @@ import { observer } from "mobx-react";
 import lightTheme from "src/core/init/themes/styles/light";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
-import { useWeatherDatas } from "src/screens/view/home/queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 import {
   IconBack,

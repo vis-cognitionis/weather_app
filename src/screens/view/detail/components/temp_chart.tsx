@@ -4,12 +4,12 @@ import { AbstractChartConfig } from "react-native-chart-kit/dist/AbstractChart";
 
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
+import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
 import {
   groupWeatherDataByDate,
   today,
   tomorrow,
 } from "../../home/components/constants/constants";
-import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
 
 const TemperatureChart = () => {
   const { theme } = useTheme();
@@ -61,11 +61,13 @@ const TemperatureChart = () => {
     },
   };
 
-  const refinedTempArr = combinedTempArr.map((item) => Math.floor(item));
+  const refinedTempArr = combinedTempArr
+    ? combinedTempArr.map((item) => Math.floor(item))
+    : [5];
 
-  const segments = Math.floor(
-    Math.max(...refinedTempArr) - Math.min(...refinedTempArr)
-  );
+  const segments = refinedTempArr
+    ? Math.floor(Math.max(...refinedTempArr) - Math.min(...refinedTempArr))
+    : 5;
 
   return (
     <LineChart

@@ -109,13 +109,11 @@ const ForecastFiveDay = () => {
 
   const dailyDataForNextFiveDays: DailyData = {};
 
-  const currentDayNum = Number(
-    mainStore.currentDate.toISOString().substring(8, 10)
-  );
+  const currentDayNum = mainStore.currentDate.getUTCDate();
   const todayNum = Number(today.slice(8, 10));
   const compareDays = Boolean(todayNum <= currentDayNum);
 
-  for (let i = compareDays ? 0 : 1; i < (compareDays ? 5 : 6); i++) {
+  for (let i = compareDays ? 1 : 0; i < (compareDays ? 6 : 5); i++) {
     const date = new Date(today);
     date.setDate(date.getDate() + i);
     const dateStr = date.toISOString().substring(0, 10);
@@ -137,19 +135,19 @@ const ForecastFiveDay = () => {
       };
     }
 
-    // if (i === 4) {
-    //   const lastDay = new Date(date);
-    //   lastDay.setDate(lastDay.getDate() + 1);
-    //   const lastDayStr = lastDay.toISOString().substring(0, 10);
-    //   const lastDayOfWeek = getDayOfWeek(lastDayStr);
+    if (!compareDays) {
+      const lastDay = new Date(date);
+      lastDay.setDate(lastDay.getDate() + 1);
+      const lastDayStr = lastDay.toISOString().substring(0, 10);
+      const lastDayOfWeek = getDayOfWeek(lastDayStr);
 
-    //   dailyDataForNextFiveDays[lastDayStr] = {
-    //     dayOfWeek: lastDayOfWeek,
-    //     maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
-    //     minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
-    //     info: dailyData[lastDayStr]?.info ?? undefined,
-    //   };
-    // }
+      dailyDataForNextFiveDays[lastDayStr] = {
+        dayOfWeek: lastDayOfWeek,
+        maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
+        minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
+        info: dailyData[lastDayStr]?.info ?? undefined,
+      };
+    }
   }
 
   const smallIcons = (dateStr: string) => {
@@ -188,51 +186,53 @@ const ForecastFiveDay = () => {
   return (
     <Container
       width={windowWidth - 60}
-      title={t("detail.forecastTitle")}
-      children={Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => (
-        <View style={styles.container} key={i}>
-          <View style={styles.dayContainer}>
-            <Text style={[theme.typography.caption, { width: 50 }]}>
-              {dailyDataForNextFiveDays[dateStr].dayOfWeek}
-            </Text>
-            <View style={{ transform: [{ scale: 0.3 }] }}>
-              {smallIcons(dateStr)}
+      title={"detail.forecastTitle"}
+      children={Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => {
+        return (
+          <View style={styles.container} key={i}>
+            <View style={styles.dayContainer}>
+              <Text style={[theme.typography.caption, { width: 50 }]}>
+                {dailyDataForNextFiveDays[dateStr].dayOfWeek}
+              </Text>
+              <View style={{ transform: [{ scale: 0.3 }] }}>
+                {smallIcons(dateStr)}
+              </View>
+
+              <View style={styles.tempContainer}>
+                <Text
+                  style={[
+                    theme.typography.caption,
+                    { width: "auto", minWidth: 80 },
+                  ]}
+                >
+                  {`${t("home.maxTemp")}:`}{" "}
+                  {dailyDataForNextFiveDays[dateStr].maxTemp}{" "}
+                  {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                </Text>
+                <Text
+                  style={[
+                    theme.typography.caption,
+                    { width: "auto", minWidth: 80 },
+                  ]}
+                >
+                  {`${t("home.minTemp")}:`}{" "}
+                  {dailyDataForNextFiveDays[dateStr].minTemp}{" "}
+                  {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                </Text>
+              </View>
             </View>
 
-            <View style={styles.tempContainer}>
-              <Text
+            {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
+              <View
                 style={[
-                  theme.typography.caption,
-                  { width: "auto", minWidth: 80 },
+                  styles.line,
+                  { borderBottomColor: theme.palette.background.default },
                 ]}
-              >
-                {`${t("home.maxTemp")}:`}{" "}
-                {dailyDataForNextFiveDays[dateStr].maxTemp}{" "}
-                {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
-              </Text>
-              <Text
-                style={[
-                  theme.typography.caption,
-                  { width: "auto", minWidth: 80 },
-                ]}
-              >
-                {`${t("home.minTemp")}:`}{" "}
-                {dailyDataForNextFiveDays[dateStr].minTemp}{" "}
-                {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
-              </Text>
-            </View>
+              />
+            )}
           </View>
-
-          {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
-            <View
-              style={[
-                styles.line,
-                { borderBottomColor: theme.palette.background.default },
-              ]}
-            />
-          )}
-        </View>
-      ))}
+        );
+      })}
     />
   );
 };
