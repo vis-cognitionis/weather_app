@@ -40,53 +40,6 @@ const TemperatureChart = () => {
     ? [...todaysTempArr, ...tomorrowsTempArr]
     : tomorrowsTempArr;
 
-  // --- 24 saatlik tam döngü için ----
-
-  // const todaysWeather = groupWeatherDataByDate(weatherDatas)[today];
-  // const tomorrowsWeather = groupWeatherDataByDate(weatherDatas)[tomorrow];
-
-  // const todaysHourArr = todaysWeather?.map((weather) => {
-  //   return weather.dt_txt.split(" ")[1].slice(0, 2);
-  // });
-  // const todaysTempArr = todaysWeather?.map((weather) => {
-  //   return weather.main.temp;
-  // });
-
-  // const tomorrowsHourArr = tomorrowsWeather?.map((weather) => {
-  //   return weather.dt_txt.split(" ")[1].slice(0, 2);
-  // });
-  // const tomorrowsTempArr = tomorrowsWeather?.map((weather) => {
-  //   return weather.main.temp;
-  // });
-
-  // const now = new Date();
-  // const combinedHourArr =
-  //   todaysWeather && tomorrowsWeather
-  //     ? [
-  //         ...todaysHourArr,
-  //         ...tomorrowsHourArr.filter(
-  //           (hour, index) =>
-  //             parseInt(hour) < now.getHours() && index < todaysHourArr.length
-  //         ),
-  //       ]
-  //     : todaysWeather
-  //     ? todaysHourArr
-  //     : tomorrowsHourArr;
-
-  // const combinedTempArr =
-  //   todaysWeather && tomorrowsWeather
-  //     ? [
-  //         ...todaysTempArr,
-  //         ...tomorrowsTempArr.filter(
-  //           (hour, index) =>
-  //             parseInt(hour.toString()) < now.getHours() &&
-  //             index < todaysTempArr.length
-  //         ),
-  //       ]
-  //     : todaysWeather
-  //     ? todaysTempArr
-  //     : tomorrowsTempArr;
-
   const chartConfig: AbstractChartConfig = {
     backgroundGradientFromOpacity: 0,
     backgroundGradientToOpacity: 0,
@@ -107,6 +60,11 @@ const TemperatureChart = () => {
       fill: theme.palette.primary.dark,
     },
   };
+
+  const segments = Math.ceil(
+    Math.max(...combinedTempArr) - Math.min(...combinedTempArr)
+  );
+
   return (
     <LineChart
       // withDots={false}
@@ -133,9 +91,7 @@ const TemperatureChart = () => {
       chartConfig={chartConfig}
       yAxisSuffix="°"
       yLabelsOffset={25}
-      segments={Math.ceil(
-        Math.max(...combinedTempArr) - Math.min(...combinedTempArr)
-      )}
+      segments={segments}
     />
   );
 };

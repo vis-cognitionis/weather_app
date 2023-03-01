@@ -113,7 +113,7 @@ const ForecastFiveDay = () => {
     mainStore.currentDate.toISOString().substring(8, 10)
   );
   const todayNum = Number(today.slice(8, 10));
-  const compareDays = Boolean(todayNum < currentDayNum);
+  const compareDays = Boolean(todayNum <= currentDayNum);
 
   for (let i = compareDays ? 0 : 1; i < (compareDays ? 5 : 6); i++) {
     const date = new Date(today);
