@@ -61,22 +61,20 @@ const TemperatureChart = () => {
     },
   };
 
-  const segments = Math.ceil(
-    Math.max(...combinedTempArr) - Math.min(...combinedTempArr)
+  const refinedTempArr = combinedTempArr.map((item) => Math.floor(item));
+
+  const segments = Math.floor(
+    Math.max(...refinedTempArr) - Math.min(...refinedTempArr)
   );
 
   return (
     <LineChart
-      // withDots={false}
-      // withOuterLines={false}
-      // withShadow={false}
-      // withInnerLines={false}
       withVerticalLines={false}
       data={{
         labels: combinedHourArr,
         datasets: [
           {
-            data: combinedTempArr,
+            data: refinedTempArr,
             color: () => `${theme.palette.primary.dark}`,
             strokeWidth: 2,
           },
