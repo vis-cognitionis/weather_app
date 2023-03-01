@@ -53,6 +53,29 @@ const Detail = () => {
     { title: t("detail.visibility") },
   ];
 
+  const getDetailCurrentInfo = (info: { title: string }) => {
+    switch (info.title) {
+      case t("detail.wind"):
+        return currentTemp?.wind.speed === undefined
+          ? "loading..."
+          : currentTemp?.wind.speed + " " + t("detail.windUnit");
+      case t("detail.humidity"):
+        return currentTemp?.main.humidity === undefined
+          ? "loading"
+          : "%" + currentTemp?.main.humidity;
+      case t("detail.pressure"):
+        return currentTemp?.main.pressure === undefined
+          ? "loading..."
+          : currentTemp?.main.pressure + " " + "hPa";
+      case t("detail.visibility"):
+        return Number.isNaN(Number(currentTemp?.visibility))
+          ? "loading..."
+          : Number(currentTemp?.visibility) / 1000 + " " + "km";
+      default:
+        return "loading...";
+    }
+  };
+
   const DetailCurrent = () => {
     return (
       <View style={styles.grid}>
@@ -61,16 +84,8 @@ const Detail = () => {
             <Container
               key={index}
               children={
-                <Text style={[theme.typography.caption, , { paddingLeft: 4 }]}>
-                  {info.title === t("detail.wind")
-                    ? currentTemp?.wind.speed + " " + t("detail.windUnit")
-                    : info.title === t("detail.humidity")
-                    ? "%" + currentTemp?.main.humidity
-                    : info.title === t("detail.pressure")
-                    ? currentTemp?.main.pressure + " " + "hPa"
-                    : info.title === t("detail.visibility")
-                    ? Number(currentTemp?.visibility) / 1000 + " " + "km"
-                    : "loading"}
+                <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
+                  {getDetailCurrentInfo(info)}
                 </Text>
               }
               title={info.title}
