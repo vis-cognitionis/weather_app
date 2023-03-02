@@ -110,7 +110,7 @@ const ForecastFiveDay = () => {
 
   const currentDayNum = mainStore.currentDate.getUTCDate();
   const todayNum = Number(today.slice(8, 10));
-  const compareDays = Boolean(todayNum <= currentDayNum);
+  const compareDays = Boolean(todayNum < currentDayNum);
 
   for (let i = compareDays ? 1 : 0; i < (compareDays ? 6 : 5); i++) {
     const date = new Date(today);
@@ -134,19 +134,19 @@ const ForecastFiveDay = () => {
       };
     }
 
-    if (!compareDays) {
-      const lastDay = new Date(date);
-      lastDay.setDate(lastDay.getDate() + 1);
-      const lastDayStr = lastDay.toISOString().substring(0, 10);
-      const lastDayOfWeek = getDayOfWeek(lastDayStr);
+    // if (!compareDays) {
+    //   const lastDay = new Date(date);
+    //   lastDay.setDate(lastDay.getDate() + 1);
+    //   const lastDayStr = lastDay.toISOString().substring(0, 10);
+    //   const lastDayOfWeek = getDayOfWeek(lastDayStr);
 
-      dailyDataForNextFiveDays[lastDayStr] = {
-        dayOfWeek: lastDayOfWeek,
-        maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
-        minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
-        info: dailyData[lastDayStr]?.info ?? undefined,
-      };
-    }
+    //   dailyDataForNextFiveDays[lastDayStr] = {
+    //     dayOfWeek: lastDayOfWeek,
+    //     maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
+    //     minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
+    //     info: dailyData[lastDayStr]?.info ?? undefined,
+    //   };
+    // }
   }
 
   const smallIcons = (dateStr: string) => {
