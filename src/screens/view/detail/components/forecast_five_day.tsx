@@ -100,12 +100,18 @@ const ForecastFiveDay = () => {
   ];
 
   const getDayOfWeek = (date: string) => {
-    const selectedCityTimezoneOffset = weatherDatas?.city.timezone! * 1000;
-    const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
+    const selectedCityTimezoneOffset = weatherDatas?.city.timezone!;
+    const currentDate = new Date();
+    const utcOffset = currentDate.getTimezoneOffset() * 60 * 1000;
+    const currentDateTimezoneOffset =
+      utcOffset + selectedCityTimezoneOffset * 1000;
+    const currentLocalDateTime = new Date(
+      Date.now() + currentDateTimezoneOffset
+    );
     const dayOfWeekIndex = new Date(date).getDay();
     const dateToCompare = new Date(date);
 
-    if (currentDate.toDateString() === dateToCompare.toDateString()) {
+    if (currentLocalDateTime.toDateString() === dateToCompare.toDateString()) {
       return t("daysShort.today");
     }
 
