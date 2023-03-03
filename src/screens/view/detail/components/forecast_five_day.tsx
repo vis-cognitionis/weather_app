@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import { today } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
 import { WeatherCondition } from "../../home/interfaces/interface_home";
 import {
@@ -21,7 +22,6 @@ import {
 } from "src/core/components/icons/weather_colored_icons";
 import Container from "./container";
 import mainStore from "src/screens/view-model/main_store";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const styles = StyleSheet.create({
   dayContainer: {
@@ -145,20 +145,6 @@ const ForecastFiveDay = () => {
         info: dailyData[dateStr]?.info ?? undefined,
       };
     }
-
-    // if (!compareDays) {
-    //   const lastDay = new Date(date);
-    //   lastDay.setDate(lastDay.getDate() + 1);
-    //   const lastDayStr = lastDay.toISOString().substring(0, 10);
-    //   const lastDayOfWeek = getDayOfWeek(lastDayStr);
-
-    //   dailyDataForNextFiveDays[lastDayStr] = {
-    //     dayOfWeek: lastDayOfWeek,
-    //     maxTemp: dailyData[lastDayStr]?.maxTemp ?? undefined,
-    //     minTemp: dailyData[lastDayStr]?.minTemp ?? undefined,
-    //     info: dailyData[lastDayStr]?.info ?? undefined,
-    //   };
-    // }
   }
 
   const smallIcons = (dateStr: string) => {
