@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -105,10 +105,21 @@ const AppBar = () => {
 
   const [inputValue, setInputValue] = useState<string>(mainStore.city);
   const [editable, setEditable] = useState<boolean>(false);
+  const inputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    if (editable) {
+      inputRef.current?.focus();
+    }
+  }, [editable]);
 
   const handleSearch = () => {
     mainStore.setCity(inputValue);
     setEditable(false);
+  };
+
+  const handleEditPress = () => {
+    setEditable(true);
   };
 
   useEffect(() => {
@@ -123,10 +134,15 @@ const AppBar = () => {
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={style.location}>
           <TextInput
+            ref={inputRef}
+            autoCorrect={false}
             defaultValue={mainStore.city}
             editable={editable}
             value={inputValue}
             onChangeText={setInputValue}
+            onSubmitEditing={() => {
+              inputValue.length !== 0 && handleSearch();
+            }}
             style={[
               {
                 alignSelf: "flex-end",
@@ -149,7 +165,7 @@ const AppBar = () => {
           ) : (
             <Pressable
               onPress={() => {
-                setEditable(true);
+                handleEditPress();
                 mainStore.isError === true && mainStore.setIsError(false);
               }}
             >
