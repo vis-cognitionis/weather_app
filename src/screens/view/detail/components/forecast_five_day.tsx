@@ -98,12 +98,18 @@ const ForecastFiveDay = () => {
     t("daysShort.friday"),
     t("daysShort.saturday"),
   ];
-  const getDayOfWeek = (date: string) => {
-    const dayOfWeekIndex = new Date(date).getDay();
 
-    return dayOfWeekIndex === new Date().getDay()
-      ? t("daysShort.today")
-      : days[dayOfWeekIndex];
+  const getDayOfWeek = (date: string) => {
+    const selectedCityTimezoneOffset = weatherDatas?.city.timezone! * 1000;
+    const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
+    const dayOfWeekIndex = new Date(date).getDay();
+    const dateToCompare = new Date(date);
+
+    if (currentDate.toDateString() === dateToCompare.toDateString()) {
+      return t("daysShort.today");
+    }
+
+    return days[dayOfWeekIndex];
   };
 
   const dailyDataForNextFiveDays: DailyData = {};
