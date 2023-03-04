@@ -85,5 +85,9 @@
     "friday": "Fri",
     "saturday": "Sat",
     "sunday": "Sun"
+  },
+  "error": {
+    "title": "Error",
+    "validCity": "Please search for a valid city name."
   }
 }

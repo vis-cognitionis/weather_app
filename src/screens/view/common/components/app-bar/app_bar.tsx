@@ -4,10 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react";
 
-import lightTheme from "src/core/init/themes/styles/light";
-import ThemeProps from "src/core/init/themes/interface/interfaces";
-import { StackScreenNames } from "src/navigation/interfaces/interfaces";
-import { useTheme } from "src/core/init/themes/theme_context";
 import {
   IconBack,
   IconDarkTheme,
@@ -15,8 +11,12 @@ import {
   IconLightTheme,
   IconSearch,
 } from "src/core/components/icons/custom_icons";
+import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { useTheme } from "src/core/init/themes/theme_context";
+import ThemeProps from "src/core/init/themes/interface/interfaces";
 import darkTheme from "src/core/init/themes/styles/dark";
 import mainStore from "src/screens/view-model/main_store";
+import lightTheme from "src/core/init/themes/styles/light";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;
@@ -103,7 +103,6 @@ const AppBar = () => {
   const { theme } = useTheme();
   const styles = AppBarStyles({ theme });
 
-  const [inputValue, setInputValue] = useState<string>(mainStore.city);
   const [editable, setEditable] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
 
@@ -114,20 +113,13 @@ const AppBar = () => {
   }, [editable]);
 
   const handleSearch = () => {
-    mainStore.setCity(inputValue);
+    mainStore.setCity(mainStore.inputValue);
     setEditable(false);
   };
 
   const handleEditPress = () => {
     setEditable(true);
   };
-
-  useEffect(() => {
-    mainStore.isError === true && setInputValue("Istanbul");
-    mainStore.isError === true && mainStore.setCity("Istanbul");
-  }, [mainStore.isError]);
-
-  //Ekranda uygun olan bir şehir isteme uyarısı çıkarılabilir!
 
   return (
     <SafeAreaView style={styles.container}>
@@ -138,10 +130,10 @@ const AppBar = () => {
             autoCorrect={false}
             defaultValue={mainStore.city}
             editable={editable}
-            value={inputValue}
-            onChangeText={setInputValue}
+            value={mainStore.inputValue}
+            onChangeText={(text) => mainStore.setInputValue(text)}
             onSubmitEditing={() => {
-              inputValue.length !== 0 && handleSearch();
+              mainStore.inputValue.length !== 0 && handleSearch();
             }}
             style={[
               {
@@ -157,7 +149,7 @@ const AppBar = () => {
           {editable ? (
             <Pressable
               onPress={() => {
-                inputValue.length !== 0 && handleSearch();
+                mainStore.inputValue.length !== 0 && handleSearch();
               }}
             >
               <IconSearch />
@@ -166,7 +158,6 @@ const AppBar = () => {
             <Pressable
               onPress={() => {
                 handleEditPress();
-                mainStore.isError === true && mainStore.setIsError(false);
               }}
             >
               <IconEdit />

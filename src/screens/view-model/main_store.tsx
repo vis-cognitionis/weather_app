@@ -10,9 +10,9 @@ class MainStore {
   hideStatusBar: boolean = false;
   weatherUnit: string = "metric";
   city = "Istanbul";
-  isError: boolean = false;
   timeOfDay: string = "";
   currentDate: Date = new Date();
+  inputValue: string = this.city;
 
   constructor() {
     makeAutoObservable(this);
@@ -50,16 +50,16 @@ class MainStore {
     this.city = city;
   };
 
-  setIsError = (error: boolean) => {
-    this.isError = error;
-  };
-
   setTimeOfDay(timeOfDay: string) {
     this.timeOfDay = timeOfDay;
   }
 
   setCurrentDate(date: Date) {
     this.currentDate = date;
+  }
+
+  setInputValue(value: string) {
+    this.inputValue = value;
   }
 }
 

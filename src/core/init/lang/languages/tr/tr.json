@@ -85,5 +85,9 @@
     "friday": "Cum",
     "saturday": "Cmt",
     "sunday": "Pzr"
+  },
+  "error": {
+    "title": "Hata",
+    "validCity": "Lütfen geçerli bir şehir ismi arayınız"
   }
 }
