@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import mainStore from "src/screens/view-model/main_store";
 import { WeatherDatas } from "../interfaces/interface_home";
@@ -26,9 +26,12 @@ export const useWeatherDatas = () => {
             "4ece27e8959cae958f124f7316c6e352"
         );
         return response.data;
-      } catch (error) {
+      } catch (error: any) {
+        const axiosError = error as AxiosError;
+        const status = axiosError.response?.status;
+        status === 429 && Alert.alert("Çok fazla sorgu hatası");
         setHasError(true);
-        throw new Error(`Error fetching weather data: ${error}`);
+        throw new Error(`Error fetching weather data: ${status}`);
       }
     },
     {
