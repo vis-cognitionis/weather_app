@@ -51,7 +51,13 @@ const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const AppBarStyles = ({ theme }: { theme: ThemeProps }) => {
+const AppBarStyles = ({
+  theme,
+  editable,
+}: {
+  theme: ThemeProps;
+  editable: boolean;
+}) => {
   return StyleSheet.create({
     container: {
       display: "flex",
@@ -63,6 +69,26 @@ const AppBarStyles = ({ theme }: { theme: ThemeProps }) => {
       paddingRight: 20,
       paddingTop: 25,
       flex: 1,
+    },
+    input: {
+      alignSelf: "flex-end",
+      paddingBottom: 1,
+      width: "auto",
+      textDecorationLine: editable ? "underline" : "none",
+      textTransform: "capitalize",
+    },
+    locationContainer: {
+      flexDirection: "row",
+      height: 32,
+      alignItems: "center",
+      gap: 16,
+      justifyContent: "space-between",
+    },
+    backButton: {
+      width: 32,
+      height: 32,
+      alignItems: "center",
+      justifyContent: "center",
     },
   });
 };
@@ -82,29 +108,13 @@ const ThemeSwitch = () => {
   );
 };
 
-const style = StyleSheet.create({
-  location: {
-    flexDirection: "row",
-    height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 16,
-  },
-  backButton: {
-    width: 32,
-    height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
 const AppBar = () => {
   const navigation = useNavigation();
   const { theme } = useTheme();
-  const styles = AppBarStyles({ theme });
 
   const [editable, setEditable] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
+  const styles = AppBarStyles({ theme, editable });
 
   useEffect(() => {
     if (editable) {
@@ -124,7 +134,7 @@ const AppBar = () => {
   return (
     <SafeAreaView style={styles.container}>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
-        <View style={style.location}>
+        <View style={styles.locationContainer}>
           <TextInput
             ref={inputRef}
             autoCorrect={false}
@@ -135,16 +145,7 @@ const AppBar = () => {
             onSubmitEditing={() => {
               mainStore.inputValue.length !== 0 && handleSearch();
             }}
-            style={[
-              {
-                alignSelf: "flex-end",
-                paddingBottom: 1,
-                width: "auto",
-                textDecorationLine: editable ? "underline" : "none",
-                textTransform: "capitalize",
-              },
-              theme.typography.caption,
-            ]}
+            style={[styles.input, theme.typography.caption]}
           />
           {editable ? (
             <Pressable
@@ -166,7 +167,7 @@ const AppBar = () => {
         </View>
       ) : (
         <Pressable
-          style={style.backButton}
+          style={styles.backButton}
           children={<IconBack />}
           onPress={() => {
             navigation.navigate(mainStore.previousTab as never);
