@@ -45,9 +45,18 @@ const TemperatureChart = () => {
     backgroundGradientToOpacity: 0,
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     decimalPlaces: 0,
+
     propsForDots: {
       r: "2.5",
+      strokeWidth: "2",
     },
+    propsForLabels: {
+      fontFamily: "Poppins-Regular",
+      fill: theme.palette.primary.dark,
+      dx: "-5",
+      dy: "5",
+    },
+
     propsForHorizontalLabels: {
       fontSize: 12,
       fontFamily: "Poppins-Regular",
@@ -62,11 +71,14 @@ const TemperatureChart = () => {
   };
 
   const refinedTempArr = combinedTempArr
-    ? combinedTempArr.map((item) => Math.floor(item))
+    ? combinedTempArr.map((item) => Math.round(item))
     : [0];
 
   const segments = refinedTempArr
-    ? Math.floor(Math.max(...refinedTempArr) - Math.min(...refinedTempArr))
+    ? Math.min(
+        Math.floor(Math.max(...refinedTempArr) - Math.min(...refinedTempArr)),
+        5
+      )
     : 1;
 
   return (
@@ -90,7 +102,6 @@ const TemperatureChart = () => {
       }}
       chartConfig={chartConfig}
       yAxisSuffix="°"
-      yLabelsOffset={25}
       segments={segments}
     />
   );
