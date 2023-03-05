@@ -88,6 +88,8 @@
   },
   "error": {
     "title": "Error",
-    "validCity": "Please search for a valid city name."
+    "validCity": "Please search for a valid city name",
+    "unexpected": "Unexpected error occurred. Please try again later",
+    "buttonName": "OK"
   }
 }

@@ -9,7 +9,10 @@ import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
-  const [hasError, setHasError] = useState<boolean>(false);
+  const [networkError, setNetworkError] = useState<boolean>(false);
+  const [fetchError, setFetchError] = useState<boolean>(false);
+  const [requestError, setRequestError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     data: weatherDatas,
@@ -28,18 +31,37 @@ export const useWeatherDatas = () => {
         return response.data;
       } catch (error: any) {
         const axiosError = error as AxiosError;
-        const status = axiosError.response?.status;
-        status === 429 && Alert.alert("Çok fazla sorgu hatası");
-        setHasError(true);
-        throw new Error(`Error fetching weather data: ${status}`);
+
+        if (axiosError.code === "ERR_NETWORK") {
+          setNetworkError(true);
+        } else if (axiosError.response?.status === 404) {
+          setFetchError(true);
+        } else if (axiosError.response?.status === 429) {
+          setRequestError(true);
+        } else {
+          setErrorMessage("Unexpected error occurred. Please try again later.");
+          console.log(errorMessage);
+        }
+
+        throw error;
       }
     },
     {
       enabled: true,
+
       onError: () => {
         mainStore.setCity("İstanbul");
         mainStore.setInputValue("İstanbul");
-        hasError && Alert.alert(t("error.title"), t("error.validCity"));
+
+        fetchError &&
+          Alert.alert(
+            t("error.title"),
+            t("error.validCity"),
+            [{ text: "Tamam", onPress: () => setFetchError(false) }],
+            { cancelable: false }
+          );
+        // networkError && Alert.alert("internet yok", "net yok");
+        // requestError && Alert.alert("çok sorgu", "çok sorgu");
       },
     }
   );

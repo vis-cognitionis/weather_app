@@ -88,6 +88,8 @@
   },
   "error": {
     "title": "Hata",
-    "validCity": "Lütfen geçerli bir şehir ismi arayınız"
+    "validCity": "Lütfen geçerli bir şehir ismi arayınız",
+    "unexpected": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin",
+    "buttonName": "TAMAM"
   }
 }
