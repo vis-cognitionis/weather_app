@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Animated, SafeAreaView, SectionList } from "react-native";
+import React from "react";
+import { SafeAreaView, SectionList } from "react-native";
 
 import SectionTitle from "./components/section_title";
 import SectionContent from "./components/section_content";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { Notify } from "src/core/components/notification/notify";
 
 const Settings = () => {
   const { theme } = useTheme();
@@ -34,8 +33,6 @@ const Settings = () => {
     },
   ];
 
-  const [showNotification, setShowNotification] = useState<boolean>(false);
-  const [animation] = useState(new Animated.Value(0));
   return (
     <SafeAreaView
       style={{
@@ -43,24 +40,13 @@ const Settings = () => {
         backgroundColor: theme.palette.background.default,
       }}
     >
-      {Notify.notifySuccess({
-        animation: animation,
-        message: t("notification.tempUnit"),
-        showNotification: showNotification,
-      })}
       <SectionList
         style={{
           paddingLeft: 60,
         }}
         sections={settings}
         keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <SectionContent
-            content={item.name}
-            animation={animation}
-            setShowNotification={setShowNotification}
-          />
-        )}
+        renderItem={({ item }) => <SectionContent content={item.name} />}
         renderSectionHeader={({ section }) => (
           <SectionTitle title={section.title} />
         )}

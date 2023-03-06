@@ -53,17 +53,17 @@ const Notification = ({
       style={{
         position: "absolute",
         bottom: -40,
-        width: "67%",
-        left: "20%",
+        width: "auto",
+        left: "15%",
       }}
     >
       <Animated.View
         style={[
           {
             backgroundColor: backgroundColor,
-            padding: 10,
-            borderRadius: 5,
-            position: "absolute",
+            paddingVertical: 12,
+            paddingHorizontal: 18,
+            borderRadius: 20,
             top: 0,
             left: 0,
             right: 0,

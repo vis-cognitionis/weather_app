@@ -1,6 +1,6 @@
 import React from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { View, Text, Animated } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
@@ -14,17 +14,19 @@ import {
 } from "src/core/components/icons/custom_icons";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { handleNotificationPress } from "src/core/components/notification/notify";
 
-const SectionContent = ({
-  content,
-  animation,
-  setShowNotification,
-}: {
-  content: string;
-  animation: Animated.Value;
-  setShowNotification: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const styles = StyleSheet.create({
+  listContainer: {
+    padding: 10,
+    paddingLeft: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "88%",
+  },
+});
+
+const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
   const { t } = useTranslate();
 
@@ -64,16 +66,7 @@ const SectionContent = ({
   };
 
   return (
-    <View
-      style={{
-        padding: 10,
-        paddingLeft: 20,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: "88%",
-      }}
-    >
+    <View style={styles.listContainer}>
       <Text style={theme.typography.content}>{content}</Text>
       <GeneralAction />
       <StatusbarSettings content={content} />
@@ -82,10 +75,6 @@ const SectionContent = ({
           isChecked={mainStore.weatherUnit === "metric"}
           onPress={() => {
             mainStore.setWeatherUnit("metric");
-            handleNotificationPress({
-              animation: animation,
-              setShowNotification: setShowNotification,
-            });
           }}
         />
       ) : content === t("settings.temperature.fahrenheit") ? (
@@ -93,10 +82,6 @@ const SectionContent = ({
           isChecked={mainStore.weatherUnit === "imperial"}
           onPress={() => {
             mainStore.setWeatherUnit("imperial");
-            handleNotificationPress({
-              animation: animation,
-              setShowNotification: setShowNotification,
-            });
           }}
         />
       ) : null}
