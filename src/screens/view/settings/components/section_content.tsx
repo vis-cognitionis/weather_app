@@ -50,9 +50,11 @@ const SectionContent = ({ content }: { content: string }) => {
   const CustomCheckbox = ({
     isChecked,
     onPress,
+    disabled,
   }: {
     isChecked: boolean;
     onPress: () => void;
+    disabled: boolean;
   }) => {
     return (
       <BouncyCheckbox
@@ -61,6 +63,7 @@ const SectionContent = ({ content }: { content: string }) => {
         fillColor={theme.palette.success?.main}
         isChecked={isChecked}
         onPress={onPress}
+        disabled={disabled}
       />
     );
   };
@@ -70,12 +73,14 @@ const SectionContent = ({ content }: { content: string }) => {
       <Text style={theme.typography.content}>{content}</Text>
       <GeneralAction />
       <StatusbarSettings content={content} />
+
       {content === t("settings.temperature.celsius") ? (
         <CustomCheckbox
           isChecked={mainStore.weatherUnit === "metric"}
           onPress={() => {
             mainStore.setWeatherUnit("metric");
           }}
+          disabled={mainStore.weatherUnit === "metric"}
         />
       ) : content === t("settings.temperature.fahrenheit") ? (
         <CustomCheckbox
@@ -83,6 +88,7 @@ const SectionContent = ({ content }: { content: string }) => {
           onPress={() => {
             mainStore.setWeatherUnit("imperial");
           }}
+          disabled={mainStore.weatherUnit === "imperial"}
         />
       ) : null}
     </View>
