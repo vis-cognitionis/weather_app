@@ -86,6 +86,9 @@
     "saturday": "Sat",
     "sunday": "Sun"
   },
+  "notification": {
+    "tempUnit": "Temperature unit changed"
+  },
   "error": {
     "title": "Error",
     "validCity": "Please search for a valid city name",

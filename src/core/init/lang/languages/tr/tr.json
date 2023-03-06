@@ -86,6 +86,9 @@
     "saturday": "Cmt",
     "sunday": "Pzr"
   },
+  "notification": {
+    "tempUnit": "Sıcaklık birimi değiştirildi"
+  },
   "error": {
     "title": "Hata",
     "validCity": "Lütfen geçerli bir şehir ismi arayınız",

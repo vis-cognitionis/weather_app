@@ -1,6 +1,6 @@
 import React from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { View, Text } from "react-native";
+import { View, Text, Animated } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
@@ -14,8 +14,17 @@ import {
 } from "src/core/components/icons/custom_icons";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
+import { handleNotificationPress } from "src/core/components/notification/notify";
 
-const SectionContent = ({ content }: { content: string }) => {
+const SectionContent = ({
+  content,
+  animation,
+  setShowNotification,
+}: {
+  content: string;
+  animation: Animated.Value;
+  setShowNotification: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const { theme } = useTheme();
   const { t } = useTranslate();
 
@@ -73,6 +82,10 @@ const SectionContent = ({ content }: { content: string }) => {
           isChecked={mainStore.weatherUnit === "metric"}
           onPress={() => {
             mainStore.setWeatherUnit("metric");
+            handleNotificationPress({
+              animation: animation,
+              setShowNotification: setShowNotification,
+            });
           }}
         />
       ) : content === t("settings.temperature.fahrenheit") ? (
@@ -80,6 +93,10 @@ const SectionContent = ({ content }: { content: string }) => {
           isChecked={mainStore.weatherUnit === "imperial"}
           onPress={() => {
             mainStore.setWeatherUnit("imperial");
+            handleNotificationPress({
+              animation: animation,
+              setShowNotification: setShowNotification,
+            });
           }}
         />
       ) : null}
