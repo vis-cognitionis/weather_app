@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Animated, SafeAreaView, SectionList, View } from "react-native";
+import { Animated, SafeAreaView, SectionList } from "react-native";
 
 import SectionTitle from "./components/section_title";
 import SectionContent from "./components/section_content";
