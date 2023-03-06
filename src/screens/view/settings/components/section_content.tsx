@@ -7,11 +7,7 @@ import mainStore from "src/screens/view-model/main_store";
 import LanguageAction from "./language_actions";
 import StatusbarSettings from "./statusbar_settings";
 import NotificationAction from "./notification_action";
-import {
-  IconLocation,
-  IconTerms,
-  IconAbout,
-} from "src/core/components/icons/custom_icons";
+import { IconTerms, IconAbout } from "src/core/components/icons/custom_icons";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
@@ -32,8 +28,6 @@ const SectionContent = ({ content }: { content: string }) => {
 
   const GeneralAction = () => {
     switch (content) {
-      case t("settings.general.location"):
-        return <IconLocation />;
       case t("settings.general.notifications"):
         return <NotificationAction />;
       case t("settings.general.language"):
