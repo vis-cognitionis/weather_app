@@ -102,7 +102,7 @@ const Detail = () => {
       <ScrollView
         style={{
           paddingHorizontal: "7%",
-          paddingTop: windowHeight > 736 ? 0 : "8%",
+          paddingTop: windowHeight > 736 ? 0 : "2%",
         }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

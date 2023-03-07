@@ -9,7 +9,7 @@ import {
 import WeatherAll from "./components/weather_all";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { useWeatherCurrent } from "./queries/useWeatherCurrent";
+import { useWeatherDatas } from "./queries/useWeatherDatas";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -19,7 +19,6 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
     },
     scrollView: {
       paddingHorizontal: "7%",
-      paddingTop: "5%",
     },
   });
 };
@@ -27,14 +26,14 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
 const Home = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
-  const { refetchCurrent } = useWeatherCurrent();
+  const { refetch } = useWeatherDatas();
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-      refetchCurrent();
+      refetch();
     }, 2000);
   }, []);
 

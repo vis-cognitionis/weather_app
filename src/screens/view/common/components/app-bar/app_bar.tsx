@@ -17,6 +17,7 @@ import ThemeProps from "src/core/init/themes/interface/interfaces";
 import darkTheme from "src/core/init/themes/styles/dark";
 import mainStore from "src/screens/view-model/main_store";
 import lightTheme from "src/core/init/themes/styles/light";
+import { windowHeight } from "../../constants/constants";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;
@@ -67,8 +68,8 @@ const AppBarStyles = ({
       backgroundColor: theme.palette.background.default,
       paddingLeft: 30,
       paddingRight: 20,
-      paddingTop: 25,
-      flex: 1,
+      paddingVertical: windowHeight >= 852 ? 0 : 5,
+      height: windowHeight >= 852 ? 110 : "auto",
     },
     input: {
       alignSelf: "flex-end",

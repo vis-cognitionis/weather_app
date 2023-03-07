@@ -6,20 +6,19 @@ import ThemeProps from "src/core/init/themes/interface/interfaces";
 import mainStore from "src/screens/view-model/main_store";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
+import { windowHeight } from "../common/constants/constants";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
       flexDirection: "column",
-      gap: Platform.OS === "android" ? 15 : 66,
+      gap: Platform.OS === "android" ? 15 : windowHeight * 0.05,
       alignItems: "center",
       backgroundColor: theme.palette.background.default,
+      height: "100%",
     },
     image: {
-      marginTop: 30,
-      width: 313,
-      height: 341,
+      marginTop: windowHeight <= 736 ? "5%" : "15%",
     },
   });
 };

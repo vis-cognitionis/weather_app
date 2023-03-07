@@ -9,7 +9,7 @@ const PaletteColors: Palette = {
   },
   secondary: { main: "#F1AAAA", dark: "#EEF0F2", light: "#4E6388" },
   background: { default: "red", paper: "green" },
-  text: { disabled: "#999999", primary: "#FFFFFF", secondary: "#40516F" },
+  text: { disabled: "#999999", primary: "#FFFFFF", secondary: "#FCFCFC" },
 };
 
 const generalFontFamily: string = "Poppins-Regular";
