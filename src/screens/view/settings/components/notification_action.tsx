@@ -29,7 +29,7 @@ const NotificationAction = () => {
     },
     modalView: {
       width: "55%",
-      height: "18%",
+      height: "22%",
       backgroundColor: theme.palette.background.default,
       borderRadius: 20,
       padding: 15,
