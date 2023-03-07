@@ -6,7 +6,7 @@ import { today } from "../../home/components/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
+import { useWeatherDatas } from "../../common/queries/useWeatherDatas";
 import { WeatherCondition } from "../../home/interfaces/interface_home";
 import {
   IconRain,

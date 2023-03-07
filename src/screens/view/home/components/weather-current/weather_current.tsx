@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import mainStore from "src/screens/view-model/main_store";
 import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
-import { useWeatherCurrent } from "../../queries/useWeatherCurrent";
+import { useWeatherCurrent } from "src/screens/view/common/queries/useWeatherCurrent";
 import { useTheme } from "src/core/init/themes/theme_context";
 
 const WeatherCurrent = () => {

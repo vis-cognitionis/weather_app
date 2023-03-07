@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import mainStore from "src/screens/view-model/main_store";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { WeatherCurrentData } from "../interfaces/interface_home";
+import { WeatherCurrentData } from "../../home/interfaces/interface_home";
 
 export const useWeatherCurrent = () => {
   const { t } = useTranslate();

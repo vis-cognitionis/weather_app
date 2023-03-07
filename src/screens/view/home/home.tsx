@@ -8,8 +8,8 @@ import {
 
 import WeatherAll from "./components/weather_all";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
+import { useWeatherDatas } from "../common/queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
-import { useWeatherDatas } from "./queries/useWeatherDatas";
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

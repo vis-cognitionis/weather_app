@@ -4,7 +4,7 @@ import { AbstractChartConfig } from "react-native-chart-kit/dist/AbstractChart";
 
 import { useTheme } from "src/core/init/themes/theme_context";
 import { windowWidth } from "../../common/constants/constants";
-import { useWeatherDatas } from "../../home/queries/useWeatherDatas";
+import { useWeatherDatas } from "../../common/queries/useWeatherDatas";
 import {
   groupWeatherDataByDate,
   today,

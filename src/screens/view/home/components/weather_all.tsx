@@ -8,7 +8,7 @@ import WeatherCurrent from "./weather-current/weather_current";
 import WeatherBackground from "./weather_background";
 import WeatherHourlyIcons from "./weather_hourly_icons";
 import { today, tomorrow, groupWeatherDataByDate } from "./constants/constants";
-import { useWeatherDatas } from "../queries/useWeatherDatas";
+import { useWeatherDatas } from "../../common/queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 

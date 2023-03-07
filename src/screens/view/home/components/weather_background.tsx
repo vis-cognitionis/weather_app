@@ -2,9 +2,11 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
+import { useWeatherCurrent } from "../../common/queries/useWeatherCurrent";
+import { WeatherCondition } from "../interfaces/interface_home";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
 import { windowHeight } from "../../common/constants/constants";
+import { useTheme } from "src/core/init/themes/theme_context";
 import {
   IconInfoClear,
   IconInfoClouds,
@@ -26,8 +28,6 @@ import {
   CloudsNightSvg,
   ClearNightSvg,
 } from "src/images/weather-svg/weather_svg";
-import { useWeatherCurrent } from "../queries/useWeatherCurrent";
-import { WeatherCondition } from "../interfaces/interface_home";
 import mainStore from "src/screens/view-model/main_store";
 
 const styles = StyleSheet.create({
