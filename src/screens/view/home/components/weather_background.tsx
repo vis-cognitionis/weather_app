@@ -166,7 +166,7 @@ const WeatherBackground = () => {
         <BackgroundSvg />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={[theme.typography.h2, { width: "130%" }]}>
+        <Text style={[theme.typography.h2, { width: "120%" }]}>
           {weatherSuggestions()}
         </Text>
         <View style={{ paddingTop: 5 }}>

@@ -10,6 +10,7 @@ import { today, tomorrow, groupWeatherDataByDate } from "./constants/constants";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
+import LazyLoading from "./lazy-loading/lazy_loading";
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -93,7 +94,7 @@ const WeatherAll = () => {
   };
 
   if (isLoading) {
-    return <Text>Loading...</Text>;
+    return <LazyLoading />;
   }
 
   const gapValue: number = windowHeight * 0.28;

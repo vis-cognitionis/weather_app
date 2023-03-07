@@ -57,22 +57,22 @@ const Detail = () => {
     switch (info.title) {
       case t("detail.wind"):
         return currentTemp?.wind.speed === undefined
-          ? "loading..."
+          ? t("loading")
           : currentTemp?.wind.speed + " " + t("detail.windUnit");
       case t("detail.humidity"):
         return currentTemp?.main.humidity === undefined
-          ? "loading"
+          ? t("loading")
           : "%" + currentTemp?.main.humidity;
       case t("detail.pressure"):
         return currentTemp?.main.pressure === undefined
-          ? "loading..."
+          ? t("loading")
           : currentTemp?.main.pressure + " " + "hPa";
       case t("detail.visibility"):
         return Number.isNaN(Number(currentTemp?.visibility))
-          ? "loading..."
+          ? t("loading")
           : Number(currentTemp?.visibility) / 1000 + " " + "km";
       default:
-        return "loading...";
+        return t("loading");
     }
   };
   const DetailCurrent = () => {
@@ -114,7 +114,13 @@ const Detail = () => {
             width={windowWidth - 60}
             title={t("detail.graphicTitle")}
             children={
-              isLoading ? <Text> loading...</Text> : <TemperatureChart />
+              isLoading ? (
+                <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
+                  {t("loading")}
+                </Text>
+              ) : (
+                <TemperatureChart />
+              )
             }
           />
 

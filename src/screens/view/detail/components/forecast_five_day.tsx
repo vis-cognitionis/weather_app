@@ -186,7 +186,9 @@ const ForecastFiveDay = () => {
       title={t("detail.forecastTitle")}
       children={
         isLoading ? (
-          <Text>Loading...</Text>
+          <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
+            {t("loading")}
+          </Text>
         ) : (
           Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => {
             return (

@@ -37,10 +37,20 @@ const WeatherCurrent = () => {
       }}
     >
       <View style={{ flexDirection: "column", gap: 4 }}>
-        <Text style={theme.typography.temperature}>
-          {Math.ceil(currentTemp?.main.temp!)}{" "}
-          {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
-        </Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={theme.typography.temperature}>
+            {Math.ceil(currentTemp?.main.temp!)}{" "}
+          </Text>
+          <Text
+            style={[
+              theme.typography.temperature,
+              { fontSize: 36, marginTop: 10 },
+            ]}
+          >
+            {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+          </Text>
+        </View>
+
         <Text children={mainStore.city} style={theme.typography.location} />
         <Text
           children={weatherDesc({ currentTemp: currentTemp! })}

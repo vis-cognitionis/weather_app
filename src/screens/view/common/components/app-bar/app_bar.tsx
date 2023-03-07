@@ -68,9 +68,11 @@ const AppBarStyles = ({
       backgroundColor: theme.palette.background.default,
       paddingLeft: 30,
       paddingRight: 20,
-      paddingVertical: windowHeight >= 852 ? 0 : 5,
+      paddingTop: windowHeight >= 852 ? 0 : 5,
+      paddingBottom: 0,
       height: windowHeight >= 852 ? 110 : "auto",
     },
+
     input: {
       alignSelf: "flex-end",
       paddingBottom: 1,
@@ -78,6 +80,7 @@ const AppBarStyles = ({
       textDecorationLine: editable ? "underline" : "none",
       textTransform: "capitalize",
     },
+
     locationContainer: {
       flexDirection: "row",
       height: 32,
@@ -85,6 +88,7 @@ const AppBarStyles = ({
       gap: 16,
       justifyContent: "space-between",
     },
+
     backButton: {
       width: 32,
       height: 32,
