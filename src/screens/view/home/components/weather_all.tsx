@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
+import LazyLoading from "./lazy-loading/lazy_loading";
 import WeatherCurrent from "./weather-current/weather_current";
 import WeatherBackground from "./weather_background";
 import WeatherHourlyIcons from "./weather_hourly_icons";
@@ -10,7 +11,6 @@ import { today, tomorrow, groupWeatherDataByDate } from "./constants/constants";
 import { useWeatherDatas } from "../queries/useWeatherDatas";
 import { windowHeight } from "../../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
-import LazyLoading from "./lazy-loading/lazy_loading";
 
 const styles = StyleSheet.create({
   weathersContainer: {
