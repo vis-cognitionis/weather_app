@@ -8,9 +8,8 @@ const PaletteColors: Palette = {
     light: "#40516F",
   },
   secondary: { main: "#F1AAAA", dark: "#EEF0F2", light: "#4E6388" },
-
   background: { default: "red", paper: "green" },
-  text: { disabled: "purple", primary: "#40516F", secondary: "#FCFCFC" },
+  text: { disabled: "#999999", primary: "#FFFFFF", secondary: "#40516F" },
 };
 
 const generalFontFamily: string = "Poppins-Regular";
@@ -50,6 +49,10 @@ const darkTheme: ThemeProps = {
 
     success: {
       main: "#6BB27B",
+    },
+
+    text: {
+      disabled: PaletteColors.text?.disabled,
     },
   },
   typography: {

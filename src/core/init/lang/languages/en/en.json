@@ -108,5 +108,6 @@
   },
   "about": {
     "content": "Hello, I developed this application as cross-platform using React Native. The application provides instant and 5-day forecasts to users using the Open Weather API. The data provided by the API includes hourly forecasts, which are updated every 3 hours. The purpose of the application is to allow users to easily access weather forecast information. The app offers a simple, user-friendly interface and displays weather forecasts in easily understandable graphs. The most up-to-date data provided by the Open Weather API is used to ensure the accuracy of weather forecasts. If you have any questions or feedback, please do not hesitate to contact me."
-  }
+  },
+  "defaultCityButton": "Set As Default"
 }

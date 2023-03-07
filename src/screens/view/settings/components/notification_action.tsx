@@ -7,13 +7,18 @@ import {
   Text,
   TextInput,
 } from "react-native";
+import { observer } from "mobx-react";
 
 import { IconClose, IconEdit } from "src/core/components/icons/custom_icons";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
+import mainStore from "src/screens/view-model/main_store";
 
 const NotificationAction = () => {
   const { theme } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { t } = useTranslate();
 
   const styles = StyleSheet.create({
     centeredView: {
@@ -23,10 +28,11 @@ const NotificationAction = () => {
       backgroundColor: "rgba(0,0,0,0.5)",
     },
     modalView: {
-      margin: 20,
+      width: "55%",
+      height: "18%",
       backgroundColor: theme.palette.background.default,
       borderRadius: 20,
-      padding: 35,
+      padding: 15,
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -38,26 +44,22 @@ const NotificationAction = () => {
       elevation: 5,
     },
     button: {
+      width: 120,
       borderRadius: 20,
       padding: 10,
       elevation: 2,
+      backgroundColor: theme.palette.primary.dark,
     },
-    buttonOpen: {
-      backgroundColor: "#F194FF",
-    },
-    buttonClose: {
-      backgroundColor: "#2196F3",
-    },
-    textStyle: {
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center",
-    },
-    modalText: {
+
+    modalInput: {
       marginBottom: 15,
-      borderColor: "red",
+      borderColor: theme.palette.primary.dark,
       borderWidth: 1,
       width: 120,
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderRadius: 32,
+      color: theme.palette.primary.dark,
     },
   });
 
@@ -65,11 +67,9 @@ const NotificationAction = () => {
     <>
       <Modal
         animationType="fade"
-        transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
+        transparent={true}
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -79,16 +79,28 @@ const NotificationAction = () => {
             >
               <IconClose />
             </Pressable>
-            <TextInput style={styles.modalText}></TextInput>
+            <TextInput
+              placeholderTextColor={theme.palette.text?.disabled}
+              placeholder={mainStore.city}
+              style={styles.modalInput}
+            />
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Set As Default</Text>
+              <Text
+                style={[
+                  theme.typography.caption,
+                  { color: theme.palette.primary.light },
+                ]}
+              >
+                {t("defaultCityButton")}
+              </Text>
             </Pressable>
           </View>
         </View>
       </Modal>
+
       <Pressable
         style={{
           padding: 2,
@@ -102,4 +114,4 @@ const NotificationAction = () => {
   );
 };
 
-export default NotificationAction;
+export default observer(NotificationAction);
