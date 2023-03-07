@@ -3,13 +3,14 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { View, Text, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
+import About from "./about";
 import mainStore from "src/screens/view-model/main_store";
 import LanguageAction from "./language_actions";
+import TermsAndServices from "./terms_and_services";
 import StatusbarSettings from "./statusbar_settings";
 import NotificationAction from "./notification_action";
-import { IconTerms, IconAbout } from "src/core/components/icons/custom_icons";
-import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
+import { useTheme } from "src/core/init/themes/theme_context";
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -33,9 +34,9 @@ const SectionContent = ({ content }: { content: string }) => {
       case t("settings.general.language"):
         return <LanguageAction />;
       case t("settings.terms"):
-        return <IconTerms />;
+        return <TermsAndServices />;
       case t("settings.about"):
-        return <IconAbout />;
+        return <About />;
       default:
         return null;
     }
