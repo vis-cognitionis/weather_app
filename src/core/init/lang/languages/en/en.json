@@ -36,7 +36,7 @@
   "settings": {
     "general": {
       "title": "General Settings",
-      "notifications": "Notifications",
+      "defaultCity": "Default City",
       "language": "Language",
       "statusBar": "Status Bar"
     },

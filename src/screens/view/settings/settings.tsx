@@ -14,7 +14,7 @@ const Settings = () => {
     {
       title: t("settings.general.title"),
       data: [
-        { name: t("settings.general.notifications") },
+        { name: t("settings.general.defaultCity") },
         { name: t("settings.general.language") },
         { name: t("settings.general.statusBar") },
       ],

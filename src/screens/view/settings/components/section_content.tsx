@@ -29,7 +29,7 @@ const SectionContent = ({ content }: { content: string }) => {
 
   const GeneralAction = () => {
     switch (content) {
-      case t("settings.general.notifications"):
+      case t("settings.general.defaultCity"):
         return <NotificationAction />;
       case t("settings.general.language"):
         return <LanguageAction />;

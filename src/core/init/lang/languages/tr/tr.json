@@ -36,7 +36,7 @@
   "settings": {
     "general": {
       "title": "Genel Ayarlar",
-      "notifications": "Bildirimler",
+      "defaultCity": "Varsayılan Şehir",
       "language": "Dil",
       "statusBar": "Durum Çubuğu"
     },
