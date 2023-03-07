@@ -24,7 +24,7 @@ const Container = ({
 }: {
   children: React.ReactNode;
   title: string;
-  width?: number;
+  width?: number | string;
 }) => {
   const { theme } = useTheme();
   return (

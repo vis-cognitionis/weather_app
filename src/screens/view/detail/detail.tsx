@@ -14,13 +14,13 @@ import Container from "./components/container";
 import TemperatureChart from "./components/temp_chart";
 import { useWeatherCurrent } from "../home/queries/useWeatherCurrent";
 import { useWeatherDatas } from "../home/queries/useWeatherDatas";
-import { windowWidth } from "../common/constants/constants";
+import { windowHeight, windowWidth } from "../common/constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const styles = StyleSheet.create({
   grid: {
-    justifyContent: "center",
+    justifyContent: "space-between",
     flexDirection: "row",
     flexWrap: "wrap",
     rowGap: 8,
@@ -75,7 +75,6 @@ const Detail = () => {
         return "loading...";
     }
   };
-
   const DetailCurrent = () => {
     return (
       <View style={styles.grid}>
@@ -83,6 +82,7 @@ const Detail = () => {
           return (
             <Container
               key={index}
+              width={windowWidth <= 375 ? "100%" : "48%"}
               children={
                 <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
                   {getDetailCurrentInfo(info)}
@@ -95,12 +95,15 @@ const Detail = () => {
       </View>
     );
   };
-
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.palette.background.default }}
     >
       <ScrollView
+        style={{
+          paddingHorizontal: "7%",
+          paddingTop: windowHeight > 736 ? 0 : "8%",
+        }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

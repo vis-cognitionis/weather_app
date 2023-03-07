@@ -8,7 +8,7 @@ import mainStore from "src/screens/view-model/main_store";
 import LanguageAction from "./language_actions";
 import TermsAndServices from "./terms_and_services";
 import StatusbarSettings from "./statusbar_settings";
-import NotificationAction from "./notification_action";
+import DefaultCity from "./default_city";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -30,7 +30,7 @@ const SectionContent = ({ content }: { content: string }) => {
   const GeneralAction = () => {
     switch (content) {
       case t("settings.general.defaultCity"):
-        return <NotificationAction />;
+        return <DefaultCity />;
       case t("settings.general.language"):
         return <LanguageAction />;
       case t("settings.terms"):

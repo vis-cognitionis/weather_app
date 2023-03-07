@@ -14,7 +14,7 @@ import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 import mainStore from "src/screens/view-model/main_store";
 
-const NotificationAction = () => {
+const DefaultCity = () => {
   const { theme } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -29,10 +29,11 @@ const NotificationAction = () => {
     },
     modalView: {
       width: "55%",
-      height: "22%",
       backgroundColor: theme.palette.background.default,
       borderRadius: 20,
-      padding: 15,
+      paddingHorizontal: 15,
+      paddingTop: 8,
+      paddingBottom: 20,
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -114,4 +115,4 @@ const NotificationAction = () => {
   );
 };
 
-export default observer(NotificationAction);
+export default observer(DefaultCity);

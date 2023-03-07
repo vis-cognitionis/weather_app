@@ -18,7 +18,8 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
       backgroundColor: theme.palette.background.default,
     },
     scrollView: {
-      paddingHorizontal: 30,
+      paddingHorizontal: "7%",
+      paddingTop: "5%",
     },
   });
 };
