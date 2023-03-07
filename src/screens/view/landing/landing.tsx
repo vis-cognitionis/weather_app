@@ -12,7 +12,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
     container: {
       flexDirection: "column",
-      gap: Platform.OS === "android" ? 15 : windowHeight * 0.05,
+      gap: Platform.OS === "android" ? 50 : windowHeight * 0.05,
       alignItems: "center",
       backgroundColor: theme.palette.background.default,
       height: "100%",
