@@ -69,7 +69,7 @@ const AppBarStyles = ({
       paddingLeft: 30,
       paddingRight: 20,
       paddingTop: windowHeight >= 852 ? 0 : 5,
-      paddingBottom: -20,
+      paddingBottom: -10,
       height: windowHeight >= 852 ? 110 : "auto",
     },
 
