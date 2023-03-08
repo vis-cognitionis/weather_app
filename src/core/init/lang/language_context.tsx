@@ -25,10 +25,10 @@ export const LanguageProvider = ({
   const [language, setLanguage] = useState<Language | null>(null);
 
   useEffect(() => {
-    const getDeviceLanguage = async () => {
+    (async () => {
       const lang = (await AsyncStorage.getItem("language")) as Language;
-
       let deviceLanguage: Language | undefined;
+
       try {
         deviceLanguage = (await NativeModules.I18nManager
           .localeIdentifier) as Language;
@@ -39,9 +39,7 @@ export const LanguageProvider = ({
       !deviceLanguage
         ? setLanguage(lang || Language.English)
         : setLanguage(lang || deviceLanguage);
-    };
-
-    getDeviceLanguage();
+    })();
   }, []);
 
   const handleSetLanguage = async (lang: Language) => {
