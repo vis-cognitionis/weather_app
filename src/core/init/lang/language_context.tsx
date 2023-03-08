@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { NativeModules } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export enum Language {
   English = "en",
@@ -21,22 +22,41 @@ export const LanguageProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [deviceLanguage, setDeviceLanguage] = useState<Language | null>(null);
+  const [language, setLanguage] = useState<Language | null>(null);
 
   useEffect(() => {
     const getDeviceLanguage = async () => {
-      const deviceLanguage = await NativeModules.I18nManager.localeIdentifier;
-      setDeviceLanguage(deviceLanguage);
+      const lang = (await AsyncStorage.getItem("language")) as Language;
+
+      let deviceLanguage: Language | undefined;
+      try {
+        deviceLanguage = (await NativeModules.I18nManager
+          .localeIdentifier) as Language;
+      } catch (error) {
+        console.error(error);
+      }
+
+      !deviceLanguage
+        ? setLanguage(lang || Language.English)
+        : setLanguage(lang || deviceLanguage);
     };
+
     getDeviceLanguage();
   }, []);
 
-  const [language, setLanguage] = useState<Language>(
-    deviceLanguage as Language
-  );
+  const handleSetLanguage = async (lang: Language) => {
+    await AsyncStorage.setItem("language", lang);
+    setLanguage(lang);
+  };
+
+  if (!language) {
+    return null;
+  }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider
+      value={{ language, setLanguage: handleSetLanguage }}
+    >
       {children}
     </LanguageContext.Provider>
   );
