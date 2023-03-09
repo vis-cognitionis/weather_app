@@ -22,34 +22,36 @@ export const LanguageProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [language, setLanguage] = useState<Language | null>(null);
+  const [deviceLanguage, setDeviceLanguage] = useState<Language | null>(null);
 
   useEffect(() => {
     (async () => {
-      const lang = (await AsyncStorage.getItem("language")) as Language;
-      let deviceLanguage: Language | undefined;
-
-      try {
-        deviceLanguage = (await NativeModules.I18nManager
-          .localeIdentifier) as Language;
-      } catch (error) {
-        console.error(error);
+      const languageFromStorage = await AsyncStorage.getItem("language");
+      if (languageFromStorage) {
+        setDeviceLanguage(languageFromStorage as Language);
+      } else {
+        const deviceLanguage = await NativeModules.I18nManager.localeIdentifier;
+        setDeviceLanguage(deviceLanguage as Language);
       }
-
-      !deviceLanguage
-        ? setLanguage(lang || Language.English)
-        : setLanguage(lang || deviceLanguage);
     })();
+  }, []);
+
+  const [language, setLanguage] = useState<Language>(
+    deviceLanguage || Language.English
+  );
+
+  useEffect(() => {
+    AsyncStorage.getItem("language").then((language) => {
+      if (language) {
+        setLanguage(language as Language);
+      }
+    });
   }, []);
 
   const handleSetLanguage = async (lang: Language) => {
     await AsyncStorage.setItem("language", lang);
     setLanguage(lang);
   };
-
-  if (!language) {
-    return null;
-  }
 
   return (
     <LanguageContext.Provider
