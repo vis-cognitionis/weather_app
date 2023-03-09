@@ -12,12 +12,12 @@ import {
   IconSearch,
 } from "src/core/components/icons/custom_icons";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { windowHeight } from "../../constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
+import lightTheme from "src/core/init/themes/styles/light";
 import darkTheme from "src/core/init/themes/styles/dark";
 import mainStore from "src/screens/view-model/main_store";
-import lightTheme from "src/core/init/themes/styles/light";
-import { windowHeight } from "../../constants/constants";
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;
