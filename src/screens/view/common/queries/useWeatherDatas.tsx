@@ -3,9 +3,10 @@ import { Alert } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
-import mainStore from "src/screens/view-model/main_store";
-import { WeatherDatas } from "../interfaces/interface_home";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
+import { WeatherDatas } from "../../home/interfaces/interface_home";
+import mainStore from "src/screens/view-model/main_store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
@@ -22,10 +23,14 @@ export const useWeatherDatas = () => {
     ["weatherDatas", mainStore.city, mainStore.weatherUnit],
     async () => {
       try {
+        const weatherUnit =
+          ((await AsyncStorage.getItem("unit")) as string) ||
+          mainStore.weatherUnit;
+        mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
           "https://api.openweathermap.org/data/2.5/forecast?q=" +
             mainStore.city +
-            `&units=${mainStore.weatherUnit}&appid=` +
+            `&units=${weatherUnit}&appid=` +
             "4ece27e8959cae958f124f7316c6e352"
         );
         return response.data;

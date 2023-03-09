@@ -1,14 +1,15 @@
 import React from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, StyleSheet } from "react-native";
 import { observer } from "mobx-react";
 
 import About from "./about";
 import mainStore from "src/screens/view-model/main_store";
+import DefaultCity from "./default_city";
 import LanguageAction from "./language_actions";
 import TermsAndServices from "./terms_and_services";
 import StatusbarSettings from "./statusbar_settings";
-import DefaultCity from "./default_city";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -62,6 +63,10 @@ const SectionContent = ({ content }: { content: string }) => {
       />
     );
   };
+  const toggleWeatherUnit = async (unit: string) => {
+    await AsyncStorage.setItem("unit", unit);
+    mainStore.setWeatherUnit(unit);
+  };
 
   return (
     <View style={styles.listContainer}>
@@ -73,7 +78,7 @@ const SectionContent = ({ content }: { content: string }) => {
         <CustomCheckbox
           isChecked={mainStore.weatherUnit === "metric"}
           onPress={() => {
-            mainStore.setWeatherUnit("metric");
+            toggleWeatherUnit("metric");
           }}
           disabled={mainStore.weatherUnit === "metric"}
         />
@@ -81,7 +86,7 @@ const SectionContent = ({ content }: { content: string }) => {
         <CustomCheckbox
           isChecked={mainStore.weatherUnit === "imperial"}
           onPress={() => {
-            mainStore.setWeatherUnit("imperial");
+            toggleWeatherUnit("imperial");
           }}
           disabled={mainStore.weatherUnit === "imperial"}
         />
