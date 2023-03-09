@@ -6,6 +6,11 @@ import ThemeProps from "./interface/interfaces";
 import darkTheme from "./styles/dark";
 import lightTheme from "./styles/light";
 
+enum ThemeEnum {
+  Dark = "dark",
+  Light = "light",
+}
+
 interface ThemeContext {
   theme: ThemeProps;
   setTheme: (theme: ThemeProps) => void;
@@ -23,13 +28,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     (async () => {
       const themeFromStorage = await AsyncStorage.getItem("userTheme");
 
-      if (themeFromStorage !== null && themeFromStorage === "light") {
+      if (themeFromStorage !== null && themeFromStorage === ThemeEnum.Light) {
         setTheme(lightTheme);
-      } else if (themeFromStorage === "dark") {
+      } else if (themeFromStorage === ThemeEnum.Dark) {
         setTheme(darkTheme);
       } else {
         const colorScheme = Appearance.getColorScheme();
-        if (colorScheme === "dark") {
+        if (colorScheme === ThemeEnum.Dark) {
           setTheme(darkTheme);
         } else {
           setTheme(lightTheme);
@@ -41,7 +46,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const handleSetTheme = async (theme: ThemeProps) => {
     try {
       setTheme(theme);
-      const setUserTheme = theme === lightTheme ? "light" : "dark";
+      const setUserTheme =
+        theme === lightTheme ? ThemeEnum.Light : ThemeEnum.Dark;
       await AsyncStorage.setItem("userTheme", setUserTheme);
     } catch (e) {
       console.log("Error setting theme to storage:", e);
