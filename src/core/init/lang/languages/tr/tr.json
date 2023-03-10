@@ -91,9 +91,10 @@
   },
   "error": {
     "title": "Hata",
-    "validCity": "Lütfen geçerli bir şehir arayınız",
+    "validCity": "Lütfen geçerli bir şehir yazın",
     "unexpected": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin",
-    "buttonName": "TAMAM"
+    "buttonName": "TAMAM",
+    "info": "Varsayılan şehir sıfırlandı"
   },
   "terms&services": {
     "welcome": "Hoşgeldiniz!\n",

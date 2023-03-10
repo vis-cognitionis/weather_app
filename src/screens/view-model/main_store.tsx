@@ -18,6 +18,7 @@ class MainStore {
   currentDate: Date = new Date();
   is404Err: boolean = false;
   inputCityValue: string = this.defaultCity;
+  showNotification: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -87,6 +88,10 @@ class MainStore {
 
   setInputCityValue(value: string) {
     this.inputCityValue = value;
+  }
+
+  setShowNotification(show: boolean) {
+    this.showNotification = show;
   }
 }
 

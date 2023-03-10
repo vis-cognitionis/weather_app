@@ -1,8 +1,11 @@
 import React from "react";
 import { SafeAreaView, SectionList } from "react-native";
+import { observer } from "mobx-react";
 
+import mainStore from "src/screens/view-model/main_store";
 import SectionTitle from "./components/section_title";
 import SectionContent from "./components/section_content";
+import NotificationInfo from "./components/notification_info";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -39,6 +42,7 @@ const Settings = () => {
         backgroundColor: theme.palette.background.default,
       }}
     >
+      {mainStore.showNotification && <NotificationInfo />}
       <SectionList
         style={{
           paddingLeft: 60,
@@ -53,4 +57,4 @@ const Settings = () => {
     </SafeAreaView>
   );
 };
-export default Settings;
+export default observer(Settings);

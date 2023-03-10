@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { WeatherDatas } from "../../home/interfaces/interface_home";
 import mainStore from "src/screens/view-model/main_store";
+import { StackScreenNames } from "src/navigation/interfaces/interfaces";
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
@@ -59,11 +60,12 @@ export const useWeatherDatas = () => {
         mainStore.setInputValue(mainStore.defaultCity);
         mainStore.setIs404Err(true);
 
-        if (mainStore.currentTab === "Settings") {
+        if (mainStore.currentTab === StackScreenNames.Settings) {
           mainStore.setCity(mainStore.firstDefaultCity);
           mainStore.setInputValue(mainStore.firstDefaultCity);
           mainStore.setDefaultCity(mainStore.firstDefaultCity);
           mainStore.setInputCityValue(mainStore.firstDefaultCity);
+          mainStore.setShowNotification(true);
         }
 
         fetchError &&

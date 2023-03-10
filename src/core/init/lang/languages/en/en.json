@@ -91,9 +91,10 @@
   },
   "error": {
     "title": "Error",
-    "validCity": "Please search for a valid city",
+    "validCity": "Please enter a valid city",
     "unexpected": "Unexpected error occurred. Please try again later",
-    "buttonName": "OK"
+    "buttonName": "OK",
+    "info": "The default city has been reset"
   },
   "terms&services": {
     "welcome": "Welcome!\n",
