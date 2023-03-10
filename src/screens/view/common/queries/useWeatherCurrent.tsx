@@ -55,8 +55,8 @@ export const useWeatherCurrent = () => {
       enabled: true,
 
       onError: () => {
-        mainStore.setCity("İstanbul");
-        mainStore.setInputValue("İstanbul");
+        mainStore.setCity(mainStore.defaultCity);
+        mainStore.setInputValue(mainStore.defaultCity);
 
         fetchError &&
           Alert.alert(

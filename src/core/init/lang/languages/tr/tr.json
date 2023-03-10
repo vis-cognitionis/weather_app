@@ -110,6 +110,6 @@
   "about": {
     "content": "Merhaba, bu uygulamayı React Native kullanarak cross-platform olarak geliştirdim. Uygulama, Open Weather API'sini kullanarak kullanıcılara anlık ve 5 günlük hava tahmini sunar. API'nin sunduğu veriler arasında saatlik tahminler de bulunur ve bu tahminler 3'er saatlik periyotlarda güncellenir. Uygulamanın amacı, kullanıcıların hava tahmini bilgilerine kolayca erişmelerini sağlamaktır. Uygulama, basit, kullanıcı dostu bir arayüz sunar ve hava durumu tahminlerini kolayca anlaşılabilir grafiklerle gösterir. Hava durumu tahminlerinin doğruluğunu sağlamak için Open Weather API tarafından sağlanan en güncel veriler kullanılır. Herhangi bir sorunuz veya geri bildiriminiz varsa, lütfen benimle iletişime geçmekten çekinmeyin."
   },
-  "defaultCityButton": "Ayarla",
+  "defaultCityButton": "Değiştir",
   "loading": "yükleniyor..."
 }

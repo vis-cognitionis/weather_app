@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Alert } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { WeatherDatas } from "../../home/interfaces/interface_home";
 import mainStore from "src/screens/view-model/main_store";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
@@ -55,8 +55,8 @@ export const useWeatherDatas = () => {
       enabled: true,
 
       onError: () => {
-        mainStore.setCity("İstanbul");
-        mainStore.setInputValue("İstanbul");
+        mainStore.setCity(mainStore.defaultCity);
+        mainStore.setInputValue(mainStore.defaultCity);
 
         fetchError &&
           Alert.alert(

@@ -15,7 +15,7 @@ import { useTheme } from "src/core/init/themes/theme_context";
 const styles = StyleSheet.create({
   weathersContainer: {
     flexDirection: "column",
-    gap: 42,
+    gap: 28,
   },
   rowContainer: {
     flexDirection: "row",

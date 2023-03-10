@@ -13,6 +13,7 @@ import { IconClose, IconEdit } from "src/core/components/icons/custom_icons";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 import mainStore from "src/screens/view-model/main_store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DefaultCity = () => {
   const { theme } = useTheme();
@@ -61,9 +62,19 @@ const DefaultCity = () => {
       paddingHorizontal: 10,
       paddingVertical: 8,
       borderRadius: 32,
-      color: theme.palette.primary.dark,
+      color: theme.palette.text?.disabled,
     },
   });
+
+  const [inputCityValue, setInputCityValue] = useState<string>(
+    mainStore.defaultCity
+  );
+
+  const handleSetDefaultCity = async () => {
+    setModalVisible(!modalVisible);
+    await AsyncStorage.setItem("defaultCity", inputCityValue);
+    mainStore.setDefaultCity(inputCityValue);
+  };
 
   return (
     <>
@@ -82,14 +93,12 @@ const DefaultCity = () => {
               <IconClose />
             </Pressable>
             <TextInput
-              placeholderTextColor={theme.palette.text?.disabled}
-              placeholder={mainStore.city}
+              autoCorrect={false}
+              value={inputCityValue}
+              onChangeText={(text) => setInputCityValue(text)}
               style={styles.modalInput}
             />
-            <Pressable
-              style={styles.button}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
+            <Pressable style={styles.button} onPress={handleSetDefaultCity}>
               <Text
                 style={[
                   theme.typography.caption,
