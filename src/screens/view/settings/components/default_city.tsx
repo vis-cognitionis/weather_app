@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -62,18 +62,26 @@ const DefaultCity = () => {
       paddingHorizontal: 10,
       paddingVertical: 8,
       borderRadius: 32,
-      color: theme.palette.text?.disabled,
     },
   });
 
   const [inputCityValue, setInputCityValue] = useState<string>(
     mainStore.defaultCity
   );
+  const [editable, setEditable] = useState<boolean>(false);
+  const inputRef = useRef<TextInput>(null);
+
+  useEffect(() => {
+    if (editable) {
+      inputRef.current?.focus();
+    }
+  }, [editable]);
 
   const handleSetDefaultCity = async () => {
     setModalVisible(!modalVisible);
     await AsyncStorage.setItem("defaultCity", inputCityValue);
     mainStore.setDefaultCity(inputCityValue);
+    setEditable(false);
   };
 
   return (
@@ -93,11 +101,21 @@ const DefaultCity = () => {
               <IconClose />
             </Pressable>
             <TextInput
+              ref={inputRef}
+              editable={editable}
               autoCorrect={false}
               value={inputCityValue}
+              onPressIn={() => setEditable(true)}
               onChangeText={(text) => setInputCityValue(text)}
               onSubmitEditing={handleSetDefaultCity}
-              style={styles.modalInput}
+              style={[
+                styles.modalInput,
+                {
+                  color: editable
+                    ? theme.palette.primary.dark
+                    : theme.palette.text?.disabled,
+                },
+              ]}
             />
             <Pressable style={styles.button} onPress={handleSetDefaultCity}>
               <Text
