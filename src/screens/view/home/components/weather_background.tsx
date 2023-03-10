@@ -83,7 +83,7 @@ const WeatherBackground = () => {
       case WeatherCondition.Tornado:
         return <TornadoSvg />;
       default:
-        return <ClearSvg />;
+        return null;
     }
   };
 
