@@ -50,7 +50,6 @@ const DefaultCity = () => {
       borderRadius: 20,
       padding: 10,
       elevation: 2,
-      backgroundColor: theme.palette.primary.dark,
       alignItems: "center",
     },
 
@@ -82,19 +81,23 @@ const DefaultCity = () => {
     setEditable(false);
   };
 
+  const handleCloseModal = () => {
+    setModalVisible(!modalVisible);
+    setEditable(false);
+  };
   return (
     <>
       <Modal
         animationType="fade"
         visible={modalVisible}
         transparent={true}
-        onRequestClose={() => setModalVisible(!modalVisible)}
+        onRequestClose={handleCloseModal}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
               style={{ alignSelf: "flex-end" }}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={handleCloseModal}
             >
               <IconClose />
             </Pressable>
@@ -115,7 +118,18 @@ const DefaultCity = () => {
                 },
               ]}
             />
-            <Pressable style={styles.button} onPress={handleSetDefaultCity}>
+            <Pressable
+              disabled={!editable}
+              style={[
+                styles.button,
+                {
+                  backgroundColor: !editable
+                    ? theme.palette.secondary?.main
+                    : theme.palette.primary.dark,
+                },
+              ]}
+              onPress={handleSetDefaultCity}
+            >
               <Text
                 style={[
                   theme.typography.caption,

@@ -60,7 +60,6 @@ export const useWeatherDatas = () => {
         mainStore.setIs404Err(true);
 
         if (mainStore.currentTab === "Settings") {
-          console.log("girdi");
           mainStore.setCity(mainStore.firstDefaultCity);
           mainStore.setInputValue(mainStore.firstDefaultCity);
           mainStore.setDefaultCity(mainStore.firstDefaultCity);
@@ -71,7 +70,12 @@ export const useWeatherDatas = () => {
           Alert.alert(
             t("error.title"),
             t("error.validCity"),
-            [{ text: "Tamam", onPress: () => setFetchError(false) }],
+            [
+              {
+                text: t("error.buttonName"),
+                onPress: () => setFetchError(false),
+              },
+            ],
             { cancelable: false }
           );
         // networkError && Alert.alert("internet yok", "net yok");

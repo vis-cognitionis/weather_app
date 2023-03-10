@@ -3,7 +3,7 @@ import ThemeProps, { Palette } from "../interface/interfaces";
 
 const PaletteColors: Palette = {
   primary: { main: "#FCFCFC", dark: "#40516F", light: "#FCFCFC" },
-  secondary: { main: "#BF6767", dark: "#4E6388", light: "#EEF0F2" },
+  secondary: { main: "#8C9DBC", dark: "#4E6388", light: "#EEF0F2" },
   background: { default: "red", paper: "green" },
   text: { disabled: "#999999", primary: "#FFFFFF", secondary: "#40516F" },
 };

@@ -7,7 +7,7 @@ const PaletteColors: Palette = {
     dark: "#FCFCFC",
     light: "#40516F",
   },
-  secondary: { main: "#F1AAAA", dark: "#EEF0F2", light: "#4E6388" },
+  secondary: { main: "#BDBDBD", dark: "#EEF0F2", light: "#4E6388" },
   background: { default: "red", paper: "green" },
   text: { disabled: "#999999", primary: "#40516F", secondary: "#FCFCFC" },
 };
