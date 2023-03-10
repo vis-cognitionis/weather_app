@@ -1,5 +1,6 @@
 {
   "home": {
+    "current": "current weather",
     "welcome": "Welcome",
     "title": "Home",
     "minTemp": "M",

@@ -7,10 +7,12 @@ import weatherDesc from "./weather_infos";
 import WeatherCurrentIcons from "./weather_current_icons";
 import { useWeatherCurrent } from "src/screens/view/common/queries/useWeatherCurrent";
 import { useTheme } from "src/core/init/themes/theme_context";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const WeatherCurrent = () => {
   const { theme } = useTheme();
   const { currentTemp } = useWeatherCurrent();
+  const { t } = useTranslate();
 
   const unixTime = currentTemp?.dt!;
   const cityTimezoneOffset = currentTemp?.timezone! / 3600;
@@ -57,7 +59,7 @@ const WeatherCurrent = () => {
           style={theme.typography.title2}
         />
         <Text style={theme.typography.caption}>
-          {dateStr + " | current weather"}
+          {dateStr + ` | ${t("home.current")}`}
         </Text>
       </View>
       <WeatherCurrentIcons currentTemp={currentTemp!} />
