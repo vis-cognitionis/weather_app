@@ -96,6 +96,7 @@ const DefaultCity = () => {
               autoCorrect={false}
               value={inputCityValue}
               onChangeText={(text) => setInputCityValue(text)}
+              onSubmitEditing={handleSetDefaultCity}
               style={styles.modalInput}
             />
             <Pressable style={styles.button} onPress={handleSetDefaultCity}>
