@@ -8,12 +8,12 @@ import {
   TextInput,
 } from "react-native";
 import { observer } from "mobx-react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { IconClose, IconEdit } from "src/core/components/icons/custom_icons";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 import mainStore from "src/screens/view-model/main_store";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DefaultCity = () => {
   const { theme } = useTheme();
