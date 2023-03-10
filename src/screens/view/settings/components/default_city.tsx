@@ -50,6 +50,7 @@ const DefaultCity = () => {
       padding: 10,
       elevation: 2,
       backgroundColor: theme.palette.primary.dark,
+      alignItems: "center",
     },
 
     modalInput: {
