@@ -9,7 +9,7 @@ class MainStore {
   navigateLanding: boolean = false;
   hideStatusBar: boolean = false;
   weatherUnit: string = "metric";
-  city = "Istanbul";
+  city: string = "Istanbul";
   timeOfDay: string = "";
   currentDate: Date = new Date();
   inputValue: string = this.city;
