@@ -55,9 +55,6 @@ export const useWeatherCurrent = () => {
       enabled: true,
 
       onError: () => {
-        mainStore.setCity(mainStore.defaultCity);
-        mainStore.setInputValue(mainStore.defaultCity);
-
         fetchError &&
           Alert.alert(
             t("error.title"),

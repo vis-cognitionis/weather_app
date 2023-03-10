@@ -3,6 +3,7 @@ import { StackScreenNames } from "src/navigation/interfaces/interfaces";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class MainStore {
+  firstDefaultCity: string = "Istanbul";
   defaultCity: string = "";
   city: string = this.defaultCity;
   inputValue: string = this.city;
@@ -15,13 +16,16 @@ class MainStore {
   weatherUnit: string = "metric";
   timeOfDay: string = "";
   currentDate: Date = new Date();
+  is404Err: boolean = false;
+  inputCityValue: string = this.defaultCity;
 
   constructor() {
     makeAutoObservable(this);
     AsyncStorage.getItem("defaultCity").then((defaultCity) => {
-      this.defaultCity = defaultCity || "Istanbul";
+      this.defaultCity = defaultCity || this.firstDefaultCity;
       this.city = this.defaultCity;
       this.inputValue = this.city;
+      this.inputCityValue = this.defaultCity;
     });
   }
 
@@ -73,8 +77,17 @@ class MainStore {
     this.defaultCity = defaultCity;
     this.city = defaultCity;
     this.inputValue = defaultCity;
+    this.inputCityValue = this.defaultCity;
     await AsyncStorage.setItem("defaultCity", defaultCity);
   };
+
+  setIs404Err(err: boolean) {
+    this.is404Err = err;
+  }
+
+  setInputCityValue(value: string) {
+    this.inputCityValue = value;
+  }
 }
 
 const mainStore = new MainStore();

@@ -57,6 +57,15 @@ export const useWeatherDatas = () => {
       onError: () => {
         mainStore.setCity(mainStore.defaultCity);
         mainStore.setInputValue(mainStore.defaultCity);
+        mainStore.setIs404Err(true);
+
+        if (mainStore.currentTab === "Settings") {
+          console.log("girdi");
+          mainStore.setCity(mainStore.firstDefaultCity);
+          mainStore.setInputValue(mainStore.firstDefaultCity);
+          mainStore.setDefaultCity(mainStore.firstDefaultCity);
+          mainStore.setInputCityValue(mainStore.firstDefaultCity);
+        }
 
         fetchError &&
           Alert.alert(

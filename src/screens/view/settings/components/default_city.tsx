@@ -65,9 +65,6 @@ const DefaultCity = () => {
     },
   });
 
-  const [inputCityValue, setInputCityValue] = useState<string>(
-    mainStore.defaultCity
-  );
   const [editable, setEditable] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
 
@@ -79,8 +76,9 @@ const DefaultCity = () => {
 
   const handleSetDefaultCity = async () => {
     setModalVisible(!modalVisible);
-    await AsyncStorage.setItem("defaultCity", inputCityValue);
-    mainStore.setDefaultCity(inputCityValue);
+    await AsyncStorage.setItem("defaultCity", mainStore.inputCityValue);
+    mainStore.setDefaultCity(mainStore.inputCityValue);
+    mainStore.setCity(mainStore.inputCityValue);
     setEditable(false);
   };
 
@@ -104,9 +102,9 @@ const DefaultCity = () => {
               ref={inputRef}
               editable={editable}
               autoCorrect={false}
-              value={inputCityValue}
+              value={mainStore.inputCityValue}
               onPressIn={() => setEditable(true)}
-              onChangeText={(text) => setInputCityValue(text)}
+              onChangeText={(text) => mainStore.setInputCityValue(text)}
               onSubmitEditing={handleSetDefaultCity}
               style={[
                 styles.modalInput,
