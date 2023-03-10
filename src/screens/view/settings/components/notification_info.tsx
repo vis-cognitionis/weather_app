@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Animated, View, Text, StyleSheet } from "react-native";
+
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
-
 import mainStore from "src/screens/view-model/main_store";
 
 const NotificationInfo = () => {
   const { t } = useTranslate();
   const { theme } = useTheme();
-
   const [animation] = useState<Animated.Value>(new Animated.Value(0));
 
   const styles = StyleSheet.create({

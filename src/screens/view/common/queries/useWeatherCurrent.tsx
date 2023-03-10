@@ -24,8 +24,7 @@ export const useWeatherCurrent = () => {
     async () => {
       try {
         const weatherUnit =
-          ((await AsyncStorage.getItem("unit")) as string) ||
-          mainStore.weatherUnit;
+          (await AsyncStorage.getItem("unit")) || mainStore.weatherUnit;
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
           "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -53,23 +52,6 @@ export const useWeatherCurrent = () => {
     },
     {
       enabled: true,
-
-      onError: () => {
-        fetchError &&
-          Alert.alert(
-            t("error.title"),
-            t("error.validCity"),
-            [
-              {
-                text: t("error.buttonName"),
-                onPress: () => setFetchError(false),
-              },
-            ],
-            { cancelable: false }
-          );
-        // networkError && Alert.alert("internet yok", "net yok");
-        // requestError && Alert.alert("çok sorgu", "çok sorgu");
-      },
     }
   );
 

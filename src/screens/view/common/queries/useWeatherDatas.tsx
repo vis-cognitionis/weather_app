@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { Alert } from "react-native";
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { WeatherDatas } from "../../home/interfaces/interface_home";
-import mainStore from "src/screens/view-model/main_store";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { WeatherDatas } from "../../home/interfaces/interface_home";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
+import mainStore from "src/screens/view-model/main_store";
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
-  const [networkError, setNetworkError] = useState<boolean>(false);
+  // const [networkError, setNetworkError] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<boolean>(false);
   const [requestError, setRequestError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+  console.log(mainStore.networkError);
   const {
     data: weatherDatas,
     isLoading,
@@ -25,8 +25,7 @@ export const useWeatherDatas = () => {
     async () => {
       try {
         const weatherUnit =
-          ((await AsyncStorage.getItem("unit")) as string) ||
-          mainStore.weatherUnit;
+          (await AsyncStorage.getItem("unit")) || mainStore.weatherUnit;
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
           "https://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -39,14 +38,15 @@ export const useWeatherDatas = () => {
         const axiosError = error as AxiosError;
 
         if (axiosError.code === "ERR_NETWORK") {
-          setNetworkError(true);
+          if (!mainStore.networkError) {
+            mainStore.setNetworkError(true);
+          }
         } else if (axiosError.response?.status === 404) {
           setFetchError(true);
         } else if (axiosError.response?.status === 429) {
           setRequestError(true);
         } else {
           setErrorMessage("Unexpected error occurred. Please try again later.");
-          console.log(errorMessage);
         }
 
         throw error;
@@ -68,23 +68,49 @@ export const useWeatherDatas = () => {
           mainStore.setShowNotification(true);
         }
 
-        fetchError &&
+        if (mainStore.networkError) {
+          Alert.alert(
+            t("error.title"),
+            t("error.network"),
+            [
+              {
+                text: t("error.buttonName"),
+              },
+            ],
+            { cancelable: false }
+          );
+        } else if (fetchError) {
           Alert.alert(
             t("error.title"),
             t("error.validCity"),
             [
               {
                 text: t("error.buttonName"),
-                onPress: () => setFetchError(false),
               },
             ],
             { cancelable: false }
           );
-        // networkError && Alert.alert("internet yok", "net yok");
-        // requestError && Alert.alert("çok sorgu", "çok sorgu");
+        } else if (requestError) {
+          Alert.alert(
+            t("error.title"),
+            t("error.manyRequest"),
+            [
+              {
+                text: t("error.buttonName"),
+              },
+            ],
+            { cancelable: false }
+          );
+        }
       },
     }
   );
+
+  useEffect(() => {
+    if (errorMessage !== null) {
+      console.log(errorMessage);
+    }
+  }, [errorMessage]);
 
   return { weatherDatas, isLoading, refetch };
 };

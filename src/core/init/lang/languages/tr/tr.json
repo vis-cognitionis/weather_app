@@ -93,8 +93,11 @@
     "title": "Hata",
     "validCity": "Lütfen geçerli bir şehir yazın",
     "unexpected": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin",
-    "buttonName": "TAMAM",
-    "info": "Varsayılan şehir sıfırlandı"
+    "buttonName": "Tamam",
+    "info": "Varsayılan şehir sıfırlandı",
+    "manyRequest": "Fazla sorgu! \n Daha sonra tekrar deneyin",
+    "network": "Ağ bağlantısı bulunamadı",
+    "noNetwork": "İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin ve tekrar deneyin"
   },
   "terms&services": {
     "welcome": "Hoşgeldiniz!\n",

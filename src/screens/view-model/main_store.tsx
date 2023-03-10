@@ -19,6 +19,7 @@ class MainStore {
   is404Err: boolean = false;
   inputCityValue: string = this.defaultCity;
   showNotification: boolean = false;
+  networkError: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -92,6 +93,10 @@ class MainStore {
 
   setShowNotification(show: boolean) {
     this.showNotification = show;
+  }
+
+  setNetworkError(network: boolean) {
+    this.networkError = network;
   }
 }
 
