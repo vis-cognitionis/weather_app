@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Animated, View, Text } from "react-native";
+import { Animated, View, Text, StyleSheet } from "react-native";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -10,6 +10,26 @@ const NotificationInfo = () => {
   const { theme } = useTheme();
 
   const [animation] = useState<Animated.Value>(new Animated.Value(0));
+
+  const styles = StyleSheet.create({
+    container: {
+      display: "flex",
+      alignSelf: "center",
+      position: "absolute",
+      bottom: -40,
+      width: "auto",
+    },
+    animStyle: {
+      backgroundColor: theme.palette.primary.dark,
+      paddingVertical: 12,
+      paddingHorizontal: 18,
+      borderRadius: 20,
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 999,
+    },
+  });
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -40,30 +60,10 @@ const NotificationInfo = () => {
     ],
     opacity: animation,
   };
+
   return (
-    <View
-      style={{
-        position: "absolute",
-        bottom: -40,
-        width: "auto",
-        left: "25%",
-      }}
-    >
-      <Animated.View
-        style={[
-          {
-            backgroundColor: theme.palette.primary.dark,
-            paddingVertical: 12,
-            paddingHorizontal: 18,
-            borderRadius: 20,
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 999,
-          },
-          animationStyle,
-        ]}
-      >
+    <View style={styles.container}>
+      <Animated.View style={[styles.animStyle, animationStyle]}>
         <Text
           style={[
             theme.typography.caption,
