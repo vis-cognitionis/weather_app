@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, Linking } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import RNRestart from "react-native-restart";
 
 import { IconNoNetwork } from "src/core/components/icons/custom_icons";
@@ -48,7 +48,6 @@ const NetworkError = () => {
       <Pressable
         onPress={() => {
           RNRestart.restart();
-          Linking.openSettings();
         }}
       >
         <View style={styles.refreshButton}>
