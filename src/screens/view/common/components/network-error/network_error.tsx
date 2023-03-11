@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  Linking,
+  Platform,
+} from "react-native";
 import RNRestart from "react-native-restart";
 
 import { IconNoNetwork } from "src/core/components/icons/custom_icons";
@@ -39,6 +46,18 @@ const NetworkError = () => {
     },
   });
 
+  const openWifiSettings = () => {
+    let url = "";
+    if (Platform.OS === "android") {
+      url = "intent://wifi";
+    } else if (Platform.OS === "ios") {
+      url = "App-Prefs:root=WIFI";
+    }
+    Linking.openURL(url).catch((err) =>
+      console.error("Could not open Wi-Fi settings!", err)
+    );
+  };
+
   return (
     <View style={styles.container}>
       <IconNoNetwork />
@@ -48,6 +67,7 @@ const NetworkError = () => {
       <Pressable
         onPress={() => {
           RNRestart.restart();
+          openWifiSettings();
         }}
       >
         <View style={styles.refreshButton}>
