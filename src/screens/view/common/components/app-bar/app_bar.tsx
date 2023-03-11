@@ -130,13 +130,22 @@ const AppBar = () => {
   }, [editable]);
 
   const handleSearch = () => {
-    mainStore.setCity(mainStore.inputValue);
-    setEditable(false);
-    inputRef.current?.blur();
+    if (mainStore.inputValue.trim().length !== 0) {
+      mainStore.setCity(mainStore.inputValue);
+      setEditable(false);
+      inputRef.current?.blur();
+    }
   };
 
   const handleEditPress = () => {
     setEditable(true);
+  };
+
+  const handleOnBlur = () => {
+    if (mainStore.inputValue.trim().length === 0) {
+      setEditable(false);
+      mainStore.setInputValue(mainStore.city);
+    }
   };
 
   return (
@@ -151,8 +160,11 @@ const AppBar = () => {
             onPressIn={handleEditPress}
             onChangeText={(text) => mainStore.setInputValue(text)}
             onSubmitEditing={() => {
-              mainStore.inputValue.length !== 0 && handleSearch();
+              if (mainStore.inputValue.trim().length !== 0) {
+                handleSearch();
+              }
             }}
+            onBlur={handleOnBlur}
             style={[styles.input, theme.typography.caption]}
           />
           {editable ? (
