@@ -38,9 +38,7 @@ export const useWeatherDatas = () => {
         const axiosError = error as AxiosError;
 
         if (axiosError.code === "ERR_NETWORK") {
-          if (!mainStore.networkError) {
-            mainStore.setNetworkError(true);
-          }
+          mainStore.setNetworkError(true);
         } else if (axiosError.response?.status === 404) {
           setFetchError(true);
         } else if (axiosError.response?.status === 429) {
@@ -68,18 +66,7 @@ export const useWeatherDatas = () => {
           mainStore.setShowNotification(true);
         }
 
-        if (mainStore.networkError) {
-          Alert.alert(
-            t("error.title"),
-            t("error.network"),
-            [
-              {
-                text: t("error.buttonName"),
-              },
-            ],
-            { cancelable: false }
-          );
-        } else if (fetchError) {
+        if (fetchError) {
           Alert.alert(
             t("error.title"),
             t("error.validCity"),

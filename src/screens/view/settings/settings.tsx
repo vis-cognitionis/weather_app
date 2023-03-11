@@ -4,10 +4,11 @@ import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
 import SectionTitle from "./components/section_title";
+import NetworkError from "../common/components/network-error/network_error";
 import SectionContent from "./components/section_content";
 import NotificationInfo from "./components/notification_info";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useTheme } from "src/core/init/themes/theme_context";
+import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 
 const Settings = () => {
   const { theme } = useTheme();
@@ -42,18 +43,24 @@ const Settings = () => {
         backgroundColor: theme.palette.background.default,
       }}
     >
-      {mainStore.showNotification && <NotificationInfo />}
-      <SectionList
-        style={{
-          paddingLeft: 60,
-        }}
-        sections={settings}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => <SectionContent content={item.name} />}
-        renderSectionHeader={({ section }) => (
-          <SectionTitle title={section.title} />
-        )}
-      />
+      {mainStore.networkError ? (
+        <NetworkError />
+      ) : (
+        <>
+          {mainStore.showNotification && <NotificationInfo />}
+          <SectionList
+            style={{
+              paddingLeft: 60,
+            }}
+            sections={settings}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => <SectionContent content={item.name} />}
+            renderSectionHeader={({ section }) => (
+              <SectionTitle title={section.title} />
+            )}
+          />
+        </>
+      )}
     </SafeAreaView>
   );
 };

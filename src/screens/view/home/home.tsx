@@ -5,9 +5,12 @@ import {
   RefreshControl,
   ScrollView,
 } from "react-native";
+import { observer } from "mobx-react";
 
+import mainStore from "src/screens/view-model/main_store";
 import WeatherAll from "./components/weather_all";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
+import NetworkError from "../common/components/network-error/network_error";
 import { useWeatherDatas } from "../common/queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 
@@ -45,10 +48,10 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <WeatherAll />
+        {mainStore.networkError ? <NetworkError /> : <WeatherAll />}
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default observer(Home);

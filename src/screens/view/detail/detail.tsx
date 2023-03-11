@@ -10,8 +10,10 @@ import {
 import { observer } from "mobx-react";
 
 import ForecastFiveDay from "./components/forecast_five_day";
-import Container from "./components/container";
 import TemperatureChart from "./components/temp_chart";
+import NetworkError from "../common/components/network-error/network_error";
+import Container from "./components/container";
+import mainStore from "src/screens/view-model/main_store";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useWeatherDatas } from "../common/queries/useWeatherDatas";
@@ -99,34 +101,38 @@ const Detail = () => {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.palette.background.default }}
     >
-      <ScrollView
-        style={{
-          paddingHorizontal: "7%",
-          paddingTop: windowHeight > 736 ? 0 : "2%",
-        }}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <View style={{ rowGap: 12, paddingBottom: 40 }}>
-          <DetailCurrent />
-          <Container
-            width={windowWidth - 60}
-            title={t("detail.graphicTitle")}
-            children={
-              isLoading ? (
-                <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
-                  {t("loading")}
-                </Text>
-              ) : (
-                <TemperatureChart />
-              )
-            }
-          />
+      {mainStore.networkError ? (
+        <NetworkError />
+      ) : (
+        <ScrollView
+          style={{
+            paddingHorizontal: "7%",
+            paddingTop: windowHeight > 736 ? 0 : "2%",
+          }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <View style={{ rowGap: 12, paddingBottom: 40 }}>
+            <DetailCurrent />
+            <Container
+              width={windowWidth - 60}
+              title={t("detail.graphicTitle")}
+              children={
+                isLoading ? (
+                  <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
+                    {t("loading")}
+                  </Text>
+                ) : (
+                  <TemperatureChart />
+                )
+              }
+            />
 
-          <ForecastFiveDay />
-        </View>
-      </ScrollView>
+            <ForecastFiveDay />
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
