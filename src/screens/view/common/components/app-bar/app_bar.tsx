@@ -1,12 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Keyboard,
-  Platform,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react";
@@ -19,6 +12,7 @@ import {
   IconSearch,
 } from "src/core/components/icons/custom_icons";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { useWeatherDatas } from "../../queries/useWeatherDatas";
 import { windowHeight } from "../../constants/constants";
 import { useTheme } from "src/core/init/themes/theme_context";
 import ThemeProps from "src/core/init/themes/interface/interfaces";
@@ -123,6 +117,7 @@ const ThemeSwitch = () => {
 const AppBar = () => {
   const navigation = useNavigation();
   const { theme } = useTheme();
+  const { isLoading } = useWeatherDatas();
 
   const [editable, setEditable] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
@@ -176,6 +171,7 @@ const AppBar = () => {
         </View>
       ) : (
         <Pressable
+          disabled={isLoading}
           style={styles.backButton}
           children={<IconBack />}
           onPress={() => {

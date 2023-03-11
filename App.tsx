@@ -8,7 +8,9 @@ import { queryClient } from "src/core/init/query/query_client";
 import { LogBox } from "react-native";
 
 function App() {
-  // LogBox.ignoreAllLogs(true); need to hide warning boxes etc.
+  // need to hide warning boxes etc.
+  LogBox.ignoreAllLogs(true);
+
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>

@@ -11,10 +11,12 @@ import {
   IconSettings,
 } from "src/core/components/icons/custom_icons";
 import { StackScreenNames } from "src/navigation/interfaces/interfaces";
+import { useWeatherDatas } from "../../queries/useWeatherDatas";
 import { useTheme } from "src/core/init/themes/theme_context";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
+  const { isLoading } = useWeatherDatas();
 
   return (
     <SafeAreaView
@@ -74,6 +76,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
 
           return (
             <ActionButton
+              disabled={isLoading}
               isFocused={isFocused}
               key={index}
               children={<TabIcon />}

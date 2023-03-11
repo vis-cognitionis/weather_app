@@ -1,5 +1,10 @@
 import React from "react";
-import { SafeAreaView, SectionList } from "react-native";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  SectionList,
+  View,
+} from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
@@ -9,10 +14,13 @@ import SectionContent from "./components/section_content";
 import NotificationInfo from "./components/notification_info";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
+import { useWeatherDatas } from "../common/queries/useWeatherDatas";
 
 const Settings = () => {
   const { theme } = useTheme();
   const { t } = useTranslate();
+
+  const { isLoading } = useWeatherDatas();
 
   const settings = [
     {
@@ -47,18 +55,35 @@ const Settings = () => {
         <NetworkError />
       ) : (
         <>
-          {mainStore.showNotification && <NotificationInfo />}
-          <SectionList
-            style={{
-              paddingLeft: 60,
-            }}
-            sections={settings}
-            keyExtractor={(item) => item.name}
-            renderItem={({ item }) => <SectionContent content={item.name} />}
-            renderSectionHeader={({ section }) => (
-              <SectionTitle title={section.title} />
-            )}
-          />
+          {isLoading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size="large" />
+            </View>
+          ) : (
+            <>
+              {mainStore.showNotification && <NotificationInfo />}
+
+              <SectionList
+                style={{
+                  paddingLeft: 60,
+                }}
+                sections={settings}
+                keyExtractor={(item) => item.name}
+                renderItem={({ item }) => (
+                  <SectionContent content={item.name} />
+                )}
+                renderSectionHeader={({ section }) => (
+                  <SectionTitle title={section.title} />
+                )}
+              />
+            </>
+          )}
         </>
       )}
     </SafeAreaView>

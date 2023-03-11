@@ -17,9 +17,8 @@ import mainStore from "src/screens/view-model/main_store";
 
 const DefaultCity = () => {
   const { theme } = useTheme();
-  const [modalVisible, setModalVisible] = useState(false);
-
   const { t } = useTranslate();
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const styles = StyleSheet.create({
     centeredView: {
