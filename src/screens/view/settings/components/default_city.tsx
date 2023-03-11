@@ -84,6 +84,7 @@ const DefaultCity = () => {
   const handleCloseModal = () => {
     setModalVisible(!modalVisible);
     setEditable(false);
+    inputRef.current?.blur();
   };
   return (
     <>
@@ -103,7 +104,6 @@ const DefaultCity = () => {
             </Pressable>
             <TextInput
               ref={inputRef}
-              editable={editable}
               autoCorrect={false}
               value={mainStore.inputCityValue}
               onPressIn={() => setEditable(true)}

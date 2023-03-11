@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
@@ -15,7 +15,7 @@ import { useTheme } from "src/core/init/themes/theme_context";
 const styles = StyleSheet.create({
   weathersContainer: {
     flexDirection: "column",
-    gap: 28,
+    gap: Platform.OS === "android" ? 20 : 28,
   },
   rowContainer: {
     flexDirection: "row",

@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
+import {
+  Keyboard,
+  Platform,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { observer } from "mobx-react";
@@ -130,6 +137,7 @@ const AppBar = () => {
   const handleSearch = () => {
     mainStore.setCity(mainStore.inputValue);
     setEditable(false);
+    inputRef.current?.blur();
   };
 
   const handleEditPress = () => {
@@ -144,7 +152,6 @@ const AppBar = () => {
             ref={inputRef}
             autoCorrect={false}
             defaultValue={mainStore.city}
-            editable={editable}
             value={mainStore.inputValue}
             onPressIn={handleEditPress}
             onChangeText={(text) => mainStore.setInputValue(text)}

@@ -67,7 +67,7 @@ const darkTheme: ThemeProps = {
       color: PaletteColors.text?.secondary,
       fontStyle: "normal",
       fontWeight: "500",
-      fontSize: 22,
+      fontSize: Platform.OS === "android" ? 18 : 22,
     },
     button: {
       fontFamily: generalFontFamily,
@@ -77,7 +77,7 @@ const darkTheme: ThemeProps = {
     title: {
       fontFamily: generalFontFamily,
       fontStyle: "normal",
-      fontWeight: "500",
+      fontWeight: Platform.OS === "android" ? "700" : "500",
       fontSize: 18,
       color: PaletteColors.primary.dark,
     },

@@ -31,7 +31,6 @@ const NetworkError = () => {
     message: {
       textAlign: "center",
     },
-
     refreshButton: {
       flexDirection: "row",
       alignItems: "center",
@@ -40,7 +39,6 @@ const NetworkError = () => {
       paddingVertical: 6,
       borderRadius: 16,
     },
-
     refreshText: {
       color: theme.palette.primary.light,
     },
