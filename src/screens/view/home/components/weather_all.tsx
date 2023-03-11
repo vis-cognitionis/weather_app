@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import { observer } from "mobx-react";
 
 import mainStore from "src/screens/view-model/main_store";
@@ -104,6 +104,7 @@ const WeatherAll = () => {
       <WeatherBackground />
       <View style={styles.weathersContainer}>
         <WeatherCurrent />
+
         <HourlyWeather />
       </View>
     </View>

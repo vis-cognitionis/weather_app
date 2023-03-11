@@ -11,11 +11,10 @@ import mainStore from "src/screens/view-model/main_store";
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
-  // const [networkError, setNetworkError] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<boolean>(false);
   const [requestError, setRequestError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  console.log(mainStore.networkError);
+
   const {
     data: weatherDatas,
     isLoading,

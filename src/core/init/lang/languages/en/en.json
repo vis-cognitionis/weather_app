@@ -97,7 +97,8 @@
     "info": "The default city has been reset",
     "manyRequest": "Too many request! \n Check back soon",
     "network": "Network connection not found",
-    "noNetwork": "No Internet connection. Please check your connection and try again"
+    "noNetwork": "No Internet connection. Please check your connection and try again",
+    "refresh": "Refresh"
   },
   "terms&services": {
     "welcome": "Welcome!\n",

@@ -42,14 +42,18 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {mainStore.networkError ? <NetworkError /> : <WeatherAll />}
-      </ScrollView>
+      {mainStore.networkError ? (
+        <NetworkError />
+      ) : (
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <WeatherAll />
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

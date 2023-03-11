@@ -97,7 +97,8 @@
     "info": "Varsayılan şehir sıfırlandı",
     "manyRequest": "Fazla sorgu! \n Daha sonra tekrar deneyin",
     "network": "Ağ bağlantısı bulunamadı",
-    "noNetwork": "İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin ve tekrar deneyin"
+    "noNetwork": "İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin ve tekrar deneyin",
+    "refresh": "Yenile"
   },
   "terms&services": {
     "welcome": "Hoşgeldiniz!\n",

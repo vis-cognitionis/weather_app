@@ -1,4 +1,5 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Linking } from "react-native";
+import RNRestart from "react-native-restart";
 
 import { IconNoNetwork } from "src/core/components/icons/custom_icons";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
@@ -15,6 +16,7 @@ const NetworkError = () => {
       justifyContent: "center",
       width: "80%",
       gap: 20,
+      alignSelf: "center",
     },
     icon: {
       marginBottom: 16,
@@ -26,19 +28,16 @@ const NetworkError = () => {
     refreshButton: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: "gray",
-      paddingHorizontal: 10,
-      paddingVertical: 5,
-      borderRadius: 5,
+      backgroundColor: theme.palette.primary.dark,
+      paddingHorizontal: 20,
+      paddingVertical: 6,
+      borderRadius: 16,
     },
+
     refreshText: {
-      color: "white",
-      marginLeft: 5,
+      color: theme.palette.primary.light,
     },
   });
-  const refreshApp = () => {
-    console.log("girdi");
-  };
 
   return (
     <View style={styles.container}>
@@ -48,11 +47,12 @@ const NetworkError = () => {
       </Text>
       <Pressable
         onPress={() => {
-          refreshApp();
+          RNRestart.restart();
+          Linking.openSettings();
         }}
       >
         <View style={styles.refreshButton}>
-          <Text style={styles.refreshText}>Refresh</Text>
+          <Text style={styles.refreshText}>{t("error.refresh")}</Text>
         </View>
       </Pressable>
     </View>
