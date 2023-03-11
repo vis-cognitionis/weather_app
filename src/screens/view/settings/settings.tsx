@@ -15,6 +15,16 @@ import NotificationInfo from "./components/notification_info";
 import { useTheme } from "src/core/init/themes/theme_context";
 import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
 import { useWeatherDatas } from "../common/queries/useWeatherDatas";
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  sectionListContainer: { paddingLeft: 60 },
+});
 
 const Settings = () => {
   const { theme } = useTheme();
@@ -51,28 +61,18 @@ const Settings = () => {
         backgroundColor: theme.palette.background.default,
       }}
     >
-      {mainStore.networkError ? (
-        <NetworkError />
-      ) : (
+      {mainStore.networkError && <NetworkError />}
+      {!mainStore.networkError && (
         <>
           {isLoading ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" />
             </View>
           ) : (
             <>
               {mainStore.showNotification && <NotificationInfo />}
-
               <SectionList
-                style={{
-                  paddingLeft: 60,
-                }}
+                style={styles.sectionListContainer}
                 sections={settings}
                 keyExtractor={(item) => item.name}
                 renderItem={({ item }) => (
