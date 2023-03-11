@@ -146,6 +146,7 @@ const AppBar = () => {
             defaultValue={mainStore.city}
             editable={editable}
             value={mainStore.inputValue}
+            onPressIn={handleEditPress}
             onChangeText={(text) => mainStore.setInputValue(text)}
             onSubmitEditing={() => {
               mainStore.inputValue.length !== 0 && handleSearch();
@@ -161,11 +162,7 @@ const AppBar = () => {
               <IconSearch />
             </Pressable>
           ) : (
-            <Pressable
-              onPress={() => {
-                handleEditPress();
-              }}
-            >
+            <Pressable onPress={handleEditPress}>
               <IconEdit />
             </Pressable>
           )}
