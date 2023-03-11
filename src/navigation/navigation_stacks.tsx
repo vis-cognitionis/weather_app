@@ -8,6 +8,7 @@ import Landing from "src/screens/view/landing/landing";
 import mainStore from "src/screens/view-model/main_store";
 import OutletTabs from "./components/outlet_tabs";
 import SplashScreen from "src/screens/view/splash/splash";
+import StatusBarControl from "src/screens/view/common/components/status-bar/status_bar";
 import { ParamList, StackScreenNames } from "./interfaces/interfaces";
 
 const NavigationStacks = () => {
@@ -15,6 +16,7 @@ const NavigationStacks = () => {
 
   return (
     <NavigationContainer>
+      <StatusBarControl />
       <Stack.Navigator
         initialRouteName={StackScreenNames.Splash}
         children={

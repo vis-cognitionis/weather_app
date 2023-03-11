@@ -51,8 +51,13 @@ class MainStore {
     this.navigateLanding = navigate;
   };
 
-  setHideStatusBar = (hide: boolean) => {
+  setHideStatusBar = async (hide: boolean) => {
     this.hideStatusBar = hide;
+    try {
+      await AsyncStorage.setItem("hideStatusBar", JSON.stringify(hide));
+    } catch (e) {
+      console.error("Error saving hideStatusBar to AsyncStorage", e);
+    }
   };
 
   setWeatherUnit = (unit: string) => {
