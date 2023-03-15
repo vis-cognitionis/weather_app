@@ -11,6 +11,7 @@ To install and run the app on your local machine, follow these steps:
 3. Run the app on an emulator or device: `npm run android` or `npm run ios`
 
 ## Technologies 
+
   - React Native
   - TypeScript
   - OpenWeather API (Current Weather & 3-hour Forecast 5 days)
@@ -44,13 +45,28 @@ The app uses the following dependencies:
 - `react-native-svg`: A library used to create vector graphics such as icon in React Native
 
 ## Project Overview
+
 This weather application was created with the idea of a simple, understandable, and clean interface design. The application starts with Istanbul as the default city without requiring any location data from the user. After the splash and landing screens, the home, detail, and settings screens are available. The home screen shows the current weather provided by the openWeather API along with 3-hourly weather information, using various images and icons along with humorous and advisory messages for the user. The entered city can be seen at the top and the theme switcher on the right can be set to either light or dark mode. On the detail screen, after the wind, pressure, and other information, the 3-hourly data is displayed in a chart and the temperature changes can be easily read. The lowest and highest temperature data is shown with 5-day forecast data underneath. In the settings section, users can change the default city, language (English or Turkish), status bar, and temperature unit settings. This way, they can use the application in the way they want without having to set their preferences again and again every time they reopen the app.
 
 ## Screenshots
 
-Here are some example screenshots of the app:
+Here are some example screenshots and video of the app:
 
-<div align="center" >
+<div align="center">
+  <video src="https://user-images.githubusercontent.com/108089138/225416202-14a1f6c0-1677-477e-a232-64ee628cfb9e.mp4" type="video/mp4"
+  </video>
+ 
+</div>
+
+<div align="center">
+ <br>
+  <em>Video on general usage of the app</em>
+  <br>
+  <br>
+</div>
+  
+
+<div align="center">
   <img src="assets/images/cross_platform.png" width="500" height="auto">
   <br>
   <em>Landing page of Weather App running on one iOS and one Android</em>
