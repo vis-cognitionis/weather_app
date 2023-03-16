@@ -12,13 +12,13 @@ To install and run the app on your local machine, follow these steps:
 
 ## Technologies 
 
-  <li> <a href="https://reactnative.dev/">React Native</a></li> 
-  <li> <a href="https://beta.reactjs.org/">React</a></li> 
-  <li> <a href="https://www.typescriptlang.org/">TypeScript</a> </li> 
-  <li> <a href="https://openweathermap.org/">OpenWeather API (Current Weather & 3-hour Forecast 5 days)</a> </li> 
-  <li> <a href="https://reactnavigation.org/">React Navigation</a> </li> 
-  <li> <a href="https://tanstack.com/query/latest">TanStack React Query</a> </li> 
-  <li> <a href="https://mobx.js.org/">MobX</a> </li> 
+<li> <a href="https://reactnative.dev/" target="_blank">React Native</a></li> 
+<li> <a href="https://beta.reactjs.org/" target="_blank">React</a></li> 
+<li> <a href="https://www.typescriptlang.org/" target="_blank">TypeScript</a> </li> 
+<li> <a href="https://openweathermap.org/" target="_blank">OpenWeather API (Current Weather & 3-hour Forecast 5 days)</a> </li> 
+<li> <a href="https://reactnavigation.org/" target="_blank">React Navigation</a> </li> 
+<li> <a href="https://tanstack.com/query/latest" target="_blank">TanStack React Query</a> </li> 
+<li> <a href="https://mobx.js.org/" target="_blank">MobX</a> </li>
 
 ## Project Structure
 
