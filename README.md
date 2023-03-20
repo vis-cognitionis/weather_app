@@ -47,7 +47,17 @@ The app uses the following dependencies:
 
 ## Project Overview
 
-This weather application was created with the idea of a simple, understandable, and clean interface design. The application starts with Istanbul as the default city without requiring any location data from the user. After the splash and landing screens, the home, detail, and settings screens are available. The home screen shows the current weather provided by the openWeather API along with 3-hourly weather information, using various images and icons along with humorous and advisory messages for the user. The entered city can be seen at the top and the theme switcher on the right can be set to either light or dark mode. On the detail screen, after the wind, pressure, and other information, the 3-hourly data is displayed in a chart and the temperature changes can be easily read. The lowest and highest temperature data is shown with 5-day forecast data underneath. In the settings section, users can change the default city, language (English or Turkish), status bar, and temperature unit settings. This way, they can use the application in the way they want without having to set their preferences again and again every time they reopen the app.
+This weather application has been developed using React Native and can be used on both iOS and Android devices. It provides users with accurate and up-to-date weather information in a simple and user-friendly way. Upon opening the application, users are greeted with a splash screen that quickly transitions into the landing screen, which displays the default city of Istanbul.
+
+The home screen displays the current weather in the selected city, with a clean and modern design that includes large and easy-to-read fonts and icons. Users can access 3-hourly weather information with the help of various images and icons that provide a fun and engaging experience. The screen also includes helpful and humorous messages, giving users advice on how to prepare for the day's weather.
+
+The detail screen provides users with more in-depth weather information, such as wind direction, pressure, and other meteorological data. The 3-hourly data is displayed in a chart format, allowing users to visualize temperature changes throughout the day quickly. The lowest and highest temperature data is also shown, with 5-day forecast data located below.
+
+In the settings section, users can customize their experience by changing their default city, language (English or Turkish), status bar, and temperature unit settings. This feature ensures that users do not have to repeatedly set their preferences every time they use the application.
+
+One of the most significant advantages of this weather application is its use of the openWeather API, which provides accurate and reliable weather data. Users can feel confident in the accuracy of the information provided by the application, making it an essential tool for planning their day.
+
+Overall, this weather application is a valuable tool for anyone who wants to stay informed about the weather conditions in their area. Its intuitive design, customizable settings, and reliable data make it a top choice for users who want a simple and effective way to check the weather. With its cross-platform compatibility and useful features, this weather application is sure to be a popular choice for users worldwide.
 
 ## Screenshots
 
