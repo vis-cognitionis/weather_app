@@ -1,31 +1,31 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
-import { observer } from "mobx-react";
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
+import { observer } from 'mobx-react';
 
-import mainStore from "src/screens/view-model/main_store";
-import LazyLoading from "./lazy-loading/lazy_loading";
-import WeatherCurrent from "./weather-current/weather_current";
-import WeatherBackground from "./weather_background";
-import WeatherHourlyIcons from "./weather_hourly_icons";
-import { today, tomorrow, groupWeatherDataByDate } from "./constants/constants";
-import { useWeatherDatas } from "../../common/queries/useWeatherDatas";
-import { windowHeight } from "../../common/constants/constants";
-import { useTheme } from "src/core/init/themes/theme_context";
+import mainStore from '../../../../screens/view-model/main_store';
+import LazyLoading from './lazy-loading/lazy_loading';
+import WeatherCurrent from './weather-current/weather_current';
+import WeatherBackground from './weather_background';
+import WeatherHourlyIcons from './weather_hourly_icons';
+import { today, tomorrow, groupWeatherDataByDate } from './constants/constants';
+import { useWeatherDatas } from '../../common/queries/useWeatherDatas';
+import { windowHeight } from '../../common/constants/constants';
+import { useTheme } from '../../../../core/init/themes/theme_context';
 
 const styles = StyleSheet.create({
   weathersContainer: {
-    flexDirection: "column",
-    gap: Platform.OS === "android" ? 20 : 28,
+    flexDirection: 'column',
+    gap: Platform.OS === 'android' ? 20 : 28,
   },
   rowContainer: {
-    flexDirection: "row",
-    overflow: "scroll",
+    flexDirection: 'row',
+    overflow: 'scroll',
   },
   weatherContainer: {
     flex: 1,
     padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     minWidth: 90,
     width: 90,
   },
@@ -43,9 +43,9 @@ const WeatherAll = () => {
 
   useEffect(() => {
     if (currentDate >= sunrise && currentDate < sunset && mainStore.city) {
-      mainStore.setTimeOfDay("day");
+      mainStore.setTimeOfDay('day');
     } else {
-      mainStore.setTimeOfDay("night");
+      mainStore.setTimeOfDay('night');
     }
     mainStore.setCurrentDate(currentDate);
   }, [mainStore.city, weatherDatas]);
@@ -72,8 +72,8 @@ const WeatherAll = () => {
           {hourlyData.map((weather) => (
             <View key={weather.dt} style={styles.weatherContainer}>
               <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                {Math.ceil(weather.main.temp)}{" "}
-                {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                {Math.ceil(weather.main.temp)}{' '}
+                {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
               </Text>
               <View style={{ flex: 1, paddingVertical: 10 }}>
                 <WeatherHourlyIcons
@@ -84,7 +84,7 @@ const WeatherAll = () => {
               </View>
               <Text
                 style={theme.typography.caption}
-                children={weather.dt_txt.split(" ")[1].slice(0, 5)}
+                children={weather.dt_txt.split(' ')[1].slice(0, 5)}
               />
             </View>
           ))}

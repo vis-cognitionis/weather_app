@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
-import { useQuery } from "@tanstack/react-query";
-import { Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { StackScreenNames } from "src/navigation/interfaces/interfaces";
-import { WeatherDatas } from "../../home/interfaces/interface_home";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import mainStore from "src/screens/view-model/main_store";
+import { StackScreenNames } from '../../../../navigation/interfaces/interfaces';
+import { WeatherDatas } from '../../home/interfaces/interface_home';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import mainStore from '../../../../screens/view-model/main_store';
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
@@ -19,78 +19,80 @@ export const useWeatherDatas = () => {
     data: weatherDatas,
     isLoading,
     refetch,
-  } = useQuery<WeatherDatas>(
-    ["weatherDatas", mainStore.city, mainStore.weatherUnit],
-    async () => {
+    error
+  } = useQuery<WeatherDatas, AxiosError, WeatherDatas, [string, string, string]>({
+    queryKey: ['weatherDatas', mainStore.city, mainStore.weatherUnit],
+    queryFn: async () => {
       try {
         const weatherUnit =
-          (await AsyncStorage.getItem("unit")) || mainStore.weatherUnit;
+          (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
-          "https://api.openweathermap.org/data/2.5/forecast?q=" +
+          'https://api.openweathermap.org/data/2.5/forecast?q=' +
             mainStore.city +
             `&units=${weatherUnit}&appid=` +
-            "4ece27e8959cae958f124f7316c6e352"
+            '4ece27e8959cae958f124f7316c6e352'
         );
         return response.data;
       } catch (error: any) {
         const axiosError = error as AxiosError;
 
-        if (axiosError.code === "ERR_NETWORK") {
+        if (axiosError.code === 'ERR_NETWORK') {
           mainStore.setNetworkError(true);
         } else if (axiosError.response?.status === 404) {
           setFetchError(true);
         } else if (axiosError.response?.status === 429) {
           setRequestError(true);
         } else {
-          setErrorMessage("Unexpected error occurred. Please try again later.");
+          setErrorMessage('Unexpected error occurred. Please try again later.');
         }
 
         throw error;
       }
     },
-    {
-      enabled: true,
+    enabled: true,
+  });
 
-      onError: () => {
-        mainStore.setCity(mainStore.defaultCity);
-        mainStore.setInputValue(mainStore.defaultCity);
-        mainStore.setIs404Err(true);
+  // Hata yönetimi artık useEffect içinde yapılıyor
+  useEffect(() => {
+    if (error) {
+      mainStore.setCity(mainStore.defaultCity);
+      mainStore.setInputValue(mainStore.defaultCity);
+      mainStore.setIs404Err(true);
 
-        if (mainStore.currentTab === StackScreenNames.Settings) {
-          mainStore.setCity(mainStore.firstDefaultCity);
-          mainStore.setInputValue(mainStore.firstDefaultCity);
-          mainStore.setDefaultCity(mainStore.firstDefaultCity);
-          mainStore.setInputCityValue(mainStore.firstDefaultCity);
-          mainStore.setShowNotification(true);
-        }
+      if (mainStore.currentTab === StackScreenNames.Settings) {
+        mainStore.setCity(mainStore.firstDefaultCity);
+        mainStore.setInputValue(mainStore.firstDefaultCity);
+        mainStore.setDefaultCity(mainStore.firstDefaultCity);
+        mainStore.setInputCityValue(mainStore.firstDefaultCity);
+        mainStore.setShowNotification(true);
+      }
 
-        if (fetchError) {
-          Alert.alert(
-            t("error.title"),
-            t("error.validCity"),
-            [
-              {
-                text: t("error.buttonName"),
-              },
-            ],
-            { cancelable: false }
-          );
-        } else if (requestError) {
-          Alert.alert(
-            t("error.title"),
-            t("error.manyRequest"),
-            [
-              {
-                text: t("error.buttonName"),
-              },
-            ],
-            { cancelable: false }
-          );
-        }
-      },
+      if (fetchError) {
+        Alert.alert(
+          t('error.title'),
+          t('error.validCity'),
+          [
+            {
+              text: t('error.buttonName'),
+            },
+          ],
+          { cancelable: false }
+        );
+      } else if (requestError) {
+        Alert.alert(
+          t('error.title'),
+          t('error.manyRequest'),
+          [
+            {
+              text: t('error.buttonName'),
+            },
+          ],
+          { cancelable: false }
+        );
+      }
     }
-  );
+  }, [error, fetchError, requestError, t]);
 
   useEffect(() => {
     if (errorMessage !== null) {

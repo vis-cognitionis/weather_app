@@ -1,20 +1,20 @@
-import { makeAutoObservable } from "mobx";
-import { StackScreenNames } from "src/navigation/interfaces/interfaces";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { makeAutoObservable } from 'mobx';
+import { StackScreenNames } from '../../navigation/interfaces/interfaces';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class MainStore {
-  firstDefaultCity: string = "Istanbul";
-  defaultCity: string = "";
+  firstDefaultCity: string = 'Istanbul';
+  defaultCity: string = '';
   city: string = this.defaultCity;
   inputValue: string = this.city;
-  currentTab: string = "";
+  currentTab: string = '';
   previousTab: string = StackScreenNames.Home;
   openNotification: boolean = true;
   showSplashScreen: boolean = true;
   navigateLanding: boolean = false;
   hideStatusBar: boolean = false;
-  weatherUnit: string = "metric";
-  timeOfDay: string = "";
+  weatherUnit: string = 'metric';
+  timeOfDay: string = '';
   currentDate: Date = new Date();
   is404Err: boolean = false;
   inputCityValue: string = this.defaultCity;
@@ -23,7 +23,7 @@ class MainStore {
 
   constructor() {
     makeAutoObservable(this);
-    AsyncStorage.getItem("defaultCity").then((defaultCity) => {
+    AsyncStorage.getItem('defaultCity').then((defaultCity) => {
       this.defaultCity = defaultCity || this.firstDefaultCity;
       this.city = this.defaultCity;
       this.inputValue = this.city;
@@ -54,9 +54,9 @@ class MainStore {
   setHideStatusBar = async (hide: boolean) => {
     this.hideStatusBar = hide;
     try {
-      await AsyncStorage.setItem("hideStatusBar", JSON.stringify(hide));
+      await AsyncStorage.setItem('hideStatusBar', JSON.stringify(hide));
     } catch (e) {
-      console.error("Error saving hideStatusBar to AsyncStorage", e);
+      console.error('Error saving hideStatusBar to AsyncStorage', e);
     }
   };
 
@@ -85,7 +85,7 @@ class MainStore {
     this.city = defaultCity;
     this.inputValue = defaultCity;
     this.inputCityValue = this.defaultCity;
-    await AsyncStorage.setItem("defaultCity", defaultCity);
+    await AsyncStorage.setItem('defaultCity', defaultCity);
   };
 
   setIs404Err(err: boolean) {

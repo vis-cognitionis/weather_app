@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -6,14 +6,14 @@ import {
   View,
   Text,
   TextInput,
-} from "react-native";
-import { observer } from "mobx-react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native';
+import { observer } from 'mobx-react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { IconClose, IconEdit } from "src/core/components/icons/custom_icons";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
-import mainStore from "src/screens/view-model/main_store";
+import { IconClose, IconEdit } from '../../../../core/components/icons/custom_icons';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../core/init/themes/theme_context';
+import mainStore from '../../../../screens/view-model/main_store';
 
 const DefaultCity = () => {
   const { theme } = useTheme();
@@ -23,19 +23,19 @@ const DefaultCity = () => {
   const styles = StyleSheet.create({
     centeredView: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "rgba(0,0,0,0.5)",
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.5)',
     },
     modalView: {
-      width: "55%",
+      width: '55%',
       backgroundColor: theme.palette.background.default,
       borderRadius: 20,
       paddingHorizontal: 15,
       paddingTop: 8,
       paddingBottom: 20,
-      alignItems: "center",
-      shadowColor: "#000",
+      alignItems: 'center',
+      shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: 2,
@@ -49,7 +49,7 @@ const DefaultCity = () => {
       borderRadius: 20,
       padding: 10,
       elevation: 2,
-      alignItems: "center",
+      alignItems: 'center',
     },
 
     modalInput: {
@@ -74,7 +74,7 @@ const DefaultCity = () => {
 
   const handleSetDefaultCity = async () => {
     setModalVisible(!modalVisible);
-    await AsyncStorage.setItem("defaultCity", mainStore.inputCityValue);
+    await AsyncStorage.setItem('defaultCity', mainStore.inputCityValue);
     mainStore.setDefaultCity(mainStore.inputCityValue);
     mainStore.setCity(mainStore.inputCityValue);
     setEditable(false);
@@ -96,7 +96,7 @@ const DefaultCity = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={{ alignSelf: "flex-end" }}
+              style={{ alignSelf: 'flex-end' }}
               onPress={handleCloseModal}
             >
               <IconClose />
@@ -135,7 +135,7 @@ const DefaultCity = () => {
                   { color: theme.palette.primary.light },
                 ]}
               >
-                {t("defaultCityButton")}
+                {t('defaultCityButton')}
               </Text>
             </Pressable>
           </View>

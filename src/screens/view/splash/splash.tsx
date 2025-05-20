@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { View, Image, StyleSheet } from "react-native";
+import React, { useEffect } from 'react';
+import { View, Image, StyleSheet } from 'react-native';
 
-import { ScreenNavigationProps } from "src/navigation/interfaces/interfaces";
-import mainStore from "src/screens/view-model/main_store";
+import { ScreenNavigationProps } from '../../../navigation/interfaces/interfaces';
+import mainStore from '../../../screens/view-model/main_store';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
 });
 
-const SplashScreen = ({ navigation }: ScreenNavigationProps) => {
+const SplashScreen = ({ }: ScreenNavigationProps) => {
   useEffect(() => {
     setTimeout(() => {
       mainStore.setShowSplashScreen(false);
@@ -25,7 +25,7 @@ const SplashScreen = ({ navigation }: ScreenNavigationProps) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../../images/splash.png")}
+        source={require('../../../images/splash.png')}
         style={styles.image}
       />
     </View>

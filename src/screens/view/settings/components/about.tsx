@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Modal, ScrollView, StyleSheet, View } from "react-native";
-import { Pressable, Text } from "react-native";
+import React, { useState } from 'react';
+import { Modal, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
-import { IconClose, IconAbout } from "src/core/components/icons/custom_icons";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
+import { IconClose, IconAbout } from '../../../../core/components/icons/custom_icons';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../core/init/themes/theme_context';
 
 const About = () => {
   const { theme } = useTheme();
@@ -12,8 +12,8 @@ const About = () => {
   const styles = StyleSheet.create({
     centeredView: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       marginTop: 22,
     },
     modalView: {
@@ -21,8 +21,8 @@ const About = () => {
       backgroundColor: theme.palette.background.default,
       borderRadius: 20,
       padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
+      alignItems: 'center',
+      shadowColor: '#000',
       gap: 16,
 
       shadowOffset: {
@@ -56,13 +56,13 @@ const About = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={{ alignSelf: "flex-end" }}
+              style={{ alignSelf: 'flex-end' }}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <IconClose />
             </Pressable>
             <ScrollView>
-              <Text style={theme.typography.caption}>{t("about.content")}</Text>
+              <Text style={theme.typography.caption}>{t('about.content')}</Text>
             </ScrollView>
           </View>
         </View>

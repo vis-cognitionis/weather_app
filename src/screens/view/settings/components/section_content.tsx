@@ -1,26 +1,26 @@
-import React from "react";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, Text, StyleSheet } from "react-native";
-import { observer } from "mobx-react";
+import React from 'react';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Text, StyleSheet } from 'react-native';
+import { observer } from 'mobx-react';
 
-import About from "./about";
-import mainStore from "src/screens/view-model/main_store";
-import DefaultCity from "./default_city";
-import LanguageAction from "./language_actions";
-import TermsAndServices from "./terms_and_services";
-import StatusbarSettings from "./statusbar_settings";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
+import About from './about';
+import mainStore from '../../../../screens/view-model/main_store';
+import DefaultCity from './default_city';
+import LanguageAction from './language_actions';
+import TermsAndServices from './terms_and_services';
+import StatusbarSettings from './statusbar_settings';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../core/init/themes/theme_context';
 
 const styles = StyleSheet.create({
   listContainer: {
     padding: 10,
     paddingLeft: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "88%",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '88%',
   },
 });
 
@@ -30,13 +30,13 @@ const SectionContent = ({ content }: { content: string }) => {
 
   const GeneralAction = () => {
     switch (content) {
-      case t("settings.general.defaultCity"):
+      case t('settings.general.defaultCity'):
         return <DefaultCity />;
-      case t("settings.general.language"):
+      case t('settings.general.language'):
         return <LanguageAction />;
-      case t("settings.terms"):
+      case t('settings.terms'):
         return <TermsAndServices />;
-      case t("settings.about"):
+      case t('settings.about'):
         return <About />;
       default:
         return null;
@@ -64,7 +64,7 @@ const SectionContent = ({ content }: { content: string }) => {
     );
   };
   const toggleWeatherUnit = async (unit: string) => {
-    await AsyncStorage.setItem("unit", unit);
+    await AsyncStorage.setItem('unit', unit);
     mainStore.setWeatherUnit(unit);
   };
 
@@ -74,21 +74,21 @@ const SectionContent = ({ content }: { content: string }) => {
       <GeneralAction />
       <StatusbarSettings content={content} />
 
-      {content === t("settings.temperature.celsius") ? (
+      {content === t('settings.temperature.celsius') ? (
         <CustomCheckbox
-          isChecked={mainStore.weatherUnit === "metric"}
+          isChecked={mainStore.weatherUnit === 'metric'}
           onPress={() => {
-            toggleWeatherUnit("metric");
+            toggleWeatherUnit('metric');
           }}
-          disabled={mainStore.weatherUnit === "metric"}
+          disabled={mainStore.weatherUnit === 'metric'}
         />
-      ) : content === t("settings.temperature.fahrenheit") ? (
+      ) : content === t('settings.temperature.fahrenheit') ? (
         <CustomCheckbox
-          isChecked={mainStore.weatherUnit === "imperial"}
+          isChecked={mainStore.weatherUnit === 'imperial'}
           onPress={() => {
-            toggleWeatherUnit("imperial");
+            toggleWeatherUnit('imperial');
           }}
-          disabled={mainStore.weatherUnit === "imperial"}
+          disabled={mainStore.weatherUnit === 'imperial'}
         />
       ) : null}
     </View>

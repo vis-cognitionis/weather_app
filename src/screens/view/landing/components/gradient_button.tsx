@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   GestureResponderEvent,
-} from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import { LinearGradientText } from "react-native-linear-gradient-text";
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradientText } from 'react-native-linear-gradient-text';
 
-import ThemeProps from "src/core/init/themes/interface/interfaces";
-import { useTheme } from "src/core/init/themes/theme_context";
+import ThemeProps from '../../../../core/init/themes/interface/interfaces';
+import { useTheme } from '../../../../core/init/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -21,12 +21,12 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
     borderContainer: {
       borderRadius: 32,
       padding: 3,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     buttonText: {
-      color: "#fff",
-      fontWeight: "bold",
+      color: '#fff',
+      fontWeight: 'bold',
       fontSize: 16,
     },
   });
@@ -46,12 +46,12 @@ const GradientButton = ({
     <LinearGradient
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
-      colors={[theme.palette.primary?.dark!, "#CB4B00"]}
+      colors={[theme.palette.primary?.dark!, '#CB4B00']}
       style={styles.borderContainer}
     >
       <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
         <LinearGradientText
-          colors={[theme.palette.primary?.dark!, "#CB4B00"]}
+          colors={[theme.palette.primary?.dark!, '#CB4B00']}
           text={text}
           start={{ x: 0.5, y: 0 }}
           end={{ x: 1, y: 1 }}

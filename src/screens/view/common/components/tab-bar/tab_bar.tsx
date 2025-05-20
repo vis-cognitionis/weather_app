@@ -1,18 +1,18 @@
-import React from "react";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { SafeAreaView, View } from "react-native";
-import { observer } from "mobx-react";
+import React from 'react';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { SafeAreaView, View } from 'react-native';
+import { observer } from 'mobx-react';
 
-import mainStore from "src/screens/view-model/main_store";
-import ActionButton from "src/core/components/buttons/action_button";
+import mainStore from '../../../../../screens/view-model/main_store';
+import ActionButton from '../../../../../core/components/buttons/action_button';
 import {
   IconDetail,
   IconHomeWeather,
   IconSettings,
-} from "src/core/components/icons/custom_icons";
-import { StackScreenNames } from "src/navigation/interfaces/interfaces";
-import { useWeatherDatas } from "../../queries/useWeatherDatas";
-import { useTheme } from "src/core/init/themes/theme_context";
+} from '../../../../../core/components/icons/custom_icons';
+import { StackScreenNames } from '../../../../../navigation/interfaces/interfaces';
+import { useWeatherDatas } from '../../queries/useWeatherDatas';
+import { useTheme } from '../../../../../core/init/themes/theme_context';
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
@@ -22,17 +22,18 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
     <SafeAreaView
       style={{
         backgroundColor: theme.palette.background.default,
-        height: "12%",
-        position: "relative",
+        height: '12%',
+        position: 'relative',
       }}
     >
       <View
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{
-          flexDirection: "row",
+          flexDirection: 'row',
           gap: 15,
           top: 14,
-          position: "absolute",
-          alignSelf: "center",
+          position: 'absolute',
+          alignSelf: 'center',
         }}
       >
         {state.routes.map((route, index) => {
@@ -43,18 +44,18 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
             : theme.palette.primary.dark!;
 
           const TabIcon = () => {
-            return route.name === "Detail" ? (
+            return route.name === 'Detail' ? (
               <IconDetail stroke={stroke} />
-            ) : route.name === "Home" ? (
+            ) : route.name === 'Home' ? (
               <IconHomeWeather stroke={stroke} />
-            ) : route.name === "Settings" ? (
+            ) : route.name === 'Settings' ? (
               <IconSettings stroke={stroke} />
             ) : null;
           };
 
           const onPress = () => {
             const event = navigation.emit({
-              type: "tabPress",
+              type: 'tabPress',
               target: route.key,
               canPreventDefault: true,
             });
@@ -86,7 +87,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
                 maxWidth: 70,
                 backgroundColor: isFocused
                   ? theme.palette.primary.dark
-                  : "transparent",
+                  : 'transparent',
               }}
               onPress={onPress}
             />

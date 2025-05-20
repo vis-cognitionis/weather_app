@@ -1,15 +1,15 @@
-import React from "react";
-import { LineChart } from "react-native-chart-kit";
-import { AbstractChartConfig } from "react-native-chart-kit/dist/AbstractChart";
+import React from 'react';
+import { LineChart } from 'react-native-chart-kit';
+import { AbstractChartConfig } from 'react-native-chart-kit/dist/AbstractChart';
 
-import { useTheme } from "src/core/init/themes/theme_context";
-import { windowWidth } from "../../common/constants/constants";
-import { useWeatherDatas } from "../../common/queries/useWeatherDatas";
+import { useTheme } from '../../../../core/init/themes/theme_context';
+import { windowWidth } from '../../common/constants/constants';
+import { useWeatherDatas } from '../../common/queries/useWeatherDatas';
 import {
   groupWeatherDataByDate,
   today,
   tomorrow,
-} from "../../home/components/constants/constants";
+} from '../../home/components/constants/constants';
 
 const TemperatureChart = () => {
   const { theme } = useTheme();
@@ -19,14 +19,14 @@ const TemperatureChart = () => {
   const tomorrowsWeather = groupWeatherDataByDate(weatherDatas)[tomorrow];
 
   const todaysHourArr = todaysWeather?.map((weather) => {
-    return weather.dt_txt.split(" ")[1].slice(0, 2);
+    return weather.dt_txt.split(' ')[1].slice(0, 2);
   });
   const todaysTempArr = todaysWeather?.map((weather) => {
     return weather.main.temp;
   });
 
   const tomorrowsHourArr = tomorrowsWeather?.map((weather) => {
-    return weather.dt_txt.split(" ")[1].slice(0, 2);
+    return weather.dt_txt.split(' ')[1].slice(0, 2);
   });
   const tomorrowsTempArr = tomorrowsWeather?.map((weather) => {
     return weather.main.temp;
@@ -47,24 +47,24 @@ const TemperatureChart = () => {
     decimalPlaces: 0,
 
     propsForDots: {
-      r: "2.5",
-      strokeWidth: "2",
+      r: '2.5',
+      strokeWidth: '2',
     },
     propsForLabels: {
-      fontFamily: "Poppins-Regular",
+      fontFamily: 'Poppins-Regular',
       fill: theme.palette.primary.dark,
-      dx: "-5",
-      dy: "5",
+      dx: '-5',
+      dy: '5',
     },
 
     propsForHorizontalLabels: {
       fontSize: 12,
-      fontFamily: "Poppins-Regular",
+      fontFamily: 'Poppins-Regular',
       fill: theme.palette.primary.dark,
     },
 
     propsForVerticalLabels: {
-      fontFamily: "Poppins-Regular",
+      fontFamily: 'Poppins-Regular',
       fontSize: 12,
       fill: theme.palette.primary.dark,
     },
@@ -98,7 +98,7 @@ const TemperatureChart = () => {
       height={190}
       style={{
         borderRadius: 16,
-        alignSelf: "center",
+        alignSelf: 'center',
       }}
       chartConfig={chartConfig}
       yAxisSuffix="°"

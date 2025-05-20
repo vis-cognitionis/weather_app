@@ -1,8 +1,8 @@
-import Localization from "react-native-localization";
+import Localization from 'react-native-localization';
 
-import { useLanguage } from "../language_context";
-import tr from "../languages/tr/tr.json";
-import en from "../languages/en/en.json";
+import { useLanguage } from '../language_context';
+import tr from '../languages/tr/tr.json';
+import en from '../languages/en/en.json';
 
 const localizations = new Localization({
   en: en,

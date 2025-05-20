@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import axios, { AxiosError } from "axios";
-import { Alert } from "react-native";
-import { useQuery } from "@tanstack/react-query";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { Alert } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import mainStore from "src/screens/view-model/main_store";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { WeatherCurrentData } from "../../home/interfaces/interface_home";
+import mainStore from '../../../../screens/view-model/main_store';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { WeatherCurrentData } from '../../home/interfaces/interface_home';
 
 export const useWeatherCurrent = () => {
   const { t } = useTranslate();
@@ -19,41 +19,39 @@ export const useWeatherCurrent = () => {
     data: currentTemp,
     isLoading,
     refetch: refetchCurrent,
-  } = useQuery<WeatherCurrentData>(
-    ["currentTemp", mainStore.city, mainStore.weatherUnit],
-    async () => {
+  } = useQuery<WeatherCurrentData>({
+    queryKey: ['currentTemp', mainStore.city, mainStore.weatherUnit],
+    queryFn: async () => {
       try {
         const weatherUnit =
-          (await AsyncStorage.getItem("unit")) || mainStore.weatherUnit;
+          (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
-          "https://api.openweathermap.org/data/2.5/weather?q=" +
+          'https://api.openweathermap.org/data/2.5/weather?q=' +
             mainStore.city +
             `&units=${weatherUnit}&appid=` +
-            "4ece27e8959cae958f124f7316c6e352"
+            '4ece27e8959cae958f124f7316c6e352'
         );
         return response.data;
       } catch (error: any) {
         const axiosError = error as AxiosError;
 
-        if (axiosError.code === "ERR_NETWORK") {
+        if (axiosError.code === 'ERR_NETWORK') {
           setNetworkError(true);
         } else if (axiosError.response?.status === 404) {
           setFetchError(true);
         } else if (axiosError.response?.status === 429) {
           setRequestError(true);
         } else {
-          setErrorMessage(t("error.unexpected"));
+          setErrorMessage(t('error.unexpected'));
           console.log(errorMessage);
         }
 
         throw error;
       }
     },
-    {
-      enabled: true,
-    }
-  );
+    enabled: true
+  });
 
   return { currentTemp, isLoading, refetchCurrent };
 };

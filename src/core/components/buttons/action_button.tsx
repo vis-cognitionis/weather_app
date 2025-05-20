@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Platform,
@@ -6,21 +6,21 @@ import {
   FlexStyle,
   ViewStyle,
   GestureResponderEvent,
-} from "react-native";
+} from 'react-native';
 
-import ThemeProps from "src/core/init/themes/interface/interfaces";
-import lightTheme from "src/core/init/themes/styles/light";
-import { useTheme } from "src/core/init/themes/theme_context";
+import ThemeProps from '../../../core/init/themes/interface/interfaces';
+import lightTheme from '../../../core/init/themes/styles/light';
+import { useTheme } from '../../../core/init/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;
 
   return StyleSheet.create({
     button: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
       width: 64,
       height: 48,
       backgroundColor: theme.palette.primary.dark,
@@ -30,14 +30,14 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
     shadow: {
       ...Platform.select({
         ios: {
-          shadowColor: "#424242",
+          shadowColor: '#424242',
           shadowOpacity: value ? 0.5 : 1,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 6 },
         },
         android: {
           elevation: 10,
-          shadowColor: "#000000",
+          shadowColor: '#000000',
           shadowOpacity: value ? 0.5 : 1,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 6 },

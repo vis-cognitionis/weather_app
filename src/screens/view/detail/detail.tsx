@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -6,25 +6,25 @@ import {
   StyleSheet,
   RefreshControl,
   ScrollView,
-} from "react-native";
-import { observer } from "mobx-react";
+} from 'react-native';
+import { observer } from 'mobx-react';
 
-import ForecastFiveDay from "./components/forecast_five_day";
-import TemperatureChart from "./components/temp_chart";
-import NetworkError from "../common/components/network-error/network_error";
-import Container from "./components/container";
-import mainStore from "src/screens/view-model/main_store";
-import { useTheme } from "src/core/init/themes/theme_context";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useWeatherDatas } from "../common/queries/useWeatherDatas";
-import { useWeatherCurrent } from "../common/queries/useWeatherCurrent";
-import { windowHeight, windowWidth } from "../common/constants/constants";
+import ForecastFiveDay from './components/forecast_five_day';
+import TemperatureChart from './components/temp_chart';
+import NetworkError from '../common/components/network-error/network_error';
+import Container from './components/container';
+import mainStore from '../../../screens/view-model/main_store';
+import { useTheme } from '../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../core/init/lang/custom-hook/useTranslate';
+import { useWeatherDatas } from '../common/queries/useWeatherDatas';
+import { useWeatherCurrent } from '../common/queries/useWeatherCurrent';
+import { windowHeight, windowWidth } from '../common/constants/constants';
 
 const styles = StyleSheet.create({
   grid: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     rowGap: 8,
     columnGap: 10,
   },
@@ -49,32 +49,32 @@ const Detail = () => {
   }, []);
 
   const DetailCurrentInfos = [
-    { title: t("detail.wind") },
-    { title: t("detail.humidity") },
-    { title: t("detail.pressure") },
-    { title: t("detail.visibility") },
+    { title: t('detail.wind') },
+    { title: t('detail.humidity') },
+    { title: t('detail.pressure') },
+    { title: t('detail.visibility') },
   ];
 
   const getDetailCurrentInfo = (info: { title: string }) => {
     switch (info.title) {
-      case t("detail.wind"):
+      case t('detail.wind'):
         return currentTemp?.wind.speed === undefined
-          ? t("loading")
-          : currentTemp?.wind.speed + " " + t("detail.windUnit");
-      case t("detail.humidity"):
+          ? t('loading')
+          : currentTemp?.wind.speed + ' ' + t('detail.windUnit');
+      case t('detail.humidity'):
         return currentTemp?.main.humidity === undefined
-          ? t("loading")
-          : "%" + currentTemp?.main.humidity;
-      case t("detail.pressure"):
+          ? t('loading')
+          : '%' + currentTemp?.main.humidity;
+      case t('detail.pressure'):
         return currentTemp?.main.pressure === undefined
-          ? t("loading")
-          : currentTemp?.main.pressure + " " + "hPa";
-      case t("detail.visibility"):
+          ? t('loading')
+          : currentTemp?.main.pressure + ' ' + 'hPa';
+      case t('detail.visibility'):
         return Number.isNaN(Number(currentTemp?.visibility))
-          ? t("loading")
-          : Number(currentTemp?.visibility) / 1000 + " " + "km";
+          ? t('loading')
+          : Number(currentTemp?.visibility) / 1000 + ' ' + 'km';
       default:
-        return t("loading");
+        return t('loading');
     }
   };
   const DetailCurrent = () => {
@@ -84,7 +84,7 @@ const Detail = () => {
           return (
             <Container
               key={index}
-              width={windowWidth <= 375 ? "100%" : "48%"}
+              width={windowWidth <= 375 ? '100%' : '48%'}
               children={
                 <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
                   {getDetailCurrentInfo(info)}
@@ -106,8 +106,8 @@ const Detail = () => {
       ) : (
         <ScrollView
           style={{
-            paddingHorizontal: "7%",
-            paddingTop: windowHeight > 736 ? 0 : "2%",
+            paddingHorizontal: '7%',
+            paddingTop: windowHeight > 736 ? 0 : '2%',
           }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -117,11 +117,11 @@ const Detail = () => {
             <DetailCurrent />
             <Container
               width={windowWidth - 60}
-              title={t("detail.graphicTitle")}
+              title={t('detail.graphicTitle')}
               children={
                 isLoading ? (
                   <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
-                    {t("loading")}
+                    {t('loading')}
                   </Text>
                 ) : (
                   <TemperatureChart />

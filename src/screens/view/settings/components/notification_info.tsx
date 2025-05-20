@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Animated, View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { Animated, View, Text, StyleSheet } from 'react-native';
 
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
-import mainStore from "src/screens/view-model/main_store";
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../core/init/themes/theme_context';
+import mainStore from '../../../../screens/view-model/main_store';
 
 const NotificationInfo = () => {
   const { t } = useTranslate();
@@ -12,11 +12,11 @@ const NotificationInfo = () => {
 
   const styles = StyleSheet.create({
     container: {
-      display: "flex",
-      alignSelf: "center",
-      position: "absolute",
+      display: 'flex',
+      alignSelf: 'center',
+      position: 'absolute',
       bottom: -40,
-      width: "auto",
+      width: 'auto',
     },
     animStyle: {
       backgroundColor: theme.palette.primary.dark,
@@ -46,7 +46,7 @@ const NotificationInfo = () => {
         });
       }, 5000);
     });
-  }, []);
+  }, [animation]);
 
   const animationStyle = {
     transform: [
@@ -69,7 +69,7 @@ const NotificationInfo = () => {
             { color: theme.palette.primary.light },
           ]}
         >
-          {t("error.info")}
+          {t('error.info')}
         </Text>
       </Animated.View>
     </View>

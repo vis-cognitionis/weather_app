@@ -1,7 +1,7 @@
-import React from "react";
-import Svg, { Path } from "react-native-svg";
+import React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
-import { useTheme } from "src/core/init/themes/theme_context";
+import { useTheme } from '../../../core/init/themes/theme_context';
 
 export const IconClear = () => {
   return (

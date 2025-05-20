@@ -1,18 +1,18 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
   RefreshControl,
   ScrollView,
-} from "react-native";
-import { observer } from "mobx-react";
+} from 'react-native';
+import { observer } from 'mobx-react';
 
-import mainStore from "src/screens/view-model/main_store";
-import WeatherAll from "./components/weather_all";
-import ThemeProps from "src/core/init/themes/interface/interfaces";
-import NetworkError from "../common/components/network-error/network_error";
-import { useWeatherDatas } from "../common/queries/useWeatherDatas";
-import { useTheme } from "src/core/init/themes/theme_context";
+import mainStore from '../../../screens/view-model/main_store';
+import WeatherAll from './components/weather_all';
+import ThemeProps from '../../../core/init/themes/interface/interfaces';
+import NetworkError from '../common/components/network-error/network_error';
+import { useWeatherDatas } from '../common/queries/useWeatherDatas';
+import { useTheme } from '../../../core/init/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -21,7 +21,7 @@ const Styles = ({ theme }: { theme: ThemeProps }) => {
       backgroundColor: theme.palette.background.default,
     },
     scrollView: {
-      paddingHorizontal: "7%",
+      paddingHorizontal: '7%',
     },
   });
 };
@@ -38,7 +38,7 @@ const Home = () => {
       setRefreshing(false);
       refetch();
     }, 2000);
-  }, []);
+  }, [refetch]);
 
   return (
     <SafeAreaView style={styles.container}>

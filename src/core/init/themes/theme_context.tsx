@@ -1,14 +1,14 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import { Appearance } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { Appearance } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import ThemeProps from "./interface/interfaces";
-import darkTheme from "./styles/dark";
-import lightTheme from "./styles/light";
+import ThemeProps from './interface/interfaces';
+import darkTheme from './styles/dark';
+import lightTheme from './styles/light';
 
 enum ThemeEnum {
-  Dark = "dark",
-  Light = "light",
+  Dark = 'dark',
+  Light = 'light',
 }
 
 interface ThemeContext {
@@ -26,7 +26,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     (async () => {
-      const themeFromStorage = await AsyncStorage.getItem("userTheme");
+      const themeFromStorage = await AsyncStorage.getItem('userTheme');
 
       if (themeFromStorage !== null && themeFromStorage === ThemeEnum.Light) {
         setTheme(lightTheme);
@@ -48,9 +48,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       setTheme(theme);
       const setUserTheme =
         theme === lightTheme ? ThemeEnum.Light : ThemeEnum.Dark;
-      await AsyncStorage.setItem("userTheme", setUserTheme);
+      await AsyncStorage.setItem('userTheme', setUserTheme);
     } catch (e) {
-      console.log("Error setting theme to storage:", e);
+      console.log('Error setting theme to storage:', e);
     }
   };
 

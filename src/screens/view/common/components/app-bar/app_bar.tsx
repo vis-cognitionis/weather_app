@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Platform, Pressable, StyleSheet, TextInput, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { observer } from "mobx-react";
+import React, { useEffect, useRef, useState } from 'react';
+import { Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+ import { observer } from 'mobx-react';
 
 import {
   IconBack,
@@ -10,22 +9,22 @@ import {
   IconEdit,
   IconLightTheme,
   IconSearch,
-} from "src/core/components/icons/custom_icons";
-import { StackScreenNames } from "src/navigation/interfaces/interfaces";
-import { useWeatherDatas } from "../../queries/useWeatherDatas";
-import { windowHeight } from "../../constants/constants";
-import { useTheme } from "src/core/init/themes/theme_context";
-import ThemeProps from "src/core/init/themes/interface/interfaces";
-import lightTheme from "src/core/init/themes/styles/light";
-import darkTheme from "src/core/init/themes/styles/dark";
-import mainStore from "src/screens/view-model/main_store";
+} from '../../../../../core/components/icons/custom_icons';
+import { StackScreenNames } from '../../../../../navigation/interfaces/interfaces';
+import { useWeatherDatas } from '../../queries/useWeatherDatas';
+import { windowHeight } from '../../constants/constants';
+import { useTheme } from '../../../../../core/init/themes/theme_context';
+import ThemeProps from '../../../../../core/init/themes/interface/interfaces';
+import lightTheme from '../../../../../core/init/themes/styles/light';
+import darkTheme from '../../../../../core/init/themes/styles/dark';
+import mainStore from '../../../../../screens/view-model/main_store';
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;
 
   return StyleSheet.create({
     button: {
-      justifyContent: "center",
+      justifyContent: 'center',
       paddingLeft: 9,
       width: 38,
       height: 38,
@@ -36,14 +35,14 @@ const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
     shadow: {
       ...Platform.select({
         ios: {
-          shadowColor: "#424242",
+          shadowColor: '#424242',
           shadowOpacity: value ? 0.1 : 1,
           shadowRadius: 7,
           shadowOffset: { width: 0, height: 6 },
         },
         android: {
           elevation: 10,
-          shadowColor: "#000000",
+          shadowColor: '#000000',
           shadowOpacity: value ? 0.6 : 0.25,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 6 },
@@ -62,39 +61,39 @@ const AppBarStyles = ({
 }) => {
   return StyleSheet.create({
     container: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
       backgroundColor: theme.palette.background.default,
       paddingLeft: 30,
       paddingRight: 20,
       paddingTop: windowHeight >= 852 ? 0 : 5,
       paddingBottom: -10,
-      height: windowHeight >= 852 ? 110 : "auto",
+      height: windowHeight >= 852 ? 110 : 'auto',
     },
 
     input: {
-      alignSelf: "flex-end",
+      alignSelf: 'flex-end',
       paddingBottom: 1,
-      width: "auto",
-      textDecorationLine: editable ? "underline" : "none",
-      textTransform: "capitalize",
+      width: 'auto',
+      textDecorationLine: editable ? 'underline' : 'none',
+      textTransform: 'capitalize',
     },
 
     locationContainer: {
-      flexDirection: "row",
+      flexDirection: 'row',
       height: 32,
-      alignItems: "center",
+      alignItems: 'center',
       gap: 16,
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
     },
 
     backButton: {
       width: 32,
       height: 32,
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });
 };
@@ -149,7 +148,7 @@ const AppBar = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    < >
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={styles.locationContainer}>
           <TextInput
@@ -193,7 +192,7 @@ const AppBar = () => {
         />
       )}
       <ThemeSwitch />
-    </SafeAreaView>
+    </>
   );
 };
 export default observer(AppBar);

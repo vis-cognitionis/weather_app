@@ -1,15 +1,15 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {
   ParamList,
   TabConfig,
   StackScreenNames,
-} from "../interfaces/interfaces";
-import Home from "src/screens/view/home/home";
-import Detail from "src/screens/view/detail/detail";
-import Settings from "src/screens/view/settings/settings";
-import TabBar from "src/screens/view/common/components/tab-bar/tab_bar";
+} from '../interfaces/interfaces';
+import Home from '../../screens/view/home/home';
+import Detail from '../../screens/view/detail/detail';
+import Settings from '../../screens/view/settings/settings';
+import TabBar from '../../screens/view/common/components/tab-bar/tab_bar';
 
 const OutletTabs = () => {
   const Tab = createBottomTabNavigator<ParamList>();

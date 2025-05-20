@@ -1,5 +1,5 @@
-import React from "react";
-import { observer } from "mobx-react";
+import React from 'react';
+import { observer } from 'mobx-react';
 
 import {
   IconClear,
@@ -14,12 +14,12 @@ import {
   IconSquall,
   IconThunderstorm,
   IconTornado,
-} from "src/core/components/icons/weather_colored_icons";
+} from '../../../../../core/components/icons/weather_colored_icons';
 import {
   WeatherCondition,
   WeatherCurrentData,
-} from "../../interfaces/interface_home";
-import mainStore from "src/screens/view-model/main_store";
+} from '../../interfaces/interface_home';
+import mainStore from '../../../../../screens/view-model/main_store';
 
 const WeatherCurrentIcons = ({
   currentTemp,
@@ -28,13 +28,13 @@ const WeatherCurrentIcons = ({
 }) => {
   switch (currentTemp?.weather[0].main!) {
     case WeatherCondition.Clear:
-      return mainStore.timeOfDay === "night" ? (
+      return mainStore.timeOfDay === 'night' ? (
         <IconClearNight />
       ) : (
         <IconClear />
       );
     case WeatherCondition.Clouds:
-      return mainStore.timeOfDay === "night" ? (
+      return mainStore.timeOfDay === 'night' ? (
         <IconCloudsNight />
       ) : (
         <IconClouds />

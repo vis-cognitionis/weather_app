@@ -1,12 +1,12 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { observer } from "mobx-react";
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { observer } from 'mobx-react';
 
-import { useWeatherCurrent } from "../../common/queries/useWeatherCurrent";
-import { WeatherCondition } from "../interfaces/interface_home";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { windowHeight } from "../../common/constants/constants";
-import { useTheme } from "src/core/init/themes/theme_context";
+import { useWeatherCurrent } from '../../common/queries/useWeatherCurrent';
+import { WeatherCondition } from '../interfaces/interface_home';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { windowHeight } from '../../common/constants/constants';
+import { useTheme } from '../../../../core/init/themes/theme_context';
 import {
   IconInfoClear,
   IconInfoClouds,
@@ -14,7 +14,7 @@ import {
   IconInfoSnow,
   IconInfoSquall,
   IconInfoWarning,
-} from "src/core/components/icons/weather_info_icons";
+} from '../../../../core/components/icons/weather_info_icons';
 import {
   RainySvg,
   ClearSvg,
@@ -27,14 +27,14 @@ import {
   FogHazeMistSvg,
   CloudsNightSvg,
   ClearNightSvg,
-} from "src/images/weather-svg/weather_svg";
-import mainStore from "src/screens/view-model/main_store";
+} from '../../../../images/weather-svg/weather_svg';
+import mainStore from '../../../../screens/view-model/main_store';
 
 const styles = StyleSheet.create({
   infoContainer: {
-    flexDirection: "row",
-    width: "70%",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    width: '70%',
+    justifyContent: 'space-between',
     gap: 12,
   },
 });
@@ -49,13 +49,13 @@ const WeatherBackground = () => {
   const BackgroundSvg = () => {
     switch (condition) {
       case WeatherCondition.Clear:
-        return mainStore.timeOfDay === "night" ? (
+        return mainStore.timeOfDay === 'night' ? (
           <ClearNightSvg />
         ) : (
           <ClearSvg />
         );
       case WeatherCondition.Clouds:
-        return mainStore.timeOfDay === "night" ? (
+        return mainStore.timeOfDay === 'night' ? (
           <CloudsNightSvg />
         ) : (
           <CloudsSvg />
@@ -92,37 +92,37 @@ const WeatherBackground = () => {
 
     switch (condition) {
       case WeatherCondition.Clear:
-        return mainStore.timeOfDay === "night"
-          ? t("weatherSuggestion.clearNight")
-          : t("weatherSuggestion.clear");
+        return mainStore.timeOfDay === 'night'
+          ? t('weatherSuggestion.clearNight')
+          : t('weatherSuggestion.clear');
       case WeatherCondition.Clouds:
-        return mainStore.timeOfDay === "night"
-          ? t("weatherSuggestion.cloudsNight")
-          : t("weatherSuggestion.clouds");
+        return mainStore.timeOfDay === 'night'
+          ? t('weatherSuggestion.cloudsNight')
+          : t('weatherSuggestion.clouds');
       case WeatherCondition.Drizzle:
-        return t("weatherSuggestion.drizzle");
+        return t('weatherSuggestion.drizzle');
       case WeatherCondition.Dust:
-        return t("weatherSuggestion.dust");
+        return t('weatherSuggestion.dust');
       case WeatherCondition.Fog:
-        return t("weatherSuggestion.fog");
+        return t('weatherSuggestion.fog');
       case WeatherCondition.Haze:
-        return t("weatherSuggestion.haze");
+        return t('weatherSuggestion.haze');
       case WeatherCondition.Mist:
-        return t("weatherSuggestion.mist");
+        return t('weatherSuggestion.mist');
       case WeatherCondition.Rain:
-        return t("weatherSuggestion.rain");
+        return t('weatherSuggestion.rain');
       case WeatherCondition.Sand:
-        return t("weatherSuggestion.sand");
+        return t('weatherSuggestion.sand');
       case WeatherCondition.Snow:
-        return t("weatherSuggestion.snow");
+        return t('weatherSuggestion.snow');
       case WeatherCondition.Squall:
-        return t("weatherSuggestion.squall");
+        return t('weatherSuggestion.squall');
       case WeatherCondition.Thunderstorm:
-        return t("weatherSuggestion.thunderstorm");
+        return t('weatherSuggestion.thunderstorm');
       case WeatherCondition.Tornado:
-        return t("weatherSuggestion.tornado");
+        return t('weatherSuggestion.tornado');
       default:
-        return t("weatherSuggestion.clear");
+        return t('weatherSuggestion.clear');
     }
   };
 
@@ -162,12 +162,12 @@ const WeatherBackground = () => {
   return (
     <>
       <View
-        style={{ position: "absolute", top: topValue, alignSelf: "center" }}
+        style={{ position: 'absolute', top: topValue, alignSelf: 'center' }}
       >
         <BackgroundSvg />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={[theme.typography.h2, { width: "120%" }]}>
+        <Text style={[theme.typography.h2, { width: '120%' }]}>
           {weatherSuggestions()}
         </Text>
         <View style={{ paddingTop: 5 }}>

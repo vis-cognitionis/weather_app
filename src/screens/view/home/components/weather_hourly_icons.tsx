@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   IconClear,
@@ -13,8 +13,8 @@ import {
   IconTornado,
   IconClearNight,
   IconCloudsNight,
-} from "src/core/components/icons/weather_field_icons";
-import { Weather, WeatherCondition } from "../interfaces/interface_home";
+} from '../../../../core/components/icons/weather_field_icons';
+import { Weather, WeatherCondition } from '../interfaces/interface_home';
 
 const WeatherHourlyIcons = ({
   weather,
@@ -26,8 +26,8 @@ const WeatherHourlyIcons = ({
   sunset: Date;
 }) => {
   const hourControl =
-    Number(weather.dt_txt.split(" ")[1].slice(0, 2)) >= sunrise.getUTCHours() &&
-    Number(weather.dt_txt.split(" ")[1].slice(0, 2)) < sunset.getUTCHours();
+    Number(weather.dt_txt.split(' ')[1].slice(0, 2)) >= sunrise.getUTCHours() &&
+    Number(weather.dt_txt.split(' ')[1].slice(0, 2)) < sunset.getUTCHours();
 
   switch (weather.weather[0].main) {
     case WeatherCondition.Clear:

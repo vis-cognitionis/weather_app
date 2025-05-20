@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Modal, ScrollView, StyleSheet, View } from "react-native";
-import { Pressable, Text } from "react-native";
+import React, { useState } from 'react';
+import { Modal, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
-import { IconClose, IconTerms } from "src/core/components/icons/custom_icons";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
+import { IconClose, IconTerms } from '../../../../core/components/icons/custom_icons';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../core/init/themes/theme_context';
 
 const TermsAndServices = () => {
   const { theme } = useTheme();
@@ -12,8 +12,8 @@ const TermsAndServices = () => {
   const styles = StyleSheet.create({
     centeredView: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       marginTop: 22,
     },
     modalView: {
@@ -21,8 +21,8 @@ const TermsAndServices = () => {
       backgroundColor: theme.palette.background.default,
       borderRadius: 20,
       padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
+      alignItems: 'center',
+      shadowColor: '#000',
       gap: 16,
 
       shadowOffset: {
@@ -47,43 +47,43 @@ const TermsAndServices = () => {
     return (
       <View style={{ gap: 20 }}>
         <View>
-          <Text style={[theme.typography.caption, { fontWeight: "bold" }]}>
-            {t("terms&services.welcome")}
+          <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
+            {t('terms&services.welcome')}
           </Text>
           <Text style={theme.typography.caption}>
-            {t("terms&services.welcomeContent")}
+            {t('terms&services.welcomeContent')}
           </Text>
         </View>
         <View>
-          <Text style={[theme.typography.caption, { fontWeight: "bold" }]}>
-            {t("terms&services.termsOfUse")}
+          <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
+            {t('terms&services.termsOfUse')}
           </Text>
           <Text style={theme.typography.caption}>
-            {t("terms&services.termsOfUseContent")}
+            {t('terms&services.termsOfUseContent')}
           </Text>
         </View>
         <View>
-          <Text style={[theme.typography.caption, { fontWeight: "bold" }]}>
-            {t("terms&services.openWeather")}
+          <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
+            {t('terms&services.openWeather')}
           </Text>
           <Text style={theme.typography.caption}>
-            {t("terms&services.openWeatherContent")}
+            {t('terms&services.openWeatherContent')}
           </Text>
         </View>
         <View>
-          <Text style={[theme.typography.caption, { fontWeight: "bold" }]}>
-            {t("terms&services.privacy")}
+          <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
+            {t('terms&services.privacy')}
           </Text>
           <Text style={theme.typography.caption}>
-            {t("terms&services.privacyContent")}
+            {t('terms&services.privacyContent')}
           </Text>
         </View>
         <View>
-          <Text style={[theme.typography.caption, { fontWeight: "bold" }]}>
-            {t("terms&services.changes")}
+          <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
+            {t('terms&services.changes')}
           </Text>
           <Text style={theme.typography.caption}>
-            {t("terms&services.changesContent")}
+            {t('terms&services.changesContent')}
           </Text>
         </View>
       </View>
@@ -103,7 +103,7 @@ const TermsAndServices = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={{ alignSelf: "flex-end" }}
+              style={{ alignSelf: 'flex-end' }}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <IconClose />

@@ -1,19 +1,19 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import { useTheme } from "src/core/init/themes/theme_context";
+import { useTheme } from '../../../../core/init/themes/theme_context';
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
-    width: "auto",
-    height: "auto",
+    width: 'auto',
+    height: 'auto',
     minWidth: 162,
     minHeight: 93,
     paddingTop: 22,
     padding: 12,
     gap: 10,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
 
@@ -33,7 +33,7 @@ const Container = ({
         styles.container,
         {
           backgroundColor: theme.palette.secondary?.light,
-          width: width,
+          ...(typeof width === 'number' && { width }),
         },
       ]}
     >

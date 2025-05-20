@@ -1,27 +1,27 @@
-import React from "react";
+import React from 'react';
 import {
   ActivityIndicator,
   SafeAreaView,
   SectionList,
   View,
-} from "react-native";
-import { observer } from "mobx-react";
+} from 'react-native';
+import { observer } from 'mobx-react';
 
-import mainStore from "src/screens/view-model/main_store";
-import SectionTitle from "./components/section_title";
-import NetworkError from "../common/components/network-error/network_error";
-import SectionContent from "./components/section_content";
-import NotificationInfo from "./components/notification_info";
-import { useTheme } from "src/core/init/themes/theme_context";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useWeatherDatas } from "../common/queries/useWeatherDatas";
-import { StyleSheet } from "react-native";
+import mainStore from '../../../screens/view-model/main_store';
+import SectionTitle from './components/section_title';
+import NetworkError from '../common/components/network-error/network_error';
+import SectionContent from './components/section_content';
+import NotificationInfo from './components/notification_info';
+import { useTheme } from '../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../core/init/lang/custom-hook/useTranslate';
+import { useWeatherDatas } from '../common/queries/useWeatherDatas';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sectionListContainer: { paddingLeft: 60 },
 });
@@ -34,23 +34,23 @@ const Settings = () => {
 
   const settings = [
     {
-      title: t("settings.general.title"),
+      title: t('settings.general.title'),
       data: [
-        { name: t("settings.general.defaultCity") },
-        { name: t("settings.general.language") },
-        { name: t("settings.general.statusBar") },
+        { name: t('settings.general.defaultCity') },
+        { name: t('settings.general.language') },
+        { name: t('settings.general.statusBar') },
       ],
     },
     {
-      title: t("settings.temperature.title"),
+      title: t('settings.temperature.title'),
       data: [
-        { name: t("settings.temperature.celsius") },
-        { name: t("settings.temperature.fahrenheit") },
+        { name: t('settings.temperature.celsius') },
+        { name: t('settings.temperature.fahrenheit') },
       ],
     },
     {
-      title: "",
-      data: [{ name: t("settings.terms") }, { name: t("settings.about") }],
+      title: '',
+      data: [{ name: t('settings.terms') }, { name: t('settings.about') }],
     },
   ];
 

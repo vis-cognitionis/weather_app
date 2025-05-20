@@ -5,12 +5,12 @@ import {
   Pressable,
   Linking,
   Platform,
-} from "react-native";
-import RNRestart from "react-native-restart";
+} from 'react-native';
+import RNRestart from 'react-native-restart';
 
-import { IconNoNetwork } from "src/core/components/icons/custom_icons";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useTheme } from "src/core/init/themes/theme_context";
+import { IconNoNetwork } from '../../../../../core/components/icons/custom_icons';
+import { useTranslate } from '../../../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../../core/init/themes/theme_context';
 
 const NetworkError = () => {
   const { theme } = useTheme();
@@ -19,21 +19,21 @@ const NetworkError = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      width: "80%",
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '80%',
       gap: 20,
-      alignSelf: "center",
+      alignSelf: 'center',
     },
     icon: {
       marginBottom: 16,
     },
     message: {
-      textAlign: "center",
+      textAlign: 'center',
     },
     refreshButton: {
-      flexDirection: "row",
-      alignItems: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
       backgroundColor: theme.palette.primary.dark,
       paddingHorizontal: 20,
       paddingVertical: 6,
@@ -45,14 +45,14 @@ const NetworkError = () => {
   });
 
   const openWifiSettings = () => {
-    let url = "";
-    if (Platform.OS === "android") {
-      url = "intent://wifi";
-    } else if (Platform.OS === "ios") {
-      url = "App-Prefs:root=WIFI";
+    let url = '';
+    if (Platform.OS === 'android') {
+      url = 'intent://wifi';
+    } else if (Platform.OS === 'ios') {
+      url = 'App-Prefs:root=WIFI';
     }
     Linking.openURL(url).catch((err) =>
-      console.error("Could not open Wi-Fi settings!", err)
+      console.error('Could not open Wi-Fi settings!', err)
     );
   };
 
@@ -60,7 +60,7 @@ const NetworkError = () => {
     <View style={styles.container}>
       <IconNoNetwork />
       <Text style={[theme.typography.content, styles.message]}>
-        {t("error.noNetwork")}
+        {t('error.noNetwork')}
       </Text>
       <Pressable
         onPress={() => {
@@ -69,7 +69,7 @@ const NetworkError = () => {
         }}
       >
         <View style={styles.refreshButton}>
-          <Text style={styles.refreshText}>{t("error.refresh")}</Text>
+          <Text style={styles.refreshText}>{t('error.refresh')}</Text>
         </View>
       </Pressable>
     </View>

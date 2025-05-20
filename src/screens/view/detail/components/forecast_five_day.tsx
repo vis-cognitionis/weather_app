@@ -1,13 +1,13 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { observer } from "mobx-react";
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { observer } from 'mobx-react';
 
-import { today } from "../../home/components/constants/constants";
-import { useTheme } from "src/core/init/themes/theme_context";
-import { windowWidth } from "../../common/constants/constants";
-import { useTranslate } from "src/core/init/lang/custom-hook/useTranslate";
-import { useWeatherDatas } from "../../common/queries/useWeatherDatas";
-import { WeatherCondition } from "../../home/interfaces/interface_home";
+import { today } from '../../home/components/constants/constants';
+import { useTheme } from '../../../../core/init/themes/theme_context';
+import { windowWidth } from '../../common/constants/constants';
+import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useWeatherDatas } from '../../common/queries/useWeatherDatas';
+import { WeatherCondition } from '../../home/interfaces/interface_home';
 import {
   IconRain,
   IconSnow,
@@ -19,35 +19,35 @@ import {
   IconDustSand,
   IconFogHazeMist,
   IconThunderstorm,
-} from "src/core/components/icons/weather_colored_icons";
-import Container from "./container";
-import mainStore from "src/screens/view-model/main_store";
+} from '../../../../core/components/icons/weather_colored_icons';
+import Container from './container';
+import mainStore from '../../../../screens/view-model/main_store';
 
 const styles = StyleSheet.create({
   dayContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     height: 50,
     maxHeight: 50,
   },
 
   container: {
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingHorizontal: 5,
   },
 
   line: {
-    alignSelf: "center",
+    alignSelf: 'center',
     width: windowWidth - 60,
     borderBottomWidth: 1,
   },
 
   tempContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: 130,
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 
@@ -90,13 +90,13 @@ const ForecastFiveDay = () => {
     }
   }
   const days = [
-    t("daysShort.sunday"),
-    t("daysShort.monday"),
-    t("daysShort.tuesday"),
-    t("daysShort.wednesday"),
-    t("daysShort.thursday"),
-    t("daysShort.friday"),
-    t("daysShort.saturday"),
+    t('daysShort.sunday'),
+    t('daysShort.monday'),
+    t('daysShort.tuesday'),
+    t('daysShort.wednesday'),
+    t('daysShort.thursday'),
+    t('daysShort.friday'),
+    t('daysShort.saturday'),
   ];
 
   const getDayOfWeek = (date: string) => {
@@ -112,7 +112,7 @@ const ForecastFiveDay = () => {
     const dateToCompare = new Date(date);
 
     if (currentLocalDateTime.toDateString() === dateToCompare.toDateString()) {
-      return t("daysShort.today");
+      return t('daysShort.today');
     }
 
     return days[dayOfWeekIndex];
@@ -183,11 +183,11 @@ const ForecastFiveDay = () => {
   return (
     <Container
       width={windowWidth - 60}
-      title={t("detail.forecastTitle")}
+      title={t('detail.forecastTitle')}
       children={
         isLoading ? (
           <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
-            {t("loading")}
+            {t('loading')}
           </Text>
         ) : (
           Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => {
@@ -205,22 +205,22 @@ const ForecastFiveDay = () => {
                     <Text
                       style={[
                         theme.typography.caption,
-                        { width: "auto", minWidth: 80 },
+                        { width: 'auto', minWidth: 80 },
                       ]}
                     >
-                      {`${t("home.maxTemp")}:`}{" "}
-                      {dailyDataForNextFiveDays[dateStr].maxTemp}{" "}
-                      {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                      {`${t('home.maxTemp')}:`}{' '}
+                      {dailyDataForNextFiveDays[dateStr].maxTemp}{' '}
+                      {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
                     </Text>
                     <Text
                       style={[
                         theme.typography.caption,
-                        { width: "auto", minWidth: 80 },
+                        { width: 'auto', minWidth: 80 },
                       ]}
                     >
-                      {`${t("home.minTemp")}:`}{" "}
-                      {dailyDataForNextFiveDays[dateStr].minTemp}{" "}
-                      {mainStore.weatherUnit === "metric" ? "°C" : "°F"}
+                      {`${t('home.minTemp')}:`}{' '}
+                      {dailyDataForNextFiveDays[dateStr].minTemp}{' '}
+                      {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
                     </Text>
                   </View>
                 </View>

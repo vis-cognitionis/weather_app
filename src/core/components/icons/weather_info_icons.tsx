@@ -1,6 +1,6 @@
-import React from "react";
-import Svg, { Path, Mask } from "react-native-svg";
-import { useTheme } from "src/core/init/themes/theme_context";
+import React from 'react';
+import Svg, { Path, Mask } from 'react-native-svg';
+import { useTheme } from '../../../core/init/themes/theme_context';
 
 export const IconInfoClear = () => {
   const { theme } = useTheme();

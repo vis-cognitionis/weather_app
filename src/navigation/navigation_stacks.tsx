@@ -1,15 +1,15 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { observer } from "mobx-react";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { observer } from 'mobx-react';
 
-import AppBar from "src/screens/view/common/components/app-bar/app_bar";
-import Landing from "src/screens/view/landing/landing";
-import mainStore from "src/screens/view-model/main_store";
-import OutletTabs from "./components/outlet_tabs";
-import SplashScreen from "src/screens/view/splash/splash";
-import StatusBarControl from "src/screens/view/common/components/status-bar/status_bar";
-import { ParamList, StackScreenNames } from "./interfaces/interfaces";
+  import AppBar from '../screens/view/common/components/app-bar/app_bar';
+import Landing from '../screens/view/landing/landing';
+import mainStore from '../screens/view-model/main_store';
+import OutletTabs from './components/outlet_tabs';
+import SplashScreen from '../screens/view/splash/splash';
+import StatusBarControl from '../screens/view/common/components/status-bar/status_bar';
+import { ParamList, StackScreenNames } from './interfaces/interfaces';
 
 const NavigationStacks = () => {
   const Stack = createNativeStackNavigator<ParamList>();
@@ -41,7 +41,8 @@ const NavigationStacks = () => {
               name={StackScreenNames.Outlet}
               component={OutletTabs}
               options={{
-                header: () => <AppBar />,
+                // eslint-disable-next-line react/no-unstable-nested-components
+            header: () => <AppBar />,
               }}
             />
           )
