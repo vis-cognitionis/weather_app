@@ -10,8 +10,8 @@ import DefaultCity from './default_city';
 import LanguageAction from './language_actions';
 import TermsAndServices from './terms_and_services';
 import StatusbarSettings from './statusbar_settings';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const styles = StyleSheet.create({
   listContainer: {

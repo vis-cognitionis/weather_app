@@ -4,11 +4,11 @@ import { observer } from 'mobx-react';
 
 import ActionButton from '../../../core/components/buttons/action_button';
 import NetworkError from '../common/components/network-error/network_error';
-import ThemeProps from '../../../core/init/themes/interface/interfaces';
+import ThemeProps from '../../../inits/themes/interface/interfaces';
 import mainStore from '../../../screens/view-model/main_store';
-import { useTranslate } from '../../../core/init/lang/custom-hook/useTranslate';
+import { useTranslate } from '../../../inits/lang/custom-hook/useTranslate';
 import { windowHeight } from '../common/constants/constants';
-import { useTheme } from '../../../core/init/themes/theme_context';
+import { useTheme } from '../../../inits/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -36,13 +36,8 @@ const Landing = () => {
         <NetworkError />
       ) : (
         <>
-          <Image
-            style={styles.image}
-            source={require('../../../images/landing_page.png')}
-          />
-          <Text
-            style={[theme.typography.h1, { width: '70%', textAlign: 'center' }]}
-          >
+          <Image style={styles.image} source={require('../../../images/landing_page.png')} />
+          <Text style={[theme.typography.h1, { width: '70%', textAlign: 'center' }]}>
             {t('landing.content')}
           </Text>
           {/* <GradientButton
@@ -55,9 +50,7 @@ const Landing = () => {
             onPress={() => {
               mainStore.setNavigateLanding(false);
             }}
-            children={
-              <Text style={theme.typography.button}>{t('landing.button')}</Text>
-            }
+            children={<Text style={theme.typography.button}>{t('landing.button')}</Text>}
             customStyles={{
               paddingHorizontal: 70,
               paddingVertical: 10,

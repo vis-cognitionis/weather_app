@@ -1,16 +1,9 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  Linking,
-  Platform,
-} from 'react-native';
+import { StyleSheet, View, Text, Pressable, Linking, Platform } from 'react-native';
 import RNRestart from 'react-native-restart';
 
 import { IconNoNetwork } from '../../../../../core/components/icons/custom_icons';
-import { useTranslate } from '../../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../../inits/themes/theme_context';
 
 const NetworkError = () => {
   const { theme } = useTheme();
@@ -51,17 +44,13 @@ const NetworkError = () => {
     } else if (Platform.OS === 'ios') {
       url = 'App-Prefs:root=WIFI';
     }
-    Linking.openURL(url).catch((err) =>
-      console.error('Could not open Wi-Fi settings!', err)
-    );
+    Linking.openURL(url).catch((err) => console.error('Could not open Wi-Fi settings!', err));
   };
 
   return (
     <View style={styles.container}>
       <IconNoNetwork />
-      <Text style={[theme.typography.content, styles.message]}>
-        {t('error.noNetwork')}
-      </Text>
+      <Text style={[theme.typography.content, styles.message]}>{t('error.noNetwork')}</Text>
       <Pressable
         onPress={() => {
           RNRestart.restart();

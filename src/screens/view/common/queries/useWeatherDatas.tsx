@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { StackScreenNames } from '../../../../navigation/interfaces/interfaces';
 import { WeatherDatas } from '../../home/interfaces/interface_home';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
 import mainStore from '../../../../screens/view-model/main_store';
 
 export const useWeatherDatas = () => {
@@ -19,13 +19,12 @@ export const useWeatherDatas = () => {
     data: weatherDatas,
     isLoading,
     refetch,
-    error
+    error,
   } = useQuery<WeatherDatas, AxiosError, WeatherDatas, [string, string, string]>({
     queryKey: ['weatherDatas', mainStore.city, mainStore.weatherUnit],
     queryFn: async () => {
       try {
-        const weatherUnit =
-          (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
+        const weatherUnit = (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
           'https://api.openweathermap.org/data/2.5/forecast?q=' +

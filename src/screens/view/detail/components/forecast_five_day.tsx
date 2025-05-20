@@ -3,9 +3,9 @@ import { Text, View, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
 import { today } from '../../home/components/constants/constants';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTheme } from '../../../../inits/themes/theme_context';
 import { windowWidth } from '../../common/constants/constants';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
 import { useWeatherDatas } from '../../common/queries/useWeatherDatas';
 import { WeatherCondition } from '../../home/interfaces/interface_home';
 import {
@@ -103,11 +103,8 @@ const ForecastFiveDay = () => {
     const selectedCityTimezoneOffset = weatherDatas?.city.timezone!;
     const currentDate = new Date();
     const utcOffset = currentDate.getTimezoneOffset() * 60 * 1000;
-    const currentDateTimezoneOffset =
-      utcOffset + selectedCityTimezoneOffset * 1000;
-    const currentLocalDateTime = new Date(
-      Date.now() + currentDateTimezoneOffset
-    );
+    const currentDateTimezoneOffset = utcOffset + selectedCityTimezoneOffset * 1000;
+    const currentLocalDateTime = new Date(Date.now() + currentDateTimezoneOffset);
     const dayOfWeekIndex = new Date(date).getDay();
     const dateToCompare = new Date(date);
 
@@ -186,9 +183,7 @@ const ForecastFiveDay = () => {
       title={t('detail.forecastTitle')}
       children={
         isLoading ? (
-          <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
-            {t('loading')}
-          </Text>
+          <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>{t('loading')}</Text>
         ) : (
           Object.keys(dailyDataForNextFiveDays).map((dateStr, i) => {
             return (
@@ -197,29 +192,15 @@ const ForecastFiveDay = () => {
                   <Text style={[theme.typography.caption, { width: 50 }]}>
                     {dailyDataForNextFiveDays[dateStr].dayOfWeek}
                   </Text>
-                  <View style={{ transform: [{ scale: 0.3 }] }}>
-                    {smallIcons(dateStr)}
-                  </View>
+                  <View style={{ transform: [{ scale: 0.3 }] }}>{smallIcons(dateStr)}</View>
 
                   <View style={styles.tempContainer}>
-                    <Text
-                      style={[
-                        theme.typography.caption,
-                        { width: 'auto', minWidth: 80 },
-                      ]}
-                    >
-                      {`${t('home.maxTemp')}:`}{' '}
-                      {dailyDataForNextFiveDays[dateStr].maxTemp}{' '}
+                    <Text style={[theme.typography.caption, { width: 'auto', minWidth: 80 }]}>
+                      {`${t('home.maxTemp')}:`} {dailyDataForNextFiveDays[dateStr].maxTemp}{' '}
                       {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
                     </Text>
-                    <Text
-                      style={[
-                        theme.typography.caption,
-                        { width: 'auto', minWidth: 80 },
-                      ]}
-                    >
-                      {`${t('home.minTemp')}:`}{' '}
-                      {dailyDataForNextFiveDays[dateStr].minTemp}{' '}
+                    <Text style={[theme.typography.caption, { width: 'auto', minWidth: 80 }]}>
+                      {`${t('home.minTemp')}:`} {dailyDataForNextFiveDays[dateStr].minTemp}{' '}
                       {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
                     </Text>
                   </View>
@@ -227,10 +208,7 @@ const ForecastFiveDay = () => {
 
                 {i !== Object.keys(dailyDataForNextFiveDays).length - 1 && (
                   <View
-                    style={[
-                      styles.line,
-                      { borderBottomColor: theme.palette.background.default },
-                    ]}
+                    style={[styles.line, { borderBottomColor: theme.palette.background.default }]}
                   />
                 )}
               </View>

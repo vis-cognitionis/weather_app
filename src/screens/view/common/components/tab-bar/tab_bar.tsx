@@ -12,7 +12,7 @@ import {
 } from '../../../../../core/components/icons/custom_icons';
 import { StackScreenNames } from '../../../../../navigation/interfaces/interfaces';
 import { useWeatherDatas } from '../../queries/useWeatherDatas';
-import { useTheme } from '../../../../../core/init/themes/theme_context';
+import { useTheme } from '../../../../../inits/themes/theme_context';
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
@@ -85,9 +85,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
                 flex: 1,
                 width: 20,
                 maxWidth: 70,
-                backgroundColor: isFocused
-                  ? theme.palette.primary.dark
-                  : 'transparent',
+                backgroundColor: isFocused ? theme.palette.primary.dark : 'transparent',
               }}
               onPress={onPress}
             />

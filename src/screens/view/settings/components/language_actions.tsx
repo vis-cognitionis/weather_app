@@ -1,8 +1,8 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 
-import { Language, useLanguage } from '../../../../core/init/lang/language_context';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { Language, useLanguage } from '../../../../inits/lang/language_context';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const LanguageAction = () => {
   const { theme } = useTheme();

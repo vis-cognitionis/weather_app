@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  SectionList,
-  View,
-} from 'react-native';
+import { ActivityIndicator, SafeAreaView, SectionList, View } from 'react-native';
 import { observer } from 'mobx-react';
 
 import mainStore from '../../../screens/view-model/main_store';
@@ -12,8 +7,8 @@ import SectionTitle from './components/section_title';
 import NetworkError from '../common/components/network-error/network_error';
 import SectionContent from './components/section_content';
 import NotificationInfo from './components/notification_info';
-import { useTheme } from '../../../core/init/themes/theme_context';
-import { useTranslate } from '../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../inits/themes/theme_context';
+import { useTranslate } from '../../../inits/lang/custom-hook/useTranslate';
 import { useWeatherDatas } from '../common/queries/useWeatherDatas';
 import { StyleSheet } from 'react-native';
 
@@ -75,12 +70,8 @@ const Settings = () => {
                 style={styles.sectionListContainer}
                 sections={settings}
                 keyExtractor={(item) => item.name}
-                renderItem={({ item }) => (
-                  <SectionContent content={item.name} />
-                )}
-                renderSectionHeader={({ section }) => (
-                  <SectionTitle title={section.title} />
-                )}
+                renderItem={({ item }) => <SectionContent content={item.name} />}
+                renderSectionHeader={({ section }) => <SectionTitle title={section.title} />}
               />
             </>
           )}

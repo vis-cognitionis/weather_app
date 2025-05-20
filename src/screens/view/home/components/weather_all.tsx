@@ -10,7 +10,7 @@ import WeatherHourlyIcons from './weather_hourly_icons';
 import { today, tomorrow, groupWeatherDataByDate } from './constants/constants';
 import { useWeatherDatas } from '../../common/queries/useWeatherDatas';
 import { windowHeight } from '../../common/constants/constants';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const styles = StyleSheet.create({
   weathersContainer: {
@@ -72,15 +72,10 @@ const WeatherAll = () => {
           {hourlyData.map((weather) => (
             <View key={weather.dt} style={styles.weatherContainer}>
               <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                {Math.ceil(weather.main.temp)}{' '}
-                {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
+                {Math.ceil(weather.main.temp)} {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
               </Text>
               <View style={{ flex: 1, paddingVertical: 10 }}>
-                <WeatherHourlyIcons
-                  sunrise={sunrise}
-                  sunset={sunset}
-                  weather={weather}
-                />
+                <WeatherHourlyIcons sunrise={sunrise} sunset={sunset} weather={weather} />
               </View>
               <Text
                 style={theme.typography.caption}

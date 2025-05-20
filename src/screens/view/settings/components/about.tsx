@@ -3,8 +3,8 @@ import { Modal, ScrollView, StyleSheet, View } from 'react-native';
 import { Pressable, Text } from 'react-native';
 
 import { IconClose, IconAbout } from '../../../../core/components/icons/custom_icons';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const About = () => {
   const { theme } = useTheme();

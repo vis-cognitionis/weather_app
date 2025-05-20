@@ -1,11 +1,52 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "./*"
-      ]
-    },
-  }
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "strict": true,
+    "baseUrl": "./src/",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "paths": {
+    "assets/*": [
+      "assets/*"
+    ],
+    "components/": [
+      "components/"
+    ],
+    "constants/": [
+      "constants/"
+    ],
+    "layouts/": [
+      "layouts/"
+    ],
+    "navigation/": [
+      "navigation/"
+    ],
+    "screens/": [
+      "screens/"
+    ],
+    "utils/": [
+      "utils/"
+    ],
+    "hooks/": [
+      "hooks/"
+    ],
+    "store/": [
+      "store/"
+    ],
+    "types/": [
+      "types/"
+    ],
+    "styles/": [
+      "styles/"
+    ],
+    "services/": [
+      "services/"
+    ],
+  },
+  "noImplicitAny": false
 }

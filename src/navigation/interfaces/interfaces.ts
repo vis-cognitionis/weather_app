@@ -1,7 +1,8 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
-
+import { JSX } from "react";
+ 
 export enum StackScreenNames {
   Home = "Home",
   Splash = "Splash",

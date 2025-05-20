@@ -1,27 +1,24 @@
-import React from 'react';
+import { StatusBar } from 'react-native';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { LogBox } from 'react-native';
 
-import NavigationStacks from './src/navigation/navigation_stacks';
-import { LanguageProvider } from './src/core/init/lang/language_context';
-import { ThemeProvider } from './src/core/init/themes/theme_context';
-import { queryClient } from './src/core/init/query/query_client';
+import { LanguageProvider } from 'inits/lang/language_context';
+import { queryClient } from 'inits/query/query_client';
+import NavigationStacks from 'navigation/navigation_stacks';
+import { ThemeProvider } from 'inits/themes/theme_context';
 
-function App() {
-  // need to hide warning boxes etc.
-  LogBox.ignoreAllLogs(true);
-
+const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <ThemeProvider>
-          <NavigationStacks />
-        </ThemeProvider>
-      </LanguageProvider>
-    </QueryClientProvider>
+    <>
+      <StatusBar hidden={true} />
+      <QueryClientProvider client={queryClient}>
+        <LanguageProvider>
+          <ThemeProvider>
+            <NavigationStacks />
+          </ThemeProvider>
+        </LanguageProvider>
+      </QueryClientProvider>
+    </>
   );
-}
+};
 
 export default App;
-
- 

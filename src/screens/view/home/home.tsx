@@ -1,18 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  RefreshControl,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, RefreshControl, ScrollView } from 'react-native';
 import { observer } from 'mobx-react';
 
 import mainStore from '../../../screens/view-model/main_store';
 import WeatherAll from './components/weather_all';
-import ThemeProps from '../../../core/init/themes/interface/interfaces';
+import ThemeProps from '../../../inits/themes/interface/interfaces';
 import NetworkError from '../common/components/network-error/network_error';
 import { useWeatherDatas } from '../common/queries/useWeatherDatas';
-import { useTheme } from '../../../core/init/themes/theme_context';
+import { useTheme } from '../../../inits/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({
@@ -47,9 +42,7 @@ const Home = () => {
       ) : (
         <ScrollView
           contentContainerStyle={styles.scrollView}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
           <WeatherAll />
         </ScrollView>

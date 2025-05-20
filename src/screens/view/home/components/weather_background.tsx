@@ -4,9 +4,9 @@ import { observer } from 'mobx-react';
 
 import { useWeatherCurrent } from '../../common/queries/useWeatherCurrent';
 import { WeatherCondition } from '../interfaces/interface_home';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
 import { windowHeight } from '../../common/constants/constants';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTheme } from '../../../../inits/themes/theme_context';
 import {
   IconInfoClear,
   IconInfoClouds,
@@ -49,17 +49,9 @@ const WeatherBackground = () => {
   const BackgroundSvg = () => {
     switch (condition) {
       case WeatherCondition.Clear:
-        return mainStore.timeOfDay === 'night' ? (
-          <ClearNightSvg />
-        ) : (
-          <ClearSvg />
-        );
+        return mainStore.timeOfDay === 'night' ? <ClearNightSvg /> : <ClearSvg />;
       case WeatherCondition.Clouds:
-        return mainStore.timeOfDay === 'night' ? (
-          <CloudsNightSvg />
-        ) : (
-          <CloudsSvg />
-        );
+        return mainStore.timeOfDay === 'night' ? <CloudsNightSvg /> : <CloudsSvg />;
       case WeatherCondition.Drizzle:
         return <RainySvg />;
       case WeatherCondition.Dust:
@@ -161,15 +153,11 @@ const WeatherBackground = () => {
 
   return (
     <>
-      <View
-        style={{ position: 'absolute', top: topValue, alignSelf: 'center' }}
-      >
+      <View style={{ position: 'absolute', top: topValue, alignSelf: 'center' }}>
         <BackgroundSvg />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={[theme.typography.h2, { width: '120%' }]}>
-          {weatherSuggestions()}
-        </Text>
+        <Text style={[theme.typography.h2, { width: '120%' }]}>{weatherSuggestions()}</Text>
         <View style={{ paddingTop: 5 }}>
           <SuggestionIcons />
         </View>

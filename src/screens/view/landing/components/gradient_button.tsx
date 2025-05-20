@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  GestureResponderEvent,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearGradientText } from 'react-native-linear-gradient-text';
 
-import ThemeProps from '../../../../core/init/themes/interface/interfaces';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import ThemeProps from '../../../../inits/themes/interface/interfaces';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   return StyleSheet.create({

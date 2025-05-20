@@ -2,14 +2,10 @@ import React from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { AbstractChartConfig } from 'react-native-chart-kit/dist/AbstractChart';
 
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTheme } from '../../../../inits/themes/theme_context';
 import { windowWidth } from '../../common/constants/constants';
 import { useWeatherDatas } from '../../common/queries/useWeatherDatas';
-import {
-  groupWeatherDataByDate,
-  today,
-  tomorrow,
-} from '../../home/components/constants/constants';
+import { groupWeatherDataByDate, today, tomorrow } from '../../home/components/constants/constants';
 
 const TemperatureChart = () => {
   const { theme } = useTheme();
@@ -70,15 +66,10 @@ const TemperatureChart = () => {
     },
   };
 
-  const refinedTempArr = combinedTempArr
-    ? combinedTempArr.map((item) => Math.round(item))
-    : [0];
+  const refinedTempArr = combinedTempArr ? combinedTempArr.map((item) => Math.round(item)) : [0];
 
   const segments = refinedTempArr
-    ? Math.min(
-        Math.floor(Math.max(...refinedTempArr) - Math.min(...refinedTempArr)),
-        5
-      )
+    ? Math.min(Math.floor(Math.max(...refinedTempArr) - Math.min(...refinedTempArr)), 5)
     : 1;
 
   return (

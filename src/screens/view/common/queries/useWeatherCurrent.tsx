@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import mainStore from '../../../../screens/view-model/main_store';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
 import { WeatherCurrentData } from '../../home/interfaces/interface_home';
 
 export const useWeatherCurrent = () => {
@@ -23,8 +23,7 @@ export const useWeatherCurrent = () => {
     queryKey: ['currentTemp', mainStore.city, mainStore.weatherUnit],
     queryFn: async () => {
       try {
-        const weatherUnit =
-          (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
+        const weatherUnit = (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
           'https://api.openweathermap.org/data/2.5/weather?q=' +
@@ -50,7 +49,7 @@ export const useWeatherCurrent = () => {
         throw error;
       }
     },
-    enabled: true
+    enabled: true,
   });
 
   return { currentTemp, isLoading, refetchCurrent };

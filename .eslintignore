@@ -1,0 +1,6 @@
+**/*.js
+node_modules
+build
+/*.js
+src/assets/**/*.ts
+

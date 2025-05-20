@@ -1,18 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  Modal,
-  View,
-  Text,
-  TextInput,
-} from 'react-native';
+import { Pressable, StyleSheet, Modal, View, Text, TextInput } from 'react-native';
 import { observer } from 'mobx-react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IconClose, IconEdit } from '../../../../core/components/icons/custom_icons';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../inits/themes/theme_context';
 import mainStore from '../../../../screens/view-model/main_store';
 
 const DefaultCity = () => {
@@ -95,10 +88,7 @@ const DefaultCity = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Pressable
-              style={{ alignSelf: 'flex-end' }}
-              onPress={handleCloseModal}
-            >
+            <Pressable style={{ alignSelf: 'flex-end' }} onPress={handleCloseModal}>
               <IconClose />
             </Pressable>
             <TextInput
@@ -111,9 +101,7 @@ const DefaultCity = () => {
               style={[
                 styles.modalInput,
                 {
-                  color: editable
-                    ? theme.palette.primary.dark
-                    : theme.palette.text?.disabled,
+                  color: editable ? theme.palette.primary.dark : theme.palette.text?.disabled,
                 },
               ]}
             />
@@ -129,12 +117,7 @@ const DefaultCity = () => {
               ]}
               onPress={handleSetDefaultCity}
             >
-              <Text
-                style={[
-                  theme.typography.caption,
-                  { color: theme.palette.primary.light },
-                ]}
-              >
+              <Text style={[theme.typography.caption, { color: theme.palette.primary.light }]}>
                 {t('defaultCityButton')}
               </Text>
             </Pressable>

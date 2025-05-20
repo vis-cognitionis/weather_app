@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
- import { observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import {
   IconBack,
@@ -13,10 +13,10 @@ import {
 import { StackScreenNames } from '../../../../../navigation/interfaces/interfaces';
 import { useWeatherDatas } from '../../queries/useWeatherDatas';
 import { windowHeight } from '../../constants/constants';
-import { useTheme } from '../../../../../core/init/themes/theme_context';
-import ThemeProps from '../../../../../core/init/themes/interface/interfaces';
-import lightTheme from '../../../../../core/init/themes/styles/light';
-import darkTheme from '../../../../../core/init/themes/styles/dark';
+import { useTheme } from '../../../../../inits/themes/theme_context';
+import ThemeProps from '../../../../../inits/themes/interface/interfaces';
+import lightTheme from '../../../../../inits/themes/styles/light';
+import darkTheme from '../../../../../inits/themes/styles/dark';
 import mainStore from '../../../../../screens/view-model/main_store';
 
 const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
@@ -52,13 +52,7 @@ const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const AppBarStyles = ({
-  theme,
-  editable,
-}: {
-  theme: ThemeProps;
-  editable: boolean;
-}) => {
+const AppBarStyles = ({ theme, editable }: { theme: ThemeProps; editable: boolean }) => {
   return StyleSheet.create({
     container: {
       display: 'flex',
@@ -148,7 +142,7 @@ const AppBar = () => {
   };
 
   return (
-    < >
+    <>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={styles.locationContainer}>
           <TextInput

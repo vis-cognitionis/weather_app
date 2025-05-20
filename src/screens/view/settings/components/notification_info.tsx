@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, View, Text, StyleSheet } from 'react-native';
 
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../inits/themes/theme_context';
 import mainStore from '../../../../screens/view-model/main_store';
 
 const NotificationInfo = () => {
@@ -63,12 +63,7 @@ const NotificationInfo = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.animStyle, animationStyle]}>
-        <Text
-          style={[
-            theme.typography.caption,
-            { color: theme.palette.primary.light },
-          ]}
-        >
+        <Text style={[theme.typography.caption, { color: theme.palette.primary.light }]}>
           {t('error.info')}
         </Text>
       </Animated.View>

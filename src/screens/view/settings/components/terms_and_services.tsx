@@ -3,8 +3,8 @@ import { Modal, ScrollView, StyleSheet, View } from 'react-native';
 import { Pressable, Text } from 'react-native';
 
 import { IconClose, IconTerms } from '../../../../core/components/icons/custom_icons';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const TermsAndServices = () => {
   const { theme } = useTheme();
@@ -50,41 +50,31 @@ const TermsAndServices = () => {
           <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
             {t('terms&services.welcome')}
           </Text>
-          <Text style={theme.typography.caption}>
-            {t('terms&services.welcomeContent')}
-          </Text>
+          <Text style={theme.typography.caption}>{t('terms&services.welcomeContent')}</Text>
         </View>
         <View>
           <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
             {t('terms&services.termsOfUse')}
           </Text>
-          <Text style={theme.typography.caption}>
-            {t('terms&services.termsOfUseContent')}
-          </Text>
+          <Text style={theme.typography.caption}>{t('terms&services.termsOfUseContent')}</Text>
         </View>
         <View>
           <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
             {t('terms&services.openWeather')}
           </Text>
-          <Text style={theme.typography.caption}>
-            {t('terms&services.openWeatherContent')}
-          </Text>
+          <Text style={theme.typography.caption}>{t('terms&services.openWeatherContent')}</Text>
         </View>
         <View>
           <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
             {t('terms&services.privacy')}
           </Text>
-          <Text style={theme.typography.caption}>
-            {t('terms&services.privacyContent')}
-          </Text>
+          <Text style={theme.typography.caption}>{t('terms&services.privacyContent')}</Text>
         </View>
         <View>
           <Text style={[theme.typography.caption, { fontWeight: 'bold' }]}>
             {t('terms&services.changes')}
           </Text>
-          <Text style={theme.typography.caption}>
-            {t('terms&services.changesContent')}
-          </Text>
+          <Text style={theme.typography.caption}>{t('terms&services.changesContent')}</Text>
         </View>
       </View>
     );

@@ -3,8 +3,8 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { observer } from 'mobx-react';
 
 import mainStore from '../../../../screens/view-model/main_store';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const StatusBarSettings = ({ content }: { content: string }) => {
   const { theme } = useTheme();

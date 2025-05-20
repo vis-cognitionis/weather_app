@@ -1,6 +1,6 @@
 import React from 'react';
 import { Path, Svg } from 'react-native-svg';
-import { useTheme } from  '../../../core/init/themes/theme_context';
+import { useTheme } from '../../../inits/themes/theme_context';
 
 export const IconHomeWeather = ({ stroke }: { stroke: string }) => {
   return (

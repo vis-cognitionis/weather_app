@@ -1,12 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  StyleSheet,
-  RefreshControl,
-  ScrollView,
-} from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, RefreshControl, ScrollView } from 'react-native';
 import { observer } from 'mobx-react';
 
 import ForecastFiveDay from './components/forecast_five_day';
@@ -14,8 +7,8 @@ import TemperatureChart from './components/temp_chart';
 import NetworkError from '../common/components/network-error/network_error';
 import Container from './components/container';
 import mainStore from '../../../screens/view-model/main_store';
-import { useTheme } from '../../../core/init/themes/theme_context';
-import { useTranslate } from '../../../core/init/lang/custom-hook/useTranslate';
+import { useTheme } from '../../../inits/themes/theme_context';
+import { useTranslate } from '../../../inits/lang/custom-hook/useTranslate';
 import { useWeatherDatas } from '../common/queries/useWeatherDatas';
 import { useWeatherCurrent } from '../common/queries/useWeatherCurrent';
 import { windowHeight, windowWidth } from '../common/constants/constants';
@@ -98,9 +91,7 @@ const Detail = () => {
     );
   };
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme.palette.background.default }}
-    >
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.palette.background.default }}>
       {mainStore.networkError ? (
         <NetworkError />
       ) : (
@@ -109,9 +100,7 @@ const Detail = () => {
             paddingHorizontal: '7%',
             paddingTop: windowHeight > 736 ? 0 : '2%',
           }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
           <View style={{ rowGap: 12, paddingBottom: 40 }}>
             <DetailCurrent />
@@ -120,9 +109,7 @@ const Detail = () => {
               title={t('detail.graphicTitle')}
               children={
                 isLoading ? (
-                  <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
-                    {t('loading')}
-                  </Text>
+                  <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>{t('loading')}</Text>
                 ) : (
                   <TemperatureChart />
                 )

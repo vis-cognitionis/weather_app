@@ -8,9 +8,9 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 
-import ThemeProps from '../../../core/init/themes/interface/interfaces';
-import lightTheme from '../../../core/init/themes/styles/light';
-import { useTheme } from '../../../core/init/themes/theme_context';
+import ThemeProps from '../../../inits/themes/interface/interfaces';
+import lightTheme from '../../../inits/themes/styles/light';
+import { useTheme } from '../../../inits/themes/theme_context';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;

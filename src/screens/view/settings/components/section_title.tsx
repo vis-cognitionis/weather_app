@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useTranslate } from '../../../../core/init/lang/custom-hook/useTranslate';
+import { useTranslate } from '../../../../inits/lang/custom-hook/useTranslate';
 
-import { useTheme } from '../../../../core/init/themes/theme_context';
+import { useTheme } from '../../../../inits/themes/theme_context';
 
 const SectionTitle = ({ title }: { title: string }) => {
   const { theme } = useTheme();
