@@ -1,6 +1,7 @@
-import { makeAutoObservable } from 'mobx';
-import { StackScreenNames } from '../navigation/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { makeAutoObservable } from 'mobx';
+
+import { StackScreenNames } from 'navigation/types';
 
 class MainStore {
   firstDefaultCity: string = 'Istanbul';

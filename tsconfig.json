@@ -47,6 +47,9 @@
     "services/": [
       "services/"
     ],
+    "i18n/": [
+      "i18n/"
+    ],
   },
   "noImplicitAny": false
 }
