@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Home from 'screens/home/home';
-import Detail from 'screens/detail/detail';
-import Settings from 'screens/settings/settings';
-import TabBar from 'screens/components/tab-bar/tab_bar';
+import MainScreen from 'screens/mainScreen/mainScreen';
+import DetailScreen from 'screens/detailScreen/detailScreen';
+import SettingsScreen from 'screens/settingsScreen/settingsScreen';
+import TabBar from 'components/tab-bar/tab_bar';
 
 import { ParamList, StackScreenNames, TabConfig } from './types';
 
@@ -13,21 +13,21 @@ export const TabNavigation = () => {
   const tabRoutes: TabConfig[] = [
     {
       name: StackScreenNames.Home,
-      component: Home,
+      component: MainScreen,
       options: {
         headerShown: false,
       },
     },
     {
       name: StackScreenNames.Detail,
-      component: Detail,
+      component: DetailScreen,
       options: {
         headerShown: false,
       },
     },
     {
       name: StackScreenNames.Settings,
-      component: Settings,
+      component: SettingsScreen,
       options: {
         headerShown: false,
       },

@@ -1,7 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
 
-import lightTheme from 'hooks/useTheme.tsx/styles/light';
-import { ThemeProps } from 'hooks/useTheme.tsx/types';
+import lightTheme from 'hooks/useTheme/styles/light';
+import { ThemeProps } from 'hooks/useTheme/types';
 
 export const Styles = ({ theme }: { theme: ThemeProps }) => {
   const value: boolean = theme === lightTheme;

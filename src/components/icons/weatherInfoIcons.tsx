@@ -1,5 +1,5 @@
 import Svg, { Path, Mask } from 'react-native-svg';
-import { useTheme } from 'hooks/useTheme.tsx/useTheme';
+import { useTheme } from 'hooks/useTheme/useTheme';
 
 export const IconInfoClear = () => {
   const { theme } = useTheme();

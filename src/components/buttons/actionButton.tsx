@@ -1,5 +1,5 @@
 import { Pressable } from 'react-native';
-import { useTheme } from 'hooks/useTheme.tsx/useTheme';
+import { useTheme } from 'hooks/useTheme/useTheme';
 
 import { Props } from './types';
 import { Styles } from './styles';
