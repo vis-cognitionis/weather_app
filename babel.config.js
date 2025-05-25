@@ -17,7 +17,6 @@ module.exports = {
           types: './src/types',
           inits: './src/inits',
           store: './src/store',
-          contexts: './src/contexts',
           providers: './src/providers',
           styles: './src/styles',
           themes: './src/themes',
