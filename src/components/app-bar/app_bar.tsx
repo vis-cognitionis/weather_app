@@ -12,7 +12,7 @@ import {
 } from 'components/icons/customIcons';
 import { StackScreenNames } from 'navigation/types';
 import { windowHeight } from 'constants/Dimesions';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import mainStore from 'store/mainStore';
 import { ThemeProps } from 'hooks/useTheme/types';
 import lightTheme from 'hooks/useTheme/styles/light';

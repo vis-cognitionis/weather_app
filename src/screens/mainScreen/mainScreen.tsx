@@ -6,7 +6,7 @@ import mainStore from '../../store/mainStore';
 import WeatherAll from './components/weather_all';
 import NetworkError from '../../components/network-error/network_error';
 import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import { ThemeProps } from 'hooks/useTheme/types';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {

@@ -4,8 +4,7 @@ import { observer } from 'mobx-react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IconClose, IconEdit } from 'components/icons/customIcons';
-import { useTranslate } from 'hooks/useTranslate/useTranslate';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTranslate, useTheme } from 'hooks';
 import mainStore from 'store/mainStore';
 
 const DefaultCity = () => {

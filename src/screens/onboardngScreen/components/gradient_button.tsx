@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, GestureResponderEvent } from 'react-nativ
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearGradientText } from 'react-native-linear-gradient-text';
 
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import { ThemeProps } from 'hooks/useTheme/types';
 
 const Styles = ({ theme }: { theme: ThemeProps }) => {

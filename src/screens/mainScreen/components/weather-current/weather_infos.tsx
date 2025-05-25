@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { WeatherCurrentData, WeatherCondition } from '../../interfaces/interface_home';
-import { useTranslate } from '../../../../hooks/useTranslate/useTranslate';
+import { useTranslate } from 'hooks';
 
 const weatherDesc = ({ currentTemp }: { currentTemp: WeatherCurrentData }) => {
   const { t } = useTranslate();

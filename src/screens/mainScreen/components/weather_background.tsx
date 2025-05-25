@@ -1,11 +1,10 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
-import { useWeatherCurrent } from '../../../services/queries/useWeatherCurrent';
+import { useWeatherCurrent } from 'services/queries/useWeatherCurrent';
 import { WeatherCondition } from '../interfaces/interface_home';
-import { useTranslate } from '../../../hooks/useTranslate/useTranslate';
-import { windowHeight } from '../../../constants/Dimesions';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { windowHeight } from 'constants/Dimesions';
+import { useTheme, useTranslate } from 'hooks';
 
 import {
   IconInfoClear,

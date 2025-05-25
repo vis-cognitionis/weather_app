@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native';
-import { useTranslate } from '../../../hooks/useTranslate/useTranslate';
 
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme, useTranslate } from 'hooks';
 
 const SectionTitle = ({ title }: { title: string }) => {
   const { theme } = useTheme();

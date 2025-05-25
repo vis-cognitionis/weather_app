@@ -2,10 +2,9 @@ import { Text, View, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
 import { today } from '../../mainScreen/components/constants/constants';
-import { useTheme } from 'hooks/useTheme/useTheme';
-import { windowWidth } from '../../../constants/Dimesions';
-import { useTranslate } from '../../../hooks/useTranslate/useTranslate';
-import { useWeatherDatas } from '../../../services/queries/useWeatherDatas';
+import { useTheme, useTranslate } from 'hooks';
+import { windowWidth } from 'constants/Dimesions';
+import { useWeatherDatas } from 'services/queries/useWeatherDatas';
 import { WeatherCondition } from '../../mainScreen/interfaces/interface_home';
 import {
   IconRain,
@@ -18,9 +17,9 @@ import {
   IconDustSand,
   IconFogHazeMist,
   IconThunderstorm,
-} from '../../../components/icons/weatherColoredIcons';
+} from 'components/icons/weatherColoredIcons';
 import Container from './container';
-import mainStore from '../../../store/mainStore';
+import mainStore from 'store/mainStore';
 
 const styles = StyleSheet.create({
   dayContainer: {

@@ -4,13 +4,12 @@ import { View, Text, StyleSheet } from 'react-native';
 import { observer } from 'mobx-react';
 
 import About from './about';
-import mainStore from '../../../store/mainStore';
+import mainStore from 'store/mainStore';
 import DefaultCity from './default_city';
 import LanguageAction from './language_actions';
 import TermsAndServices from './terms_and_services';
 import StatusbarSettings from './statusbar_settings';
-import { useTranslate } from '../../../hooks/useTranslate/useTranslate';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTranslate, useTheme } from 'hooks';
 
 const styles = StyleSheet.create({
   listContainer: {

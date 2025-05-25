@@ -1,4 +1,4 @@
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import Svg, { Path } from 'react-native-svg';
 
 export const IconClear = () => {

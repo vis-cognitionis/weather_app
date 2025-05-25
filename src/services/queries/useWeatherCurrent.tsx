@@ -3,9 +3,9 @@ import axios, { AxiosError } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import mainStore from '../../store/mainStore';
-import { useTranslate } from '../../hooks/useTranslate/useTranslate';
-import { WeatherCurrentData } from '../../screens/mainScreen/interfaces/interface_home';
+import mainStore from 'store/mainStore';
+import { useTranslate } from 'hooks';
+import { WeatherCurrentData } from 'screens/mainScreen/interfaces/interface_home';
 
 export const useWeatherCurrent = () => {
   const { t } = useTranslate();

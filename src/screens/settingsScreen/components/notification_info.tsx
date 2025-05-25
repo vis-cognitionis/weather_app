@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Animated, View, Text, StyleSheet } from 'react-native';
 
-import { useTranslate } from 'hooks/useTranslate/useTranslate';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTranslate, useTheme } from 'hooks';
 import mainStore from 'store/mainStore';
 
 const NotificationInfo = () => {

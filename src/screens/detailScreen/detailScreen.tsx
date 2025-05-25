@@ -2,16 +2,16 @@ import { useCallback, useState } from 'react';
 import { SafeAreaView, Text, View, RefreshControl, ScrollView } from 'react-native';
 import { observer } from 'mobx-react';
 
+import mainStore from 'store/mainStore';
+import { useTheme, useTranslate } from 'hooks';
+import { useWeatherDatas } from 'services/queries/useWeatherDatas';
+import { useWeatherCurrent } from 'services/queries/useWeatherCurrent';
+import { windowHeight, windowWidth } from 'constants/Dimesions';
+import NetworkError from 'components/network-error/network_error';
+
 import ForecastFiveDay from './components/forecast_five_day';
 import TemperatureChart from './components/temp_chart';
 import Container from './components/container';
-import mainStore from '../../store/mainStore';
-import { useTheme } from 'hooks/useTheme/useTheme';
-import { useTranslate } from '../../hooks/useTranslate/useTranslate';
-import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
-import { useWeatherCurrent } from '../../services/queries/useWeatherCurrent';
-import { windowHeight, windowWidth } from '../../constants/Dimesions';
-import NetworkError from '../../components/network-error/network_error';
 import { styles } from './styles';
 
 const DetailScreen = () => {

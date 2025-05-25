@@ -6,7 +6,7 @@ import mainStore from 'store/mainStore';
 import ActionButton from 'components/buttons/actionButton';
 import { IconDetail, IconHomeWeather, IconSettings } from 'components/icons/customIcons';
 import { StackScreenNames } from 'navigation/types';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 
 import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
 

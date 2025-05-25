@@ -5,7 +5,7 @@ import mainStore from '../../../../store/mainStore';
 import weatherDesc from './weather_infos';
 import WeatherCurrentIcons from './weather_current_icons';
 import { useWeatherCurrent } from '../../../../services/queries/useWeatherCurrent';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import { useTranslate } from 'hooks/useTranslate/useTranslate';
 
 const WeatherCurrent = () => {

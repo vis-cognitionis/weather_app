@@ -1,7 +1,7 @@
 import { Pressable, Text } from 'react-native';
 
 import { Language, useLanguage } from 'hooks/useTranslate/languageContext';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 
 const LanguageAction = () => {
   const { theme } = useTheme();

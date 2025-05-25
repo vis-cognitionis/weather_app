@@ -1,5 +1,5 @@
-import { useTheme } from 'hooks/useTheme/useTheme';
 import { Path, Svg } from 'react-native-svg';
+import { useTheme } from 'hooks';
 
 export const IconHomeWeather = ({ stroke }: { stroke: string }) => {
   return (

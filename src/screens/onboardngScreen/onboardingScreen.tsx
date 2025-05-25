@@ -2,10 +2,10 @@ import { Text, Image, SafeAreaView } from 'react-native';
 import { observer } from 'mobx-react';
 
 import ActionButton from '../../components/buttons/actionButton';
-import mainStore from 'store/mainStore';
-import { useTranslate } from '../../hooks/useTranslate/useTranslate';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTranslate, useTheme } from 'hooks';
 import NetworkError from 'components/network-error/network_error';
+import mainStore from 'store/mainStore';
+
 import { Styles } from './styles';
 
 const OnboardngScreen = () => {

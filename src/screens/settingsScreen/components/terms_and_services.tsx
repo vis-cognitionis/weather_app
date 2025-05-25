@@ -3,8 +3,7 @@ import { Modal, ScrollView, StyleSheet, View } from 'react-native';
 import { Pressable, Text } from 'react-native';
 
 import { IconClose, IconTerms } from 'components/icons/customIcons';
-import { useTranslate } from 'hooks/useTranslate/useTranslate';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTranslate, useTheme } from 'hooks';
 
 const TermsAndServices = () => {
   const { theme } = useTheme();

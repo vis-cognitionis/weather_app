@@ -1,7 +1,7 @@
 import { LineChart } from 'react-native-chart-kit';
 import { AbstractChartConfig } from 'react-native-chart-kit/dist/AbstractChart';
 
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import { windowWidth } from '../../../constants/Dimesions';
 import { useWeatherDatas } from '../../../services/queries/useWeatherDatas';
 import {

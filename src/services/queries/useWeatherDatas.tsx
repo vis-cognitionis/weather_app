@@ -4,10 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { StackScreenNames } from '../../navigation/types';
-import { WeatherDatas } from '../../screens/mainScreen/interfaces/interface_home';
-import { useTranslate } from '../../hooks/useTranslate/useTranslate';
-import mainStore from '../../store/mainStore';
+import { StackScreenNames } from 'navigation/types';
+import { WeatherDatas } from 'screens/mainScreen/interfaces/interface_home';
+import { useTranslate } from 'hooks';
+import mainStore from 'store/mainStore';
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();

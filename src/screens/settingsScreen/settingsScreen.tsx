@@ -1,15 +1,15 @@
+import { StyleSheet } from 'react-native';
 import { ActivityIndicator, SafeAreaView, SectionList, View } from 'react-native';
 import { observer } from 'mobx-react';
 
-import mainStore from '../../store/mainStore';
-import SectionTitle from './components/section_title';
-import NetworkError from '../../components/network-error/network_error';
+import mainStore from 'store/mainStore';
+import NetworkError from 'components/network-error/network_error';
+import { useTheme, useTranslate } from 'hooks';
+
 import SectionContent from './components/section_content';
 import NotificationInfo from './components/notification_info';
-import { useTheme } from 'hooks/useTheme/useTheme';
-import { useTranslate } from '../../hooks/useTranslate/useTranslate';
 import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
-import { StyleSheet } from 'react-native';
+import SectionTitle from './components/section_title';
 
 const styles = StyleSheet.create({
   loadingContainer: {

@@ -3,7 +3,7 @@ import { Modal, ScrollView, StyleSheet, View } from 'react-native';
 import { Pressable, Text } from 'react-native';
 
 import { IconClose, IconAbout } from 'components/icons/customIcons';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 import { useTranslate } from 'hooks/useTranslate/useTranslate';
 
 const About = () => {

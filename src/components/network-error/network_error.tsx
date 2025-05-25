@@ -3,7 +3,7 @@ import RNRestart from 'react-native-restart';
 
 import { IconNoNetwork } from 'components/icons/customIcons';
 import { useTranslate } from 'hooks/useTranslate/useTranslate';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 
 const NetworkError = () => {
   const { theme } = useTheme();

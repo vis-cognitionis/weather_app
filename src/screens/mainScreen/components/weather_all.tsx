@@ -10,7 +10,7 @@ import WeatherHourlyIcons from './weather_hourly_icons';
 import { today, tomorrow, groupWeatherDataByDate } from './constants/constants';
 import { useWeatherDatas } from '../../../services/queries/useWeatherDatas';
 import { windowHeight } from '../../../constants/Dimesions';
-import { useTheme } from 'hooks/useTheme/useTheme';
+import { useTheme } from 'hooks';
 
 const styles = StyleSheet.create({
   weathersContainer: {
