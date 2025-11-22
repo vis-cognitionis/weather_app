@@ -58,6 +58,7 @@ const SectionContent = ({ content }: { content: string }) => {
         isChecked={isChecked}
         onPress={onPress}
         disabled={disabled}
+        useBuiltInState={false}
       />
     );
   };

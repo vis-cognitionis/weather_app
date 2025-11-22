@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -28,9 +28,9 @@ export const useWeatherDatas = () => {
         mainStore.setWeatherUnit(weatherUnit);
         const response = await axios.get(
           'https://api.openweathermap.org/data/2.5/forecast?q=' +
-            mainStore.city +
-            `&units=${weatherUnit}&appid=` +
-            '4ece27e8959cae958f124f7316c6e352'
+          mainStore.city +
+          `&units=${weatherUnit}&appid=` +
+          '4ece27e8959cae958f124f7316c6e352'
         );
         return response.data;
       } catch (error: any) {
@@ -50,9 +50,9 @@ export const useWeatherDatas = () => {
       }
     },
     enabled: true,
+    placeholderData: keepPreviousData,
   });
 
-  // Hata yönetimi artık useEffect içinde yapılıyor
   useEffect(() => {
     if (error) {
       mainStore.setCity(mainStore.defaultCity);

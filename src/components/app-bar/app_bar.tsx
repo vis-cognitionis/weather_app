@@ -189,8 +189,15 @@ const AppBar = () => {
           style={styles.backButton}
           children={<IconBack />}
           onPress={() => {
-            navigation.navigate(mainStore.previousTab as never);
-            mainStore.setCurrentTab(mainStore.previousTab);
+            console.log('Navigating back to:', mainStore.previousTab);
+            try {
+              (navigation as any).navigate(StackScreenNames.Outlet, {
+                screen: mainStore.previousTab,
+              });
+              mainStore.setCurrentTab(mainStore.previousTab);
+            } catch (error) {
+              console.error('Navigation error:', error);
+            }
           }}
         />
       )}
