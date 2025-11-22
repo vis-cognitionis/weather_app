@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { observer } from 'mobx-react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
   IconBack,
@@ -11,7 +12,6 @@ import {
   IconSearch,
 } from 'components/icons/customIcons';
 import { StackScreenNames } from 'navigation/types';
-import { windowHeight } from 'constants/Dimesions';
 import { useTheme } from 'hooks';
 import mainStore from 'store/mainStore';
 import { ThemeProps } from 'hooks/useTheme/types';
@@ -53,7 +53,15 @@ const SwitchStyles = ({ theme }: { theme: ThemeProps }) => {
   });
 };
 
-const AppBarStyles = ({ theme, editable }: { theme: ThemeProps; editable: boolean }) => {
+const AppBarStyles = ({
+  theme,
+  editable,
+  topPadding,
+}: {
+  theme: ThemeProps;
+  editable: boolean;
+  topPadding: number;
+}) => {
   return StyleSheet.create({
     container: {
       display: 'flex',
@@ -63,9 +71,8 @@ const AppBarStyles = ({ theme, editable }: { theme: ThemeProps; editable: boolea
       backgroundColor: theme.palette.background.default,
       paddingLeft: 30,
       paddingRight: 20,
-      paddingTop: windowHeight >= 852 ? 0 : 5,
-      paddingBottom: -10,
-      height: windowHeight >= 852 ? 110 : 'auto',
+      paddingTop: topPadding + 10,
+      paddingBottom: 10,
     },
 
     input: {
@@ -112,10 +119,11 @@ const AppBar = () => {
   const navigation = useNavigation();
   const { theme } = useTheme();
   const { isLoading } = useWeatherDatas();
+  const insets = useSafeAreaInsets();
 
   const [editable, setEditable] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
-  const styles = AppBarStyles({ theme, editable });
+  const styles = AppBarStyles({ theme, editable, topPadding: insets.top });
 
   useEffect(() => {
     if (editable) {
@@ -143,7 +151,7 @@ const AppBar = () => {
   };
 
   return (
-    <>
+    <View style={styles.container}>
       {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={styles.locationContainer}>
           <TextInput
@@ -187,7 +195,7 @@ const AppBar = () => {
         />
       )}
       <ThemeSwitch />
-    </>
+    </View>
   );
 };
 export default observer(AppBar);
