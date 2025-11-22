@@ -8,7 +8,6 @@ import mainStore from 'store/mainStore';
 import DefaultCity from './default_city';
 import LanguageAction from './language_actions';
 import TermsAndServices from './terms_and_services';
-import StatusbarSettings from './statusbar_settings';
 import { useTranslate, useTheme } from 'hooks';
 
 const styles = StyleSheet.create({
@@ -71,7 +70,6 @@ const SectionContent = ({ content }: { content: string }) => {
     <View style={styles.listContainer}>
       <Text style={theme.typography.content}>{content}</Text>
       <GeneralAction />
-      <StatusbarSettings content={content} />
 
       {content === t('settings.temperature.celsius') ? (
         <CustomCheckbox
