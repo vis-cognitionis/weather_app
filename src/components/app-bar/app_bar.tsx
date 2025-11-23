@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, TextInput, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -86,8 +86,10 @@ const AppBarStyles = ({
       flexDirection: 'row',
       height: 32,
       alignItems: 'center',
-      gap: 16,
-      justifyContent: 'space-between',
+      gap: 10,
+      justifyContent: 'flex-start',
+      flex: 1,
+      marginRight: 10,
     },
 
     backButton: {
@@ -161,34 +163,47 @@ const AppBar = () => {
     <View style={styles.container}>
       {currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={styles.locationContainer}>
-          <TextInput
-            ref={inputRef}
-            autoCorrect={false}
-            defaultValue={city}
-            value={inputValue}
-            onPressIn={handleEditPress}
-            onChangeText={(text) => setInputValue(text)}
-            onSubmitEditing={() => {
-              if (inputValue.trim().length !== 0) {
-                handleSearch();
-              }
-            }}
-            onBlur={handleOnBlur}
-            style={[styles.input, theme.typography.caption]}
-          />
           {editable ? (
-            <Pressable
-              onPress={() => {
-                inputValue.length !== 0 && handleSearch();
+            <TextInput
+              ref={inputRef}
+              autoCorrect={false}
+              defaultValue={city}
+              value={inputValue}
+              onChangeText={(text) => setInputValue(text)}
+              onSubmitEditing={() => {
+                if (inputValue.trim().length !== 0) {
+                  handleSearch();
+                }
               }}
-            >
-              <IconSearch />
-            </Pressable>
+              onBlur={handleOnBlur}
+              style={[styles.input, theme.typography.caption, { width: '80%', textAlign: 'left' }]}
+            />
           ) : (
-            <Pressable onPress={handleEditPress}>
-              <IconEdit />
+            <Pressable onPress={handleEditPress} style={{ maxWidth: '80%' }}>
+              <Text
+                style={[theme.typography.caption, { textAlign: 'left', textTransform: 'capitalize' }]}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {city}
+              </Text>
             </Pressable>
           )}
+          <View style={{ width: 24, alignItems: 'center' }}>
+            {editable ? (
+              <Pressable
+                onPress={() => {
+                  inputValue.length !== 0 && handleSearch();
+                }}
+              >
+                <IconSearch />
+              </Pressable>
+            ) : (
+              <Pressable onPress={handleEditPress}>
+                <IconEdit />
+              </Pressable>
+            )}
+          </View>
         </View>
       ) : (
         <Pressable

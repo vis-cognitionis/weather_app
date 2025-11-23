@@ -1,5 +1,6 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { SafeAreaView, View } from 'react-native';
+import { View, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useMainStore } from 'store/useMainStore';
 import ActionButton from 'components/buttons/actionButton';
@@ -12,24 +13,25 @@ import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
   const { isLoading } = useWeatherDatas();
+  const insets = useSafeAreaInsets();
   const setPreviousTab = useMainStore((state) => state.setPreviousTab);
   const setCurrentTab = useMainStore((state) => state.setCurrentTab);
 
   return (
-    <SafeAreaView
+    <View
       style={{
         backgroundColor: theme.palette.background.default,
-        height: '12%',
-        position: 'relative',
+        paddingBottom: Platform.OS === 'ios' ? insets.bottom : insets.bottom + 10,
+        paddingTop: 10,
+        minHeight: 60 + insets.bottom,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
       }}
     >
       <View
-        // eslint-disable-next-line react-native/no-inline-styles
         style={{
           flexDirection: 'row',
           gap: 15,
-          top: 14,
-          position: 'absolute',
           alignSelf: 'center',
         }}
       >
@@ -89,7 +91,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           );
         })}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
