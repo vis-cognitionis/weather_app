@@ -14,7 +14,7 @@ const RootNavigation = () => {
 
   const renderScreen = () => {
     if (navigateLanding) {
-      return <Stack.Screen name={StackScreenNames.Landing} component={Landing} options={{}} />;
+      return <Stack.Screen name={StackScreenNames.Landing} component={Landing} options={{ headerShown: false }} />;
     }
 
     return (

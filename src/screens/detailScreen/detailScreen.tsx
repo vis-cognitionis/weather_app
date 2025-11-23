@@ -68,7 +68,7 @@ const DetailScreen = () => {
           return (
             <Container
               key={index}
-              width={windowWidth <= 375 ? '100%' : '48%'}
+              width={'48%'}
               children={
                 <Text style={[theme.typography.caption, { paddingLeft: 4 }]}>
                   {getDetailCurrentInfo(info)}
