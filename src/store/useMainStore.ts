@@ -22,6 +22,8 @@ interface MainStore {
     inputCityValue: string;
     showNotification: boolean;
     networkError: boolean;
+    location: { lat: number; lon: number } | null;
+    savedCities: string[];
 
     // Actions
     setCurrentTab: (currentTab: string) => void;
@@ -40,6 +42,9 @@ interface MainStore {
     setInputCityValue: (value: string) => void;
     setShowNotification: (show: boolean) => void;
     setNetworkError: (network: boolean) => void;
+    setLocation: (location: { lat: number; lon: number } | null) => void;
+    addCity: (city: string) => Promise<void>;
+    removeCity: (city: string) => Promise<void>;
     initializeDefaultCity: () => Promise<void>;
 }
 
@@ -62,6 +67,8 @@ export const useMainStore = create<MainStore>((set, get) => ({
     inputCityValue: '',
     showNotification: false,
     networkError: false,
+    location: null,
+    savedCities: [],
 
     // Actions
     setCurrentTab: (currentTab) => set({ currentTab }),
@@ -95,14 +102,41 @@ export const useMainStore = create<MainStore>((set, get) => ({
     setInputCityValue: (value) => set({ inputCityValue: value }),
     setShowNotification: (show) => set({ showNotification: show }),
     setNetworkError: (network) => set({ networkError: network }),
+    setLocation: (location) => set({ location }),
+    addCity: async (city) => {
+        const currentCities = get().savedCities;
+        if (!currentCities.includes(city)) {
+            const newCities = [...currentCities, city];
+            set({ savedCities: newCities });
+            await AsyncStorage.setItem('savedCities', JSON.stringify(newCities));
+        }
+    },
+    removeCity: async (city) => {
+        const currentCities = get().savedCities;
+        const newCities = currentCities.filter((c) => c !== city);
+        set({ savedCities: newCities });
+        await AsyncStorage.setItem('savedCities', JSON.stringify(newCities));
+    },
     initializeDefaultCity: async () => {
         const defaultCity = await AsyncStorage.getItem('defaultCity');
+        const savedCitiesJson = await AsyncStorage.getItem('savedCities');
+        const savedCities = savedCitiesJson ? JSON.parse(savedCitiesJson) : [];
+
         const finalCity = defaultCity || get().firstDefaultCity;
+
+        // Ensure default city is in saved list if not empty
+        let finalSavedCities = savedCities;
+        if (finalCity && !savedCities.includes(finalCity)) {
+            finalSavedCities = [...savedCities, finalCity];
+            await AsyncStorage.setItem('savedCities', JSON.stringify(finalSavedCities));
+        }
+
         set({
             defaultCity: finalCity,
             city: finalCity,
             inputValue: finalCity,
             inputCityValue: finalCity,
+            savedCities: finalSavedCities,
         });
     },
 }));

@@ -47,7 +47,9 @@
       "celsius": "Celsius"
     },
     "terms": "terms and services",
-    "about": "About"
+    "about": "About",
+    "addCity": "Add City",
+    "searchCity": "Search City..."
   },
   "weatherSuggestion": {
     "clear": "Feels like a good time to go out",

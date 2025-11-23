@@ -5,8 +5,10 @@ import NavigationStacks from 'navigation/rootNavigation';
 import { useMainStore } from 'store/useMainStore';
 import { Providers } from 'hooks/providers';
 import { SplashScreen } from 'screens/splashScreen/splashScreen';
+import { useLocation } from 'hooks';
 
 const App = () => {
+  useLocation();
   const [initializationStep, setInitializationStep] = React.useState<number>(0);
   const setShowSplashScreen = useMainStore((state) => state.setShowSplashScreen);
   const setNavigateLanding = useMainStore((state) => state.setNavigateLanding);

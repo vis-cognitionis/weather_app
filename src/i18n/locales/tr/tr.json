@@ -47,7 +47,9 @@
       "celsius": "Celsius"
     },
     "terms": "şartlar ve hizmetler",
-    "about": "Hakkında"
+    "about": "Hakkında",
+    "addCity": "Şehir Ekle",
+    "searchCity": "Şehir Ara..."
   },
   "weatherSuggestion": {
     "clear": "Dışarı çıkmak için iyi bir zaman",

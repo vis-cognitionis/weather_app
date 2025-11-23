@@ -29,23 +29,30 @@ export const useWeatherDatas = () => {
   const setShowNotification = useMainStore((state) => state.setShowNotification);
   const setNetworkError = useMainStore((state) => state.setNetworkError);
 
+  const location = useMainStore((state) => state.location);
+
   const {
     data: weatherDatas,
     isLoading,
     refetch,
     error,
-  } = useQuery<WeatherDatas, AxiosError, WeatherDatas, [string, string, string]>({
-    queryKey: ['weatherDatas', city, weatherUnit],
+  } = useQuery<WeatherDatas, AxiosError, WeatherDatas, [string, string, string, { lat: number; lon: number } | null]>({
+    queryKey: ['weatherDatas', city, weatherUnit, location],
     queryFn: async () => {
       try {
         const storedWeatherUnit = (await AsyncStorage.getItem('unit')) || weatherUnit;
         setWeatherUnit(storedWeatherUnit);
-        const response = await axios.get(
-          'https://api.openweathermap.org/data/2.5/forecast?q=' +
-          city +
-          `&units=${storedWeatherUnit}&appid=` +
-          '4ece27e8959cae958f124f7316c6e352'
-        );
+
+        let url = 'https://api.openweathermap.org/data/2.5/forecast?';
+        if (location) {
+          url += `lat=${location.lat}&lon=${location.lon}`;
+        } else {
+          url += `q=${city}`;
+        }
+        url += `&units=${storedWeatherUnit}&appid=4ece27e8959cae958f124f7316c6e352`;
+
+        const response = await axios.get(url);
+        console.log('🌤️ Hava Durumu Getirildi:', response.data.city?.name || 'Bilinmeyen Şehir');
         return response.data;
       } catch (error: any) {
         const axiosError = error as AxiosError;
@@ -112,6 +119,16 @@ export const useWeatherDatas = () => {
       console.log(errorMessage);
     }
   }, [errorMessage]);
+
+  useEffect(() => {
+    if (weatherDatas?.city?.name && location) {
+      if (weatherDatas.city.name !== city) {
+        console.log(`🔄 Şehir güncelleniyor: ${city} -> ${weatherDatas.city.name}`);
+        setCity(weatherDatas.city.name);
+        setDefaultCity(weatherDatas.city.name);
+      }
+    }
+  }, [weatherDatas, location, city, setCity, setDefaultCity]);
 
   return { weatherDatas, isLoading, refetch };
 };
