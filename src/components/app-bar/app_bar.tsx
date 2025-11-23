@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { observer } from 'mobx-react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -13,7 +12,7 @@ import {
 } from 'components/icons/customIcons';
 import { StackScreenNames } from 'navigation/types';
 import { useTheme } from 'hooks';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 import { ThemeProps } from 'hooks/useTheme/types';
 import lightTheme from 'hooks/useTheme/styles/light';
 import darkTheme from 'hooks/useTheme/styles/dark';
@@ -121,6 +120,14 @@ const AppBar = () => {
   const { isLoading } = useWeatherDatas();
   const insets = useSafeAreaInsets();
 
+  const inputValue = useMainStore((state) => state.inputValue);
+  const city = useMainStore((state) => state.city);
+  const currentTab = useMainStore((state) => state.currentTab);
+  const previousTab = useMainStore((state) => state.previousTab);
+  const setCity = useMainStore((state) => state.setCity);
+  const setInputValue = useMainStore((state) => state.setInputValue);
+  const setCurrentTab = useMainStore((state) => state.setCurrentTab);
+
   const [editable, setEditable] = useState<boolean>(false);
   const inputRef = useRef<TextInput>(null);
   const styles = AppBarStyles({ theme, editable, topPadding: insets.top });
@@ -132,8 +139,8 @@ const AppBar = () => {
   }, [editable]);
 
   const handleSearch = () => {
-    if (mainStore.inputValue.trim().length !== 0) {
-      mainStore.setCity(mainStore.inputValue);
+    if (inputValue.trim().length !== 0) {
+      setCity(inputValue);
       setEditable(false);
       inputRef.current?.blur();
     }
@@ -144,25 +151,25 @@ const AppBar = () => {
   };
 
   const handleOnBlur = () => {
-    if (mainStore.inputValue.trim().length === 0) {
+    if (inputValue.trim().length === 0) {
       setEditable(false);
-      mainStore.setInputValue(mainStore.city);
+      setInputValue(city);
     }
   };
 
   return (
     <View style={styles.container}>
-      {mainStore.currentTab !== StackScreenNames.Settings.toString() ? (
+      {currentTab !== StackScreenNames.Settings.toString() ? (
         <View style={styles.locationContainer}>
           <TextInput
             ref={inputRef}
             autoCorrect={false}
-            defaultValue={mainStore.city}
-            value={mainStore.inputValue}
+            defaultValue={city}
+            value={inputValue}
             onPressIn={handleEditPress}
-            onChangeText={(text) => mainStore.setInputValue(text)}
+            onChangeText={(text) => setInputValue(text)}
             onSubmitEditing={() => {
-              if (mainStore.inputValue.trim().length !== 0) {
+              if (inputValue.trim().length !== 0) {
                 handleSearch();
               }
             }}
@@ -172,7 +179,7 @@ const AppBar = () => {
           {editable ? (
             <Pressable
               onPress={() => {
-                mainStore.inputValue.length !== 0 && handleSearch();
+                inputValue.length !== 0 && handleSearch();
               }}
             >
               <IconSearch />
@@ -189,12 +196,12 @@ const AppBar = () => {
           style={styles.backButton}
           children={<IconBack />}
           onPress={() => {
-            console.log('Navigating back to:', mainStore.previousTab);
+            console.log('Navigating back to:', previousTab);
             try {
               (navigation as any).navigate(StackScreenNames.Outlet, {
-                screen: mainStore.previousTab,
+                screen: previousTab,
               });
-              mainStore.setCurrentTab(mainStore.previousTab);
+              setCurrentTab(previousTab);
             } catch (error) {
               console.error('Navigation error:', error);
             }
@@ -205,4 +212,4 @@ const AppBar = () => {
     </View>
   );
 };
-export default observer(AppBar);
+export default AppBar;

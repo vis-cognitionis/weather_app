@@ -1,8 +1,7 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { SafeAreaView, View } from 'react-native';
-import { observer } from 'mobx-react';
 
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 import ActionButton from 'components/buttons/actionButton';
 import { IconDetail, IconHomeWeather, IconSettings } from 'components/icons/customIcons';
 import { StackScreenNames } from 'navigation/types';
@@ -13,6 +12,8 @@ import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const { theme } = useTheme();
   const { isLoading } = useWeatherDatas();
+  const setPreviousTab = useMainStore((state) => state.setPreviousTab);
+  const setCurrentTab = useMainStore((state) => state.setCurrentTab);
 
   return (
     <SafeAreaView
@@ -61,14 +62,14 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
             }
 
             if (route.name === StackScreenNames.Home) {
-              mainStore.setPreviousTab(StackScreenNames.Home);
+              setPreviousTab(StackScreenNames.Home);
             }
 
             if (route.name === StackScreenNames.Detail) {
-              mainStore.setPreviousTab(StackScreenNames.Detail);
+              setPreviousTab(StackScreenNames.Detail);
             }
 
-            mainStore.setCurrentTab(route.name);
+            setCurrentTab(route.name);
           };
 
           return (
@@ -92,4 +93,4 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   );
 };
 
-export default observer(TabBar);
+export default TabBar;

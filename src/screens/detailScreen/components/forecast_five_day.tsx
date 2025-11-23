@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { observer } from 'mobx-react';
 
 import { today } from '../../mainScreen/components/constants/constants';
 import { useTheme, useTranslate } from 'hooks';
@@ -19,7 +18,7 @@ import {
   IconThunderstorm,
 } from 'components/icons/weatherColoredIcons';
 import Container from './container';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 const styles = StyleSheet.create({
   dayContainer: {
@@ -62,6 +61,8 @@ const ForecastFiveDay = () => {
   const { theme } = useTheme();
   const { weatherDatas, isLoading } = useWeatherDatas();
   const { t } = useTranslate();
+  const currentDate = useMainStore((state) => state.currentDate);
+  const weatherUnit = useMainStore((state) => state.weatherUnit);
 
   const dailyData: DailyData = {};
   if (weatherDatas && weatherDatas.list) {
@@ -115,7 +116,7 @@ const ForecastFiveDay = () => {
 
   const dailyDataForNextFiveDays: DailyData = {};
 
-  const currentDayNum = mainStore.currentDate.getUTCDate();
+  const currentDayNum = currentDate.getUTCDate();
   const todayNum = Number(today.slice(8, 10));
   const compareDays = Boolean(todayNum < currentDayNum);
 
@@ -195,11 +196,11 @@ const ForecastFiveDay = () => {
                   <View style={styles.tempContainer}>
                     <Text style={[theme.typography.caption, { width: 'auto', minWidth: 80 }]}>
                       {`${t('home.maxTemp')}:`} {dailyDataForNextFiveDays[dateStr].maxTemp}{' '}
-                      {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
+                      {weatherUnit === 'metric' ? '°C' : '°F'}
                     </Text>
                     <Text style={[theme.typography.caption, { width: 'auto', minWidth: 80 }]}>
                       {`${t('home.minTemp')}:`} {dailyDataForNextFiveDays[dateStr].minTemp}{' '}
-                      {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
+                      {weatherUnit === 'metric' ? '°C' : '°F'}
                     </Text>
                   </View>
                 </View>
@@ -218,4 +219,4 @@ const ForecastFiveDay = () => {
   );
 };
 
-export default observer(ForecastFiveDay);
+export default (ForecastFiveDay);

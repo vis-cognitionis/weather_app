@@ -1,10 +1,9 @@
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet } from 'react-native';
-import { observer } from 'mobx-react';
 
 import About from './about';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 import DefaultCity from './default_city';
 import LanguageAction from './language_actions';
 import TermsAndServices from './terms_and_services';
@@ -24,6 +23,8 @@ const styles = StyleSheet.create({
 const SectionContent = ({ content }: { content: string }) => {
   const { theme } = useTheme();
   const { t } = useTranslate();
+  const weatherUnit = useMainStore((state) => state.weatherUnit);
+  const setWeatherUnit = useMainStore((state) => state.setWeatherUnit);
 
   const GeneralAction = () => {
     switch (content) {
@@ -63,7 +64,7 @@ const SectionContent = ({ content }: { content: string }) => {
   };
   const toggleWeatherUnit = async (unit: string) => {
     await AsyncStorage.setItem('unit', unit);
-    mainStore.setWeatherUnit(unit);
+    setWeatherUnit(unit);
   };
 
   return (
@@ -73,22 +74,22 @@ const SectionContent = ({ content }: { content: string }) => {
 
       {content === t('settings.temperature.celsius') ? (
         <CustomCheckbox
-          isChecked={mainStore.weatherUnit === 'metric'}
+          isChecked={weatherUnit === 'metric'}
           onPress={() => {
             toggleWeatherUnit('metric');
           }}
-          disabled={mainStore.weatherUnit === 'metric'}
+          disabled={weatherUnit === 'metric'}
         />
       ) : content === t('settings.temperature.fahrenheit') ? (
         <CustomCheckbox
-          isChecked={mainStore.weatherUnit === 'imperial'}
+          isChecked={weatherUnit === 'imperial'}
           onPress={() => {
             toggleWeatherUnit('imperial');
           }}
-          disabled={mainStore.weatherUnit === 'imperial'}
+          disabled={weatherUnit === 'imperial'}
         />
       ) : null}
     </View>
   );
 };
-export default observer(SectionContent);
+export default SectionContent;

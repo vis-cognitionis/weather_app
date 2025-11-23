@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
-import { observer } from 'mobx-react';
 
-import mainStore from '../../../store/mainStore';
+
+import { useMainStore } from '../../../store/useMainStore';
 import LazyLoading from './lazy-loading/lazy_loading';
 import WeatherCurrent from './weather-current/weather_current';
 import WeatherBackground from './weather_background';
@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
 const WeatherAll = () => {
   const { theme } = useTheme();
   const { weatherDatas, isLoading } = useWeatherDatas();
+  const city = useMainStore((state) => state.city);
+  const weatherUnit = useMainStore((state) => state.weatherUnit);
+  const setTimeOfDay = useMainStore((state) => state.setTimeOfDay);
+  const setCurrentDate = useMainStore((state) => state.setCurrentDate);
 
   const cityTimeZone = weatherDatas?.city.timezone!;
   const sunrise = new Date((weatherDatas?.city.sunrise! + cityTimeZone) * 1000);
@@ -42,22 +46,22 @@ const WeatherAll = () => {
   const currentDate = new Date(Date.now() + selectedCityTimezoneOffset);
 
   useEffect(() => {
-    if (currentDate >= sunrise && currentDate < sunset && mainStore.city) {
-      mainStore.setTimeOfDay('day');
+    if (currentDate >= sunrise && currentDate < sunset && city) {
+      setTimeOfDay('day');
     } else {
-      mainStore.setTimeOfDay('night');
+      setTimeOfDay('night');
     }
-    mainStore.setCurrentDate(currentDate);
-  }, [mainStore.city, weatherDatas]);
+    setCurrentDate(currentDate);
+  }, [city, weatherDatas, currentDate, sunrise, sunset, setTimeOfDay, setCurrentDate]);
 
   const filterWeatherData = (timeKey: string) => {
     const groupedWeatherData = groupWeatherDataByDate(weatherDatas);
 
     return timeKey && groupedWeatherData && groupedWeatherData[timeKey]
       ? groupedWeatherData[timeKey].filter((weather) => {
-          const weatherDate = new Date(weather.dt * 1000);
-          return weatherDate >= currentDate;
-        })
+        const weatherDate = new Date(weather.dt * 1000);
+        return weatherDate >= currentDate;
+      })
       : [];
   };
 
@@ -72,7 +76,7 @@ const WeatherAll = () => {
           {hourlyData.map((weather) => (
             <View key={weather.dt} style={styles.weatherContainer}>
               <Text style={[theme.typography.caption, { flex: 0.5 }]}>
-                {Math.ceil(weather.main.temp)} {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
+                {Math.ceil(weather.main.temp)} {weatherUnit === 'metric' ? '°C' : '°F'}
               </Text>
               <View style={{ flex: 1, paddingVertical: 10 }}>
                 <WeatherHourlyIcons sunrise={sunrise} sunset={sunset} weather={weather} />
@@ -106,4 +110,4 @@ const WeatherAll = () => {
   );
 };
 
-export default observer(WeatherAll);
+export default (WeatherAll);

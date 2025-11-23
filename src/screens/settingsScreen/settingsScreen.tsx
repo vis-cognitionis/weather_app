@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { ActivityIndicator, SafeAreaView, SectionList, View } from 'react-native';
-import { observer } from 'mobx-react';
 
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 import NetworkError from 'components/network-error/network_error';
 import { useTheme, useTranslate } from 'hooks';
 
@@ -23,6 +22,8 @@ const styles = StyleSheet.create({
 const Settings = () => {
   const { theme } = useTheme();
   const { t } = useTranslate();
+  const networkError = useMainStore((state) => state.networkError);
+  const showNotification = useMainStore((state) => state.showNotification);
 
   const { isLoading } = useWeatherDatas();
 
@@ -54,8 +55,8 @@ const Settings = () => {
         backgroundColor: theme.palette.background.default,
       }}
     >
-      {mainStore.networkError && <NetworkError />}
-      {!mainStore.networkError && (
+      {networkError && <NetworkError />}
+      {!networkError && (
         <>
           {isLoading ? (
             <View style={styles.loadingContainer}>
@@ -63,7 +64,7 @@ const Settings = () => {
             </View>
           ) : (
             <>
-              {mainStore.showNotification && <NotificationInfo />}
+              {showNotification && <NotificationInfo />}
               <SectionList
                 style={styles.sectionListContainer}
                 sections={settings}
@@ -78,4 +79,4 @@ const Settings = () => {
     </SafeAreaView>
   );
 };
-export default observer(Settings);
+export default Settings;

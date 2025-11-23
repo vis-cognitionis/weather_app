@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
 import { SafeAreaView, Text, View, RefreshControl, ScrollView } from 'react-native';
-import { observer } from 'mobx-react';
 
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 import { useTheme, useTranslate } from 'hooks';
 import { useWeatherDatas } from 'services/queries/useWeatherDatas';
 import { useWeatherCurrent } from 'services/queries/useWeatherCurrent';
@@ -17,6 +16,7 @@ import { styles } from './styles';
 const DetailScreen = () => {
   const { theme } = useTheme();
   const { t } = useTranslate();
+  const networkError = useMainStore((state) => state.networkError);
 
   const { refetch, isLoading } = useWeatherDatas();
   const { currentTemp, refetchCurrent } = useWeatherCurrent();
@@ -83,7 +83,7 @@ const DetailScreen = () => {
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.palette.background.default }}>
-      {mainStore.networkError ? (
+      {networkError ? (
         <NetworkError />
       ) : (
         <ScrollView
@@ -114,4 +114,4 @@ const DetailScreen = () => {
     </SafeAreaView>
   );
 };
-export default observer(DetailScreen);
+export default DetailScreen;

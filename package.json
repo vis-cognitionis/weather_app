@@ -23,8 +23,6 @@
     "@tanstack/react-query": "5.76.1",
     "@types/react-native-vector-icons": "^6.4.13",
     "axios": "^1.3.2",
-    "mobx": "^6.8.0",
-    "mobx-react": "9.2.0",
     "npx": "^10.2.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -41,7 +39,8 @@
     "react-native-svg": "^15.12.0",
     "react-native-vector-icons": "10.2.0",
     "run-ios": "^0.4.0",
-    "start": "^5.1.0"
+    "start": "^5.1.0",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

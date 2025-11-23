@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native';
-import { observer } from 'mobx-react';
 
-import mainStore from '../../../../store/mainStore';
+import { useMainStore } from '../../../../store/useMainStore';
 import weatherDesc from './weather_infos';
 import WeatherCurrentIcons from './weather_current_icons';
 import { useWeatherCurrent } from '../../../../services/queries/useWeatherCurrent';
@@ -12,6 +11,8 @@ const WeatherCurrent = () => {
   const { theme } = useTheme();
   const { currentTemp } = useWeatherCurrent();
   const { t } = useTranslate();
+  const weatherUnit = useMainStore((state) => state.weatherUnit);
+  const city = useMainStore((state) => state.city);
 
   const unixTime = currentTemp?.dt!;
   const cityTimezoneOffset = currentTemp?.timezone! / 3600;
@@ -39,11 +40,11 @@ const WeatherCurrent = () => {
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text style={theme.typography.temperature}>{Math.ceil(currentTemp?.main.temp!)} </Text>
           <Text style={[theme.typography.temperature, { fontSize: 36, marginTop: 10 }]}>
-            {mainStore.weatherUnit === 'metric' ? '°C' : '°F'}
+            {weatherUnit === 'metric' ? '°C' : '°F'}
           </Text>
         </View>
 
-        <Text children={mainStore.city} style={theme.typography.location} />
+        <Text children={city} style={theme.typography.location} />
         <Text
           children={weatherDesc({ currentTemp: currentTemp! })}
           style={theme.typography.title2}
@@ -54,4 +55,4 @@ const WeatherCurrent = () => {
     </View>
   );
 };
-export default observer(WeatherCurrent);
+export default (WeatherCurrent);

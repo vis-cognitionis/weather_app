@@ -1,10 +1,9 @@
 import { Text, Image, SafeAreaView } from 'react-native';
-import { observer } from 'mobx-react';
 
 import ActionButton from '../../components/buttons/actionButton';
 import { useTranslate, useTheme } from 'hooks';
 import NetworkError from 'components/network-error/network_error';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 import { Styles } from './styles';
 
@@ -12,10 +11,12 @@ const OnboardngScreen = () => {
   const { theme } = useTheme();
   const styles = Styles({ theme });
   const { t } = useTranslate();
+  const networkError = useMainStore((state) => state.networkError);
+  const setNavigateLanding = useMainStore((state) => state.setNavigateLanding);
 
   return (
     <SafeAreaView style={styles.container}>
-      {mainStore.networkError ? (
+      {networkError ? (
         <NetworkError />
       ) : (
         <>
@@ -25,7 +26,7 @@ const OnboardngScreen = () => {
           </Text>
           <ActionButton
             onPress={() => {
-              mainStore.setNavigateLanding(false);
+              setNavigateLanding(false);
             }}
             children={<Text style={theme.typography.button}>{t('landing.button')}</Text>}
             customStyles={styles.actionButton}
@@ -36,4 +37,4 @@ const OnboardngScreen = () => {
   );
 };
 
-export default observer(OnboardngScreen);
+export default OnboardngScreen;

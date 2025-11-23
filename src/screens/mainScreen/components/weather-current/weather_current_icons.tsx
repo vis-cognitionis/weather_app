@@ -1,5 +1,3 @@
-import React from 'react';
-import { observer } from 'mobx-react';
 
 import {
   IconClear,
@@ -16,14 +14,16 @@ import {
   IconTornado,
 } from '../../../../components/icons/weatherColoredIcons';
 import { WeatherCondition, WeatherCurrentData } from '../../interfaces/interface_home';
-import mainStore from '../../../../store/mainStore';
+import { useMainStore } from '../../../../store/useMainStore';
 
 const WeatherCurrentIcons = ({ currentTemp }: { currentTemp: WeatherCurrentData }) => {
+  const timeOfDay = useMainStore((state) => state.timeOfDay);
+
   switch (currentTemp?.weather[0].main!) {
     case WeatherCondition.Clear:
-      return mainStore.timeOfDay === 'night' ? <IconClearNight /> : <IconClear />;
+      return timeOfDay === 'night' ? <IconClearNight /> : <IconClear />;
     case WeatherCondition.Clouds:
-      return mainStore.timeOfDay === 'night' ? <IconCloudsNight /> : <IconClouds />;
+      return timeOfDay === 'night' ? <IconCloudsNight /> : <IconClouds />;
     case WeatherCondition.Drizzle:
       return <IconDrizzle />;
     case WeatherCondition.Dust:
@@ -50,4 +50,4 @@ const WeatherCurrentIcons = ({ currentTemp }: { currentTemp: WeatherCurrentData 
       return <IconClouds />;
   }
 };
-export default observer(WeatherCurrentIcons);
+export default (WeatherCurrentIcons);

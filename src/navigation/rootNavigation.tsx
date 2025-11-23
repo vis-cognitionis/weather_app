@@ -1,19 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { observer } from 'mobx-react';
 
 import AppBar from 'components/app-bar/app_bar';
 import Landing from 'screens/onboardngScreen/onboardingScreen';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 import { ParamList, StackScreenNames } from './types';
 import { TabNavigation } from './tabNavigation';
 
 const RootNavigation = () => {
   const Stack = createNativeStackNavigator<ParamList>();
+  const navigateLanding = useMainStore((state) => state.navigateLanding);
 
   const renderScreen = () => {
-    if (mainStore.navigateLanding) {
+    if (navigateLanding) {
       return <Stack.Screen name={StackScreenNames.Landing} component={Landing} options={{}} />;
     }
 
@@ -32,7 +32,7 @@ const RootNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={
-          mainStore.navigateLanding ? StackScreenNames.Landing : StackScreenNames.Outlet
+          navigateLanding ? StackScreenNames.Landing : StackScreenNames.Outlet
         }
       >
         {renderScreen()}
@@ -41,4 +41,4 @@ const RootNavigation = () => {
   );
 };
 
-export default observer(RootNavigation);
+export default RootNavigation;

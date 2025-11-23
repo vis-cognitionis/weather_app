@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { observer } from 'mobx-react';
 
 import { useWeatherCurrent } from 'services/queries/useWeatherCurrent';
 import { WeatherCondition } from '../interfaces/interface_home';
@@ -27,7 +26,7 @@ import {
   CloudsNightSvg,
   ClearNightSvg,
 } from 'assets/images/weather-svg/weather_svg';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 const styles = StyleSheet.create({
   infoContainer: {
@@ -42,15 +41,16 @@ const WeatherBackground = () => {
   const { theme } = useTheme();
   const topValue: number = windowHeight * 0.0475;
   const { currentTemp } = useWeatherCurrent();
+  const timeOfDay = useMainStore((state) => state.timeOfDay);
 
   const condition = currentTemp?.weather[0].main;
 
   const BackgroundSvg = () => {
     switch (condition) {
       case WeatherCondition.Clear:
-        return mainStore.timeOfDay === 'night' ? <ClearNightSvg /> : <ClearSvg />;
+        return timeOfDay === 'night' ? <ClearNightSvg /> : <ClearSvg />;
       case WeatherCondition.Clouds:
-        return mainStore.timeOfDay === 'night' ? <CloudsNightSvg /> : <CloudsSvg />;
+        return timeOfDay === 'night' ? <CloudsNightSvg /> : <CloudsSvg />;
       case WeatherCondition.Drizzle:
         return <RainySvg />;
       case WeatherCondition.Dust:
@@ -83,11 +83,11 @@ const WeatherBackground = () => {
 
     switch (condition) {
       case WeatherCondition.Clear:
-        return mainStore.timeOfDay === 'night'
+        return timeOfDay === 'night'
           ? t('weatherSuggestion.clearNight')
           : t('weatherSuggestion.clear');
       case WeatherCondition.Clouds:
-        return mainStore.timeOfDay === 'night'
+        return timeOfDay === 'night'
           ? t('weatherSuggestion.cloudsNight')
           : t('weatherSuggestion.clouds');
       case WeatherCondition.Drizzle:
@@ -165,4 +165,4 @@ const WeatherBackground = () => {
   );
 };
 
-export default observer(WeatherBackground);
+export default (WeatherBackground);

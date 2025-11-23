@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Animated, View, Text, StyleSheet } from 'react-native';
 
 import { useTranslate, useTheme } from 'hooks';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 const NotificationInfo = () => {
   const { t } = useTranslate();
   const { theme } = useTheme();
-  const [animation] = useState<Animated.Value>(new Animated.Value(0));
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const setShowNotification = useMainStore((state) => state.setShowNotification);
 
   const styles = StyleSheet.create({
     container: {
@@ -30,33 +31,33 @@ const NotificationInfo = () => {
   });
 
   useEffect(() => {
-    Animated.timing(animation, {
+    Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 500,
       useNativeDriver: true,
     }).start(() => {
       setTimeout(() => {
-        Animated.timing(animation, {
+        Animated.timing(fadeAnim, {
           toValue: 0,
           duration: 500,
           useNativeDriver: true,
         }).start(() => {
-          mainStore.setShowNotification(false);
+          setShowNotification(false);
         });
       }, 5000);
     });
-  }, [animation]);
+  }, [fadeAnim]);
 
   const animationStyle = {
     transform: [
       {
-        translateY: animation.interpolate({
+        translateY: fadeAnim.interpolate({
           inputRange: [0, 1],
           outputRange: [0, -60],
         }),
       },
     ],
-    opacity: animation,
+    opacity: fadeAnim,
   };
 
   return (

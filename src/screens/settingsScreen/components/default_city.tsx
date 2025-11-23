@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Modal, View, Text, TextInput } from 'react-native';
-import { observer } from 'mobx-react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IconClose, IconEdit } from 'components/icons/customIcons';
 import { useTranslate, useTheme } from 'hooks';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 const DefaultCity = () => {
   const { theme } = useTheme();
   const { t } = useTranslate();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  const inputCityValue = useMainStore((state) => state.inputCityValue);
+  const setInputCityValue = useMainStore((state) => state.setInputCityValue);
+  const setDefaultCity = useMainStore((state) => state.setDefaultCity);
+  const setCity = useMainStore((state) => state.setCity);
 
   const styles = StyleSheet.create({
     centeredView: {
@@ -66,9 +71,9 @@ const DefaultCity = () => {
 
   const handleSetDefaultCity = async () => {
     setModalVisible(!modalVisible);
-    await AsyncStorage.setItem('defaultCity', mainStore.inputCityValue);
-    mainStore.setDefaultCity(mainStore.inputCityValue);
-    mainStore.setCity(mainStore.inputCityValue);
+    await AsyncStorage.setItem('defaultCity', inputCityValue);
+    setDefaultCity(inputCityValue);
+    setCity(inputCityValue);
     setEditable(false);
   };
 
@@ -93,9 +98,9 @@ const DefaultCity = () => {
             <TextInput
               ref={inputRef}
               autoCorrect={false}
-              value={mainStore.inputCityValue}
+              value={inputCityValue}
               onPressIn={() => setEditable(true)}
-              onChangeText={(text) => mainStore.setInputCityValue(text)}
+              onChangeText={(text) => setInputCityValue(text)}
               onSubmitEditing={handleSetDefaultCity}
               style={[
                 styles.modalInput,
@@ -137,4 +142,4 @@ const DefaultCity = () => {
   );
 };
 
-export default observer(DefaultCity);
+export default DefaultCity;

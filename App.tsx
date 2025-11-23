@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { StatusBar } from 'react-native';
-import { observer } from 'mobx-react';
 
 import NavigationStacks from 'navigation/rootNavigation';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 import { Providers } from 'hooks/providers';
 import { SplashScreen } from 'screens/splashScreen/splashScreen';
 
 const App = () => {
   const [initializationStep, setInitializationStep] = React.useState<number>(0);
+  const setShowSplashScreen = useMainStore((state) => state.setShowSplashScreen);
+  const setNavigateLanding = useMainStore((state) => state.setNavigateLanding);
 
   const completeInitialization = React.useCallback(() => setInitializationStep(2), []);
 
@@ -20,8 +21,8 @@ const App = () => {
         await new Promise((resolve) => setTimeout(() => resolve(undefined), 3000));
 
         if (isAppMounted) {
-          mainStore.setShowSplashScreen(false);
-          mainStore.setNavigateLanding(true);
+          setShowSplashScreen(false);
+          setNavigateLanding(true);
 
           completeInitialization();
         }
@@ -38,7 +39,7 @@ const App = () => {
     return () => {
       isAppMounted = false;
     };
-  }, [completeInitialization]);
+  }, [completeInitialization, setShowSplashScreen, setNavigateLanding]);
 
   if (initializationStep < 2) {
     return <SplashScreen />;
@@ -54,4 +55,4 @@ const App = () => {
   );
 };
 
-export default observer(App);
+export default App;

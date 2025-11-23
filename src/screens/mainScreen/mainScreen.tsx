@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { StyleSheet, SafeAreaView, RefreshControl, ScrollView } from 'react-native';
-import { observer } from 'mobx-react';
 
-import mainStore from '../../store/mainStore';
+
+import { useMainStore } from '../../store/useMainStore';
 import WeatherAll from './components/weather_all';
 import NetworkError from '../../components/network-error/network_error';
 import { useWeatherDatas } from '../../services/queries/useWeatherDatas';
@@ -26,6 +26,7 @@ const MainScreen = () => {
   const styles = Styles({ theme });
   const { refetch } = useWeatherDatas();
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const networkError = useMainStore((state) => state.networkError);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -37,7 +38,7 @@ const MainScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {mainStore.networkError ? (
+      {networkError ? (
         <NetworkError />
       ) : (
         <ScrollView
@@ -51,4 +52,4 @@ const MainScreen = () => {
   );
 };
 
-export default observer(MainScreen);
+export default (MainScreen);

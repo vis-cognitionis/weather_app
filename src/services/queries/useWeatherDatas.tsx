@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackScreenNames } from 'navigation/types';
 import { WeatherDatas } from 'screens/mainScreen/interfaces/interface_home';
 import { useTranslate } from 'hooks';
-import mainStore from 'store/mainStore';
+import { useMainStore } from 'store/useMainStore';
 
 export const useWeatherDatas = () => {
   const { t } = useTranslate();
@@ -15,21 +15,35 @@ export const useWeatherDatas = () => {
   const [requestError, setRequestError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const city = useMainStore((state) => state.city);
+  const weatherUnit = useMainStore((state) => state.weatherUnit);
+  const currentTab = useMainStore((state) => state.currentTab);
+  const defaultCity = useMainStore((state) => state.defaultCity);
+  const firstDefaultCity = useMainStore((state) => state.firstDefaultCity);
+  const setCity = useMainStore((state) => state.setCity);
+  const setInputValue = useMainStore((state) => state.setInputValue);
+  const setWeatherUnit = useMainStore((state) => state.setWeatherUnit);
+  const setIs404Err = useMainStore((state) => state.setIs404Err);
+  const setDefaultCity = useMainStore((state) => state.setDefaultCity);
+  const setInputCityValue = useMainStore((state) => state.setInputCityValue);
+  const setShowNotification = useMainStore((state) => state.setShowNotification);
+  const setNetworkError = useMainStore((state) => state.setNetworkError);
+
   const {
     data: weatherDatas,
     isLoading,
     refetch,
     error,
   } = useQuery<WeatherDatas, AxiosError, WeatherDatas, [string, string, string]>({
-    queryKey: ['weatherDatas', mainStore.city, mainStore.weatherUnit],
+    queryKey: ['weatherDatas', city, weatherUnit],
     queryFn: async () => {
       try {
-        const weatherUnit = (await AsyncStorage.getItem('unit')) || mainStore.weatherUnit;
-        mainStore.setWeatherUnit(weatherUnit);
+        const storedWeatherUnit = (await AsyncStorage.getItem('unit')) || weatherUnit;
+        setWeatherUnit(storedWeatherUnit);
         const response = await axios.get(
           'https://api.openweathermap.org/data/2.5/forecast?q=' +
-          mainStore.city +
-          `&units=${weatherUnit}&appid=` +
+          city +
+          `&units=${storedWeatherUnit}&appid=` +
           '4ece27e8959cae958f124f7316c6e352'
         );
         return response.data;
@@ -37,7 +51,7 @@ export const useWeatherDatas = () => {
         const axiosError = error as AxiosError;
 
         if (axiosError.code === 'ERR_NETWORK') {
-          mainStore.setNetworkError(true);
+          setNetworkError(true);
         } else if (axiosError.response?.status === 404) {
           setFetchError(true);
         } else if (axiosError.response?.status === 429) {
@@ -55,16 +69,16 @@ export const useWeatherDatas = () => {
 
   useEffect(() => {
     if (error) {
-      mainStore.setCity(mainStore.defaultCity);
-      mainStore.setInputValue(mainStore.defaultCity);
-      mainStore.setIs404Err(true);
+      setCity(defaultCity);
+      setInputValue(defaultCity);
+      setIs404Err(true);
 
-      if (mainStore.currentTab === StackScreenNames.Settings) {
-        mainStore.setCity(mainStore.firstDefaultCity);
-        mainStore.setInputValue(mainStore.firstDefaultCity);
-        mainStore.setDefaultCity(mainStore.firstDefaultCity);
-        mainStore.setInputCityValue(mainStore.firstDefaultCity);
-        mainStore.setShowNotification(true);
+      if (currentTab === StackScreenNames.Settings) {
+        setCity(firstDefaultCity);
+        setInputValue(firstDefaultCity);
+        setDefaultCity(firstDefaultCity);
+        setInputCityValue(firstDefaultCity);
+        setShowNotification(true);
       }
 
       if (fetchError) {
